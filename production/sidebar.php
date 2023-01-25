@@ -10,6 +10,8 @@
             $otoritas = explode(" ; ", $row['otoritas']);
         }
     }
+
+    $master = array('database', 'picker', 'mobil', 'driver', 'user-account');
 ?>
 
 <!-- Sidebar navigation-->
@@ -24,17 +26,22 @@
                 <span class="hide-menu">Welcome, <b><?php echo $nama; ?></b></span>
             </div>
         </li>
-            
-        <li class="sidebar-item">
-            <a
-                class="sidebar-link has-arrow waves-effect waves-dark"
-                href="javascript:void(0)"
-                aria-expanded="false">
-                <i class="fa fa-users"></i>
-                <span class="hide-menu">Master </span>
-            </a>
-
-            <ul aria-expanded="false" class="collapse first-level">
+    
+    <?php
+        if(count(array_intersect($otoritas, $master)) > 0) {
+            echo '
+                <li class="sidebar-item">
+                <a
+                    class="sidebar-link has-arrow waves-effect waves-dark"
+                    href="javascript:void(0)"
+                    aria-expanded="false">
+                    <i class="fa fa-users"></i>
+                    <span class="hide-menu">Master </span>
+                </a>    
+            ';
+        }
+    ?>
+        <ul aria-expanded="false" class="collapse first-level">
     <?php 
         if(in_array('database', $otoritas)) {
             echo '
@@ -93,28 +100,34 @@
     ?>
             </ul>
         </li>
-              
-        <li class="sidebar-item">
-            <a
-                class="sidebar-link has-arrow waves-effect waves-dark"
-                href="javascript:void(0)"
-                aria-expanded="false"
-            >
-            <i class="fas fa-warehouse"></i>
-            <span class="hide-menu"> WMS </span></a>
-            <ul aria-expanded="false" class="collapse first-level">
+    
+    <?php 
+        if(in_array('delivery', $otoritas)) {
+            echo '
                 <li class="sidebar-item">
-                    <a href="delivery.php" class="sidebar-link">
-                    <i class="mdi mdi-truck-delivery"></i>
-                    <span class="hide-menu"> Delivery </span></a>
+                    <a
+                        class="sidebar-link has-arrow waves-effect waves-dark"
+                        href="javascript:void(0)"
+                        aria-expanded="false"
+                    >
+                    <i class="fas fa-warehouse"></i>
+                    <span class="hide-menu"> WMS </span></a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="delivery.php" class="sidebar-link">
+                            <i class="mdi mdi-truck-delivery"></i>
+                            <span class="hide-menu"> Delivery </span></a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="javascript:void(0)" class="sidebar-link">
+                            <i class="mdi mdi-backup-restore"></i>
+                            <span class="hide-menu"> Retur Barang </span></a>
+                        </li>
+                    </ul>
                 </li>
-                <li class="sidebar-item">
-                    <a href="javascript:void(0)" class="sidebar-link">
-                    <i class="mdi mdi-backup-restore"></i>
-                    <span class="hide-menu"> Retur Barang </span></a>
-                </li>
-            </ul>
-        </li>
+            ';
+        }
+    ?>   
     </ul>
 </nav>
 <!-- End Sidebar navigation -->
