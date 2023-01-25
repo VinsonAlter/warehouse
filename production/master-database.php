@@ -14,7 +14,6 @@
 
     $nama = $_SESSION['user_login'];
 
-    $otoritas = $_SESSION['user_otoritas'];
 ?>
 
 <!DOCTYPE html>

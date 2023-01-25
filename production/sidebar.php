@@ -1,3 +1,17 @@
+<?php
+    $nama = $_SESSION['user_login'];
+    $search = "SELECT * FROM [WMS-System].[dbo].[TB_User] WHERE
+                username = :username";
+    $stmt = $conn->prepare($search, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+    $stmt->bindParam(":username", $nama, PDO::PARAM_STR);
+    $stmt->execute();
+    if($stmt->rowCount() > 0) {
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $otoritas = explode(" ; ", $row['otoritas']);
+        }
+    }
+?>
+
 <!-- Sidebar navigation-->
 
 <nav class="sidebar-nav">

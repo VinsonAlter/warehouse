@@ -31,7 +31,6 @@
               $server = explode(' ; ', $row['server']);
               $username = $row['username'];
               $segmen = explode(' ; ', $row['segmen']);
-              $otoritas = explode(' ; ', $row['otoritas']);
             }
             // $verify = password_verify($password, $row['password']);
             // old password encryption
@@ -68,7 +67,6 @@
               $_SESSION['cabang_user'] = $server;
               $_SESSION['sales_force'] = $sales;
               $_SESSION['segmen_user'] = $segments;
-              $_SESSION['user_otoritas'] = $otoritas;
               // var_dump($_SESSION['user_server']);
               header("location:production/index.php"); 
             } else {
