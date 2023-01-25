@@ -16,6 +16,8 @@
 
     $server = $_SESSION['cabang_user'];
 
+    $nama = $_SESSION['user_login'];
+
 ?>
 
 <!DOCTYPE html>
@@ -827,6 +829,7 @@
                 $('#masterModal').modal('hide');
                 // reload datatable when ajax success returns success
                 $('#table_user').DataTable().ajax.reload();
+                window.location.reload();
               } alert (res.message);
             },
             error: err => {
@@ -847,6 +850,7 @@
             $('#masterModalEdit').modal('hide');
             // reload datatable when ajax success returns success
             $('#table_user').DataTable().ajax.reload();
+            window.location.reload();
             } alert(res.message);
           },
           error: err => {

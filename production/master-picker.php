@@ -14,6 +14,8 @@
 
     }
 
+    $nama = $_SESSION['user_login'];
+
 ?>
 
 <!DOCTYPE html>
