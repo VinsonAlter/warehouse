@@ -18,6 +18,8 @@
 
     $nama = $_SESSION['user_login'];
 
+    $database = query("SELECT * FROM [WMS-System].[dbo].[TB_Server] WHERE aktif = 1");
+
 ?>
 
 <!DOCTYPE html>
@@ -459,10 +461,10 @@
                     <div class = "col col-md-6">
                       <div class="form-check ml-half">
                         <div class="d-flex flex-column">
-                          <?php foreach ($server as $row): ?>
-                            <label class="form-check-label cp">
-                              <input class="cp form-check-input" id="<?=$row?>" type="checkbox"  name="server[]" value="<?=$row?>">
-                              <?=$row?>
+                          <?php foreach ($database as $row): ?>
+                            <label class="cp form-check-label">
+                              <input class="cp form-check-input" id="<?=$row['warehouse']?>" type="checkbox"  name="server[]" value="<?=$row['warehouse']?>">
+                              <?=$row['warehouse']?>
                             </label>
                           <?php endforeach;?>
                         </div>
@@ -599,10 +601,10 @@
                     <div class = "col col-md-6">
                       <div class="form-check ml-half">
                         <div class="d-flex flex-column">
-                          <?php foreach ($server as $row): ?>
+                          <?php foreach ($database as $row): ?>
                             <label class="cp form-check-label">
-                              <input class="cp form-check-input" id="<?=$row?>" type="checkbox"  name="server[]" value="<?=$row?>">
-                              <?=$row?>
+                              <input class="cp form-check-input" id="<?=$row['warehouse']?>" type="checkbox"  name="server[]" value="<?=$row['warehouse']?>">
+                              <?=$row['warehouse']?>
                             </label>
                           <?php endforeach;?>
                         </div>
@@ -832,6 +834,9 @@
                 window.location.reload();
               } alert (res.message);
             },
+            complete: () => {
+              window.location.reload();
+            },  
             error: err => {
             console.error(err.statusText);
           }
@@ -850,8 +855,10 @@
             $('#masterModalEdit').modal('hide');
             // reload datatable when ajax success returns success
             $('#table_user').DataTable().ajax.reload();
-            window.location.reload();
             } alert(res.message);
+          },
+          complete: () => {
+            window.location.reload();
           },
           error: err => {
             console.error(err.statusText);

@@ -504,7 +504,7 @@
                     </a>
                   </li>
                   <li class="sidebar-item">
-                    <a href="master-account.php" class="sidebar-link">
+                    <a href="account.php" class="sidebar-link">
                       <i class="mdi mdi-account-plus"></i>
                       <span class="hide-menu">User Account</span>
                     </a>
