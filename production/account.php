@@ -451,7 +451,7 @@
                       <label class="cp" for="userAktif">Aktif</label>
                     </div>
                   </div>
-                  <p style="margin-left:2px;color:red;"> <b> (*) Database harus dicentang setidaknya satu</b></p>
+                  <p style="margin-left:2px;color:red;"> <b> (*) Database, Segmen dan Otoritas harus dicentang setidaknya satu</b></p>
                   <div class="d-flex">
                     <p class="col-6 ml-half"> <b>Select Database : </b></p>
                     <p class="col-6" style="margin-left:2px"> <b>Select Segmen : </b></p>
@@ -534,8 +534,13 @@
                           </div>
                           <div class="d-flex">
                             <input id="Delivery" name="otoritas[]" class="cp form-check-input" type="checkbox"  
-                              value="delivery">
-                            <label for="Delivery" class="cp form-check-label ml-half">Delivery</label>
+                              value="picking-delivery">
+                            <label for="Delivery" class="cp form-check-label ml-half">Picking & Delivery</label>
+                          </div>
+                          <div class="d-flex">
+                            <input id="Status" name="otoritas[]" class="cp form-check-input" type="checkbox"
+                              value="status-delivery">
+                            <label for="Status" class="cp form-check-label ml-half">Status Delivery</label>
                           </div>
                         </div>
                       </div>
@@ -591,7 +596,7 @@
                       <label class="cp" for="edit_aktif">Aktif</label>
                     </div>
                   </div>
-                  <p style="margin-left:2px;color:red;"> <b> (*) Database dan Segmen harus dicentang setidaknya satu</b></p>
+                  <p style="margin-left:2px;color:red;"> <b> (*) Database, Segmen dan Otoritas harus dicentang setidaknya satu </b></p>
                   <div class="d-flex">
                     <p class="col-6 ml-half"> <b>Select Database : </b></p>
                     <p class="col-6" style="margin-left:2px"> <b>Select Segmen : </b></p>
@@ -674,8 +679,13 @@
                           </div>
                           <div class="d-flex">
                             <input id="edit_delivery" name="otoritas[]" class="cp form-check-input" type="checkbox"  
-                              value="delivery">
-                            <label for="edit_delivery" class="cp form-check-label ml-half">Delivery</label>
+                              value="picking-delivery">
+                            <label for="edit_delivery" class="cp form-check-label ml-half">Picking & Delivery</label>
+                          </div>
+                          <div class="d-flex">
+                            <input id="edit_status" name="otoritas[]" class="cp form-check-input" type="checkbox"
+                              value="status-delivery">
+                            <label for="edit_status" class="cp form-check-label ml-half">Status Delivery</label>
                           </div>
                         </div>
                       </div>
