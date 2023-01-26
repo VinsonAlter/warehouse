@@ -121,7 +121,7 @@
         if(in_array('picking-delivery', $otoritas)) {
             echo '
                         <li class="sidebar-item">
-                            <a href="delivery.php" class="sidebar-link">
+                            <a href="picking-delivery.php" class="sidebar-link">
                             <i class="mdi mdi-truck-delivery"></i>
                             <span class="hide-menu">Picking & Delivery</span></a>
                         </li>
