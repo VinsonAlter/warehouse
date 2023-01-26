@@ -2,11 +2,16 @@
     session_start();
     // require_once '../koneksi.php';
     require_once '../function.php';
+    date_default_timezone_set('Asia/Jakarta');
     // cek apakah user sudah login, apabila belum login arahkan user ke laman login
     if(!isset($_SESSION['user_login'])) {
       header("location:../login.php");  
     }
     $nama = $_SESSION['user_login'];
+    $awalTransaksi = date('d-m-Y');
+    $akhirTransaksi = date('d-m-Y');
+    $awalTerima = date('d-m-Y');
+    $akhirTerima = date('d-m-Y');
 ?>
 
 <!DOCTYPE html>
@@ -168,19 +173,19 @@
                             <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Filter Tgl Transaksi</label>
                             <input type="radio" class="cp mr-8" id="filter_transaksi" name="enable_date" onclick="enable_transaksi()">
                             <input type="text" class="mr-3 col-md-2 col-4 mydatepicker"
-                              name="awalStatus" id="awal_transaksi" value="" autocomplete="off">
+                              name="awalStatus" id="awal_transaksi" value="<?=$awalTransaksi?>" autocomplete="off">
                             <label class="centered d-md-flex">s/d.</label>
                             <input type="text" class="ml-3 col-md-2 col-4 mydatepicker"
-                              name="akhirStatus" id="akhir_transaksi" value="" autocomplete="off">
+                              name="akhirStatus" id="akhir_transaksi" value="<?=$akhirTransaksi?>" autocomplete="off">
                           </div>
                           <div class="d-sm-inline-block d-md-flex">
                             <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Filter Tgl Terima</label>
                             <input type="radio" class="cp mr-8" id="filter_terima" name="enable_date" onclick="enable_terima()">
                             <input type="text" class="mr-3 col-md-2 col-4 mydatepicker"
-                              name="awalStatus"id="awal_terima"  value="" autocomplete="off">
+                              name="awalStatus"id="awal_terima"  value="<?=$awalTerima?>" autocomplete="off">
                             <label class="centered d-md-flex">s/d.</label>
                             <input type="text" class="ml-3 col-md-2 col-4 mydatepicker"
-                              name="akhirStatus" id="akhir_terima" value="" autocomplete="off">
+                              name="akhirStatus" id="akhir_terima" value="<?=$akhirTerima?>" autocomplete="off">
                           </div>
                         </div>
                       </div>
