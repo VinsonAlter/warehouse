@@ -28,7 +28,7 @@
                 
                             ([NoTransaksi], [Nama], [TglTransaksi], [TglTerima], [Status])
                                         
-                            VALUES ('".$no_transaksi."', '".$nama_owner."', '$tgl_transaksi', '$date', 'Diterima')";
+                            VALUES ('".$no_transaksi."', '".$nama_owner."', '$tgl_transaksi', '$date', 1)";
 
             $stmt = $conn->prepare($insert, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
 

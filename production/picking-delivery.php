@@ -12,6 +12,22 @@
     $akhirTransaksi = date('d-m-Y');
     $awalTerima = date('d-m-Y');
     $akhirTerima = date('d-m-Y');
+
+    if(isset($_REQUEST['filter_tgl_transaksi'])) {
+      $_SESSION['FilterTglTransaksiFrom'] = $_POST['awalTransaksi'];
+      $_SESSION['FilterTglTransaksiTo'] = $_POST['akhirTransaksi'];
+    }
+
+    if(isset($_SESSION['FilterTglTransaksiFrom'])) $awalTransaksi = $_SESSION['FilterTglTransaksiFrom'];
+    if(isset($_SESSION['FilterTglTransaksiTo'])) $akhirTransaksi = $_SESSION['FilterTglTransaksiTo'];
+
+    if(isset($_REQUEST['filter_tgl_terima'])) {
+      $_SESSION['FilterTglTerimaFrom'] = $_POST['awalTerima'];
+      $_SESSION['FilterTglTerimaTo'] = $_POST['akhirTerima'];
+    }
+
+    if(isset($_SESSION['FilterTglTerimaFrom'])) $awalTerima = $_SESSION['FilterTglTerimaFrom'];
+    if(isset($_SESSION['FilterTglTerimaTo'])) $akhirTerima = $_SESSION['FilterTglTerimaTo'];
 ?>
 
 <!DOCTYPE html>
@@ -120,9 +136,7 @@
   </head>
 
   <body>
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
+    <div class='loader'></div>
     <div class="preloader">
       <div class="lds-ripple">
         <div class="lds-pos"></div>
@@ -130,9 +144,6 @@
       </div>
     </div>
 
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
     <div
       id="main-wrapper"
       data-layout="vertical"
@@ -173,19 +184,27 @@
                             <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Filter Tgl Transaksi</label>
                             <input type="radio" class="cp mr-8" id="filter_transaksi" name="enable_date" onclick="enable_transaksi()">
                             <input type="text" class="mr-3 col-md-2 col-4 mydatepicker"
-                              name="awalStatus" id="awal_transaksi" value="<?=$awalTransaksi?>" autocomplete="off">
+                              name="awalTransaksi" id="awal_transaksi" value="<?=$awalTransaksi?>" autocomplete="off">
                             <label class="centered d-md-flex">s/d.</label>
                             <input type="text" class="ml-3 col-md-2 col-4 mydatepicker"
-                              name="akhirStatus" id="akhir_transaksi" value="<?=$akhirTransaksi?>" autocomplete="off">
+                              name="akhirTransaksi" id="akhir_transaksi" value="<?=$akhirTransaksi?>" autocomplete="off">
+                            <button class="px-2 btn btn-success btn-sm text-white ml-half"
+                              type="submit" name="filter_tgl_transaksi">
+                              Filter
+                            </button>
                           </div>
                           <div class="d-sm-inline-block d-md-flex">
                             <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Filter Tgl Terima</label>
                             <input type="radio" class="cp mr-8" id="filter_terima" name="enable_date" onclick="enable_terima()">
                             <input type="text" class="mr-3 col-md-2 col-4 mydatepicker"
-                              name="awalStatus"id="awal_terima"  value="<?=$awalTerima?>" autocomplete="off">
+                              name="awalTerima"id="awal_terima"  value="<?=$awalTerima?>" autocomplete="off">
                             <label class="centered d-md-flex">s/d.</label>
                             <input type="text" class="ml-3 col-md-2 col-4 mydatepicker"
-                              name="akhirStatus" id="akhir_terima" value="<?=$akhirTerima?>" autocomplete="off">
+                              name="akhirTerima" id="akhir_terima" value="<?=$akhirTerima?>" autocomplete="off">
+                            <button class="px-2 btn btn-success btn-sm text-white ml-half"
+                              type="submit" name="filter_tgl_terima">
+                              Filter
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -193,10 +212,10 @@
                   </form>
                 </div>
                 <div class="table-responsive">
-                  <table id="table_picker" class="table table-bordered table-condensed display compact">
+                  <table id="table_picking" class="table table-bordered table-condensed display compact">
                     <thead>
                       <tr>
-                        <th></th>
+                        <th>No</th>
                         <th>No Transaksi</th>
                         <th>Tgl Transaksi</th>
                         <th>Customer</th>
@@ -256,6 +275,9 @@
 
     <script>
       $(document).ready(() => {
+        /* hide the loader first */
+        $('.loader').hide();
+
         /*datepicker*/
         $(".mydatepicker").datepicker({
           format: 'dd-mm-yyyy',
@@ -282,6 +304,29 @@
           $('#awal_terima').prop('disabled', false);
           $('#akhir_terima').prop('disabled', false);
         }
+
+        // fill datatables 
+        var tablePicking = $('#table_picking').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "deferRender": true,
+          "stateSave": true,
+          "stateDuration": -1,
+          "pageLength": 20,
+          "ajax": {
+            url: "json/getDataDelivery.php"
+          },
+          "language": {
+            "processing": '<div class="loader"></div>',
+          }
+        });
+
+        tablePicking.on('draw.dt', () => {
+          const PageInfo = $('#table_picking').DataTable().page.info();
+			    tablePicking.column(0, { page: 'current' }).nodes().each((cell, i) => {
+				    cell.innerHTML = i + 1 + PageInfo.start
+			    })
+        }) 
       })
 
       function enable_transaksi() {
