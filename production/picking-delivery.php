@@ -166,19 +166,21 @@
                         <div class="mb-2">
                           <div class="d-sm-inline-block d-md-flex mb-3">
                             <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Filter Tgl Transaksi</label>
+                            <input type="radio" class="cp mr-8" id="filter_transaksi" name="enable_date" onclick="enable_transaksi()">
                             <input type="text" class="mr-3 col-md-2 col-4 mydatepicker"
-                              name="awalStatus" value="" autocomplete="off">
+                              name="awalStatus" id="awal_transaksi" value="" autocomplete="off">
                             <label class="centered d-md-flex">s/d.</label>
                             <input type="text" class="ml-3 col-md-2 col-4 mydatepicker"
-                              name="akhirStatus" value="" autocomplete="off">
+                              name="akhirStatus" id="akhir_transaksi" value="" autocomplete="off">
                           </div>
                           <div class="d-sm-inline-block d-md-flex">
                             <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Filter Tgl Terima</label>
+                            <input type="radio" class="cp mr-8" id="filter_terima" name="enable_date" onclick="enable_terima()">
                             <input type="text" class="mr-3 col-md-2 col-4 mydatepicker"
-                              name="awalStatus" value="" autocomplete="off">
+                              name="awalStatus"id="awal_terima"  value="" autocomplete="off">
                             <label class="centered d-md-flex">s/d.</label>
                             <input type="text" class="ml-3 col-md-2 col-4 mydatepicker"
-                              name="akhirStatus" value="" autocomplete="off">
+                              name="akhirStatus" id="akhir_terima" value="" autocomplete="off">
                           </div>
                         </div>
                       </div>
@@ -257,10 +259,40 @@
           autoclose: true,
           todayHighlight: true
         });
+
+        $('#filter_transaksi').prop('checked', true);
+
+        if(!$('#filter_transaksi').is(':checked')) {
+          $('#awal_transaksi').prop('disabled', true);
+          $('#akhir_transaksi').prop('disabled', true);
+        } else {
+          $('#awal_transaksi').prop('disabled', false);
+          $('#akhir_transaksi').prop('disabled', false);
+        }
+
+        if(!$('#filter_terima').is(':checked')) {
+          $('#awal_terima').prop('disabled', true);
+          $('#akhir_terima').prop('disabled', true);
+        } else {
+          $('#awal_terima').prop('disabled', false);
+          $('#akhir_terima').prop('disabled', false);
+        }
       })
 
+      function enable_transaksi() {
+        $('#awal_transaksi').prop('disabled', false);
+        $('#akhir_transaksi').prop('disabled', false);
+        $('#awal_terima').prop('disabled', true);
+        $('#akhir_terima').prop('disabled', true);
+      }
+
+      function enable_terima() {
+        $('#awal_terima').prop('disabled', false);
+        $('#akhir_terima').prop('disabled', false);
+        $('#awal_transaksi').prop('disabled', true);
+        $('#akhir_transaksi').prop('disabled', true);
+      }
+
     </script>
-
   </body>
-
 </html>
