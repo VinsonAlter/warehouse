@@ -10,16 +10,15 @@
     $nama = $_SESSION['user_login'];
     $tglTransaksi = date('d-m-Y');
     $tglTerima = date('d-m-Y');
-
     if(isset($_REQUEST['filter_tgl'])) {
       if($_REQUEST['enable_date'] == 'transaksi_on') {
         $status = 'transaksi_on';
-        $_SESSION['CurrentStatus'] = $status;
+        $_SESSION['StatusFilter'] = $status;
         $_SESSION['FilterTglTransaksi'] = $_POST['tglTransaksi'];
         $_SESSION['FilterTglTerima'] = date('d-m-Y');
-      } else if($_REQUEST['enable_date'] == 'terima_on') {
+      } else  {
         $status = 'terima_on';
-        $_SESSION['CurrentStatus'] = $status;
+        $_SESSION['StatusFilter'] = $status;
         $_SESSION['FilterTglTerima'] = $_POST['tglTerima'];
         $_SESSION['FilterTglTransaksi'] = date('d-m-Y');
       }
