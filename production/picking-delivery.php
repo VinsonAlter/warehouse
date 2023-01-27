@@ -178,10 +178,9 @@
                             <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Filter Tgl Transaksi</label>
                             <input type="radio" class="cp mr-8" id="filter_transaksi" name="enable_date" onclick="enable_transaksi()">
                             <input type="text" class="mr-3 col-md-2 col-4 mydatepicker"
-                              name="tglTransaksi" id="awal_transaksi" value="<?=$tglTransaksi?>" autocomplete="off">
-                            <label class="centered d-md-flex">s/d.</label>
+                              name="tglTransaksi" id="tgl_transaksi" value="<?=$tglTransaksi?>" autocomplete="off">
                             <button class="px-2 btn btn-success btn-sm text-white ml-half"
-                              type="submit" name="filter_tgl_transaksi" id="btn_transaksi">
+                              type="submit" name="filter_tgl" id="btn_filter">
                               Filter
                             </button>
                           </div>
@@ -189,12 +188,11 @@
                             <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Filter Tgl Terima</label>
                             <input type="radio" class="cp mr-8" id="filter_terima" name="enable_date" onclick="enable_terima()">
                             <input type="text" class="mr-3 col-md-2 col-4 mydatepicker"
-                              name="tglTerima"id="awal_terima"  value="<?=$tglTerima?>" autocomplete="off">
-                            <label class="centered d-md-flex">s/d.</label>
-                            <button class="px-2 btn btn-success btn-sm text-white ml-half"
+                              name="tglTerima"id="tgl_terima"  value="<?=$tglTerima?>" autocomplete="off">
+                            <!-- <button class="px-2 btn btn-success btn-sm text-white ml-half"
                               type="submit" name="filter_tgl_terima" id="btn_terima">
                               Filter
-                            </button>
+                            </button> -->
                           </div>
                         </div>
                       </div>
@@ -280,23 +278,15 @@
         $('#filter_transaksi').prop('checked', true);
 
         if(!$('#filter_transaksi').is(':checked')) {
-          $('#awal_transaksi').prop('disabled', true);
-          $('#akhir_transaksi').prop('disabled', true);
-          $('#btn_transaksi').prop('disabled', true);
+          $('#tgl_transaksi').prop('disabled', true);
         } else {
-          $('#awal_transaksi').prop('disabled', false);
-          $('#akhir_transaksi').prop('disabled', false);
-          $('#btn_transaksi').prop('disabled', false);
+          $('#tgl_transaksi').prop('disabled', false);
         }
 
         if(!$('#filter_terima').is(':checked')) {
-          $('#awal_terima').prop('disabled', true);
-          $('#akhir_terima').prop('disabled', true);
-          $('#btn_terima').prop('disabled', true);
+          $('#tgl_terima').prop('disabled', true);
         } else {
-          $('#awal_terima').prop('disabled', false);
-          $('#akhir_terima').prop('disabled', false);
-          $('#btn_terima').prop('disabled', false);
+          $('#tgl_terima').prop('disabled', false);
         }
 
         // fill datatables 
@@ -324,21 +314,13 @@
       })
 
       function enable_transaksi() {
-        $('#awal_transaksi').prop('disabled', false);
-        $('#akhir_transaksi').prop('disabled', false);
-        $('#btn_transaksi').prop('disabled', false);
-        $('#awal_terima').prop('disabled', true);
-        $('#akhir_terima').prop('disabled', true);
-        $('#btn_terima').prop('disabled', true);
+        $('#tgl_transaksi').prop('disabled', false);
+        $('#tgl_terima').prop('disabled', true);     
       }
 
       function enable_terima() {
-        $('#awal_terima').prop('disabled', false);
-        $('#akhir_terima').prop('disabled', false);
-        $('#btn_terima').prop('disabled', false);
-        $('#awal_transaksi').prop('disabled', true);
-        $('#akhir_transaksi').prop('disabled', true);
-        $('#btn_transaksi').prop('disabled', true);
+        $('#tgl_transaksi').prop('disabled', true);
+        $('#tgl_terima').prop('disabled', false);
       }
 
     </script>
