@@ -11,8 +11,12 @@
     $tglTransaksi = date('d-m-Y');
     $tglTerima = date('d-m-Y');
 
-    if(isset($_REQUEST['filter_tgl_transaksi'])) {
-      $_SESSION['FilterTglTransaksi'] = $_POST['tglTransaksi'];
+    if(isset($_REQUEST['filter_tgl'])) {
+      if($_REQUEST['enable_date'] == 'transaksi_on') {
+        $_SESSION['FilterTglTransaksi'] = $_POST['tglTransaksi'];
+      } else {
+        $_SESSION['FilterTglTerima'] = $_POST['tglTerima'];
+      }
     }
 
     if(isset($_SESSION['FilterTglTransaksi'])) $tglTransaksi = $_SESSION['FilterTglTransaksi'];
@@ -176,7 +180,7 @@
                         <div class="mb-2">
                           <div class="d-sm-inline-block d-md-flex mb-3">
                             <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Filter Tgl Transaksi</label>
-                            <input type="radio" class="cp mr-8" id="filter_transaksi" name="enable_date" onclick="enable_transaksi()">
+                            <input type="radio" class="cp mr-8" id="filter_transaksi" name="enable_date" value="transaksi_on" onclick="enable_transaksi()">
                             <input type="text" class="mr-3 col-md-2 col-4 mydatepicker"
                               name="tglTransaksi" id="tgl_transaksi" value="<?=$tglTransaksi?>" autocomplete="off">
                             <button class="px-2 btn btn-success btn-sm text-white ml-half"
@@ -186,7 +190,7 @@
                           </div>
                           <div class="d-sm-inline-block d-md-flex">
                             <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Filter Tgl Terima</label>
-                            <input type="radio" class="cp mr-8" id="filter_terima" name="enable_date" onclick="enable_terima()">
+                            <input type="radio" class="cp mr-8" id="filter_terima" name="enable_date" value="transaksi_off" onclick="enable_terima()">
                             <input type="text" class="mr-3 col-md-2 col-4 mydatepicker"
                               name="tglTerima"id="tgl_terima"  value="<?=$tglTerima?>" autocomplete="off">
                             <!-- <button class="px-2 btn btn-success btn-sm text-white ml-half"
