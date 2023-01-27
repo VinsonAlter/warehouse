@@ -330,21 +330,31 @@
 
                                 array_multisort($sort10, $dir, $data);
 
+                                break;
+
                             case 11:
 
                                 array_multisort($sort11, $dir, $data);
 
+                                break;
+
                             case 12:
 
                                 array_multisort($sort12, $dir, $data);
+
+                                break;
                             
                             case 13:
 
                                 array_multisort($sort13, $dir, $data);
 
+                                break;
+
                             default:
 
                                 array_multisort($sort1, $dir, $data);
+
+                                break;
 
                         }
 

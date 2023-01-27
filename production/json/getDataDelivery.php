@@ -3,12 +3,14 @@
     require_once '../../function.php';
     $data = $result = array();
     $user_data = $_SESSION['user_server'];
+    $user_segmen = $_SESSION['segmen_user'];
     try {
         if($pdo) {
             $tgl_condition = '';
             $urut = $total_record = 0;
-            $tgl_transaksi = isset($_SESSION['FilterTanggalTransaksi']) ? $_SESSION['FilterTanggalTransaksi'] : date('d-m-Y');
-            $tgl_terima = isset($_SESSION['FilterTanggalTerima']) ? $_SESSION['FilterTanggalTerima'] : '';
+            $tgl_transaksi = $_SESSION['FilterTglTransaksi'] != date('d-m-Y') ? $_SESSION['FilterTglTransaksi'] : date('d-m-Y');
+            $tgl_terima = $_SESSION['FilterTglTerima'] != date('d-m-Y') ? $_SESSION['FilterTglTerima'] : date('d-m-Y');
+            $status = $_SESSION['CurrentStatus'];
             if($tgl_terima != '') {
                 $tgl_condition = " WHERE P.[Tgl] = '".date_to_str($tgl_transaksi)."' ";
             } else {
@@ -53,41 +55,46 @@
                 }
                 $pdo = null;
             }
-            if(!empty($data)){
-                $sort1 = $sort2 = $sort3 = $sort4 = $sort5 = $sort6 = array();
-            }
-            foreach($data as $key => $value) {
-                $sort1[$key] = $value[1];
-                $sort2[$key] = $value[2];
-                $sort3[$key] = $value[3];
-                $sort4[$key] = $value[4];
-                $sort5[$key] = $value[5];
-                $sort6[$key] = $value[6];
-            }
-            if(isset($_REQUEST['order']) && count($_REQUEST['order'])) {
-                for($i = 0, $ien = count($_REQUEST['order']); $i < $ien; $i++) {
-                    $columnIdx = intval($_REQUEST['order'][$i]['column']);
-                    $requestColumn = $_REQUEST['columns'][$columnIdx];
-                    if($requestColumn['orderable'] == 'true') {
-                        $dir = $_REQUEST['order'][$i]['dir'] === 'asc' ? SORT_ASC : SORT_DESC;
-                        switch($columnIdx) {
-                            case 2:
-                                array_multisort($sort2, $dir, $data);
-                                break;
-                            case 3:
-                                array_multisort($sort3, $dir, $data);
-                            case 4:
-                                array_multisort($sort4, $dir, $data);
-                            case 5:
-                                array_multisort($sort5, $dir, $data);
-                            case 6:
-                                array_multisort($sort6, $dir, $data);
-                            default:
-                                array_multisort($sort1, $dir, $data);
-                        }
-                    }
-                }
-            }
+            // if(!empty($data)){
+            //     $sort1 = $sort2 = $sort3 = $sort4 = $sort5 = $sort6 = array();
+            // }
+            // foreach($data as $key => $value) {
+            //     $sort1[$key] = $value[1];
+            //     $sort2[$key] = $value[2];
+            //     $sort3[$key] = $value[3];
+            //     $sort4[$key] = $value[4];
+            //     $sort5[$key] = $value[5];
+            //     $sort6[$key] = $value[6];
+            // }
+            // if(isset($_REQUEST['order']) && count($_REQUEST['order'])) {
+            //     for($i = 0, $ien = count($_REQUEST['order']); $i < $ien; $i++) {
+            //         $columnIdx = intval($_REQUEST['order'][$i]['column']);
+            //         $requestColumn = $_REQUEST['columns'][$columnIdx];
+            //         if($requestColumn['orderable'] == 'true') {
+            //             $dir = $_REQUEST['order'][$i]['dir'] === 'asc' ? SORT_ASC : SORT_DESC;
+            //             switch($columnIdx) {
+            //                 case 2:
+            //                     array_multisort($sort2, $dir, $data);
+            //                     break;
+            //                 case 3:
+            //                     array_multisort($sort3, $dir, $data);
+            //                     break;
+            //                 case 4:
+            //                     array_multisort($sort4, $dir, $data);
+            //                     break;
+            //                 case 5:
+            //                     array_multisort($sort5, $dir, $data);
+            //                     break;
+            //                 case 6:
+            //                     array_multisort($sort6, $dir, $data);
+            //                     break;
+            //                 default:
+            //                     array_multisort($sort1, $dir, $data);
+            //                     break;
+            //             }
+            //         }
+            //     }
+            // }
 
             if(isset($_REQUEST['start']) && $_REQUEST['length'] != -1) {
                 $data = array_slice($data, intval($_REQUEST['start']), intval($_REQUEST['length']));
@@ -95,7 +102,7 @@
 
             // Datetime Formatting
             for ($i=0;$i<count($data);$i++) {
-                $data[$i][3] = strtotime('d-m-Y', $data[$i][3]);
+                $data[$i][2] = date('d-m-Y', strtotime($data[$i][2]));
                 if (strtotime($data[$i][6]) != '') {
                     $data[$i][6] = date('d-m-Y', strtotime($data[$i][6]));
                 } else {
@@ -107,7 +114,9 @@
                 'draw' => isset($_REQUEST['draw']) ? intval($_REQUEST['draw']): 0,
                 'recordsTotal' => $total_record,
                 'recordsFiltered' => $urut,
-                "data" => $data
+                'data' => $data,
+                'query' => $query,
+                'tgl_terima' => $tgl_terima
             );
 
         }

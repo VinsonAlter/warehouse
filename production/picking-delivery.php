@@ -13,9 +13,15 @@
 
     if(isset($_REQUEST['filter_tgl'])) {
       if($_REQUEST['enable_date'] == 'transaksi_on') {
+        $status = 'transaksi_on';
+        $_SESSION['CurrentStatus'] = $status;
         $_SESSION['FilterTglTransaksi'] = $_POST['tglTransaksi'];
-      } else {
+        $_SESSION['FilterTglTerima'] = date('d-m-Y');
+      } else if($_REQUEST['enable_date'] == 'terima_on') {
+        $status = 'terima_on';
+        $_SESSION['CurrentStatus'] = $status;
         $_SESSION['FilterTglTerima'] = $_POST['tglTerima'];
+        $_SESSION['FilterTglTransaksi'] = date('d-m-Y');
       }
     }
 
@@ -61,9 +67,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <style>
 
-      body {
+      /* body {
         overflow:hidden;
-      }
+      } */
       
       .nav-img {
         margin-right: 10px;
@@ -206,13 +212,15 @@
                         <th>No</th>
                         <th>No Transaksi</th>
                         <th>Tgl Transaksi</th>
-                        <th>Customer</th>
+                        <th>Nama</th>
+                        <th>Owner</th>
                         <th>Status</th>
                         <th>Tanggal Terima</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
