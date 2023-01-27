@@ -21,10 +21,6 @@
 
     if(isset($_SESSION['FilterTglTransaksi'])) $tglTransaksi = $_SESSION['FilterTglTransaksi'];
 
-    if(isset($_REQUEST['filter_tgl_terima'])) {
-      $_SESSION['FilterTglTerima'] = $_POST['tglTerima'];
-    }
-
     if(isset($_SESSION['FilterTglTerima'])) $tglTerima = $_SESSION['FilterTglTerima'];
 ?>
 
