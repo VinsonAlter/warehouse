@@ -8,26 +8,20 @@
       header("location:../login.php");  
     }
     $nama = $_SESSION['user_login'];
-    $awalTransaksi = date('d-m-Y');
-    $akhirTransaksi = date('d-m-Y');
-    $awalTerima = date('d-m-Y');
-    $akhirTerima = date('d-m-Y');
+    $tglTransaksi = date('d-m-Y');
+    $tglTerima = date('d-m-Y');
 
     if(isset($_REQUEST['filter_tgl_transaksi'])) {
-      $_SESSION['FilterTglTransaksiFrom'] = $_POST['awalTransaksi'];
-      $_SESSION['FilterTglTransaksiTo'] = $_POST['akhirTransaksi'];
+      $_SESSION['FilterTglTransaksi'] = $_POST['tglTransaksi'];
     }
 
-    if(isset($_SESSION['FilterTglTransaksiFrom'])) $awalTransaksi = $_SESSION['FilterTglTransaksiFrom'];
-    if(isset($_SESSION['FilterTglTransaksiTo'])) $akhirTransaksi = $_SESSION['FilterTglTransaksiTo'];
+    if(isset($_SESSION['FilterTglTransaksi'])) $tglTransaksi = $_SESSION['FilterTglTransaksi'];
 
     if(isset($_REQUEST['filter_tgl_terima'])) {
-      $_SESSION['FilterTglTerimaFrom'] = $_POST['awalTerima'];
-      $_SESSION['FilterTglTerimaTo'] = $_POST['akhirTerima'];
+      $_SESSION['FilterTglTerima'] = $_POST['tglTerima'];
     }
 
-    if(isset($_SESSION['FilterTglTerimaFrom'])) $awalTerima = $_SESSION['FilterTglTerimaFrom'];
-    if(isset($_SESSION['FilterTglTerimaTo'])) $akhirTerima = $_SESSION['FilterTglTerimaTo'];
+    if(isset($_SESSION['FilterTglTerima'])) $tglTerima = $_SESSION['FilterTglTerima'];
 ?>
 
 <!DOCTYPE html>
@@ -184,12 +178,10 @@
                             <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Filter Tgl Transaksi</label>
                             <input type="radio" class="cp mr-8" id="filter_transaksi" name="enable_date" onclick="enable_transaksi()">
                             <input type="text" class="mr-3 col-md-2 col-4 mydatepicker"
-                              name="awalTransaksi" id="awal_transaksi" value="<?=$awalTransaksi?>" autocomplete="off">
+                              name="tglTransaksi" id="awal_transaksi" value="<?=$tglTransaksi?>" autocomplete="off">
                             <label class="centered d-md-flex">s/d.</label>
-                            <input type="text" class="ml-3 col-md-2 col-4 mydatepicker"
-                              name="akhirTransaksi" id="akhir_transaksi" value="<?=$akhirTransaksi?>" autocomplete="off">
                             <button class="px-2 btn btn-success btn-sm text-white ml-half"
-                              type="submit" name="filter_tgl_transaksi">
+                              type="submit" name="filter_tgl_transaksi" id="btn_transaksi">
                               Filter
                             </button>
                           </div>
@@ -197,12 +189,10 @@
                             <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Filter Tgl Terima</label>
                             <input type="radio" class="cp mr-8" id="filter_terima" name="enable_date" onclick="enable_terima()">
                             <input type="text" class="mr-3 col-md-2 col-4 mydatepicker"
-                              name="awalTerima"id="awal_terima"  value="<?=$awalTerima?>" autocomplete="off">
+                              name="tglTerima"id="awal_terima"  value="<?=$tglTerima?>" autocomplete="off">
                             <label class="centered d-md-flex">s/d.</label>
-                            <input type="text" class="ml-3 col-md-2 col-4 mydatepicker"
-                              name="akhirTerima" id="akhir_terima" value="<?=$akhirTerima?>" autocomplete="off">
                             <button class="px-2 btn btn-success btn-sm text-white ml-half"
-                              type="submit" name="filter_tgl_terima">
+                              type="submit" name="filter_tgl_terima" id="btn_terima">
                               Filter
                             </button>
                           </div>
@@ -292,17 +282,21 @@
         if(!$('#filter_transaksi').is(':checked')) {
           $('#awal_transaksi').prop('disabled', true);
           $('#akhir_transaksi').prop('disabled', true);
+          $('#btn_transaksi').prop('disabled', true);
         } else {
           $('#awal_transaksi').prop('disabled', false);
           $('#akhir_transaksi').prop('disabled', false);
+          $('#btn_transaksi').prop('disabled', false);
         }
 
         if(!$('#filter_terima').is(':checked')) {
           $('#awal_terima').prop('disabled', true);
           $('#akhir_terima').prop('disabled', true);
+          $('#btn_terima').prop('disabled', true);
         } else {
           $('#awal_terima').prop('disabled', false);
           $('#akhir_terima').prop('disabled', false);
+          $('#btn_terima').prop('disabled', false);
         }
 
         // fill datatables 
@@ -332,15 +326,19 @@
       function enable_transaksi() {
         $('#awal_transaksi').prop('disabled', false);
         $('#akhir_transaksi').prop('disabled', false);
+        $('#btn_transaksi').prop('disabled', false);
         $('#awal_terima').prop('disabled', true);
         $('#akhir_terima').prop('disabled', true);
+        $('#btn_terima').prop('disabled', true);
       }
 
       function enable_terima() {
         $('#awal_terima').prop('disabled', false);
         $('#akhir_terima').prop('disabled', false);
+        $('#btn_terima').prop('disabled', false);
         $('#awal_transaksi').prop('disabled', true);
         $('#akhir_transaksi').prop('disabled', true);
+        $('#btn_transaksi').prop('disabled', true);
       }
 
     </script>
