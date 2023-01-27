@@ -10,7 +10,9 @@
     $nama = $_SESSION['user_login'];
     $tglTransaksi = date('d-m-Y');
     $tglTerima = date('d-m-Y');
+    $state = '';
     if(isset($_REQUEST['filter_tgl'])) {
+      $state = $_REQUEST['enable_date'];
       if($_REQUEST['enable_date'] == 'transaksi_on') {
         $status = 'transaksi_on';
         $_SESSION['StatusFilter'] = $status;
@@ -23,6 +25,8 @@
         $_SESSION['FilterTglTransaksi'] = date('d-m-Y');
       }
     }
+
+    echo $state;
 
     if(isset($_SESSION['FilterTglTransaksi'])) $tglTransaksi = $_SESSION['FilterTglTransaksi'];
 
@@ -269,6 +273,9 @@
      <script src="assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
     <script>
+
+      var state = '<?php echo $state ?>';
+
       $(document).ready(() => {
         /* hide the loader first */
         $('.loader').hide();
@@ -281,19 +288,25 @@
           autoclose: true,
           todayHighlight: true
         });
-
-        $('#filter_transaksi').prop('checked', true);
+          
+        
+        if(state == '' || state == 'transaksi_on') {
+          $('#filter_transaksi').prop('checked', true);
+          $('#tgl_transaksi').prop('disabled', false);
+        } else {
+          $('#filter_terima').prop('checked', true);
+        }
 
         if(!$('#filter_transaksi').is(':checked')) {
-          $('#tgl_transaksi').prop('disabled', true);
-        } else {
-          $('#tgl_transaksi').prop('disabled', false);
+            $('#tgl_transaksi').prop('disabled', true);
+          } else {
+            $('#tgl_transaksi').prop('disabled', false);
         }
 
         if(!$('#filter_terima').is(':checked')) {
-          $('#tgl_terima').prop('disabled', true);
-        } else {
-          $('#tgl_terima').prop('disabled', false);
+            $('#tgl_terima').prop('disabled', true);
+          } else {
+            $('#tgl_terima').prop('disabled', false);
         }
 
         // fill datatables 
