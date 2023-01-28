@@ -63,46 +63,42 @@
                 }
                 $pdo = null;
             }
-            // if(!empty($data)){
-            //     $sort1 = $sort2 = $sort3 = $sort4 = $sort5 = $sort6 = array();
-            // }
-            // foreach($data as $key => $value) {
-            //     $sort1[$key] = $value[1];
-            //     $sort2[$key] = $value[2];
-            //     $sort3[$key] = $value[3];
-            //     $sort4[$key] = $value[4];
-            //     $sort5[$key] = $value[5];
-            //     $sort6[$key] = $value[6];
-            // }
-            // if(isset($_REQUEST['order']) && count($_REQUEST['order'])) {
-            //     for($i = 0, $ien = count($_REQUEST['order']); $i < $ien; $i++) {
-            //         $columnIdx = intval($_REQUEST['order'][$i]['column']);
-            //         $requestColumn = $_REQUEST['columns'][$columnIdx];
-            //         if($requestColumn['orderable'] == 'true') {
-            //             $dir = $_REQUEST['order'][$i]['dir'] === 'asc' ? SORT_ASC : SORT_DESC;
-            //             switch($columnIdx) {
-            //                 case 2:
-            //                     array_multisort($sort2, $dir, $data);
-            //                     break;
-            //                 case 3:
-            //                     array_multisort($sort3, $dir, $data);
-            //                     break;
-            //                 case 4:
-            //                     array_multisort($sort4, $dir, $data);
-            //                     break;
-            //                 case 5:
-            //                     array_multisort($sort5, $dir, $data);
-            //                     break;
-            //                 case 6:
-            //                     array_multisort($sort6, $dir, $data);
-            //                     break;
-            //                 default:
-            //                     array_multisort($sort1, $dir, $data);
-            //                     break;
-            //             }
-            //         }
-            //     }
-            // }
+            if(!empty($data)){
+                $sort1 = $sort2 = $sort3 = $sort4 = $sort5 = $sort6 = array();
+            }
+            foreach($data as $key => $value) {
+                $sort1[$key] = $value[1];
+                $sort2[$key] = $value[2];
+                $sort3[$key] = $value[3];
+                $sort4[$key] = $value[4];
+                $sort5[$key] = $value[5];
+            }
+            if(isset($_REQUEST['order']) && count($_REQUEST['order'])) {
+                for($i = 0, $ien = count($_REQUEST['order']); $i < $ien; $i++) {
+                    $columnIdx = intval($_REQUEST['order'][$i]['column']);
+                    $requestColumn = $_REQUEST['columns'][$columnIdx];
+                    if($requestColumn['orderable'] == 'true') {
+                        $dir = $_REQUEST['order'][$i]['dir'] === 'asc' ? SORT_ASC : SORT_DESC;
+                        switch($columnIdx) {
+                            case 2:
+                                array_multisort($sort2, $dir, $data);
+                                break;
+                            case 3:
+                                array_multisort($sort3, $dir, $data);
+                                break;
+                            case 4:
+                                array_multisort($sort4, $dir, $data);
+                                break;
+                            case 5:
+                                array_multisort($sort5, $dir, $data);
+                                break;
+                            default:
+                                array_multisort($sort1, $dir, $data);
+                                break;
+                        }
+                    }
+                }
+            }
 
             if(isset($_REQUEST['start']) && $_REQUEST['length'] != -1) {
                 $data = array_slice($data, intval($_REQUEST['start']), intval($_REQUEST['length']));
