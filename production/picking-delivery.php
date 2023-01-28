@@ -219,10 +219,10 @@
                   </form>
                 </div>
                 <div class="table-responsive">
-                  <table id="table_picking" class="table table-bordered table-condensed display compact">
+                  <table id="table_picking" class="cp table table-bordered table-condensed display compact">
                     <thead>
                       <tr>
-                        <th><input type="checkbox" id="select_all"></th>
+                        <th><input type="checkbox" id="select_all" class="cp"></th>
                         <th>No Transaksi</th>
                         <th>Tgl Transaksi</th>
                         <th>Customer</th>
@@ -378,20 +378,24 @@
 
           /* initiate select all checkboxes highlight */ 
 
-				  $('tr').find('#select-all').on('click', function() {
-					  $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+				  $('tr').find('#select_all').on('click', function() {
+					  $("input[type='checkbox']").prop('checked', $(this).prop('checked'));
 					  if ($(this).prop('checked') === true) {
-						  $("input[type=checkbox]").closest('tr').addClass('highlight');
+						  $("input[type='checkbox']").closest('tr').addClass('highlight');
               // work around fixedColumns highlight
-              $("input[type=checkbox]").closest('tr .dtfc-fixed-left').addClass('highlight');
-              $("input[type=checkbox]").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
+              $("input[type='checkbox']").closest('tr .dtfc-fixed-left').addClass('highlight');
+              $("input[type='checkbox']").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
 					  } else {
-              $("input[type=checkbox]").closest('tr').removeClass('highlight');
+              $("input[type='checkbox']").closest('tr').removeClass('highlight');
               // work around fixedColumns highlight
-              $("input[type=checkbox]").closest('tr .dtfc-fixed-left').removeClass('highlight');
-              $("input[type=checkbox]").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');
-
+              $("input[type='checkbox']").closest('tr .dtfc-fixed-left').removeClass('highlight');
+              $("input[type='checkbox']").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');
 					  }
+            // if ($(this).is( ":checked" )) {
+            //     tablePicking.rows(  ).select();        
+            // } else {
+            //     tablePicking.rows(  ).deselect(); 
+            // }
 				  });
         })
 
