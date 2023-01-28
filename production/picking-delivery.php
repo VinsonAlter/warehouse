@@ -80,6 +80,10 @@
         background-color: #ff9933 !important;
       }
 
+      .highlight {
+        background-color: yellowgreen !important;
+      }
+
       .nav-img {
         margin-right: 10px;
       }
@@ -218,7 +222,7 @@
                   <table id="table_picking" class="table table-bordered table-condensed display compact">
                     <thead>
                       <tr>
-                        <th><input type="checkbox"></th>
+                        <th><input type="checkbox" id="select_all"></th>
                         <th>No Transaksi</th>
                         <th>Tgl Transaksi</th>
                         <th>Customer</th>
@@ -347,8 +351,49 @@
             } else {
               $('td:eq(4)', row).addClass("bg-belum-diterima");
             }
+          },
+          "drawCallback": function( settings ) {
+            $("input[type=checkbox]").prop('checked', false);
+            $("input[type=checkbox]").closest('tr').removeClass('highlight');
+            // work around fixedColumns highlight
+            $("input[type=checkbox]").closest('tr .dtfc-fixed-left').removeClass('highlight');
+            $("input[type=checkbox]").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');
           } 
         });
+
+        tablePicking.on('draw.dt', () => {
+          $('tr').find("input[type='checkbox']").on('click', function() {
+            if ($(this).prop('checked') === true) {
+              $(this).closest('tr').addClass('highlight');
+              // work around fixedColumns highlight
+              $(this).closest('tr .dtfc-fixed-left').addClass('highlight');
+              $(this).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
+            } else {
+              $(this).closest('tr').removeClass('highlight');
+              // work around fixedColumns highlight
+              $(this).closest('tr .dtfc-fixed-left').removeClass('highlight');
+              $(this).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');	  
+            }
+          });
+
+          /* initiate select all checkboxes highlight */ 
+
+				  $('tr').find('#select-all').on('click', function() {
+					  $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+					  if ($(this).prop('checked') === true) {
+						  $("input[type=checkbox]").closest('tr').addClass('highlight');
+              // work around fixedColumns highlight
+              $("input[type=checkbox]").closest('tr .dtfc-fixed-left').addClass('highlight');
+              $("input[type=checkbox]").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
+					  } else {
+              $("input[type=checkbox]").closest('tr').removeClass('highlight');
+              // work around fixedColumns highlight
+              $("input[type=checkbox]").closest('tr .dtfc-fixed-left').removeClass('highlight');
+              $("input[type=checkbox]").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');
+
+					  }
+				  });
+        })
 
         // tablePicking.on('draw.dt', () => {
         //   const PageInfo = $('#table_picking').DataTable().page.info();
