@@ -214,15 +214,13 @@
                         <th>No</th>
                         <th>No Transaksi</th>
                         <th>Tgl Transaksi</th>
-                        <th>Nama</th>
-                        <th>Owner</th>
+                        <th>Customer</th>
                         <th>Status</th>
                         <th>Tanggal Terima</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -326,6 +324,13 @@
           "order": [[1, "asc"]],
           "columnDefs": [
             { orderable: false, targets: 0 },
+            { targets: 5,
+              render: function(data){
+                if(data == 1)
+                  return '<p>Diterima</p>'
+                  else
+                  return '<p>Belum Diterima</p>'
+              }}
           ]
         });
 

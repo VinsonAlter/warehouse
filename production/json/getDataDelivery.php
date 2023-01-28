@@ -49,6 +49,7 @@
                     $nama = $row['Nama'];
                     $owner = $row['Owner'];
                     $status = $row['Status'];
+                    $customer = $owner == '' ? $nama : $nama . ' (' . $owner . ')';
                     $tglTerima = $row['TglTerima'];
 
                     $data[] = array(
@@ -56,8 +57,7 @@
                         $urut,
                         $transaksi,
                         $tglTransaksi,
-                        $nama,
-                        $owner,
+                        $customer,
                         $status,
                         $tglTerima
                     );
@@ -112,10 +112,10 @@
             // Datetime Formatting
             for ($i=0;$i<count($data);$i++) {
                 $data[$i][3] = date('d-m-Y', strtotime($data[$i][3]));
-                if (strtotime($data[$i][7]) != '') {
-                    $data[$i][7] = date('d-m-Y', strtotime($data[$i][7]));
+                if (strtotime($data[$i][6]) != '') {
+                    $data[$i][6] = date('d-m-Y', strtotime($data[$i][6]));
                 } else {
-                    $data[$i][7] = '';
+                    $data[$i][6] = '';
                 } 
             }
 
@@ -124,9 +124,6 @@
                 'recordsTotal' => $total_record,
                 'recordsFiltered' => $urut,
                 'data' => $data,
-                'query' => $query,
-                'tgl_terima' => $tgl_terima,
-                'status' => $status
             );
 
         }
