@@ -33,13 +33,16 @@
                 ";
                 $filters = implode("UNION ALL", $filter);
             }
+            $stmt = $conn->prepare($filters, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+            $stmt->execute();
+            $total_record += $stmt->rowCount();
             $order_tgl = " ORDER BY [Tgl] DESC, [Status], [NoTransaksi] ";
             $query = "SELECT * FROM ($filters) temp" . $order_tgl;
             $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
             $stmt->execute();
-            $total_record += $stmt->rowCount();
             if($stmt->rowCount() > 0) {
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    $checkbox = '<input type="checkbox" value="" id="checkboxes" class="checkboxes">';
                     $urut++;
                     $transaksi = $row['NoTransaksi'];
                     $tglTransaksi = $row['Tgl'];
@@ -49,6 +52,7 @@
                     $tglTerima = $row['TglTerima'];
 
                     $data[] = array(
+                        $checkbox,
                         $urut,
                         $transaksi,
                         $tglTransaksi,
@@ -107,11 +111,11 @@
 
             // Datetime Formatting
             for ($i=0;$i<count($data);$i++) {
-                $data[$i][2] = date('d-m-Y', strtotime($data[$i][2]));
-                if (strtotime($data[$i][6]) != '') {
-                    $data[$i][6] = date('d-m-Y', strtotime($data[$i][6]));
+                $data[$i][3] = date('d-m-Y', strtotime($data[$i][3]));
+                if (strtotime($data[$i][7]) != '') {
+                    $data[$i][7] = date('d-m-Y', strtotime($data[$i][7]));
                 } else {
-                    $data[$i][6] = '';
+                    $data[$i][7] = '';
                 } 
             }
 
@@ -122,8 +126,7 @@
                 'data' => $data,
                 'query' => $query,
                 'tgl_terima' => $tgl_terima,
-                'status' => $status,
-                'toggle' => $_SESSION['StatusFilter']
+                'status' => $status
             );
 
         }

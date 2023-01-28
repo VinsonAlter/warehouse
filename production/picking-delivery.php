@@ -26,8 +26,6 @@
       }
     }
 
-    echo $state;
-
     if(isset($_SESSION['FilterTglTransaksi'])) $tglTransaksi = $_SESSION['FilterTglTransaksi'];
 
     if(isset($_SESSION['FilterTglTerima'])) $tglTerima = $_SESSION['FilterTglTerima'];
@@ -212,6 +210,7 @@
                   <table id="table_picking" class="table table-bordered table-condensed display compact">
                     <thead>
                       <tr>
+                        <th><input type="checkbox"></th>
                         <th>No</th>
                         <th>No Transaksi</th>
                         <th>Tgl Transaksi</th>
@@ -223,6 +222,7 @@
                     </thead>
                     <tbody>
                       <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -316,18 +316,22 @@
           "deferRender": true,
           "stateSave": true,
           "stateDuration": -1,
-          "pageLength": 20,
+          "pageLength": 25,
           "ajax": {
             url: "json/getDataDelivery.php"
           },
           "language": {
             "processing": '<div class="loader"></div>',
-          }
+          },
+          "order": [[1, "asc"]],
+          "columnDefs": [
+            { orderable: false, targets: 0 },
+          ]
         });
 
         tablePicking.on('draw.dt', () => {
           const PageInfo = $('#table_picking').DataTable().page.info();
-			    tablePicking.column(0, { page: 'current' }).nodes().each((cell, i) => {
+			    tablePicking.column(1, { page: 'current' }).nodes().each((cell, i) => {
 				    cell.innerHTML = i + 1 + PageInfo.start
 			    })
         }) 
