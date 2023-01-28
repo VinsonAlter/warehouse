@@ -72,6 +72,14 @@
         overflow:hidden;
       } */
       
+      .bg-belum-diterima { 
+        background-color: #fcb1ac !important;
+      }
+
+      .bg-diterima {
+        background-color: #ff9933 !important;
+      }
+
       .nav-img {
         margin-right: 10px;
       }
@@ -325,11 +333,21 @@
             { targets: 4,
               render: function(data){
                 if(data == 1)
-                  return '<p>Diterima</p>'
+                  return '<b>Diterima</b>'
                   else
-                  return '<p>Belum Diterima</p>'
-              }}
-          ]
+                  return '<b>Belum Diterima</b>'
+              }
+            },
+            { className: 'dt-center', targets: [4]}
+          ],
+          "rowCallback": function(row, data, index) {
+            const cellValue = data[4];
+            if(cellValue == 1) {
+              $('td:eq(4)', row).addClass("bg-diterima");
+            } else {
+              $('td:eq(4)', row).addClass("bg-belum-diterima");
+            }
+          } 
         });
 
         // tablePicking.on('draw.dt', () => {
