@@ -179,7 +179,7 @@
             <div class="col-12 d-flex no-block align-items-center">
               <h4 class="page-title">Picking & Delivery</h4>
               <div class="ms-auto text-end">
-                <button class="btn btn-cyan" type="button" data-bs-toggle="modal" data-bs-target="#masterModal">Baru</button>
+                <button class="btn btn-cyan" type="button" id="update_pick">Update Picking</button>
               </div>
             </div>
           </div>
@@ -405,6 +405,13 @@
 				//     cell.innerHTML = i + 1 + PageInfo.start
 			  //   })
         // }) 
+      })
+
+      $('#update_pick').click(() => {
+        const checkValues = $('#checkbox_val:checked').map(function(){
+          return $(this).val();
+        }).get();
+        alert(checkValues);
       })
 
       function enable_transaksi() {

@@ -42,7 +42,6 @@
             $stmt->execute();
             if($stmt->rowCount() > 0) {
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $checkbox = '<input type="checkbox" value="" id="checkboxes" class="cp">';
                     $urut++;
                     $transaksi = $row['NoTransaksi'];
                     $tglTransaksi = $row['Tgl'];
@@ -51,7 +50,8 @@
                     $status = $row['Status'];
                     $customer = $owner == '' ? $nama : $nama . ' (' . $owner . ')';
                     $tglTerima = $row['TglTerima'];
-
+                    $accept = $tglTerima == '' ? '' : ' ,' . $tglTerima;
+                    $checkbox = '<input type="checkbox" value="' . $transaksi .  " , "  . $tglTransaksi . " , " . $customer . $accept. '" id="checkbox_val" class="cp">';
                     $data[] = array(
                         $checkbox,
                         $transaksi,
