@@ -211,7 +211,6 @@
                     <thead>
                       <tr>
                         <th><input type="checkbox"></th>
-                        <th>No</th>
                         <th>No Transaksi</th>
                         <th>Tgl Transaksi</th>
                         <th>Customer</th>
@@ -221,7 +220,6 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -323,8 +321,8 @@
           },
           "order": [[1, "asc"]],
           "columnDefs": [
-            { orderable: false, targets: 0 },
-            { targets: 5,
+            { orderable: false, targets: [0, 1]},
+            { targets: 4,
               render: function(data){
                 if(data == 1)
                   return '<p>Diterima</p>'
@@ -334,12 +332,12 @@
           ]
         });
 
-        tablePicking.on('draw.dt', () => {
-          const PageInfo = $('#table_picking').DataTable().page.info();
-			    tablePicking.column(1, { page: 'current' }).nodes().each((cell, i) => {
-				    cell.innerHTML = i + 1 + PageInfo.start
-			    })
-        }) 
+        // tablePicking.on('draw.dt', () => {
+        //   const PageInfo = $('#table_picking').DataTable().page.info();
+			  //   tablePicking.column(0, { page: 'current' }).nodes().each((cell, i) => {
+				//     cell.innerHTML = i + 1 + PageInfo.start
+			  //   })
+        // }) 
       })
 
       function enable_transaksi() {
