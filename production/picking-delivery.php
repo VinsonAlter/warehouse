@@ -290,12 +290,34 @@
 
       var state = '<?php echo $state ?>';
 
-      
-
-      
+      function selectPicker() {
+          $.ajax({
+            type: "post",
+            url: "json/search_picker.php",
+            success: result => {
+              const res = $.parseJSON(result);
+              if (res.success == 1) {
+                if($('#select_picker').children().length == 0) {
+                  for (i = 0; i < res.data.length; ++i) {
+                    $('<option>',
+                    {
+                      html: (res.data[i]).concat(' (' + res.id_data[i] + ')'), 
+                      value: res.id_data[i],
+                    }).appendTo('#select_picker');
+                  }
+                }   
+              }
+            },
+            error: err => {
+              console.error(err.statusText);
+            }
+          })
+        }
 
       $(document).ready(() => {
         
+        selectPicker();
+
         /* hide the loader first */
         $('.loader').hide();
 
@@ -327,29 +349,7 @@
             $('#tgl_terima').prop('disabled', false);
         }
 
-        $('#select_picker').on('click', function() {
-          $.ajax({
-            type: "post",
-            url: "json/search_picker.php",
-            success: result => {
-              const res = $.parseJSON(result);
-              if (res.success == 1) {
-                if($('#select_picker').children().length == 0) {
-                  for (i = 0; i < res.data.length; ++i) {
-                    $('<option>',
-                    {
-                      html: (res.data[i]).concat(' (' + res.id_data[i] + ')'), 
-                      value: res.id_data[i],
-                    }).appendTo('#select_picker');
-                  }
-                }   
-              }
-            },
-            error: err => {
-              console.error(err.statusText);
-            }
-          })
-        })
+        
 
         // fill datatables 
         var tablePicking = $('#table_picking').DataTable({

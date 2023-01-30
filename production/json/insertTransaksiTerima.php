@@ -5,32 +5,26 @@
         if($_POST['batch'] != '') {
             if($_POST['picker'] != '') {
                 $batch = $_POST['batch'];
+                $picker = $_POST['picker'];
                 $arr = explode(' ; ', $batch);
                 foreach($arr as $val){
                     $arr = explode(' , ', $val);
                     $noTransaksi = $arr[0];
                     $tglTransaksi = date_to_str($arr[1]);
                     $customer = $arr[2];
-                    $status = $arr[3];
-                }
-                $insert = "INSERT INTO [WMS-System].[dbo].[TB_Delivery]
-                            ([NoTransaksi]
-                            ,[Status]
-                            ,[TglTransaksi]
-                            ,[Customer])
-                            VALUES
-                            ('$noTransaksi',
-                            '$status',
-                            '$tglTransaksi',
-                            '$customer')";
-                $stmt = $pdo->prepare($insert, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-                $stmt->execute();
-                if($stmt->rowCount() > 0){
-                    $res['success'] = 1;
-                    $res['message'] = 'Transaksi berhasil diupdate!';
-                } else {
-                    $res['success'] = 0;
-                    $res['message'] = 'Transaksi gagal diupdate, mohon periksa koneksi anda!';
+                    $insert = "INSERT INTO [WMS-System].[dbo].[TB_Delivery] 
+                            ([NoTransaksi], [Customer], [TglTransaksi], [Status], [PickerID])
+                            VALUES ('".$noTransaksi."', '".$customer."', '$tglTransaksi', 1, '$picker')";
+                    $stmt = $pdo->prepare($insert, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+                    $stmt->execute();
+                    if($stmt->rowCount() > 0){
+                        $res['success'] = 1;
+                        $res['insert'] = $insert;
+                        $res['message'] = 'Transaksi berhasil diupdate!';
+                    } else {
+                        $res['success'] = 0;
+                        $res['message'] = 'Transaksi gagal diupdate, mohon periksa koneksi anda!';
+                    }
                 }
             } else {
                 $res['success'] = 0;
