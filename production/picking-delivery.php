@@ -181,11 +181,11 @@
               <div class="ms-auto text-end d-flex">
                 <select
                   class="cp select2 form-select shadow-none"
-                    style="width: 100%; height:36px; margin-right:12px"
+                    style="width: 50%; height:36px; margin-right:12px"
                     id="select_picker" name="picker">
                 </select>
                 <button class="btn btn-cyan" type="button" id="update_pick" name="update_terima"
-                  style="width:16rem;">Update Picking</button>
+                  style="width:180px;">Update Picking</button>
               </div>
             </div>
           </div>
@@ -290,33 +290,12 @@
 
       var state = '<?php echo $state ?>';
 
-      $('#select_picker').on('click', function() {
-        $.ajax({
-          type: "post",
-          url: "json/search_picker.php",
-          success: result => {
-            const res = $.parseJSON(result);
-            if (res.success == 1) {
-              if($('#select_picker').children().length == 0) {
-                for (i = 0; i < res.data.length; ++i) {
-                  $('<option>',
-                  {
-                    html: (res.data[i]).concat(' (' + res.id_data[i] + ')'),
-                    value: res.id_data[i],
-                  }).appendTo('#select_picker');
-                }
-              }   
-            }
-          },
-          error: err => {
-            console.error(err.statusText);
-          }
-        })
-      })
+      
+
+      
 
       $(document).ready(() => {
-
-
+        
         /* hide the loader first */
         $('.loader').hide();
 
@@ -347,6 +326,30 @@
           } else {
             $('#tgl_terima').prop('disabled', false);
         }
+
+        $('#select_picker').on('click', function() {
+          $.ajax({
+            type: "post",
+            url: "json/search_picker.php",
+            success: result => {
+              const res = $.parseJSON(result);
+              if (res.success == 1) {
+                if($('#select_picker').children().length == 0) {
+                  for (i = 0; i < res.data.length; ++i) {
+                    $('<option>',
+                    {
+                      html: (res.data[i]).concat(' (' + res.id_data[i] + ')'), 
+                      value: res.id_data[i],
+                    }).appendTo('#select_picker');
+                  }
+                }   
+              }
+            },
+            error: err => {
+              console.error(err.statusText);
+            }
+          })
+        })
 
         // fill datatables 
         var tablePicking = $('#table_picking').DataTable({
@@ -433,18 +436,20 @@
             const checkValues = $('#checkbox_val:checked').map(function(){
               return $(this).val();
             }).get();
+            const picker = $('#select_picker').val();
+            // alert(Picker);
             const CheckValues = checkValues.join(" ; ");
             // alert(CheckValues);
             $.ajax({
               type: "post",
               url: 'json/insertTransaksiTerima.php',
-              data: {batch : CheckValues},
+              data: {batch : CheckValues, picker: picker},
               success: result => {
                 const res = $.parseJSON(result);
                 if(res.success == 1) {
                   $('#table_picking').DataTable().ajax.reload();
-                }
-              },
+                } alert(res.message);
+              } ,
               error: err => {
                 console.error(err.statusText);
               }
