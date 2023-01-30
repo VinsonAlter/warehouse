@@ -26,7 +26,7 @@
 
             $insert = "INSERT INTO [WMS-System].[dbo].[TB_Delivery] 
                 
-                            ([NoTransaksi], [Nama], [TglTransaksi], [TglTerima], [Status])
+                            ([NoTransaksi], [Customer], [TglTransaksi], [TglTerima], [Status])
                                         
                             VALUES ('".$no_transaksi."', '".$nama_owner."', '$tgl_transaksi', '$date', 1)";
 

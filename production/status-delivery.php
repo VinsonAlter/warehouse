@@ -413,11 +413,11 @@
                         <th>Tgl Terima</th>
                         <th>Tgl Kirim</th>
                         <th>Tgl Selesai</th>
+                        <th>Wilayah</th>
+                        <th>Nama Ekspedisi</th>
                         <th>Nama Picker</th>
                         <th>Nama Driver</th>
                         <th>Plat Driver</th>
-                        <th>Driver Customer</th>
-                        <th>Plat Customer</th>
                         <th>Nama Sales</th>
                         <th>Aksi</th>
                       </tr>
@@ -811,7 +811,14 @@
             // { width: '10%', targets: [3, 5]},
             // { width: '10%', targets: [4, 5, 6]},
             { width: '20%', targets: 2},
-            { className: 'dt-center', targets: [0, 1, 3, 4, 5, 6, 7, 14]}
+            { className: 'dt-center', targets: [0, 1, 3, 4, 5, 6, 7, 14]},
+            { targets: 3,
+              render: function(data){
+                if(data == 1)
+                  return '<b>Diterima</b>'
+                  else
+                  return '<b>Belum Diterima</b>'
+              }}
           ],
           "rowCallback": function(row, data, index) {
             const cellValue = data[3];
@@ -865,7 +872,7 @@
                     (
                       $('<label>').attr({
                         class: 'cp form-check-label px-2 col-md-6 col-12 border-bottom-grey ',
-                      }).append('Nama (Owner)')
+                      }).append('Customer')
                     )
                 ).appendTo('#transaksi_container');
               if(res.data.length > 0) {

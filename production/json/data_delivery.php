@@ -110,16 +110,16 @@
 
             $table = "SELECT [NoTransaksi]
                             ,[Status]
-                            ,[Nama]
+                            ,[Customer]
                             ,d.[NamaDriver]
                             ,pic.[NamaPicker]
                             ,[TglTransaksi]
                             ,[TglTerima]
                             ,[TglKirim]
                             ,[TglSelesai]
+                            ,[Wilayah]
+                            ,[NamaEkspedisi]
                             ,[NoPlat]
-                            ,[PlatCust]
-                            ,[DriverCust]
                             ,[NamaSales]
                             ,[Cabang]
                         FROM [WMS-System].[dbo].[TB_Delivery] do 
@@ -152,7 +152,7 @@
 
                 $transaksi = $row['NoTransaksi'];
 
-                $nama = $row['Nama'];
+                $nama = $row['Customer'];
 
                 $status = $row['Status'];
 
@@ -164,15 +164,15 @@
 
                 $tglSelesai = $row['TglSelesai'];
 
+                $wilayah = $row['Wilayah'];
+
+                $ekspedisi = $row['NamaEkspedisi'];
+
                 $namaPicker = $row['NamaPicker'];
 
                 $namaDriver = $row['NamaDriver'];
 
                 $platDriver = $row['NoPlat'];
-
-                $custDriver = $row['DriverCust'];
-
-                $platCustomer = $row['PlatCust'];
 
                 $sales = $row['NamaSales'];
 
@@ -202,13 +202,13 @@
 
                     $namaPicker,
 
+                    $wilayah,
+
+                    $ekspedisi,
+
                     $namaDriver,
 
                     $platDriver,
-
-                    $custDriver,
-
-                    $platCustomer,
 
                     $sales,
 

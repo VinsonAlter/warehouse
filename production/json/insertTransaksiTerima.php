@@ -15,8 +15,7 @@
                         ([NoTransaksi]
                         ,[Status]
                         ,[TglTransaksi]
-                        ,[TglTerima]
-                        ,[Nama])
+                        ,[Customer])
                         VALUES
                         ('$noTransaksi',
                         '$status',
