@@ -179,7 +179,7 @@
             <div class="col-12 d-flex no-block align-items-center">
               <h4 class="page-title">Picking & Delivery</h4>
               <div class="ms-auto text-end">
-                <button class="btn btn-cyan" type="button" id="update_pick">Update Picking</button>
+                <button class="btn btn-cyan" type="button" id="update_pick" name="update_terima">Update Picking</button>
               </div>
             </div>
           </div>
@@ -402,9 +402,10 @@
               return $(this).val();
             }).get();
             const CheckValues = checkValues.join(" ; ");
+            alert(CheckValues);
             $.ajax({
               url: 'json/insertTransaksiTerima.php',
-              data: CheckValues,
+              data: {batch : CheckValues},
               success: result => {
                 const res = $.parseJSON(result);
                 if(res.success == 1) {
