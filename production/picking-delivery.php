@@ -288,6 +288,10 @@
 
     <script>
 
+      let checkValues = [];
+
+
+
       var state = '<?php echo $state ?>';
 
       function selectPicker() {
@@ -432,7 +436,8 @@
             // }
 				  });
 
-          $('#update_pick').click(() => {
+          $('#update_pick').click((e) => {
+            e.preventDefault();
             let checkValues = []; 
             $('#checkbox_val:checked').map(function(){
               // console.log($(this).val());
@@ -444,7 +449,7 @@
             // alert(Picker);
             // alert(checkValues);
             const CheckValues = checkValues.join(" ; ");
-            console.log(CheckValues);
+            $('input[type=checkbox]').prop('checked',false);
             $.ajax({
               type: "post",
               url: 'json/insertTransaksiTerima.php',
@@ -452,7 +457,8 @@
               success: result => {
                 const res = $.parseJSON(result);
                 if(res.success == 1) {
-                  checkValues = [];
+                  e.preventDefault();
+                  // $('input[type=checkbox]').prop('checked',false);
                   $('#table_picking').DataTable().ajax.reload();
                   // $('#checkbox_val').prop('checked', false);
                 } alert(res.message);
