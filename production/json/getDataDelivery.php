@@ -51,7 +51,8 @@
                     $customer = $owner == '' ? $nama : $nama . ' (' . $owner . ')';
                     $tglTerima = $row['TglTerima'];
                     $accept = $tglTerima == '' ? '' : ' ,' . $tglTerima;
-                    $checkbox = '<input type="checkbox" value="' . $transaksi .  " , "  . $tglTransaksi . " , " . $customer . " , " . $status . $accept. '" id="checkbox_val" class="cp">';
+                    $convert_tglTransaksi = date('d-m-Y', strtotime($tglTransaksi));
+                    $checkbox = '<input type="checkbox" value="' . $transaksi .  " , "  . $convert_tglTransaksi . " , " . $customer . " , " . $status . $accept. '" id="checkbox_val" class="cp">';
                     $data[] = array(
                         $checkbox,
                         $transaksi,
