@@ -178,8 +178,14 @@
           <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
               <h4 class="page-title">Picking & Delivery</h4>
-              <div class="ms-auto text-end">
-                <button class="btn btn-cyan" type="button" id="update_pick" name="update_terima">Update Picking</button>
+              <div class="ms-auto text-end d-flex">
+                <select
+                  class="cp select2 form-select shadow-none"
+                    style="width: 100%; height:36px; margin-right:12px"
+                    id="select_picker" name="picker">
+                </select>
+                <button class="btn btn-cyan" type="button" id="update_pick" name="update_terima"
+                  style="width:16rem;">Update Picking</button>
               </div>
             </div>
           </div>
@@ -284,7 +290,33 @@
 
       var state = '<?php echo $state ?>';
 
+      $('#select_picker').on('click', function() {
+        $.ajax({
+          type: "post",
+          url: "json/search_picker.php",
+          success: result => {
+            const res = $.parseJSON(result);
+            if (res.success == 1) {
+              if($('#select_picker').children().length == 0) {
+                for (i = 0; i < res.data.length; ++i) {
+                  $('<option>',
+                  {
+                    html: (res.data[i]).concat(' (' + res.id_data[i] + ')'),
+                    value: res.id_data[i],
+                  }).appendTo('#select_picker');
+                }
+              }   
+            }
+          },
+          error: err => {
+            console.error(err.statusText);
+          }
+        })
+      })
+
       $(document).ready(() => {
+
+
         /* hide the loader first */
         $('.loader').hide();
 
