@@ -433,13 +433,18 @@
 				  });
 
           $('#update_pick').click(() => {
-            const checkValues = $('#checkbox_val:checked').map(function(){
-              return $(this).val();
-            }).get();
+            let checkValues = []; 
+            $('#checkbox_val:checked').map(function(){
+              // console.log($(this).val());
+              // return $(this).val();
+              checkValues.push($(this).val());
+              // $(this).prop('checked', false);
+            })
             const picker = $('#select_picker').val();
             // alert(Picker);
+            // alert(checkValues);
             const CheckValues = checkValues.join(" ; ");
-            // alert(CheckValues);
+            console.log(CheckValues);
             $.ajax({
               type: "post",
               url: 'json/insertTransaksiTerima.php',
@@ -447,7 +452,9 @@
               success: result => {
                 const res = $.parseJSON(result);
                 if(res.success == 1) {
+                  checkValues = [];
                   $('#table_picking').DataTable().ajax.reload();
+                  // $('#checkbox_val').prop('checked', false);
                 } alert(res.message);
               } ,
               error: err => {

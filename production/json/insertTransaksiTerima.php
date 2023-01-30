@@ -8,10 +8,10 @@
                 $picker = $_POST['picker'];
                 $arr = explode(' ; ', $batch);
                 foreach($arr as $val){
-                    $arr = explode(' , ', $val);
-                    $noTransaksi = $arr[0];
-                    $tglTransaksi = date_to_str($arr[1]);
-                    $customer = $arr[2];
+                    $array = explode(' , ', $val);
+                    $noTransaksi = $array[0];
+                    $tglTransaksi = date_to_str($array[1]);
+                    $customer = $array[2];
                     $insert = "INSERT INTO [WMS-System].[dbo].[TB_Delivery] 
                             ([NoTransaksi], [Customer], [TglTransaksi], [Status], [PickerID])
                             VALUES ('".$noTransaksi."', '".$customer."', '$tglTransaksi', 1, '$picker')";
