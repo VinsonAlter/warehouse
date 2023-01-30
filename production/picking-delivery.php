@@ -296,7 +296,6 @@
           autoclose: true,
           todayHighlight: true
         });
-          
         
         if(state == '' || state == 'transaksi_on') {
           $('#filter_transaksi').prop('checked', true);
@@ -397,6 +396,26 @@
             //     tablePicking.rows(  ).deselect(); 
             // }
 				  });
+
+          $('#update_pick').click(() => {
+            const checkValues = $('#checkbox_val:checked').map(function(){
+              return $(this).val();
+            }).get();
+            const CheckValues = checkValues.join(" ; ");
+            $.ajax({
+              url: 'json/insertTransaksiTerima.php',
+              data: CheckValues,
+              success: result => {
+                const res = $.parseJSON(result);
+                if(res.success == 1) {
+                  $('#table_picking').DataTable().ajax.reload();
+                }
+              },
+              error: err => {
+                console.error(err.statusText);
+              }
+            })
+          })
         })
 
         // tablePicking.on('draw.dt', () => {
@@ -407,12 +426,7 @@
         // }) 
       })
 
-      $('#update_pick').click(() => {
-        const checkValues = $('#checkbox_val:checked').map(function(){
-          return $(this).val();
-        }).get();
-        alert(checkValues);
-      })
+      
 
       function enable_transaksi() {
         $('#tgl_transaksi').prop('disabled', false);
