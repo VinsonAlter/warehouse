@@ -402,8 +402,9 @@
               return $(this).val();
             }).get();
             const CheckValues = checkValues.join(" ; ");
-            alert(CheckValues);
+            // alert(CheckValues);
             $.ajax({
+              type: "post",
               url: 'json/insertTransaksiTerima.php',
               data: {batch : CheckValues},
               success: result => {
