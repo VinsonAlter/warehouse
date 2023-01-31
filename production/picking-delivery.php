@@ -423,7 +423,6 @@
                 const res = $.parseJSON(result);
                 if(res.success == 1) {
                   e.preventDefault();
-                  $('input[type=checkbox]').prop('checked',false);
                   $('#table_picking').DataTable().ajax.reload();
                   // window.location.reload();
                   alert(res.message);
