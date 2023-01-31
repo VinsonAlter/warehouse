@@ -52,7 +52,7 @@
                     $tglTerima = $row['TglTerima'];
                     $accept = $tglTerima == '' ? '' : ' ,' . $tglTerima;
                     $convert_tglTransaksi = date('d-m-Y', strtotime($tglTransaksi));
-                    $checkbox = '<input type="checkbox" value="' . $transaksi .  " , "  . $convert_tglTransaksi . " , " . $customer . $accept . '" id="checkbox_val" class="cp">';
+                    $checkbox = '<input type="checkbox" value="' . $transaksi .  " , "  . $convert_tglTransaksi . " , " . $customer . $accept . '" id="checkbox_val" name="checkboxes[]" class="cp">';
                     $data[] = array(
                         $checkbox,
                         $transaksi,

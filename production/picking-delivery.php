@@ -290,7 +290,7 @@
 
       let checkValues = [];
 
-
+      
 
       var state = '<?php echo $state ?>';
 
@@ -406,11 +406,15 @@
               // work around fixedColumns highlight
               $(this).closest('tr .dtfc-fixed-left').addClass('highlight');
               $(this).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
+              checkValues.push($(this).val());
+              console.log(checkValues);
             } else {
               $(this).closest('tr').removeClass('highlight');
               // work around fixedColumns highlight
               $(this).closest('tr .dtfc-fixed-left').removeClass('highlight');
               $(this).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');	  
+              checkValues.pop($(this).val());
+              console.log(checkValues);
             }
           });
 
@@ -423,7 +427,11 @@
               // work around fixedColumns highlight
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').addClass('highlight');
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
-					  } else {
+              $('#checkbox_val:checked').map(function(){
+                checkValues.push($(this).val());
+              })
+              console.log(checkValues);
+            } else {
               $("input[type='checkbox']").closest('tr').removeClass('highlight');
               // work around fixedColumns highlight
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').removeClass('highlight');
@@ -438,30 +446,34 @@
 
           $('#update_pick').click((e) => {
             e.preventDefault();
-            let checkValues = []; 
-            $('#checkbox_val:checked').map(function(){
-              // console.log($(this).val());
-              // return $(this).val();
-              checkValues.push($(this).val());
-              // $(this).prop('checked', false);
-            })
+            // let checkValues = []; 
+            // $('#checkbox_val:checked').map(function(){
+            //   // console.log($(this).val());
+            //   // return $(this).val();
+            //   checkValues.push($(this).val());
+            //   // $(this).prop('checked', false);
+            // })
+            
             const picker = $('#select_picker').val();
             // alert(Picker);
             // alert(checkValues);
             const CheckValues = checkValues.join(" ; ");
-            $('input[type=checkbox]').prop('checked',false);
             $.ajax({
               type: "post",
               url: 'json/insertTransaksiTerima.php',
               data: {batch : CheckValues, picker: picker},
               success: result => {
+                checkValues = [];
                 const res = $.parseJSON(result);
                 if(res.success == 1) {
                   e.preventDefault();
+                  checkValues = [];
                   // $('input[type=checkbox]').prop('checked',false);
-                  $('#table_picking').DataTable().ajax.reload();
+                  alert(res.message);
+                  window.location.reload();
+                  // $('#table_picking').DataTable().ajax.reload();
                   // $('#checkbox_val').prop('checked', false);
-                } alert(res.message);
+                } 
               } ,
               error: err => {
                 console.error(err.statusText);
