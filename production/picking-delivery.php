@@ -234,10 +234,12 @@
                         <th>Customer</th>
                         <th>Status</th>
                         <th>Tanggal Terima</th>
+                        <th>Picker</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -306,7 +308,7 @@
                     $('<option>',
                     {
                       html: (res.data[i]).concat(' (' + res.id_data[i] + ')'), 
-                      value: res.id_data[i],
+                      value: res.data[i],
                     }).appendTo('#select_picker');
                   }
                 }   

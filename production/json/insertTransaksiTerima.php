@@ -17,7 +17,7 @@
                     $status = $array[3];
                     if($status == "") {
                         $insert = "INSERT INTO [WMS-System].[dbo].[TB_Delivery] 
-                            ([NoTransaksi], [Customer], [TglTransaksi], [Status], [PickerID], [TglTerima])
+                            ([NoTransaksi], [Customer], [TglTransaksi], [Status], [NamaPicker], [TglTerima])
                             VALUES ('$noTransaksi', '$customer', '$tglTransaksi', 1, '$picker', '$tglTerima')";
                         $stmt = $pdo->prepare($insert, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
                         $stmt->execute();

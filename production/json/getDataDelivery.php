@@ -25,7 +25,7 @@
             }
             foreach($user_data as $key => $value) {
                 $filter[] = "
-                    SELECT P.[NoTransaksi], P.[Tgl], P.[Nama], P.[Owner], D.[Status], D.[TglTerima]
+                    SELECT P.[NoTransaksi], P.[Tgl], P.[Nama], P.[Owner], D.[Status], D.[TglTerima], D.[NamaPicker]
                     FROM $value P 
                     LEFT JOIN [WMS-System].[dbo].[TB_Delivery] D 
                     ON P.NoTransaksi = D.NoTransaksi " . $tgl_condition . " AND
@@ -50,6 +50,7 @@
                     $nama = $row['Nama'];
                     $owner = $row['Owner'];
                     $status = $row['Status'];
+                    $picker = $row['NamaPicker'];
                     $customer = $owner == '' ? $nama : $nama . ' (' . $owner . ')';
                     $tglTerima = $row['TglTerima'];
                     $accept = $tglTerima == '' ? '' : ' ,' . $tglTerima;
@@ -61,7 +62,8 @@
                         $tglTransaksi,
                         $customer,
                         $status,
-                        $tglTerima
+                        $tglTerima,
+                        $picker
                     );
                 }
                 $pdo = null;
@@ -75,6 +77,7 @@
                 $sort3[$key] = $value[3];
                 $sort4[$key] = $value[4];
                 $sort5[$key] = $value[5];
+                $sort6[$key] = $value[6];
             }
             if(isset($_REQUEST['order']) && count($_REQUEST['order'])) {
                 for($i = 0, $ien = count($_REQUEST['order']); $i < $ien; $i++) {
@@ -94,6 +97,9 @@
                                 break;
                             case 5:
                                 array_multisort($sort5, $dir, $data);
+                                break;
+                            case 6:
+                                array_multisort($sort6, $dir, $data);
                                 break;
                             default:
                                 array_multisort($sort1, $dir, $data);
