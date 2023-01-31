@@ -400,6 +400,44 @@
           } 
         });
 
+        $('#update_pick').click((e) => {
+            e.preventDefault();
+            // let checkValues = []; 
+            // $('#checkbox_val:checked').map(function(){
+            //   // console.log($(this).val());
+            //   // return $(this).val();
+            //   checkValues.push($(this).val());
+            //   // $(this).prop('checked', false);
+            // })
+            
+            const picker = $('#select_picker').val();
+            // alert(Picker);
+            // alert(checkValues);
+            const CheckValues = checkValues.join(" ; ");
+            $.ajax({
+              type: "post",
+              url: 'json/insertTransaksiTerima.php',
+              data: {batch : CheckValues, picker: picker},
+              success: result => {
+                checkValues = [];
+                const res = $.parseJSON(result);
+                if(res.success == 1) {
+                  e.preventDefault();
+                  $('input[type=checkbox]').prop('checked',false);
+                  $('#table_picking').DataTable().ajax.reload();
+                  // window.location.reload();
+                  alert(res.message);
+                  // $('#checkbox_val').prop('checked', false);
+                } else {
+                  alert(res.message);
+                }
+              } ,
+              error: err => {
+                console.error(err.statusText);
+              }
+            })
+          })
+
         tablePicking.on('draw.dt', () => {
           $('tr').find("input[type='checkbox']").on('click', function() {
             if ($(this).prop('checked') === true) {
@@ -451,43 +489,7 @@
             // }
 				  });
 
-          $('#update_pick').click((e) => {
-            e.preventDefault();
-            // let checkValues = []; 
-            // $('#checkbox_val:checked').map(function(){
-            //   // console.log($(this).val());
-            //   // return $(this).val();
-            //   checkValues.push($(this).val());
-            //   // $(this).prop('checked', false);
-            // })
-            
-            const picker = $('#select_picker').val();
-            // alert(Picker);
-            // alert(checkValues);
-            const CheckValues = checkValues.join(" ; ");
-            $.ajax({
-              type: "post",
-              url: 'json/insertTransaksiTerima.php',
-              data: {batch : CheckValues, picker: picker},
-              success: result => {
-                checkValues = [];
-                const res = $.parseJSON(result);
-                if(res.success == 1) {
-                  e.preventDefault();
-                  $('input[type=checkbox]').prop('checked',false);
-                  $('#table_picking').DataTable().ajax.reload();
-                  // window.location.reload();
-                  alert(res.message);
-                  // $('#checkbox_val').prop('checked', false);
-                } else {
-                  alert(res.message);
-                }
-              } ,
-              error: err => {
-                console.error(err.statusText);
-              }
-            })
-          })
+          
         })
 
         // tablePicking.on('draw.dt', () => {
