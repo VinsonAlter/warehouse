@@ -470,14 +470,14 @@
                 const res = $.parseJSON(result);
                 if(res.success == 1) {
                   e.preventDefault();
-                  checkValues = [];
                   // $('input[type=checkbox]').prop('checked',false);
-                  alert(res.message);
-                  window.location.reload();
-                  checkValues.shift($(this).val());
                   // $('#table_picking').DataTable().ajax.reload();
+                  window.location.reload();
+                  alert(res.message);
                   // $('#checkbox_val').prop('checked', false);
-                } alert(res.message);
+                } else {
+                  alert(res.message);
+                }
               } ,
               error: err => {
                 console.error(err.statusText);
