@@ -430,6 +430,7 @@
               $('#checkbox_val:checked').map(function(){
                 checkValues.push($(this).val());
               })
+              checkValues.shift($(this).val());
               console.log(checkValues);
             } else {
               $("input[type='checkbox']").closest('tr').removeClass('highlight');
@@ -446,13 +447,13 @@
 
           $('#update_pick').click((e) => {
             e.preventDefault();
-            // let checkValues = []; 
-            // $('#checkbox_val:checked').map(function(){
-            //   // console.log($(this).val());
-            //   // return $(this).val();
-            //   checkValues.push($(this).val());
-            //   // $(this).prop('checked', false);
-            // })
+            let checkValues = []; 
+            $('#checkbox_val:checked').map(function(){
+              // console.log($(this).val());
+              // return $(this).val();
+              checkValues.push($(this).val());
+              // $(this).prop('checked', false);
+            })
             
             const picker = $('#select_picker').val();
             // alert(Picker);
