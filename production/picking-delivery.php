@@ -176,7 +176,7 @@
       <div class="page-wrapper">
         <div class="page-breadcrumb">
           <div class="row">
-            <div class="col-12 d-flex no-block align-items-center">
+            <div class="col-10 d-flex no-block align-items-center">
               <h4 class="page-title">Picking & Delivery</h4>
               <div class="ms-auto text-end d-flex">
                 <select
@@ -427,8 +427,9 @@
               // work around fixedColumns highlight
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').addClass('highlight');
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
-              $('#checkbox_val:checked').map(function(){
+              $('td #checkbox_val:checked').map(function(){
                 checkValues.push($(this).val());
+                // checkValues.shift($(this).val());
               })
               checkValues.shift($(this).val());
               console.log(checkValues);
@@ -437,7 +438,8 @@
               // work around fixedColumns highlight
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').removeClass('highlight');
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');
-					  }
+              checkValues = [];
+            }
             // if ($(this).is( ":checked" )) {
             //     tablePicking.rows(  ).select();        
             // } else {
@@ -447,13 +449,13 @@
 
           $('#update_pick').click((e) => {
             e.preventDefault();
-            let checkValues = []; 
-            $('#checkbox_val:checked').map(function(){
-              // console.log($(this).val());
-              // return $(this).val();
-              checkValues.push($(this).val());
-              // $(this).prop('checked', false);
-            })
+            // let checkValues = []; 
+            // $('#checkbox_val:checked').map(function(){
+            //   // console.log($(this).val());
+            //   // return $(this).val();
+            //   checkValues.push($(this).val());
+            //   // $(this).prop('checked', false);
+            // })
             
             const picker = $('#select_picker').val();
             // alert(Picker);
@@ -472,9 +474,10 @@
                   // $('input[type=checkbox]').prop('checked',false);
                   alert(res.message);
                   window.location.reload();
+                  checkValues.shift($(this).val());
                   // $('#table_picking').DataTable().ajax.reload();
                   // $('#checkbox_val').prop('checked', false);
-                } 
+                } alert(res.message);
               } ,
               error: err => {
                 console.error(err.statusText);
