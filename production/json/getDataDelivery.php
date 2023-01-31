@@ -109,7 +109,7 @@
             for ($i=0;$i<count($data);$i++) {
                 $data[$i][2] = date('d-m-Y', strtotime($data[$i][2]));
                 if (strtotime($data[$i][5]) != '') {
-                    $data[$i][5] = date('d-m-Y', strtotime($data[$i][5]));
+                    $data[$i][5] = date('d-m-Y H:i:s', strtotime($data[$i][5]));
                 } else {
                     $data[$i][5] = '';
                 } 

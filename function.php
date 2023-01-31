@@ -73,7 +73,7 @@
         return $string;
     }
 
-    // convert date into string date format
+    // convert date d-m-Y to string Y-m-d
     function date_to_str($date)
 	{
 		if (($date == '') || (strlen($date) <> 10))
@@ -81,6 +81,16 @@
 		$reform = substr($date,6,4) . '-' . substr($date,3,2) . '-' .substr($date,0,2);
 		return $reform;
 	}
+
+    // convert date d-m-Y H:i:s to string Y-m-d H:i:s
+    function date_hour_to_str($date)
+    {
+        if (($date == '') || (strlen($date) <> 19))
+			return false;
+        $reform = substr($date,6,4) . '-' . substr($date,3,2) . '-' .substr($date,0,2) 
+                    . ' ' . substr($date, 11,2) . ':' . substr($date, 14, 2) . ':' . substr($date, 17, 2);
+        return $reform;
+    }
 
     // convert into sql datetime format
     function sqlserver_datetime_format($datetime, $divider='-', $separator='-')
