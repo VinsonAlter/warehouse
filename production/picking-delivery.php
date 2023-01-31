@@ -427,7 +427,7 @@
               // work around fixedColumns highlight
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').addClass('highlight');
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
-              $('td #checkbox_val:checked').map(function(){
+              $($('td #checkbox_val').prop('checked', true)).map(function(){
                 checkValues.push($(this).val());
                 // checkValues.shift($(this).val());
               })
@@ -438,7 +438,10 @@
               // work around fixedColumns highlight
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').removeClass('highlight');
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');
-              checkValues = [];
+              $($('td #checkbox_val').prop('checked', false)).map(function(){
+                checkValues = [];
+              })
+              console.log(checkValues);
             }
             // if ($(this).is( ":checked" )) {
             //     tablePicking.rows(  ).select();        
