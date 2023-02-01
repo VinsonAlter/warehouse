@@ -40,7 +40,7 @@
                                     AND '".date_to_str($akhir_transaksi). $end_day ."'";
             } else {
                 $tgl_condition = " WHERE D.[TglTerima] BETWEEN '".date_to_str($tgl_terima)."' AND 
-                                    AND '".date_to_str($akhir_terima). $end_day ."' ";
+                                    '".date_to_str($akhir_terima). $end_day ."' ";
             }
             foreach($user_data as $key => $value) {
                 $filter[] = "
