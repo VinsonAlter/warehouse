@@ -14,9 +14,12 @@
     margin-right: 3px;
 }
 
-
 .mr-8 {
     margin-right: 8px;
+}
+
+.mr-12 {
+    margin-right: 12px;
 }
 
 .mr-16 {
@@ -72,6 +75,11 @@
 .centered {
     justify-content: center;
     align-items: center;
+}
+
+.self-centered {
+    text-align: center !important;
+    align-self: center !important;
 }
 
 .cp {

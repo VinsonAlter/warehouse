@@ -187,16 +187,19 @@
       <div class="page-wrapper">
         <div class="page-breadcrumb">
           <div class="row">
-            <div class="col-10 d-flex no-block align-items-center">
+            <div class="col-12 d-flex no-block align-items-center">
               <h4 class="page-title">Picking & Delivery</h4>
               <div class="ms-auto text-end d-flex">
+                <h5 class="self-centered col-2 mr-12 page-title">Select Picker : </h5>
                 <select
-                  class="cp select2 form-select shadow-none"
-                    style="width: 50%; height:36px; margin-right:12px"
+                  class="cp select2 form-select shadow-none mr-12"
+                    style="width: 50%; height:36px;"
                     id="select_picker" name="picker">
                 </select>
-                <button class="btn btn-cyan" type="button" id="update_pick" name="update_terima"
-                  style="width:180px;">Update Picking</button>
+                <button class="btn btn-cyan mr-12" type="button" id="update_pick" name="update_terima"
+                  style="width:180px;height:36px;">Update Picking</button>
+                <button class="btn btn-warning" type="button" id="update_kirim" name="update_kirim"
+                  style="width:180px;height:36px;">Update Kirim</button>
               </div>
             </div>
           </div>
