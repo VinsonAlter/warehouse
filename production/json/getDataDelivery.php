@@ -25,17 +25,22 @@
             // $tgl_transaksi = $_SESSION['FilterTglTransaksi'] != date('d-m-Y') ? $_SESSION['FilterTglTransaksi'] : date('d-m-Y');
             // $tgl_terima = $_SESSION['FilterTglTerima'] != date('d-m-Y') ? $_SESSION['FilterTglTerima'] : date('d-m-Y');
             $tgl_transaksi = date('d-m-Y');
+            $akhir_transaksi = date('d-m-Y');
             $tgl_terima = date('d-m-Y');
+            $akhir_terima = date('d-m-Y');
             $end_day = ' 23:59:59';
             if (isset($_SESSION['FilterTglTransaksi'])) $tgl_transaksi = $_SESSION['FilterTglTransaksi'];
+            if (isset($_SESSION['FilterAkhirTransaksi'])) $akhir_transaksi = $_SESSION['FilterAkhirTransaksi'];
             if (isset($_SESSION['FilterTglTerima'])) $tgl_terima = $_SESSION['FilterTglTerima'];
+            if (isset($_SESSION['FilterAkhirTerima'])) $akhir_terima = $_SESSION['FilterAkhirTerima'];
             $status = 'transaksi_on';
             if (isset($_SESSION['StatusFilter'])) $status = $_SESSION['StatusFilter'];
             if($status == 'transaksi_on') {
-                $tgl_condition = " WHERE P.[Tgl] = '".date_to_str($tgl_transaksi)."' ";
+                $tgl_condition = " WHERE P.[Tgl] BETWEEN '".date_to_str($tgl_transaksi)."' 
+                                    AND '".date_to_str($akhir_transaksi). $end_day ."'";
             } else {
                 $tgl_condition = " WHERE D.[TglTerima] BETWEEN '".date_to_str($tgl_terima)."' AND 
-                                    '".date_to_str($tgl_terima). $end_day ."' ";
+                                    AND '".date_to_str($akhir_terima). $end_day ."' ";
             }
             foreach($user_data as $key => $value) {
                 $filter[] = "

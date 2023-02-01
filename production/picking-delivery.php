@@ -19,18 +19,27 @@
         $status = 'transaksi_on';
         $_SESSION['StatusFilter'] = $status;
         $_SESSION['FilterTglTransaksi'] = $_POST['tglTransaksi'];
+        $_SESSION['FilterAkhirTransaksi'] = $_POST['tglAkhirTransaksi'];
         $_SESSION['FilterTglTerima'] = date('d-m-Y');
+        $_SESSION['FilterAkhirTerima'] = date('d-m-Y');
       } else  {
         $status = 'terima_on';
         $_SESSION['StatusFilter'] = $status;
         $_SESSION['FilterTglTerima'] = $_POST['tglTerima'];
+        $_SESSION['FilterAkhirTerima'] = $_POST['tglAkhirTerima'];
         $_SESSION['FilterTglTransaksi'] = date('d-m-Y');
+        $_SESSION['FilterAkhirTransaksi'] = date('d-m-Y');
       }
     }
 
     if(isset($_SESSION['FilterTglTransaksi'])) $tglTransaksi = $_SESSION['FilterTglTransaksi'];
 
+    if(isset($_SESSION['FilterAkhirTransaksi'])) $tglAkhirTransaksi = $_SESSION['FilterAkhirTransaksi'];
+
     if(isset($_SESSION['FilterTglTerima'])) $tglTerima = $_SESSION['FilterTglTerima'];
+
+    if(isset($_SESSION['FilterAkhirTerima'])) $tglAkhirTerima = $_SESSION['FilterAkhirTerima'];
+
 ?>
 
 <!DOCTYPE html>
