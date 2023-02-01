@@ -198,7 +198,7 @@
                 </select>
                 <button class="btn btn-cyan mr-12" type="button" id="update_pick" name="update_terima"
                   style="width:180px;height:36px;">Update Picking</button>
-                <button class="btn btn-warning" type="button" id="update_kirim" name="update_kirim"
+                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#masterModalKirim" type="button" id="update_kirim" name="update_kirim"
                   style="width:180px;height:36px;">Update Kirim</button>
               </div>
             </div>
@@ -269,6 +269,91 @@
                       </tr>
                     </tbody>
                   </table>
+                </div>
+                <!-- Bootstrap Modals for Pengiriman -->
+                <div class="modal fade" id="masterModalKirim" tabindex="-1" role="dialog" aria-labelledby="masterModallabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Schedule Pengiriman</h4>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true" id="masterModallabel">&times;</span>
+                        </button>
+                      </div>
+                      <form class="form-horizontal" id="form-kirim" method="post" action="" role="form">
+                        <div class="modal-body pt-none pb-none">
+                          <div class="card-body pb-none">
+                            <div class="d-none form-group row">
+                              <label class="col-sm-4 control-label col-form-label">No Transaksi</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" id="no_transaksi" name="no_transaksi" readonly="readonly">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Status</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" id="status_delivery" readonly="readonly">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Tgl Kirim</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control mydatepicker" name="tanggal_kirim" id="tanggal_kirim">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Jenis Pengiriman</label>
+                              <div class="d-flex col-sm-8">
+                                <select
+                                  class="select2 shadow-none form-select"
+                                  style="width: 100%; height: 36px"
+                                  id="select_pengiriman" name="select_pengiriman"
+                                >
+                                  <option value="Kirim Customer">Kirim ke Customer</option>
+                                  <option value="Ambil Sendiri">Ambil Sendiri</option>
+                                  <option value="Via Sales">Via Sales</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Wilayah</label>
+                              <div class="col-sm-8">
+                                <select
+                                    class="select2 shadow-none form-select"
+                                    id="wilayah_pengiriman" name="wilayah_pengiriman"
+                                  >
+                                  <option value="Dalam Kota">Dalam Kota</option>
+                                  <option value="Luar Kota">Luar Kota</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Nama Ekspedisi</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" id="nama_ekspedisi">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Nama Driver</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" id="nama_ekspedisi">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">No. Plat Kendaraan</label>
+                              <div class="col-sm-8">
+                                <input type="text" class="form-control" id="nama_ekspedisi">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="submit" name = "btn_submit" class="btn btn-primary">Kirim</button>
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
