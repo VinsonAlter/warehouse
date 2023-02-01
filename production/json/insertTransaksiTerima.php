@@ -15,10 +15,11 @@
                     $tglTransaksi = date_to_str($array[1]);
                     $customer = $array[2];
                     $status = $array[3];
+                    $sales = $array[4];
                     if($status == "") {
                         $insert = "INSERT INTO [WMS-System].[dbo].[TB_Delivery] 
-                            ([NoTransaksi], [Customer], [TglTransaksi], [Status], [NamaPicker], [TglTerima])
-                            VALUES ('$noTransaksi', '$customer', '$tglTransaksi', 1, '$picker', '$tglTerima')";
+                            ([NoTransaksi], [Customer], [TglTransaksi], [Status], [NamaPicker], [TglTerima], [NamaSales])
+                            VALUES ('$noTransaksi', '$customer', '$tglTransaksi', 1, '$picker', '$tglTerima', '$sales')";
                         $stmt = $pdo->prepare($insert, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
                         $stmt->execute();
                         if($stmt->rowCount() > 0){
