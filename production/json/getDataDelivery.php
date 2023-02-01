@@ -4,6 +4,7 @@
     $data = $result = array();
     $user_data = $_SESSION['user_server'];
     $user_segmen = $_SESSION['segmen_user'];
+    $sales_data = $_SESSION['sales_force'];
     try {
         if($pdo) {
             $search_query = '';
@@ -43,16 +44,18 @@
                                     '".date_to_str($akhir_terima). $end_day ."' ";
             }
             foreach($user_data as $key => $value) {
-                $filter[] = "
-                    SELECT P.[NoTransaksi], P.[Tgl], P.[Nama], P.[Owner], D.[Status], D.[TglTerima], D.[NamaPicker]
-                    FROM $value P 
+                // foreach($sales_data as $key_2 => $value_2) {
+                    $filter[] = "
+                    SELECT P.[NoTransaksi], P.[Tgl], P.[Nama], P.[Owner], S.[Nama] AS NamaSales,D.[Status], D.[TglTerima], D.[NamaPicker]
+                    FROM $value P LEFT JOIN $sales_data[$key] S ON P.SalesID = S.SalesID
                     LEFT JOIN [WMS-System].[dbo].[TB_Delivery] D 
                     ON P.NoTransaksi = D.NoTransaksi " . $tgl_condition . " AND
                     P.[Segmen] IN ($user_segmen) AND
                     P.[Status] = '1' AND
                     isnull(P.[NoTransaksiOriginal], '') = ''
-                ";
-                $filters = implode("UNION ALL", $filter);
+                    ";
+                    $filters = implode("UNION ALL", $filter);
+                // }
             }
             $stmt = $conn->prepare($filters, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
             $stmt->execute();
@@ -70,6 +73,7 @@
                     $owner = $row['Owner'];
                     $status = $row['Status'];
                     $picker = $row['NamaPicker'];
+                    $sales = $row['NamaSales'];
                     $customer = $owner == '' ? $nama : $nama . ' (' . $owner . ')';
                     $tglTerima = $row['TglTerima'];
                     $accept = $tglTerima == '' ? '' : ' ,' . $tglTerima;
@@ -82,13 +86,14 @@
                         $customer,
                         $status,
                         $tglTerima,
-                        $picker
+                        $picker,
+                        $sales
                     );
                 }
                 $pdo = null;
             }
             if(!empty($data)){
-                $sort1 = $sort2 = $sort3 = $sort4 = $sort5 = $sort6 = array();
+                $sort1 = $sort2 = $sort3 = $sort4 = $sort5 = $sort6 = $sort7 = array();
             }
             foreach($data as $key => $value) {
                 $sort1[$key] = $value[1];
@@ -97,6 +102,7 @@
                 $sort4[$key] = $value[4];
                 $sort5[$key] = $value[5];
                 $sort6[$key] = $value[6];
+                $sort7[$key] = $value[7];
             }
             if(isset($_REQUEST['order']) && count($_REQUEST['order'])) {
                 for($i = 0, $ien = count($_REQUEST['order']); $i < $ien; $i++) {
@@ -119,6 +125,9 @@
                                 break;
                             case 6:
                                 array_multisort($sort6, $dir, $data);
+                                break;
+                            case 7:
+                                array_multisort($sort7, $dir, $data);
                                 break;
                             default:
                                 array_multisort($sort1, $dir, $data);

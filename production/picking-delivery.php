@@ -255,10 +255,12 @@
                         <th>Status</th>
                         <th>Tanggal Terima</th>
                         <th>Picker</th>
+                        <th>Nama Sales</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
