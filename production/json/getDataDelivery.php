@@ -6,6 +6,20 @@
     $user_segmen = $_SESSION['segmen_user'];
     try {
         if($pdo) {
+            $search_query = '';
+            $search = isset($_REQUEST['search']['value']) ? $_REQUEST['search']['value'] : '';
+            if($search) {
+                $search_query = " WHERE [NoTransaksi] LIKE '%$search%' 
+                                    OR [Tgl] LIKE '%$search%'
+                                    OR [Nama] LIKE '%$search%'
+                                    OR [Owner] LIKE '%$search%'
+                                    OR [Status] LIKE '%$search%'
+                                    OR [TglTerima] LIKE '%$search%'
+                                    OR [NamaPicker] LIKE '%$search%'
+                                    ";
+            }
+            // $tgl_transaksi = $_SESSION['FilterTglTransaksi'] != date('d-m-Y') ? $_SESSION['FilterTglTransaksi'] : date('d-m-Y');
+            // $tgl_terima = $_SESSION['FilterTglTerima'] != date('d-m-Y') ? $_SESSION['FilterTglTerima'] : date('d-m-Y');
             $tgl_condition = '';
             $urut = $total_record = 0;
             // $tgl_transaksi = $_SESSION['FilterTglTransaksi'] != date('d-m-Y') ? $_SESSION['FilterTglTransaksi'] : date('d-m-Y');
@@ -39,7 +53,7 @@
             $stmt->execute();
             $total_record += $stmt->rowCount();
             $order_tgl = " ORDER BY [Tgl] DESC, [Status], [NoTransaksi] ";
-            $query = "SELECT * FROM ($filters) temp" . $order_tgl;
+            $query = "SELECT * FROM ($filters) temp" . $search_query . $order_tgl;
             $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
             $stmt->execute();
             if($stmt->rowCount() > 0) {
@@ -128,7 +142,7 @@
                 'recordsTotal' => $total_record,
                 'recordsFiltered' => $urut,
                 'data' => $data,
-                'query' => $filters
+                'query' => $query
             );
 
         }
