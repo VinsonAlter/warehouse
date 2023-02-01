@@ -78,7 +78,7 @@
 }
 
 .self-centered {
-    text-align: center !important;
+    text-align: center;
     align-self: center !important;
 }
 
@@ -143,6 +143,12 @@
     margin-bottom: 0 !important;
 }
 
+.remove-arrow-dropdown {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -moz-border: none;
+}
 
 
 

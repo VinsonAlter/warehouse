@@ -285,25 +285,25 @@
                           <div class="card-body pb-none">
                             <div class="d-none form-group row">
                               <label class="col-sm-4 control-label col-form-label">No Transaksi</label>
-                              <div class="col-sm-8">
+                              <div class="col-sm-6">
                                 <input type="text" class="form-control" id="no_transaksi" name="no_transaksi" readonly="readonly">
                               </div>
                             </div>
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Status</label>
-                              <div class="col-sm-8">
+                              <div class="col-sm-6">
                                 <input type="text" class="form-control" id="status_delivery" readonly="readonly">
                               </div>
                             </div>
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Tgl Kirim</label>
-                              <div class="col-sm-8">
+                              <div class="col-sm-6">
                                 <input type="text" class="form-control mydatepicker" name="tanggal_kirim" id="tanggal_kirim">
                               </div>
                             </div>
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Jenis Pengiriman</label>
-                              <div class="d-flex col-sm-8">
+                              <div class="d-flex col-sm-6">
                                 <select
                                   class="select2 shadow-none form-select"
                                   style="width: 100%; height: 36px"
@@ -317,7 +317,7 @@
                             </div>
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Wilayah</label>
-                              <div class="col-sm-8">
+                              <div class="col-sm-6">
                                 <select
                                     class="select2 shadow-none form-select"
                                     id="wilayah_pengiriman" name="wilayah_pengiriman"
@@ -329,20 +329,42 @@
                             </div>
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Nama Ekspedisi</label>
-                              <div class="col-sm-8">
+                              <div class="col-sm-6">
                                 <input type="text" class="form-control" id="nama_ekspedisi">
                               </div>
                             </div>
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Nama Driver</label>
-                              <div class="col-sm-8">
-                                <input type="text" class="form-control" id="nama_ekspedisi">
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control" id="nama_driver">
+                              </div>
+                              <div class="col-sm-2 d-flex">
+                                <select
+                                    id="select_driver" name="select_driver"
+                                    style="width:40px; text-align:left; padding: 0 5px;"
+                                    class="self-centered cp remove-arrow-dropdown"
+                                >
+                                  <option selected>...</option>
+                                  <option value="Dalam Kota">Dalam Kota</option>
+                                  <option value="Luar Kota">Luar Kota</option>
+                                </select>
                               </div>
                             </div>
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">No. Plat Kendaraan</label>
-                              <div class="col-sm-8">
-                                <input type="text" class="form-control" id="nama_ekspedisi">
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control" id="no_plat">
+                              </div>
+                              <div class="col-sm-2 d-flex">
+                                <select
+                                    id="select_plat" name="select_plat"
+                                    style="width:40px; text-align:left; padding: 0 5px;"
+                                    class="self-centered cp remove-arrow-dropdown"
+                                >
+                                  <option selected>...</option>
+                                  <option value="Dalam Kota">Dalam Kota</option>
+                                  <option value="Luar Kota">Luar Kota</option>
+                                </select>
                               </div>
                             </div>
                           </div>
