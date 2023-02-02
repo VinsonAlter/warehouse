@@ -25,10 +25,10 @@
                         if($stmt->rowCount() > 0){
                             $res['success'] = 1;
                             $res['insert'] = $insert;
-                            $res['message'] = 'Transaksi berhasil diupdate!';
+                            $res['message'] = 'Status transaksi berhasil diupdate!';
                         } else {
                             $res['success'] = 0;
-                            $res['message'] = 'Transaksi gagal diupdate, mohon periksa koneksi anda!';
+                            $res['message'] = 'Status transaksi gagal diupdate, mohon periksa koneksi anda!';
                         }
                     } else {
                         $res['success'] = 0;

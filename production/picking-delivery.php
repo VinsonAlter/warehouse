@@ -12,6 +12,7 @@
     $tglAkhirTransaksi = date('d-m-Y');
     $tglTerima = date('d-m-Y');
     $tglAkhirTerima = date('d-m-Y');
+    $tglKirim = date('d-m-Y');
     $state = '';
     if(isset($_REQUEST['filter_tgl'])) {
       $state = $_REQUEST['enable_date'];
@@ -282,10 +283,10 @@
                           <span aria-hidden="true" id="masterModallabel">&times;</span>
                         </button>
                       </div>
-                      <form class="form-horizontal" id="form-kirim" method="post" action="" role="form">
+                      <form class="form-horizontal" id="form-kirim" method="post" action="javascript:kirimTransaksi()" role="form">
                         <div class="modal-body pt-none pb-none">
                           <div class="card-body pb-none">
-                            <div class="d-none form-group row">
+                            <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">No Transaksi</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="no_transaksi" name="no_transaksi" readonly="readonly">
@@ -294,7 +295,8 @@
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Tgl Kirim</label>
                               <div class="col-sm-6">
-                                <input type="text" class="form-control mydatepicker" name="tanggal_kirim" id="tanggal_kirim">
+                                <input type="text" class="form-control mydatepicker" name="tanggal_kirim" id="tanggal_kirim"
+                                  value="<?=$tglKirim?>">
                               </div>
                             </div>
                             <div class="form-group row">
@@ -332,7 +334,7 @@
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Nama Driver</label>
                               <div class="col-sm-6">
-                                <input type="text" class="form-control" id="nama_driver">
+                                <input type="text" class="form-control" id="nama_driver" name="nama_driver">
                               </div>
                               <div class="col-sm-2 d-flex">
                                 <select
@@ -342,15 +344,13 @@
                                     onclick="javascript:selectDriver()"
                                 >
                                   <option selected disabled value="">...</option>
-                                  <!-- <option value="Dalam Kota">Dalam Kota</option>
-                                  <option value="Luar Kota">Luar Kota</option> -->
                                 </select>
                               </div>
                             </div>
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">No. Plat Kendaraan</label>
                               <div class="col-sm-6">
-                                <input type="text" class="form-control" id="no_plat">
+                                <input type="text" class="form-control" id="no_plat" name="no_plat">
                               </div>
                               <div class="col-sm-2 d-flex">
                                 <select
@@ -360,8 +360,6 @@
                                     onclick="javascript:selectPlat()"
                                 >
                                   <option selected disabled value="">...</option>
-                                  <!-- <option value="Dalam Kota">Dalam Kota</option>
-                                  <option value="Luar Kota">Luar Kota</option> -->
                                 </select>
                               </div>
                             </div>
@@ -416,8 +414,6 @@
     <script>
 
       let checkValues = [];
-
-      
 
       var state = '<?php echo $state ?>';
 
@@ -494,6 +490,24 @@
               $('#no_plat').val($('#select_plat').val());
               $('#select_plat').val('');
             }
+          },
+          error: err => {
+            console.error(err.statusText);
+          }
+        })
+      }
+
+      function kirimTransaksi() {
+        $.ajax({
+          type: 'post',
+          url: 'json/updateTransaksiKirim.php',
+          data: $('#form_kirim').serialize(),
+          success: result => {
+            const res = $.parseJSON(result);
+            if(res.success == 1){
+              $('#table_picking').DataTable().ajax.reload();
+              $('#masterModalKirim').modal('hide');
+            } alert(res.message);
           },
           error: err => {
             console.error(err.statusText);
@@ -587,41 +601,45 @@
         });
 
         $('#update_pick').click((e) => {
-            e.preventDefault();
-            // let checkValues = []; 
-            // $('#checkbox_val:checked').map(function(){
-            //   // console.log($(this).val());
-            //   // return $(this).val();
-            //   checkValues.push($(this).val());
-            //   // $(this).prop('checked', false);
-            // })
+          e.preventDefault();
+          // let checkValues = []; 
+          // $('#checkbox_val:checked').map(function(){
+          // console.log($(this).val());
+          // return $(this).val();
+          // checkValues.push($(this).val());
+          // $(this).prop('checked', false);
+          // })
             
-            const picker = $('#select_picker').val();
-            // alert(Picker);
-            // alert(checkValues);
-            const CheckValues = checkValues.join(" ; ");
-            $.ajax({
-              type: "post",
-              url: 'json/insertTransaksiTerima.php',
-              data: {batch : CheckValues, picker: picker},
+          const picker = $('#select_picker').val();
+          // alert(Picker);
+          // alert(checkValues);
+          const CheckValues = checkValues.join(" ; ");
+          $.ajax({
+            type: "post",
+            url: 'json/insertTransaksiTerima.php',
+            data: {batch : CheckValues, picker: picker},
               success: result => {
-                checkValues = [];
-                const res = $.parseJSON(result);
-                if(res.success == 1) {
-                  e.preventDefault();
-                  $('#table_picking').DataTable().ajax.reload();
-                  // window.location.reload();
-                  alert(res.message);
-                  // $('#checkbox_val').prop('checked', false);
-                } else {
-                  alert(res.message);
-                }
-              } ,
-              error: err => {
-                console.error(err.statusText);
-              }
-            })
+              checkValues = [];
+              const res = $.parseJSON(result);
+              if(res.success == 1) {
+                e.preventDefault();
+                $('#table_picking').DataTable().ajax.reload();
+                // window.location.reload();
+                // alert(res.message);
+                // $('#checkbox_val').prop('checked', false);
+              } alert(res.message);
+            } ,
+            error: err => {
+              console.error(err.statusText);
+            }
           })
+        })
+
+        $('#update_kirim').click((e) => {
+          e.preventDefault();
+          const checkKirim = checkValues.join(" ; ");
+          $('#no_transaksi').val(checkKirim);
+        })
 
         tablePicking.on('draw.dt', () => {
           $('tr').find("input[type='checkbox']").on('click', function() {
