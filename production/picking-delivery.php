@@ -462,6 +462,10 @@
                 }
               }   
             }
+            if($('#select_driver').val() != '') {
+              // $('#nama_driver').html($('#select_driver').val());
+              $('#nama_driver').val($('#select_driver').val());
+            }
           },
           error: err => {
             console.error(err.statusText);
@@ -485,6 +489,10 @@
                   }).appendTo('#select_plat');
                 }
               }   
+            }
+            if($('#select_plat').val() != '') {
+              // $('#no_plat').html($('#select_plat').val());
+              $('#no_plat').val($('#select_plat').val());
             }
           },
           error: err => {
