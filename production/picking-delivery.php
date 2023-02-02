@@ -292,12 +292,6 @@
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label">Status</label>
-                              <div class="col-sm-6">
-                                <input type="text" class="form-control" id="status_delivery" readonly="readonly">
-                              </div>
-                            </div>
-                            <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Tgl Kirim</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control mydatepicker" name="tanggal_kirim" id="tanggal_kirim">
@@ -347,7 +341,7 @@
                                     class="self-centered cp remove-arrow-dropdown"
                                     onclick="javascript:selectDriver()"
                                 >
-                                  <option selected>...</option>
+                                  <option selected disabled>...</option>
                                   <!-- <option value="Dalam Kota">Dalam Kota</option>
                                   <option value="Luar Kota">Luar Kota</option> -->
                                 </select>
@@ -365,7 +359,7 @@
                                     class="self-centered cp remove-arrow-dropdown"
                                     onclick="javascript:selectPlat()"
                                 >
-                                  <option selected>...</option>
+                                  <option selected disabled>...</option>
                                   <!-- <option value="Dalam Kota">Dalam Kota</option>
                                   <option value="Luar Kota">Luar Kota</option> -->
                                 </select>
@@ -482,7 +476,7 @@
           success: result => {
             const res = $.parseJSON(result);
             if (res.success == 1) {
-              if($('#select_plat').children().length = 1) {
+              if($('#select_plat').children().length == 1) {
                 for (i = 0; i < res.data.length; ++i) {
                   $('<option>',
                   {
