@@ -283,13 +283,13 @@
                           <span aria-hidden="true" id="masterModallabel">&times;</span>
                         </button>
                       </div>
-                      <form class="form-horizontal" id="form-kirim" method="post" action="javascript:kirimTransaksi()" role="form">
+                      <form class="form-horizontal" id="form_kirim" method="post" action="javascript:kirimTransaksi()" role="form">
                         <div class="modal-body pt-none pb-none">
                           <div class="card-body pb-none">
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">No Transaksi</label>
                               <div class="col-sm-6">
-                                <input type="text" class="form-control" id="no_transaksi" name="no_transaksi" readonly="readonly">
+                                <input type="text" class="form-control" id="no_transaksi" name="NomorTransaksi" readonly="readonly">
                               </div>
                             </div>
                             <div class="form-group row">
@@ -328,7 +328,7 @@
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Nama Ekspedisi</label>
                               <div class="col-sm-6">
-                                <input type="text" class="form-control" id="nama_ekspedisi">
+                                <input type="text" class="form-control" id="nama_ekspedisi" name="nama_ekspedisi">
                               </div>
                             </div>
                             <div class="form-group row">
@@ -416,6 +416,13 @@
       let checkValues = [];
 
       var state = '<?php echo $state ?>';
+
+      $('#update_kirim').click((e) => {
+        e.preventDefault();
+        const checkKirim = checkValues.join(" ; ");
+        $('#no_transaksi').val(checkKirim);
+        console.log(checkKirim);
+      })
 
       function selectPicker() {
         $.ajax({
@@ -633,12 +640,6 @@
               console.error(err.statusText);
             }
           })
-        })
-
-        $('#update_kirim').click((e) => {
-          e.preventDefault();
-          const checkKirim = checkValues.join(" ; ");
-          $('#no_transaksi').val(checkKirim);
         })
 
         tablePicking.on('draw.dt', () => {

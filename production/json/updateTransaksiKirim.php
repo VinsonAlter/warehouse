@@ -4,8 +4,8 @@
     date_default_timezone_set('Asia/Jakarta');
     $res = [];
     try {
-        if($_POST['no_transaksi'] != '') {
-            $noTransaksi = $_POST['no_transaksi'];
+        if(isset($_POST['NomorTransaksi'])) {
+            $noTransaksi = $_POST['NomorTransaksi'];
             $arr = explode(' ; ', $noTransaksi);
             $tanggal_kirim = $_POST['tanggal_kirim'];
             $tgl_kirim = date_to_str($tanggal_kirim);
@@ -16,7 +16,7 @@
             $plat = $_POST['no_plat'];
             foreach($arr as $val){
                 $array = explode(' , ', $val);
-                $noTransaksi = $array[0];
+                $Transaksi = $array[0];
                 $status = $array[3];
                 if($status == 1) {
                     $update_kirim = "UPDATE [WMS-System].[dbo].[TB_Delivery]
@@ -27,8 +27,9 @@
                                             [NamaEkspedisi] = '$ekspedisi',
                                             [NamaDriver] = '$driver',
                                             [NoPlat] = '$plat'
+                                        WHERE [NoTransaksi] = '$Transaksi'
                                     ";
-                    $stmt = $pdo->prepare($update_kirim, [PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL]);
+                    $stmt = $pdo->prepare($update_kirim, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
                     $stmt->execute();
                     if($stmt->rowCount() > 0) {
                         $res['success'] = 1;
