@@ -9,6 +9,9 @@
             $arr = explode(' ; ', $noTransaksi);
             $tanggal_kirim = $_POST['tanggal_kirim'];
             $tgl_kirim = date_to_str($tanggal_kirim);
+            $jam_kirim = hour_to_str(date('H:i:s'));
+            // $jam_kirim = date('H:i:s');
+            $waktu_kirim = $tgl_kirim . ' ' . $jam_kirim;
             $jenis_pengiriman = $_POST['select_pengiriman'];
             $wilayah_pengiriman = $_POST['wilayah_pengiriman'];
             $ekspedisi = $_POST['nama_ekspedisi'];
@@ -21,7 +24,7 @@
                 if($status == 1) {
                     $update_kirim = "UPDATE [WMS-System].[dbo].[TB_Delivery]
                                         SET [Status] = 2,
-                                            [TglKirim] = '$tanggal_kirim',
+                                            [TglKirim] = '$waktu_kirim',
                                             [JenisPengiriman] = '$jenis_pengiriman',
                                             [Wilayah] = '$wilayah_pengiriman',
                                             [NamaEkspedisi] = '$ekspedisi',
@@ -34,6 +37,7 @@
                     if($stmt->rowCount() > 0) {
                         $res['success'] = 1;
                         $res['kirim'] = $update_kirim;
+                        $res['jam'] = $jam_kirim;
                         $res['message'] = 'Status transaksi berhasil diupdate!';
                     } else {
                         $res['success'] = 0;

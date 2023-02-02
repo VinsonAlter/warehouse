@@ -92,6 +92,15 @@
         return $reform;
     }
 
+    // convert date H:i:s to string H:i:s
+    function hour_to_str($date)
+    {
+        if (($date == ''))
+            return false;
+        $reform = substr($date,0,2) . ':' .substr($date,3,2). ':' .substr($date,6,2);
+        return $reform;
+    }
+
     // convert into sql datetime format
     function sqlserver_datetime_format($datetime, $divider='-', $separator='-')
     {

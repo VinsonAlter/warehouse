@@ -92,6 +92,10 @@
         background-color: #ff9933 !important;
       }
 
+      .bg-dikirim {
+        background-color: #7aff8c !important;
+      }
+
       .highlight {
         background-color: yellowgreen !important;
       }
@@ -251,12 +255,12 @@
                       <tr>
                         <th><input type="checkbox" id="select_all" class="cp"></th>
                         <th>No Transaksi</th>
-                        <th>Tgl Transaksi</th>
+                        <th>Tanggal Transaksi</th>
                         <th>Customer</th>
                         <th>Status</th>
                         <th>Tanggal Terima</th>
                         <th>Picker</th>
-                        <th>Nama Sales</th>
+                        <th>Tanggal Kirim</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -581,18 +585,44 @@
             { orderable: false, targets: [0, 1]},
             { targets: 4,
               render: function(data){
-                if(data == 1)
-                  return '<b>Diterima</b>'
-                  else
-                  return '<b>Belum Diterima</b>'
+                // switch(data) {
+                //   case 1 :
+                //     return '<b>Diterima</b>';
+                //     break;
+                //   case 2:
+                //     return '<b>Dikirim</b>';
+                //     break;
+                //   default:
+                //     return '<b>Belum Diterima</b>';
+                // }
+                if(data == 1) {
+                  return '<b>Diterima</b>';
+                } else if(data == 2) {
+                  return '<b>Dikirim</b>';
+                } else {
+                  return '<b>Belum Diterima</b>';
+                }
               }
             },
             { className: 'dt-center', targets: [4]}
           ],
           "rowCallback": function(row, data, index) {
             const cellValue = data[4];
+            // switch(cellValue) {
+            //   case 1:
+            //     $('td:eq(4)', row).addClass("bg-diterima");
+            //     break;
+            //   case 2:
+            //     $('td:eq(4)', row).addClass("bg-dikirim");
+            //     break;
+            //   default:
+            //     $('td:eq(4)', row).addClass("bg-belum-diterima");
+            //     break;
+            // }
             if(cellValue == 1) {
               $('td:eq(4)', row).addClass("bg-diterima");
+            } else if(cellValue == 2) {
+              $('td:eq(4)', row).addClass("bg-dikirim");
             } else {
               $('td:eq(4)', row).addClass("bg-belum-diterima");
             }

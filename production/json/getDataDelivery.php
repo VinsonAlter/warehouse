@@ -17,7 +17,8 @@
                                     OR [Status] LIKE '%$search%'
                                     OR [TglTerima] LIKE '%$search%'
                                     OR [NamaPicker] LIKE '%$search%'
-                                    ";
+                                    OR [TglKirim] LIKE '%$search%'
+                                    "; 
             }
             // $tgl_transaksi = $_SESSION['FilterTglTransaksi'] != date('d-m-Y') ? $_SESSION['FilterTglTransaksi'] : date('d-m-Y');
             // $tgl_terima = $_SESSION['FilterTglTerima'] != date('d-m-Y') ? $_SESSION['FilterTglTerima'] : date('d-m-Y');
@@ -46,7 +47,7 @@
             foreach($user_data as $key => $value) {
                 // foreach($sales_data as $key_2 => $value_2) {
                     $filter[] = "
-                    SELECT P.[NoTransaksi], P.[Tgl], P.[Nama], P.[Owner], S.[Nama] AS NamaSales,D.[Status], D.[TglTerima], D.[NamaPicker]
+                    SELECT P.[NoTransaksi], P.[Tgl], P.[Nama], P.[Owner], S.[Nama] AS NamaSales,D.[Status], D.[TglTerima], D.[TglKirim], D.[NamaPicker]
                     FROM $value P LEFT JOIN $sales_data[$key] S ON P.SalesID = S.SalesID
                     LEFT JOIN [WMS-System].[dbo].[TB_Delivery] D 
                     ON P.NoTransaksi = D.NoTransaksi " . $tgl_condition . " AND
@@ -76,6 +77,7 @@
                     $sales = $row['NamaSales'];
                     $customer = $owner == '' ? $nama : $nama . ' (' . $owner . ')';
                     $tglTerima = $row['TglTerima'];
+                    $tglKirim = $row['TglKirim'];
                     $accept = $tglTerima == '' ? '' : ' ,' . $tglTerima;
                     $convert_tglTransaksi = date('d-m-Y', strtotime($tglTransaksi));
                     $checkbox = '<input type="checkbox" value="' . $transaksi .  " , "  . $convert_tglTransaksi . " , " . $customer . " , " . $status . " , " . $sales . $accept . '" id="checkbox_val" name="checkboxes[]" class="cp">';
@@ -87,7 +89,7 @@
                         $status,
                         $tglTerima,
                         $picker,
-                        $sales
+                        $tglKirim
                     );
                 }
                 $pdo = null;
@@ -149,6 +151,11 @@
                 } else {
                     $data[$i][5] = '';
                 } 
+                if (strtotime($data[$i][7]) != ''){
+                    $data[$i][7] = date('d-m-Y H:i:s', strtotime($data[$i][7]));
+                } else {
+                    $data[$i][7] = '';
+                }
             }
 
             $result = array(
