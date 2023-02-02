@@ -341,7 +341,7 @@
                                     class="self-centered cp remove-arrow-dropdown"
                                     onclick="javascript:selectDriver()"
                                 >
-                                  <option selected disabled>...</option>
+                                  <option selected disabled value="">...</option>
                                   <!-- <option value="Dalam Kota">Dalam Kota</option>
                                   <option value="Luar Kota">Luar Kota</option> -->
                                 </select>
@@ -359,7 +359,7 @@
                                     class="self-centered cp remove-arrow-dropdown"
                                     onclick="javascript:selectPlat()"
                                 >
-                                  <option selected disabled>...</option>
+                                  <option selected disabled value="">...</option>
                                   <!-- <option value="Dalam Kota">Dalam Kota</option>
                                   <option value="Luar Kota">Luar Kota</option> -->
                                 </select>
@@ -463,8 +463,8 @@
               }   
             }
             if($('#select_driver').val() != '') {
-              // $('#nama_driver').html($('#select_driver').val());
               $('#nama_driver').val($('#select_driver').val());
+              $('#select_driver').val('');
             }
           },
           error: err => {
@@ -491,8 +491,8 @@
               }   
             }
             if($('#select_plat').val() != '') {
-              // $('#no_plat').html($('#select_plat').val());
               $('#no_plat').val($('#select_plat').val());
+              $('#select_plat').val('');
             }
           },
           error: err => {
