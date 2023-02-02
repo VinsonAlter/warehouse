@@ -345,10 +345,11 @@
                                     id="select_driver" name="select_driver"
                                     style="width:40px; text-align:left; padding: 0 5px;"
                                     class="self-centered cp remove-arrow-dropdown"
+                                    onclick="javascript:selectDriver()"
                                 >
                                   <option selected>...</option>
-                                  <option value="Dalam Kota">Dalam Kota</option>
-                                  <option value="Luar Kota">Luar Kota</option>
+                                  <!-- <option value="Dalam Kota">Dalam Kota</option>
+                                  <option value="Luar Kota">Luar Kota</option> -->
                                 </select>
                               </div>
                             </div>
@@ -362,10 +363,11 @@
                                     id="select_plat" name="select_plat"
                                     style="width:40px; text-align:left; padding: 0 5px;"
                                     class="self-centered cp remove-arrow-dropdown"
+                                    onclick="javascript:selectPlat()"
                                 >
                                   <option selected>...</option>
-                                  <option value="Dalam Kota">Dalam Kota</option>
-                                  <option value="Luar Kota">Luar Kota</option>
+                                  <!-- <option value="Dalam Kota">Dalam Kota</option>
+                                  <option value="Luar Kota">Luar Kota</option> -->
                                 </select>
                               </div>
                             </div>
@@ -426,28 +428,76 @@
       var state = '<?php echo $state ?>';
 
       function selectPicker() {
-          $.ajax({
-            type: "post",
-            url: "json/search_picker.php",
-            success: result => {
-              const res = $.parseJSON(result);
-              if (res.success == 1) {
-                if($('#select_picker').children().length == 0) {
-                  for (i = 0; i < res.data.length; ++i) {
-                    $('<option>',
-                    {
-                      html: (res.data[i]).concat(' (' + res.id_data[i] + ')'), 
-                      value: res.data[i],
-                    }).appendTo('#select_picker');
-                  }
-                }   
-              }
-            },
-            error: err => {
-              console.error(err.statusText);
+        $.ajax({
+          type: "post",
+          url: "json/search_picker.php",
+          success: result => {
+            const res = $.parseJSON(result);
+            if (res.success == 1) {
+              if($('#select_picker').children().length == 0) {
+                for (i = 0; i < res.data.length; ++i) {
+                  $('<option>',
+                  {
+                    html: (res.data[i]).concat(' (' + res.id_data[i] + ')'), 
+                    value: res.data[i],
+                  }).appendTo('#select_picker');
+                }
+              }   
             }
-          })
-        }
+          },
+          error: err => {
+            console.error(err.statusText);
+          }
+        })
+      }
+
+      function selectDriver() {
+        $.ajax({
+          type: "post",
+          url: "json/search_driver.php",
+          success: result => {
+            const res = $.parseJSON(result);
+            if (res.success == 1) {
+              if($('#select_driver').children().length == 1) {
+                for (i = 0; i < res.data.length; ++i) {
+                  $('<option>',
+                  {
+                    html: (res.data[i]).concat(' (' + res.id_data[i] + ')'), 
+                    value: res.data[i],
+                  }).appendTo('#select_driver');
+                }
+              }   
+            }
+          },
+          error: err => {
+            console.error(err.statusText);
+          }
+        })
+      }
+
+      function selectPlat() {
+        $.ajax({
+          type: "post",
+          url: "json/search_plat.php",
+          success: result => {
+            const res = $.parseJSON(result);
+            if (res.success == 1) {
+              if($('#select_plat').children().length = 1) {
+                for (i = 0; i < res.data.length; ++i) {
+                  $('<option>',
+                  {
+                    html: res.data[i], 
+                    value: res.data[i],
+                  }).appendTo('#select_plat');
+                }
+              }   
+            }
+          },
+          error: err => {
+            console.error(err.statusText);
+          }
+        })
+      }
 
       $(document).ready(() => {
         
@@ -646,6 +696,7 @@
         $('#tgl_terima').prop('disabled', false);
         $('#akhir_terima').prop('disabled', false);
       }
+
 
     </script>
   </body>
