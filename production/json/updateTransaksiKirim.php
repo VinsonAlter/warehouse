@@ -4,7 +4,7 @@
     date_default_timezone_set('Asia/Jakarta');
     $res = [];
     try {
-        if(isset($_POST['NomorTransaksi'])) {
+        if($_POST['NomorTransaksi'] != '') {
             $noTransaksi = $_POST['NomorTransaksi'];
             $arr = explode(' ; ', $noTransaksi);
             $tanggal_kirim = $_POST['tanggal_kirim'];

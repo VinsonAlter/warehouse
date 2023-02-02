@@ -290,7 +290,7 @@
                       <form class="form-horizontal" id="form_kirim" method="post" action="javascript:kirimTransaksi()" role="form">
                         <div class="modal-body pt-none pb-none">
                           <div class="card-body pb-none">
-                            <div class="form-group row">
+                            <div class="d-none form-group row">
                               <label class="col-sm-4 control-label col-form-label">No Transaksi</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="no_transaksi" name="NomorTransaksi" readonly="readonly">
@@ -345,7 +345,6 @@
                                     id="select_driver" name="select_driver"
                                     style="width:40px; text-align:left; padding: 0 5px;"
                                     class="self-centered cp remove-arrow-dropdown"
-                                    onclick="javascript:selectDriver()"
                                 >
                                   <option selected disabled value="">...</option>
                                 </select>
@@ -361,7 +360,6 @@
                                     id="select_plat" name="select_plat"
                                     style="width:40px; text-align:left; padding: 0 5px;"
                                     class="self-centered cp remove-arrow-dropdown"
-                                    onclick="javascript:selectPlat()"
                                 >
                                   <option selected disabled value="">...</option>
                                 </select>
@@ -527,9 +525,9 @@
       }
 
       $(document).ready(() => {
-        
         selectPicker();
-
+        selectDriver();
+        selectPlat();
         /* hide the loader first */
         $('.loader').hide();
 
@@ -540,6 +538,13 @@
           daysOfWeekDisabled: "0",
           autoclose: true,
           todayHighlight: true
+        });
+
+        // clear modals input when modal closed
+        $('#masterModalKirim').on('hide.bs.modal', function() {
+          $('#masterModalKirim .modal-body input[name="nama_ekspedisi"]').val('');
+          $('#masterModalKirim .modal-body input[name="nama_driver"]').val('');
+          $('#masterModalKirim .modal-body input[name="no_plat"]').val('');
         });
         
         if(state == '' || state == 'transaksi_on') {
