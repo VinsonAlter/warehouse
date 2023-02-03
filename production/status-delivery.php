@@ -407,15 +407,15 @@
                       <tr>
                         <th style="width:10px">No</th>
                         <th>No Transaksi</th>
-                        <th>Nama (Owner)</th>
+                        <th>Customer</th>
                         <th name='status-pengiriman'>Status</th>
                         <th>Tgl Transaksi</th>
                         <th>Tgl Terima</th>
+                        <th>Nama Picker</th>
                         <th>Tgl Kirim</th>
                         <th>Tgl Selesai</th>
                         <th>Wilayah</th>
                         <th>Nama Ekspedisi</th>
-                        <th>Nama Picker</th>
                         <th>Nama Driver</th>
                         <th>Plat Driver</th>
                         <th>Nama Sales</th>

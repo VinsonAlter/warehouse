@@ -78,19 +78,19 @@
             $table = "SELECT [NoTransaksi]
                             ,[Status]
                             ,[Customer]
-                            ,d.[NamaDriver]
+                            ,[NamaDriver]
                             ,[NamaPicker]
                             ,[TglTransaksi]
                             ,[TglTerima]
                             ,[TglKirim]
                             ,[TglSelesai]
                             ,[Wilayah]
+                            ,[JenisPengiriman]
                             ,[NamaEkspedisi]
                             ,[NoPlat]
                             ,[NamaSales]
                             ,[Cabang]
-                        FROM [WMS-System].[dbo].[TB_Delivery] do 
-                        LEFT JOIN [WMS-System].[dbo].[TB_Driver] d ON d.DriverID = do.DriverID";
+                        FROM [WMS-System].[dbo].[TB_Delivery]";
         }
 
         $stmt = $conn->prepare($table, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
@@ -118,6 +118,7 @@
                 $namaPicker = $row['NamaPicker'];
                 $namaDriver = $row['NamaDriver'];
                 $platDriver = $row['NoPlat'];
+                $wilayah = $row['Wilayah'];
                 $sales = $row['NamaSales'];
                 // comment this part because it's not needed yet
                 $aksi = '<a href="#" data-bs-toggle="modal" data-bs-target="#masterModalEdit" 
@@ -128,10 +129,10 @@
                     $nama, 
                     $status,
                     $tglTransaksi, 
-                    $tglTerima, 
+                    $tglTerima,
+                    $namaPicker,
                     $tglKirim, 
                     $tglSelesai,
-                    $namaPicker,
                     $wilayah,
                     $ekspedisi,
                     $namaDriver,
@@ -144,7 +145,7 @@
         }
         // Sorting Data 
         if(!empty($data)) {
-            $sort1 = $sort2 = $sort3 = $sort4 = $sort5 = $sort6 = $sort7 = $sort8 = $sort9 = $sort10 = $sort11 = $sort12 = $sort13 = array();
+            $sort1 = $sort2 = $sort3 = $sort4 = $sort5 = $sort6 = $sort7 = $sort8 = $sort9 = $sort10 = $sort11 = $sort12 = $sort13 = $sort14 = array();
             // Multi Dimensional Sorting
             foreach($data as $key => $value) {
                 $sort1[$key] = $value[1];
@@ -160,6 +161,7 @@
                 $sort11[$key] = $value[11];
                 $sort12[$key] = $value[12];
                 $sort13[$key] = $value[13];
+                $sort14[$key] = $value[14];
             }
 
             // Sorting ASC or DESC 
@@ -207,6 +209,9 @@
                             case 13:
                                 array_multisort($sort13, $dir, $data);
                                 break;
+                            case 14:
+                                array_multisort($sort14, $dir, $data);
+                                break;
                             default:
                                 array_multisort($sort1, $dir, $data);
                                 break;
@@ -236,16 +241,16 @@
                 $data[$i][5] = '';
             } 
 
-            if (strtotime($data[$i][6]) != '') {
-                $data[$i][6] = date('d-m-Y', strtotime($data[$i][6]));
-            } else {
-                $data[$i][6] = '';
-            } 
-
             if (strtotime($data[$i][7]) != '') {
                 $data[$i][7] = date('d-m-Y', strtotime($data[$i][7]));
             } else {
                 $data[$i][7] = '';
+            } 
+
+            if (strtotime($data[$i][8]) != '') {
+                $data[$i][8] = date('d-m-Y', strtotime($data[$i][8]));
+            } else {
+                $data[$i][8] = '';
             } 
 		}
 		
