@@ -1,63 +1,63 @@
 <?php
+
     session_start();
+
     require_once '../function.php';
+
     date_default_timezone_set('Asia/Jakarta');
+
+    /* let's just comment awalTanggal & akhirTanggal first */
+
+    $awalTanggal = date('01-m-Y');
+
+    $akhirTanggal = date('d-m-Y');
+
+    $awalTanggalStatus = date('01-m-Y');
+
+    $akhirTanggalStatus = date('d-m-Y');
+
     // cek apakah user sudah login, apabila belum login arahkan user ke laman login
+
     if(!isset($_SESSION['user_login'])) {
       header("location:../login.php");  
     }
+
     $user_segmen = $_SESSION['segmen_user'];
+
     // var_dump($user_segmen);
+
     $nama = $_SESSION['user_login'];
+
     $user_data = $_SESSION['user_server'];
+
     $sales = $_SESSION['sales_force'];
-    $statusAwalTransaksi = date('d-m-Y');
-    $statusAkhirTransaksi = date('d-m-Y');
-    $statusAwalTerima = date('d-m-Y');
-    $statusAkhirTerima = date('d-m-Y');
-    $statusAwalKirim = date('d-m-Y');
-    $statusAkhirKirim = date('d-m-Y');
+
+    $status_pengiriman = '';
+
+    if(!isset($status_pengiriman)) $status_pengiriman = '';
 
     // filter noTransaksi
-    if(isset($_REQUEST['filter_tgl'])){
-      $state = $_REQUEST['enable_date'];
-      if($_REQUEST['enable_date'] == 'transaksi_on') {
-        $status = 'transaksi_on';
-        $_SESSION['StatusFilter'] = $status;
-        $_SESSION['FilterStatusAwalTransaksi'] = $_POST['statusAwalTransaksi'];
-        $_SESSION['FilterStatusAkhirTransaksi'] = $_POST['statusAkhirTransaksi'];
-        $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
-        $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
-        $_SESSION['FilterStatusAwalKirim'] = date('d-m-Y');
-        $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
-      } else if ($_REQUEST['enable_date'] == 'terima_on') {
-        $status = 'terima_on';
-        $_SESSION['StatusFilter'] = $status;
-        $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
-        $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
-        $_SESSION['FilterStatusAwalTerima'] = $_POST['statusAwalTerima'];
-        $_SESSION['FilterStatusAkhirTerima'] = $_POST['statusAkhirTerima'];
-        $_SESSION['FilterStatusAwalKirim'] = date('d-m-Y');
-        $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
-      } else {
-        $status = 'kirim_on';
-        $_SESSION['StatusFilter'] = $status;
-        $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
-        $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
-        $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
-        $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
-        $_SESSION['FilterStatusAwalKirim'] = $_POST['statusAwalKirim'];
-        $_SESSION['FilterStatusAkhirKirim'] = $_POST['statusAkhirKirim'];
-      }
+    if(isset($_REQUEST['filter_transaksi'])){
+      $_SESSION['FilterChecklistDateFrom'] = $_POST['awalTanggal'];
+		  $_SESSION['FilterChecklistDateTo'] = $_POST['akhirTanggal']; 
     }
 
-    if(isset($_SESSION['FilterStatusAwalTransaksi'])) $statusAwalTransaksi = $_SESSION['FilterStatusAwalTransaksi'];
-    if(isset($_SESSION['FilterStatusAkhirTransaksi'])) $statusAkhirTransaksi = $_SESSION['FilterStatusAkhirTransaksi'];
-    if(isset($_SESSION['FilterStatusAwalTerima'])) $statusAwalTerima = $_SESSION['FilterStatusAwalTerima'];
-    if(isset($_SESSION['FilterStatusAkhirTerima'])) $statusAkhirTerima = $_SESSION['FilterStatusAkhirTerima'];
-    if(isset($_SESSION['FilterStatusAwalKirim'])) $statusAwalKirim = $_SESSION['FilterStatusAwalKirim'];
-    if(isset($_SESSION['FilterStatusAkhirKirim'])) $tglAkhirTerima = $_SESSION['FilterStatusAkhirKirim'];
+    if(isset($_SESSION['FilterChecklistDateFrom'])) $awalTanggal = $_SESSION['FilterChecklistDateFrom'];
+	  if(isset($_SESSION['FilterChecklistDateTo'])) $akhirTanggal = $_SESSION['FilterChecklistDateTo'];
 
+    //filter tgl status
+    if(isset($_POST['filter_tgl_status'])){
+      $_SESSION['FilterStatusFrom'] = $_POST['awalStatus'];
+      $_SESSION['FilterStatusTo'] = $_POST['akhirStatus'];
+      $_SESSION['FilterStatus'] = $_POST['status_pengiriman'];
+    }
+
+    if(isset($_SESSION['FilterStatusFrom'])) $awalTanggalStatus = $_SESSION['FilterStatusFrom'];
+	  if(isset($_SESSION['FilterStatusTo'])) $akhirTanggalStatus = $_SESSION['FilterStatusTo'];
+    if(isset($_SESSION['FilterStatus'])) $status_pengiriman = $_SESSION['FilterStatus'];
+    // var_dump($status_pengiriman);  
+
+    $database = query("SELECT * FROM [WMS].[dbo].[TB_Server] WHERE aktif = 1");
     
 ?>
 
@@ -279,6 +279,11 @@
   <body>
 
     <div class='loader'></div>
+
+
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
     <div class="preloader">
       <div class="lds-ripple">
         <div class="lds-pos"></div>
@@ -286,6 +291,9 @@
       </div>
     </div>
 
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
     <div
       id="main-wrapper"
       data-layout="vertical"
@@ -295,28 +303,57 @@
       data-header-position="absolute"
       data-boxed-layout="full"
     >
+      <!-- ============================================================== -->
+      <!-- Topbar header - style you can find in pages.scss -->
+      <!-- ============================================================== -->
 
       <?php require_once 'header-navbar.php'?>
 
+      <!-- ============================================================== -->
+      <!-- End Topbar header -->
+      <!-- ============================================================== -->
+      <!-- ============================================================== -->
+      <!-- Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
       <aside class="left-sidebar" data-sidebarbg="skin5">
+
+        <!-- Sidebar scroll-->
 
         <div class="scroll-sidebar">
           <?php require_once 'sidebar.php'?>
         </div>
+        <!-- End Sidebar scroll-->
       </aside>
 
+      <!-- ============================================================== -->
+      <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+      <!-- ============================================================== -->
+
+      <!-- ============================================================== -->
+      <!-- Page wrapper  -->
+      <!-- ============================================================== -->
       <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
         <div class="page-breadcrumb">
           <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-              <h4 class="page-title">Status Delivery</h4>
+              <h4 class="page-title">Delivery</h4>
               <div class="ms-auto text-end">
-                <!-- <button class="btn btn-cyan" type="button" data-bs-toggle="modal" data-bs-target="#masterModal">Baru</button> -->
+                <button class="btn btn-cyan" type="button" data-bs-toggle="modal" data-bs-target="#masterModal">Baru</button>
               </div>
             </div>
           </div>
         </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
 
+        
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
         <!-- <div class="container-fluid">
           <div class="row">
             
@@ -330,43 +367,32 @@
                   <form method="post" action="" role="form">
                   <div class="col-md-8">
                     <div class="form-group">
-                      <div class="ml-right-16 mb-2">
-                        <div class="d-sm-inline-block d-md-flex mb-3">
-                          <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Filter Tgl Transaksi</label>
-                          <input type="radio" class="cp mr-8" id="filter_transaksi" name="enable_date" value="transaksi_on" onclick="enable_transaksi()">
-                          <input type="text" class="col-md-2 col-4 mydatepicker"
-                            name="statusAwalTransaksi" id="tgl_transaksi" value="<?=$statusAwalTransaksi?>" autocomplete="off">
-                          <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
-                          <input type="mtext" class="col-md-2 col-4 mydatepicker"
-                            name="statusAkhirTransaksi" id="akhir_transaksi" value="<?=$statusAkhirTransaksi?>" autocomplete="off">
+                      <div class="form-padding mb-2">
+                        <div class="d-sm-inline-block d-md-flex">
+                          <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Tgl</label>
+                          <input type="text" class="mr-3 col-md-2 col-4 mydatepicker"
+                            name="awalStatus" value="<?=$awalTanggalStatus;?>">
+                          <label class="centered d-md-flex">s/d.</label>
+                          <input type="text" class="ml-3 col-md-2 col-4 mydatepicker"
+                            name="akhirStatus" value="<?=$akhirTanggalStatus;?>">
+                          <label class="px-2 centered d-md-flex"> Pilih Status</label>
+                          <select id="status_pengiriman" class="shadow-none col-md-2"
+                            name="status_pengiriman">
+                            <option selected>Semua</option>
+                            <option value="Diterima">Diterima</option>
+                            <option value="Dikirim">Dikirim</option>
+                            <option value="Selesai">Selesai</option>
+                          </select>
                           <button class="px-2 btn btn-success btn-sm text-white ml-half"
-                            type="submit" name="filter_tgl" id="btn_filter">
+                            type="submit" name="filter_tgl_status">
                             Filter
                           </button>
-                        </div>
-                        <div class="d-sm-inline-block d-md-flex mb-3">
-                          <label class="mb-3 mb-md-0 mr-16em-half centered d-md-flex">Filter Tgl Terima</label>
-                          <input type="radio" class="cp mr-8" id="filter_terima" name="enable_date" value="terima_on" onclick="enable_terima()">
-                          <input type="text" class="col-md-2 col-4 mydatepicker"
-                            name="statusAwalTerima"id="tgl_terima"  value="<?=$statusAwalTerima?>" autocomplete="off">
-                          <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
-                          <input type="mtext" class="col-md-2 col-4 mydatepicker"
-                            name="statusAkhirTerima" id="akhir_terima" value="<?=$statusAkhirTerima?>" autocomplete="off">
-                        </div>
-                        <div class="d-sm-inline-block d-md-flex mb-3">
-                          <label class="mb-3 mb-md-0 mr-25em-half centered d-md-flex">Filter Tgl Kirim</label>
-                          <input type="radio" class="cp mr-8" id="filter_terima" name="enable_date" value="kirim_on" onclick="enable_kirim()">
-                          <input type="text" class="col-md-2 col-4 mydatepicker"
-                            name="statusAwalKirim"id="tgl_terima"  value="<?=$statusAwalKirim?>" autocomplete="off">
-                          <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
-                          <input type="mtext" class="col-md-2 col-4 mydatepicker"
-                            name="statusAkhirKirim" id="akhir_terima" value="<?=$statusAkhirKirim?>" autocomplete="off">
-                        </div>
+                        </form>
                       </div>
                     </div>
                   </div>
-                  </form>
                 </div>
+                </form>
                   <!-- <div class="col-md-7">
                     <div class="form-group">
                       <div class="col-md-4 d-flex">
@@ -418,6 +444,54 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bootstrap Modals for Adding New No Transaksi -->
+      <div class="modal fade in" id="masterModal" tabindex="-1" role="dialog" aria-labelledby="masterModallabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Delivery Baru</h4>
+                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" id="masterModallabel">&times;</span>
+                  </button>
+                </div>
+                <!-- <form class="form-horizontal" id="form-submit" method="post" role="form"> -->
+                <div class="modal-body">
+                  <form method="post" role="form" id="form-filter" action="javascript:initFilter()">
+                  <div class="form-padding mb-2">
+                    <div class="d-sm-inline-block d-md-flex">
+                      <label class="mr-half mb-2 centered d-block d-md-flex">Filter Tgl</label>
+                      <input type="text" name="awalTanggal" value=<?=$awalTanggal?> class="mr-3 col-md-3 col-4 mydatepicker">
+                      <label class="centered d-md-flex">s/d</label>
+                      <input type="text" name="akhirTanggal" value=<?=$akhirTanggal?> class="ml-3 col-md-3 col-4 mydatepicker">
+                      <button type="submit" class="btn btn-sm btn-success ml-half" name="filter_transaksi" id="cari_transaksi" >Cari</button>
+                      <a class="btn btn-sm btn-warning ml-half" id="clear_transaksi">Clear</a>
+                      <a class="btn btn-sm btn-info ml-half" id="select_all">Select All</a>
+                    </div>
+                  </div>
+                  </form>
+                <form class="form-horizontal" id="form-submit" method="post" role="form" action="javascript:initSubmit()">
+                  <div class="form-padding d-block">
+                    <label class="mr-half">Pilih No Transaksi: </label>
+                    <div class="card border">
+                      <div class="card-header">
+                        Transaksi
+                      </div>
+                      <div class="card-body card-overflow" id="transaksi_container" style="padding:0;">
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" name = "btn_submit" class="btn btn-primary">Simpan</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+                </form>
+              </div>
           </div>
         </div>
       </div>
@@ -642,6 +716,8 @@
           $(this).parent().siblings().removeClass('bg-choose');
         }
       });
+
+      var status = "<?=$status_pengiriman?>";
 
       function unique(list) {
         var result = [];

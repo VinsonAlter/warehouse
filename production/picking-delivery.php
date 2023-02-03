@@ -233,7 +233,7 @@
                           </div>
                           <div class="d-sm-inline-block d-md-flex">
                             <label class="mb-3 mb-md-0 mr-16em centered d-md-flex">Filter Tgl Terima</label>
-                            <input type="radio" class="cp mr-8" id="filter_terima" name="enable_date" value="transaksi_off" onclick="enable_terima()">
+                            <input type="radio" class="cp mr-8" id="filter_terima" name="enable_date" value="terima_on" onclick="enable_terima()">
                             <input type="text" class="col-md-2 col-4 mydatepicker"
                               name="tglTerima"id="tgl_terima"  value="<?=$tglTerima?>" autocomplete="off">
                             <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
@@ -602,6 +602,8 @@
           "stateSave": true,
           "stateDuration": -1,
           "pageLength": 25,
+          "scrollY": '400px',
+          "scrollCollapse": true,
           "ajax": {
             url: "json/getDataDelivery.php"
           },
