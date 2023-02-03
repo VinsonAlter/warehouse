@@ -117,6 +117,7 @@
         $result = $result[2] . $divider . $result[1] . $divider . $result[0] . $datetime;
         return $result;
         }
-    }	
+    }
+    	
 
 ?>

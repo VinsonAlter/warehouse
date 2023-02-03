@@ -17,7 +17,7 @@
     $statusAkhirTerima = date('d-m-Y');
     $statusAwalKirim = date('d-m-Y');
     $statusAkhirKirim = date('d-m-Y');
-
+    $state = '';
     // filter noTransaksi
     if(isset($_REQUEST['filter_tgl'])){
       $state = $_REQUEST['enable_date'];
@@ -335,7 +335,7 @@
                           <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Filter Tgl Transaksi</label>
                           <input type="radio" class="cp mr-8" id="filter_transaksi" name="enable_date" value="transaksi_on" onclick="enable_transaksi()">
                           <input type="text" class="col-md-2 col-4 mydatepicker"
-                            name="statusAwalTransaksi" id="tgl_transaksi" value="<?=$statusAwalTransaksi?>" autocomplete="off">
+                            name="statusAwalTransaksi" id="awal_transaksi" value="<?=$statusAwalTransaksi?>" autocomplete="off">
                           <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
                           <input type="mtext" class="col-md-2 col-4 mydatepicker"
                             name="statusAkhirTransaksi" id="akhir_transaksi" value="<?=$statusAkhirTransaksi?>" autocomplete="off">
@@ -348,19 +348,19 @@
                           <label class="mb-3 mb-md-0 mr-16em-half centered d-md-flex">Filter Tgl Terima</label>
                           <input type="radio" class="cp mr-8" id="filter_terima" name="enable_date" value="terima_on" onclick="enable_terima()">
                           <input type="text" class="col-md-2 col-4 mydatepicker"
-                            name="statusAwalTerima"id="tgl_terima"  value="<?=$statusAwalTerima?>" autocomplete="off">
+                            name="statusAwalTerima" id="awal_terima"  value="<?=$statusAwalTerima?>" autocomplete="off">
                           <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
                           <input type="mtext" class="col-md-2 col-4 mydatepicker"
                             name="statusAkhirTerima" id="akhir_terima" value="<?=$statusAkhirTerima?>" autocomplete="off">
                         </div>
                         <div class="d-sm-inline-block d-md-flex mb-3">
                           <label class="mb-3 mb-md-0 mr-25em-half centered d-md-flex">Filter Tgl Kirim</label>
-                          <input type="radio" class="cp mr-8" id="filter_terima" name="enable_date" value="kirim_on" onclick="enable_kirim()">
+                          <input type="radio" class="cp mr-8" id="filter_kirim" name="enable_date" value="kirim_on" onclick="enable_kirim()">
                           <input type="text" class="col-md-2 col-4 mydatepicker"
-                            name="statusAwalKirim"id="tgl_terima"  value="<?=$statusAwalKirim?>" autocomplete="off">
+                            name="statusAwalKirim" id="awal_kirim"  value="<?=$statusAwalKirim?>" autocomplete="off">
                           <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
                           <input type="mtext" class="col-md-2 col-4 mydatepicker"
-                            name="statusAkhirKirim" id="akhir_terima" value="<?=$statusAkhirKirim?>" autocomplete="off">
+                            name="statusAkhirKirim" id="akhir_kirim" value="<?=$statusAkhirKirim?>" autocomplete="off">
                         </div>
                       </div>
                     </div>
@@ -421,151 +421,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Bootstrap Modals Edit Delivery -->
-
-      <div class="modal fade" id="masterModalEdit" tabindex="-1" role="dialog" aria-labelledby="masterModallabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">Delivery - Ubah</h4>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" id="masterModallabel">&times;</span>
-                  </button>
-                </div>
-                <form class="form-horizontal" id="form-edit" method="post" action="javascript:initEdit()" role="form">
-                <div class="modal-body pt-none pb-none">
-                  <div class="card mb-none">
-                    <div class="card-body pb-none">
-                      <div class="form-group row">
-                        <label class="col-sm-4 control-label col-form-label">No Transaksi</label>
-                        <div class="col-sm-8">
-                          <input class="form-control" id="no_transaksi" name="no_transaksi" readonly="readonly">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label class="col-sm-4 control-label col-form-label">Tgl Transaksi</label>
-                        <div class="col-sm-8">
-                          <input class="form-control" id="tgl_transaksi" name="tgl_transaksi" readonly="readonly">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label class="col-sm-4 control-label col-form-label">Status</label>
-                        <div class="col-sm-8">
-                          <input class="form-control" id="status_delivery" readonly="readonly">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label class="col-sm-4 control-label col-form-label">Nama (Owner)</label>
-                        <div class="col-sm-8">
-                          <input class="form-control" id="nama_owner" readonly="readonly">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label class="col-sm-4 control-label col-form-label">Picker</label>
-                        <div class="col-sm-8">
-                          <select
-                            class="select2 form-select shadow-none"
-                            style="width: 100%; height: 36px"
-                            id="select_picker" name="picker"
-                          >
-                            <!-- <option selected="true" disabled="disabled">Choose</option> -->
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label class="col-sm-4 control-label col-form-label">Tgl Terima</label>
-                        <div class="col-sm-8">
-                          <input class="form-control" id="tgl_terima" readonly="readonly">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label class="col-sm-4 control-label col-form-label">Tgl Kirim</label>
-                        <div class="col-sm-8">
-                          <input class="form-control mydatepicker" name="tgl_kirim" id="tgl_kirim" placeholder="dd-mm-yyyy">
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label class="col-sm-4 control-label col-form-label">Tgl Selesai</label>
-                        <div class="col-sm-8">
-                          <input class="form-control mydatepicker" name="tgl_selesai" id="tgl_selesai" placeholder="dd-mm-yyyy">
-                        </div>
-                      </div>
-                      <div class="form-group row" id="jenis_pengiriman">
-                        <label class="col-sm-6 control-label col-form-label mb-1">Jenis Pengiriman</label>
-                        <div class="col-sm-9">
-                          <div class="form-check">
-                            <input id="kirim_cust" type="radio" class="form-check-input cp" name="jenis_pengiriman" onclick="enable_kirim()">
-                            <label for="kirim_cust" class="form-check-label mb-0 cp">Kirim ke Customer</label>
-                            <div class="form-group row mt-2">
-                              <label class="col-sm-3 control-label col-form-label">Driver</label>
-                              <div class="d-flex col-sm-7">
-                                <select
-                                  class="select2 shadow-none form-select"
-                                  style="width: 100%; height: 36px"
-                                  id="select_driver" name="select_driver"
-                                >
-                                </select>
-                              </div>
-                            </div>
-                            <div class="form-group row mt-2">
-                              <label class="col-sm-3 control-label col-form-label">No Plat</label>
-                              <div class="d-flex col-sm-7">
-                                <select
-                                  class="select2 shadow-none form-select"
-                                  style="width: 100%; height: 36px"
-                                  id="select_plat" name="select_plat"
-                                >
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-check">
-                            <input id="ambil_sendiri" type="radio" class="form-check-input cp" name="jenis_pengiriman" onclick="enable_cust()">
-                            <label for="ambil_sendiri" class="form-check-label mb-0 cp">Ambil Sendiri</label>
-                            <div class="form-group row mt-2">
-                              <label for="driver_cust" class="col-sm-3 control-label col-form-label">Driver</label>
-                              <div class="d-flex col-sm-7">
-                                <input id="driver_cust" name="driver_cust" type="text" class="form-control">
-                              </div>
-                            </div>
-                            <div class="form-group row mt-2">
-                              <label for="plat_cust" class="col-sm-3 control-label col-form-label">No Plat</label>
-                              <div class="d-flex col-sm-7">
-                                <input id="plat_cust" name="plat_cust" type="text" class="form-control">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-check">
-                            <input id="via_sales" type="radio" class="form-check-input cp" name="jenis_pengiriman" onclick="enable_sales()">
-                            <label for="via_sales" class="form-check-label mb-0 cp">Via Sales</label>
-                              <div class="form-group mt-2">
-                                <select
-                                  class="select2 shadow-none form-select"
-                                  style="width: 100%; height: 36px" id="select_sales"
-                                  name="nama_sales"
-                                >
-                                </select>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- <div class="form-group row">
-                        
-                      </div> -->
-                    </div>
-                  </div> 
-                </div>
-
-                <div class="modal-footer">
-                  <button type="submit" name = "btn_submit" class="btn btn-primary">Simpan</button>
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                </div>
-                </form>
-              </div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <!-- ============================================================== -->
@@ -608,79 +463,9 @@
 
     <script>
 
-      // clear selected checkboxes inside add delivery baru
-      $(document).on("click","#clear_transaksi", function() {
-          const requiredCheckboxes = $('#masterModal .modal-body #card_container input[type="checkbox"]');
-          requiredCheckboxes.each(function() {
-          if ($(this).is(':checked')) {
-            $(this).parent().parent().removeClass('bg-choose');
-            $(this).parent().siblings().removeClass('bg-choose');
-            $(this).prop('checked', false);
-          }
-        });
-      });
+      var state = '<?php echo $state ?>';
 
-      // select all checkbox inside delivery baru modals
-      $(document).on("click","#select_all", function() {
-          const requiredCheckboxes = $('#masterModal .modal-body #card_container input[type="checkbox"]');
-          requiredCheckboxes.each(function() {
-          if (!$(this).is(':checked')) {
-            $(this).parent().parent().addClass('bg-choose');
-            $(this).parent().siblings().addClass('bg-choose');
-            $(this).prop('checked', true);
-          }
-        });
-      });
-
-      
-      $(document).on('change','#masterModal .modal-body #card_container input[type="checkbox"]',function () {
-        if ($(this).is(':checked')) {
-          $(this).parent().parent().addClass('bg-choose');
-          $(this).parent().siblings().addClass('bg-choose');
-        } else {
-          $(this).parent().parent().removeClass('bg-choose');
-          $(this).parent().siblings().removeClass('bg-choose');
-        }
-      });
-
-      function unique(list) {
-        var result = [];
-        $.each(list, function(i, e) {
-          if ($.inArray(e, result) == -1) result.push(e);
-        });
-        return result;
-      }
-
-      var SelectedDriver = '';
-
-      var SelectedDriverName = '';
-
-      var SelectedPlatDriver = '';
-
-      var SelectedCustPlat = '';
-
-      var SelectedCustDriver = '';
-
-      var SelectedSales = '';
-
-      // window.onload = function() {
-      //     $('#masterModal').modal('show');
-      // }
-
-      // adding loading spinners when ajax request 
-      // $(document).ajaxStart(function(){
-      //   $(".loader").show();
-      // }).ajaxStop(function(){
-      //   $(".loader").hide();
-      // });
-      
       $(document).ready(() => {
-        $('#status_pengiriman option').each(function() {
-          if($(this).val() == status) { 
-            $(this).attr("selected","selected");    
-          }
-        });
-
         // getPicker();
         // getDriver();
         // getPlat();
@@ -696,25 +481,40 @@
           autoclose: true,
 					todayHighlight: true
         });
-        // $("#datepicker-autoclose").datepicker({
-        //   autoclose: true,
-        //   todayHighlight: true,
-        // });
-        // this function check if at least one of the checkbox is checked
         
-          // if(requiredCheckboxes.is(':checked')) {
-          //   $('#card_container').addClass('bg-diterima');
-          // } else {
-          //   $('#card_container').removeClass('bg-diterima');
-          // }
-  
-        // requiredCheckboxes.change(function(){
-        //   if(requiredCheckboxes.is(':checked')) {
-        //       requiredCheckboxes.addClass('bg-diterima');
-        //   } else {
-        //       requiredCheckboxes.removeClass('bg-diterima');
-        //   }
-       
+        if(state == '' || state == 'transaksi_on') {
+          $('#filter_transaksi').prop('checked', true);
+          $('#awal_transaksi').prop('disabled', false);
+          $('#akhir_transaksi').prop('disabled', false);
+        } else if(state == 'terima_on') {
+          $('#filter_terima').prop('checked', true);
+        } else {
+          $('#filter_kirim').prop('checked', true);
+        }
+
+        if(!$('#filter_transaksi').is(':checked')) {
+            $('#awal_transaksi').prop('disabled', true);
+            $('#akhir_transaksi').prop('disabled', true);
+          } else {
+            $('#awal_transaksi').prop('disabled', false);
+            $('#akhir_transaksi').prop('disabled', false);
+        }
+
+        if(!$('#filter_terima').is(':checked')) {
+            $('#awal_terima').prop('disabled', true);
+            $('#akhir_terima').prop('disabled', true);
+          } else {
+            $('#awal_terima').prop('disabled', false);
+            $('#akhir_terima').prop('disabled', false);
+        }
+
+        if(!$('#filter_kirim').is(':checked')) {
+            $('#awal_kirim').prop('disabled', true);
+            $('#akhir_kirim').prop('disabled', true);
+          } else {
+            $('#awal_kirim').prop('disabled', false);
+            $('#akhir_kirim').prop('disabled', false);
+        }
 
         var tableDelivery = $('#table_delivery').DataTable({
           "processing": true,
@@ -965,7 +765,33 @@
         })
       }
       
+      // for ui/ux purposes only, enable datetime when radio button is clicked
+      function enable_transaksi() {
+        $('#awal_transaksi').prop('disabled', false);
+        $('#akhir_transaksi').prop('disabled', false);
+        $('#awal_terima').prop('disabled', true);
+        $('#akhir_terima').prop('disabled', true);
+        $('#awal_kirim').prop('disabled', true);
+        $('#akhir_kirim').prop('disabled', true);     
+      }
+
+      function enable_terima() {
+        $('#awal_transaksi').prop('disabled', true);
+        $('#akhir_transaksi').prop('disabled', true);
+        $('#awal_terima').prop('disabled', false);
+        $('#akhir_terima').prop('disabled', false);
+        $('#awal_kirim').prop('disabled', true);
+        $('#akhir_kirim').prop('disabled', true); 
+      }
       
+      function enable_kirim() {
+        $('#awal_transaksi').prop('disabled', true);
+        $('#akhir_transaksi').prop('disabled', true);
+        $('#awal_terima').prop('disabled', true);
+        $('#akhir_terima').prop('disabled', true);
+        $('#awal_kirim').prop('disabled', false);
+        $('#akhir_kirim').prop('disabled', false); 
+      }
 
       function initSubmit() {
           $.ajax({
@@ -1223,30 +1049,7 @@
           $('#select_sales').prop('disabled', true);
       }
 
-      function enable_kirim() {
-        $('#select_driver').prop('disabled', false);
-        $('#select_plat').prop('disabled', false);
-        $('#driver_cust').prop('disabled', true);
-        $('#plat_cust').prop('disabled', true);
-        $('#select_sales').prop('disabled', true);
-      } 
-
-      function enable_cust() {
-        $('#driver_cust').prop('disabled', false);
-        $('#plat_cust').prop('disabled', false);
-        $('#select_driver').prop('disabled', true);
-        $('#select_plat').prop('disabled', true);
-        $('#select_sales').prop('disabled', true);
-      } 
-
-      function enable_sales() {
-        $('#select_sales').prop('disabled', false);
-        $('#driver_cust').prop('disabled', true);
-        $('#plat_cust').prop('disabled', true);
-        $('#select_driver').prop('disabled', true);
-        $('#select_plat').prop('disabled', true);
-      } 
-
+      //  
       // if($('.form-check-input:checked[type="radio"]').checked) {
       //   alert('Button Checked');
       // }
