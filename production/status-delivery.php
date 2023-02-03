@@ -172,12 +172,12 @@
         box-shadow: none;
       } */
     
-      .bg-diterima { 
-        background-color: #fcb1ac !important;
+      .bg-diterima {
+        background-color: #ff9933 !important;
       }
 
       .bg-dikirim {
-        background-color: #e8ff78 !important;
+        background-color: #7aff8c !important;
       }
 
       .bg-selesai {
@@ -185,7 +185,7 @@
       }
 
       .bg-choose {
-        background-color: #6eff94 !important;
+        background-color: #D3D3D3 !important;
       }
 
       body {
@@ -816,15 +816,17 @@
               render: function(data){
                 if(data == 1)
                   return '<b>Diterima</b>'
-                  else
-                  return '<b>Belum Diterima</b>'
+                else if (data == 2)
+                  return '<b>Dikirim</b>'
+                else 
+                  return '<b>Selesai</b>'
               }}
           ],
           "rowCallback": function(row, data, index) {
             const cellValue = data[3];
-            if(cellValue == 'Diterima') {
+            if(cellValue == 1) {
               $('td:eq(3)', row).addClass("bg-diterima");
-            } else if (cellValue == 'Dikirim') {
+            } else if (cellValue == 2) {
               $('td:eq(3)', row).addClass("bg-dikirim");
             } else {
               $('td:eq(3)', row).addClass("bg-selesai");

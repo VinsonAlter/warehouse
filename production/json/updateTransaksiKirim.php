@@ -7,7 +7,7 @@
         if($_POST['NomorTransaksi'] != '') {
             if(isset($_POST['tanggal_kirim']) && isset($_POST['select_pengiriman'])
                 && isset($_POST['wilayah_pengiriman']) && isset($_POST['nama_ekspedisi'])
-                && isset($_POST['nama_driver']) && isset($_POST['no_plate'])) {
+                && isset($_POST['nama_driver']) && isset($_POST['no_plat'])) {
                 $noTransaksi = $_POST['NomorTransaksi'];
                 $arr = explode(' ; ', $noTransaksi);
                 $tanggal_kirim = $_POST['tanggal_kirim'];
@@ -22,8 +22,9 @@
                 $plat = $_POST['no_plat'];
                 foreach($arr as $val){
                     $array = explode(' , ', $val);
-                    $Transaksi = $array[0];
-                    $status = $array[3];
+                    $idTransaksi = $array[0];
+                    $Transaksi = $array[1];
+                    $status = $array[4];
                     if($status == 1) {
                         $update_kirim = "UPDATE [WMS].[dbo].[TB_Delivery]
                                             SET [Status] = 2,
@@ -33,7 +34,7 @@
                                                 [NamaEkspedisi] = '$ekspedisi',
                                                 [NamaDriver] = '$driver',
                                                 [NoPlat] = '$plat'
-                                            WHERE [NoTransaksi] = '$Transaksi'
+                                            WHERE [NoTransaksi] = '$Transaksi' AND [IDTransaksi] = '$idTransaksi'
                                         ";
                         $stmt = $pdo->prepare($update_kirim, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
                         $stmt->execute();

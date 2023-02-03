@@ -42,17 +42,17 @@
                                     AND '".date_to_str($akhir_transaksi). $end_day ."'";
             } else {
                 $tgl_condition = " WHERE D.[TglTerima] BETWEEN '".date_to_str($tgl_terima)."' AND 
-                                    '".date_to_str($akhir_terima). $end_day ."' ";
+                                    '".date_to_str($akhir_terima). $end_day ."'";
             }
             foreach($user_data as $key => $value) {
                 // foreach($sales_data as $key_2 => $value_2) {
                     $filter[] = "
-                    SELECT P.[NoTransaksi], P.[Tgl], P.[Nama], P.[Owner], S.[Nama] AS NamaSales,D.[Status], D.[TglTerima], D.[TglKirim], D.[NamaPicker]
+                    SELECT P.[ID], P.[NoTransaksi], P.[Tgl], P.[Nama], P.[Owner], S.[Nama] AS NamaSales,D.[Status], D.[TglTerima], D.[TglKirim], D.[NamaPicker]
                     FROM $value P LEFT JOIN $sales_data[$key] S ON P.SalesID = S.SalesID
                     LEFT JOIN [WMS].[dbo].[TB_Delivery] D 
-                    ON P.NoTransaksi = D.NoTransaksi " . $tgl_condition . " AND
+                    ON P.NoTransaksi = D.NoTransaksi AND P.ID = D.IDTransaksi " . $tgl_condition . " AND
                     P.[Segmen] IN ($user_segmen) AND
-                    P.[Status] = '1' AND
+                    P.[Status] = 1 AND
                     isnull(P.[NoTransaksiOriginal], '') = ''
                     ";
                     $filters = implode("UNION ALL", $filter);
@@ -68,6 +68,7 @@
             if($stmt->rowCount() > 0) {
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $urut++;
+                    $idTransaksi = $row['ID'];
                     $transaksi = $row['NoTransaksi'];
                     $tglTransaksi = $row['Tgl'];
                     $nama = $row['Nama'];
@@ -80,7 +81,7 @@
                     $tglKirim = $row['TglKirim'];
                     $accept = $tglTerima == '' ? '' : ' ,' . $tglTerima;
                     $convert_tglTransaksi = date('d-m-Y', strtotime($tglTransaksi));
-                    $checkbox = '<input type="checkbox" value="' . $transaksi .  " , "  . $convert_tglTransaksi . " , " . $customer . " , " . $status . " , " . $sales . $accept . '" id="checkbox_val" name="checkboxes[]" class="cp">';
+                    $checkbox = '<input type="checkbox" value="' . $idTransaksi . " , " . $transaksi .  " , "  . $convert_tglTransaksi . " , " . $customer . " , " . $status . " , " . $sales . $accept . '" id="checkbox_val" name="checkboxes[]" class="cp">';
                     $data[] = array(
                         $checkbox,
                         $transaksi,

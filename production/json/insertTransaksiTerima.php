@@ -11,15 +11,16 @@
                 $tglTerima = date_hour_to_str(date('d-m-Y H:i:s'));
                 foreach($arr as $val){
                     $array = explode(' , ', $val);
-                    $noTransaksi = $array[0];
-                    $tglTransaksi = date_to_str($array[1]);
-                    $customer = $array[2];
-                    $status = $array[3];
-                    $sales = $array[4];
+                    $idTransaksi = $array[0];
+                    $noTransaksi = $array[1];
+                    $tglTransaksi = date_to_str($array[2]);
+                    $customer = $array[3];
+                    $status = $array[4];
+                    $sales = $array[5];
                     if($status == "") {
                         $insert = "INSERT INTO [WMS].[dbo].[TB_Delivery] 
-                            ([NoTransaksi], [Customer], [TglTransaksi], [Status], [NamaPicker], [TglTerima], [NamaSales])
-                            VALUES ('$noTransaksi', '$customer', '$tglTransaksi', 1, '$picker', '$tglTerima', '$sales')";
+                            ([IDTransaksi], [NoTransaksi], [Customer], [TglTransaksi], [Status], [NamaPicker], [TglTerima], [NamaSales])
+                            VALUES ('$idTransaksi', '$noTransaksi', '$customer', '$tglTransaksi', 1, '$picker', '$tglTerima', '$sales')";
                         $stmt = $pdo->prepare($insert, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
                         $stmt->execute();
                         if($stmt->rowCount() > 0){
