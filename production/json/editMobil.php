@@ -27,7 +27,7 @@
 
     } else {
 
-        $update = "UPDATE [WMS-System].[dbo].[TB_Mobil]
+        $update = "UPDATE [WMS].[dbo].[TB_Mobil]
         
                     SET Jenis = :jenis, Aktif = :aktif WHERE NoPlat = :plat";
 

@@ -26,7 +26,7 @@
         
         // check if no plat already exist in database
 
-        $check = "SELECT * FROM [WMS-System].[dbo].[TB_Mobil] WHERE NoPlat = :plat";
+        $check = "SELECT * FROM [WMS].[dbo].[TB_Mobil] WHERE NoPlat = :plat";
 
         $stmt = $conn->prepare($check, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
 
@@ -42,7 +42,7 @@
 
             } else {
         
-                $insert = "INSERT INTO [WMS-System].[dbo].[TB_Mobil]
+                $insert = "INSERT INTO [WMS].[dbo].[TB_Mobil]
                             ([NoPlat],[Jenis],[Aktif])
                             VALUES
                             (:plat, :jenis, :aktif)";

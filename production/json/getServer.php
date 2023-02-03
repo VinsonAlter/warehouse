@@ -8,7 +8,7 @@
 
         $warehouse = $_POST['warehouse'];
 
-        $query = "SELECT * FROM [WMS-System].[dbo].[TB_Server] 
+        $query = "SELECT * FROM [WMS].[dbo].[TB_Server] 
                     
                   WHERE warehouse = :warehouse";
 

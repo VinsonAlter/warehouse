@@ -1,7 +1,7 @@
 <?php
     require_once '../../function.php';
     $res = [];
-    $query = "SELECT [PickerID], [NamaPicker] FROM [WMS-System].[dbo].[TB_Picker] WHERE Aktif = 1";
+    $query = "SELECT [PickerID], [NamaPicker] FROM [WMS].[dbo].[TB_Picker] WHERE Aktif = 1";
     $stmt = $conn->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
     $stmt->execute();
     if($stmt->rowCount() > 0) {

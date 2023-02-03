@@ -8,7 +8,7 @@
 
         $nama = $_POST['nama'];
 
-        $query = "SELECT * FROM [WMS-System].[dbo].[TB_Picker] 
+        $query = "SELECT * FROM [WMS].[dbo].[TB_Picker] 
                     
                   WHERE NamaPicker = :nama";
 

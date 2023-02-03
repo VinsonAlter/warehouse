@@ -90,7 +90,7 @@
                             ,[NoPlat]
                             ,[NamaSales]
                             ,[Cabang]
-                        FROM [WMS-System].[dbo].[TB_Delivery]";
+                        FROM [WMS].[dbo].[TB_Delivery]";
         }
 
         $stmt = $conn->prepare($table, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);

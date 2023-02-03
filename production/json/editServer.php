@@ -29,7 +29,7 @@
 
     } else {
 
-        $update = "UPDATE [WMS-System].[dbo].[TB_Server]
+        $update = "UPDATE [WMS].[dbo].[TB_Server]
         
                     SET warehouse = :warehouse, aktif = :aktif WHERE id = :id";
 

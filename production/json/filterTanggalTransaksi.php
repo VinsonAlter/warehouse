@@ -20,7 +20,7 @@
 
           $filter[] = "SELECT P.[NoTransaksi], P.[Tgl], P.[Nama], P.[Owner] FROM $value P 
 
-                        LEFT JOIN [WMS-System].[dbo].[TB_Delivery] D 
+                        LEFT JOIN [WMS].[dbo].[TB_Delivery] D 
                         
                         ON P.NoTransaksi = D.NoTransaksi 
 

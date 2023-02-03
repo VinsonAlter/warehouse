@@ -23,7 +23,7 @@
 
             // get the TotalRecords
 
-            $table = "SELECT [PickerID],[NamaPicker],[Aktif] FROM [WMS-System].[dbo].[TB_Picker]";
+            $table = "SELECT [PickerID],[NamaPicker],[Aktif] FROM [WMS].[dbo].[TB_Picker]";
             
             $stmt = $conn->prepare($table, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
 

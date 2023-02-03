@@ -24,7 +24,7 @@
 
         // check if DriverID already exists in database
 
-        $check = "SELECT * FROM [WMS-System].[dbo].[TB_Server] WHERE warehouse = :database";
+        $check = "SELECT * FROM [WMS].[dbo].[TB_Server] WHERE warehouse = :database";
 
         $stmt = $conn->prepare($check, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
 
@@ -40,7 +40,7 @@
 
             } else {
 
-                $insert = "INSERT INTO [WMS-System].[dbo].[TB_Server]
+                $insert = "INSERT INTO [WMS].[dbo].[TB_Server]
                             ([warehouse],[aktif])
                             VALUES
                             (:database, :aktif)";

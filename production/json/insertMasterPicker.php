@@ -24,7 +24,7 @@
 
         // check if PickerID already exists in database
 
-        $check = "SELECT * FROM [WMS-System].[dbo].[TB_Picker] WHERE PickerID = :kode";
+        $check = "SELECT * FROM [WMS].[dbo].[TB_Picker] WHERE PickerID = :kode";
 
         $stmt = $conn->prepare($check, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
 
@@ -40,7 +40,7 @@
 
             } else {
 
-                $insert = "INSERT INTO [WMS-System].[dbo].[TB_Picker]
+                $insert = "INSERT INTO [WMS].[dbo].[TB_Picker]
                             ([PickerID],[NamaPicker],[Aktif])
                             VALUES
                             (:kode, :nama, :aktif)";

@@ -1,6 +1,6 @@
 <?php
     $nama = $_SESSION['user_login'];
-    $search = "SELECT * FROM [WMS-System].[dbo].[TB_User] WHERE
+    $search = "SELECT * FROM [WMS].[dbo].[TB_User] WHERE
                 username = :username";
     $stmt = $conn->prepare($search, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
     $stmt->bindParam(":username", $nama, PDO::PARAM_STR);

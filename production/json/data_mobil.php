@@ -23,7 +23,7 @@
 
             // get the TotalRecords
 
-            $table = "SELECT [NoPlat],[Jenis],[Aktif] FROM [WMS-System].[dbo].[TB_Mobil]";
+            $table = "SELECT [NoPlat],[Jenis],[Aktif] FROM [WMS].[dbo].[TB_Mobil]";
             
             $stmt = $conn->prepare($table, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
 

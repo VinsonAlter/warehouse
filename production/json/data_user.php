@@ -31,7 +31,7 @@
 
             // get the TotalRecords
 
-            $table = "SELECT [nama],[username],[server],[segmen],[aktif],[otoritas] FROM [WMS-System].[dbo].[TB_User]";
+            $table = "SELECT [nama],[username],[server],[segmen],[aktif],[otoritas] FROM [WMS].[dbo].[TB_User]";
             
             $stmt = $conn->prepare($table, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
 

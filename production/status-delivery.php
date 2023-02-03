@@ -57,7 +57,7 @@
     if(isset($_SESSION['FilterStatus'])) $status_pengiriman = $_SESSION['FilterStatus'];
     // var_dump($status_pengiriman);  
 
-    $database = query("SELECT * FROM [WMS-System].[dbo].[TB_Server] WHERE aktif = 1");
+    $database = query("SELECT * FROM [WMS].[dbo].[TB_Server] WHERE aktif = 1");
     
 ?>
 

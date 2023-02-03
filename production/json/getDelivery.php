@@ -19,10 +19,10 @@
                           ,[DriverCust]
                           ,[NamaSales]
                           ,[Cabang]
-                  FROM [WMS-System].[dbo].[TB_Delivery] do LEFT JOIN 
-                       [WMS-System].[dbo].[TB_Picker] pic 
+                  FROM [WMS].[dbo].[TB_Delivery] do LEFT JOIN 
+                       [WMS].[dbo].[TB_Picker] pic 
                        ON pic.PickerID = do.PickerID LEFT JOIN
-                       [WMS-System].[dbo].[TB_Driver] d ON d.DriverID = do.DriverID WHERE
+                       [WMS].[dbo].[TB_Driver] d ON d.DriverID = do.DriverID WHERE
                        NoTransaksi = :transaksi";
         $stmt = $conn->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
         $stmt->bindParam(":transaksi", $transaksi, PDO::PARAM_STR);

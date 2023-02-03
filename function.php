@@ -15,7 +15,7 @@
 
     $pdo_option = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
 
-    $dsn = 'sqlsrv:server=192.168.100.100,1433;Database=WMS-System';
+    $dsn = 'sqlsrv:server=192.168.100.100,1433;Database=WMS';
     try {
         $conn = new PDO($dsn, 'sa', 'Brav02010IT', $pdo_option);
     } catch (PDOException $e) {

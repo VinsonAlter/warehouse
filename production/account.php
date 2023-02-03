@@ -12,13 +12,13 @@
 
     }
 
-    // $database = query("SELECT * FROM [WMS-System].[dbo].[TB_User] WHERE aktif = 1");
+    // $database = query("SELECT * FROM [WMS].[dbo].[TB_User] WHERE aktif = 1");
 
     $server = $_SESSION['cabang_user'];
 
     $nama = $_SESSION['user_login'];
 
-    $database = query("SELECT * FROM [WMS-System].[dbo].[TB_Server] WHERE aktif = 1");
+    $database = query("SELECT * FROM [WMS].[dbo].[TB_Server] WHERE aktif = 1");
 
 ?>
 

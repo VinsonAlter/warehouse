@@ -17,7 +17,7 @@
             $res['success'] = 0;
             $res['message'] = 'Password & confirm password harus sama!';
         } else {
-            $check = "SELECT * FROM [WMS-System].[dbo].[TB_User] WHERE username = :username";
+            $check = "SELECT * FROM [WMS].[dbo].[TB_User] WHERE username = :username";
             $stmt = $conn->prepare($check, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
             $stmt->execute();
@@ -34,7 +34,7 @@
                     $segmen = implode(' ; ', $_POST['segmen']);
                     $otoritas = $_POST['otoritas'];
                     $otoritas = implode(' ; ', $_POST['otoritas']);
-                    $insert = "INSERT INTO [WMS-System].[dbo].[TB_User] ([nama], [username], [password], [server], [segmen], [otoritas], [aktif])       
+                    $insert = "INSERT INTO [WMS].[dbo].[TB_User] ([nama], [username], [password], [server], [segmen], [otoritas], [aktif])       
                                 VALUES (:name, :user, :password, '$server', '$segmen', '$otoritas', :aktif)";
                     $stmt2 = $conn->prepare($insert, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
                     $stmt2->bindParam(':name', $name, PDO::PARAM_STR);

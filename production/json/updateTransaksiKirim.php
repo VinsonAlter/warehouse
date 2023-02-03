@@ -25,7 +25,7 @@
                     $Transaksi = $array[0];
                     $status = $array[3];
                     if($status == 1) {
-                        $update_kirim = "UPDATE [WMS-System].[dbo].[TB_Delivery]
+                        $update_kirim = "UPDATE [WMS].[dbo].[TB_Delivery]
                                             SET [Status] = 2,
                                                 [TglKirim] = '$waktu_kirim',
                                                 [JenisPengiriman] = '$jenis_pengiriman',

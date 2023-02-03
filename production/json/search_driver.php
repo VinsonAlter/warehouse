@@ -1,7 +1,7 @@
 <?php
     require_once '../../function.php';
     $res = [];
-    $query = "SELECT [DriverID], [NamaDriver] FROM [WMS-System].[dbo].[TB_Driver] WHERE Aktif = 1";
+    $query = "SELECT [DriverID], [NamaDriver] FROM [WMS].[dbo].[TB_Driver] WHERE Aktif = 1";
     $stmt = $conn->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
     $stmt->execute();
     if($stmt->rowCount() > 0) {

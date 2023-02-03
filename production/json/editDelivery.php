@@ -21,7 +21,7 @@
 
     if(isset($_POST['tgl_selesai']) ? $tglSelesai = date_to_str($_POST['tgl_selesai']) : $tglSelesai = '');
 
-    $check = "SELECT * FROM [WMS-System].[dbo].[TB_Delivery]
+    $check = "SELECT * FROM [WMS].[dbo].[TB_Delivery]
                          WHERE NoTransaksi = :noTransaksi";
 
     $stmt = $conn->prepare($check, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
@@ -44,7 +44,7 @@
 
                 if($tglKirim >= $tglTerima) {
 
-                    $update = "UPDATE [WMS-System].[dbo].[TB_Delivery] 
+                    $update = "UPDATE [WMS].[dbo].[TB_Delivery] 
                         SET TglKirim = :kirim , 
                             Status = 'Dikirim' , PickerID = :picker, DriverID = :driver, 
                             NoPlat = :plat, PlatCust = :platCust, DriverCust = :driverCust,
@@ -87,7 +87,7 @@
 
                 if(($tglSelesai >= $tgl_kirim) && (isset($_POST['jenis_pengiriman']))) {
 
-                    $update = "UPDATE [WMS-System].[dbo].[TB_Delivery] 
+                    $update = "UPDATE [WMS].[dbo].[TB_Delivery] 
                             SET TglSelesai = :selesai, 
                             Status = 'Selesai', DriverID = :driver, 
                             NoPlat = :plat, PlatCust = :platCust, DriverCust = :driverCust,

@@ -20,7 +20,7 @@
       if(checkinput($nama) || checkinput($password)) {
         $msg = "<div class='alert alert-danger' role='alert'>Mohon masukkan angka dan huruf!</div>";
       } else {
-        $query = "SELECT * FROM [WMS-System].[dbo].[TB_User] WHERE username=:nama AND aktif = 1";
+        $query = "SELECT * FROM [WMS].[dbo].[TB_User] WHERE username=:nama AND aktif = 1";
         $stmt = $conn->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]); 
           $stmt->bindParam(":nama", $nama, PDO::PARAM_STR);
           $stmt->execute();  
@@ -121,7 +121,7 @@
     
     
     /* old login function */
-    //   $query = "SELECT * FROM [WMS-System].[dbo].[TB_User] WHERE username=:nama AND password=:password";
+    //   $query = "SELECT * FROM [WMS].[dbo].[TB_User] WHERE username=:nama AND password=:password";
     //     $stmt = $conn->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]); 
     //     $stmt->bindParam(":nama", $nama, PDO::PARAM_STR);
     //     $stmt->bindParam(":password", $password, PDO::PARAM_STR);

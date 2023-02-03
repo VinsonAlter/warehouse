@@ -8,7 +8,7 @@
 
         $plat = $_POST['plat'];
 
-        $query = "SELECT * FROM [WMS-System].[dbo].[TB_Mobil] 
+        $query = "SELECT * FROM [WMS].[dbo].[TB_Mobil] 
                     
                   WHERE NoPlat = :plat";
 

@@ -27,7 +27,7 @@
 
     } else {
 
-        $update = "UPDATE [WMS-System].[dbo].[TB_Picker]
+        $update = "UPDATE [WMS].[dbo].[TB_Picker]
         
                     SET NamaPicker = :nama, Aktif = :aktif WHERE PickerID = :id";
 

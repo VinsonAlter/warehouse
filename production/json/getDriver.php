@@ -8,7 +8,7 @@
 
         $nama = $_POST['nama'];
 
-        $query = "SELECT * FROM [WMS-System].[dbo].[TB_Driver] 
+        $query = "SELECT * FROM [WMS].[dbo].[TB_Driver] 
                     
                   WHERE NamaDriver = :nama";
 

@@ -27,7 +27,7 @@
 
     } else {
 
-        $update = "UPDATE [WMS-System].[dbo].[TB_Driver]
+        $update = "UPDATE [WMS].[dbo].[TB_Driver]
         
                     SET NamaDriver = :nama, Aktif = :aktif WHERE DriverID = :id";
 

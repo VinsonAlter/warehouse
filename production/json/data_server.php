@@ -23,7 +23,7 @@
 
             // get the TotalRecords
 
-            $table = "SELECT * FROM [WMS-System].[dbo].[TB_Server]";
+            $table = "SELECT * FROM [WMS].[dbo].[TB_Server]";
             
             $stmt = $conn->prepare($table, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
 

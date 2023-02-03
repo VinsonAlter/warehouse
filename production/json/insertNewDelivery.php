@@ -24,7 +24,7 @@
 
             [$no_transaksi, $tgl_transaksi, $nama_owner] = explode(",", $val);
 
-            $insert = "INSERT INTO [WMS-System].[dbo].[TB_Delivery] 
+            $insert = "INSERT INTO [WMS].[dbo].[TB_Delivery] 
                 
                             ([NoTransaksi], [Customer], [TglTransaksi], [TglTerima], [Status])
                                         

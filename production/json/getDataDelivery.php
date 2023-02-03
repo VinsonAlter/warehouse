@@ -49,7 +49,7 @@
                     $filter[] = "
                     SELECT P.[NoTransaksi], P.[Tgl], P.[Nama], P.[Owner], S.[Nama] AS NamaSales,D.[Status], D.[TglTerima], D.[TglKirim], D.[NamaPicker]
                     FROM $value P LEFT JOIN $sales_data[$key] S ON P.SalesID = S.SalesID
-                    LEFT JOIN [WMS-System].[dbo].[TB_Delivery] D 
+                    LEFT JOIN [WMS].[dbo].[TB_Delivery] D 
                     ON P.NoTransaksi = D.NoTransaksi " . $tgl_condition . " AND
                     P.[Segmen] IN ($user_segmen) AND
                     P.[Status] = '1' AND

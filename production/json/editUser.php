@@ -30,7 +30,7 @@
                 } else {
                     $password = password_hash($password, PASSWORD_DEFAULT);
                     $active = (int)$_POST['edit_aktif'];
-                    $update = "UPDATE [WMS-System].[dbo].[TB_User]
+                    $update = "UPDATE [WMS].[dbo].[TB_User]
                                 SET nama = :nama, username = :username,
                                 password = :password, server = '$server', segmen = '$segmen', otoritas = '$otoritas', aktif = :aktif  
                                 WHERE id = :id";
@@ -51,7 +51,7 @@
                 }
             } else {
                 $active = (int)$_POST['edit_aktif'];
-                $update = "UPDATE [WMS-System].[dbo].[TB_User]
+                $update = "UPDATE [WMS].[dbo].[TB_User]
                             SET nama = :nama, username = :username,
                             server = '$server', segmen = '$segmen', otoritas = '$otoritas', aktif = :aktif  
                             WHERE id = :id";
