@@ -134,7 +134,7 @@
       /* adding required labels */
       
       .required::before {
-        content: ' * ';
+        content: '*';
         color: red;
         margin-right: 3px;
       }
@@ -291,20 +291,20 @@
                         <div class="modal-body pt-none pb-none">
                           <div class="card-body pb-none">
                             <div class="d-none form-group row">
-                              <label class="col-sm-4 control-label col-form-label">No Transaksi</label>
+                              <label class="col-sm-4 control-label col-form-label required">No Transaksi</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="no_transaksi" name="NomorTransaksi" readonly="readonly">
                               </div>
                             </div>
-                            <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label">Tgl Kirim</label>
+                            <div class="form-group row"> 
+                              <label class="col-sm-4 control-label col-form-label required">Tgl Kirim</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control mydatepicker" name="tanggal_kirim" id="tanggal_kirim"
                                   value="<?=$tglKirim?>">
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label">Jenis Pengiriman</label>
+                              <label class="col-sm-4 control-label col-form-label required">Jenis Pengiriman</label>
                               <div class="d-flex col-sm-6">
                                 <select
                                   class="select2 shadow-none form-select"
@@ -318,7 +318,7 @@
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label">Wilayah</label>
+                              <label class="col-sm-4 control-label col-form-label required">Wilayah</label>
                               <div class="col-sm-6">
                                 <select
                                     class="select2 shadow-none form-select"
@@ -330,13 +330,13 @@
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label">Nama Ekspedisi</label>
+                              <label class="col-sm-4 control-label col-form-label required">Nama Ekspedisi</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="nama_ekspedisi" name="nama_ekspedisi">
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label">Nama Driver</label>
+                              <label class="col-sm-4 control-label col-form-label required">Nama Driver</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="nama_driver" name="nama_driver">
                               </div>
@@ -352,7 +352,7 @@
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label">No. Plat Kendaraan</label>
+                              <label class="col-sm-4 control-label col-form-label required">No. Plat</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="no_plat" name="no_plat">
                               </div>
