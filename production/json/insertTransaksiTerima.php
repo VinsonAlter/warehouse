@@ -8,7 +8,7 @@
                 $batch = $_POST['batch'];
                 $picker = $_POST['picker'];
                 $arr = explode(' ; ', $batch);
-                $tglTerima = date_hour_to_str(date('d-m-Y H:i:s'));
+                $tglTerima = date_hour_to_str(date('d-m-Y H:i:00'));
                 foreach($arr as $val){
                     $array = explode(' , ', $val);
                     $idTransaksi = $array[0];

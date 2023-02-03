@@ -96,10 +96,20 @@
         return $reform;
     }
 
+    // convert date d-m-Y H:i to string Y-m-d H:i format
+    // this function is not working
+    // function date_hour_minute_to_str($date)
+    // {
+    //     if ($date == '')
+    //         return false;
+    //     $reform = substr($date,6,4) . '-' . substr($date,3,2) . '-' .substr($date,0,2) 
+    //         . ' ' . substr($date, 11,2) . ':' . substr($date, 14, 2);
+    // }
+
     // convert date H:i:s to string H:i:s
     function hour_to_str($date)
     {
-        if (($date == ''))
+        if ($date == '')
             return false;
         $reform = substr($date,0,2) . ':' .substr($date,3,2). ':' .substr($date,6,2);
         return $reform;
