@@ -345,6 +345,7 @@
                                     id="select_driver" name="select_driver"
                                     style="width:40px; text-align:left; padding: 0 5px;"
                                     class="self-centered cp remove-arrow-dropdown"
+                                    onclick="javascript:checkSelectedDriver()"
                                 >
                                   <option selected disabled value="">...</option>
                                 </select>
@@ -360,6 +361,7 @@
                                     id="select_plat" name="select_plat"
                                     style="width:40px; text-align:left; padding: 0 5px;"
                                     class="self-centered cp remove-arrow-dropdown"
+                                    onclick="javascript:checkSelectedPlat()"
                                 >
                                   <option selected disabled value="">...</option>
                                 </select>
@@ -415,9 +417,25 @@
 
     <script>
 
+      function checkSelectedDriver() {
+        if($('#select_driver option:selected').val() != '') {
+          $('#nama_driver').val($('#select_driver').val());
+          $('#select_driver').val('');
+        }
+      } 
+      
+      function checkSelectedPlat() {
+        if($('#select_plat option:selected').val() != '') {
+          $('#no_plat').val($('#select_plat').val());
+          $('#select_plat').val('');
+        }
+      }
+      
       let checkValues = [];
 
       var state = '<?php echo $state ?>';
+
+      var date = '<?php echo date('d-m-Y')?>'
 
       $('#update_kirim').click((e) => {
         e.preventDefault();
@@ -467,10 +485,7 @@
                 }
               }   
             }
-            if($('#select_driver').val() != '') {
-              $('#nama_driver').val($('#select_driver').val());
-              $('#select_driver').val('');
-            }
+            
           },
           error: err => {
             console.error(err.statusText);
@@ -495,10 +510,14 @@
                 }
               }   
             }
-            if($('#select_plat').val() != '') {
-              $('#no_plat').val($('#select_plat').val());
-              $('#select_plat').val('');
-            }
+            // if($('#select_plat').val() != '') {
+            //   $('#no_plat').val($('#select_plat').val());
+            //   $('#select_plat').val('');
+            // }
+            // if($('#select_plat input[value="0"]').is(':selected')){
+	          //   $('#no_plat').val($('#select_plat').val());
+            //   $('#select_plat').val('');
+	          // }
           },
           error: err => {
             console.error(err.statusText);
@@ -546,7 +565,11 @@
           $('#masterModalKirim .modal-body input[name="nama_driver"]').val('');
           $('#masterModalKirim .modal-body input[name="no_plat"]').val('');
         });
-        
+
+        $('#masterModalKirim').on('show.bs.modal', function() {
+          $('#masterModalKirim .modal-body input[name="tanggal_kirim"]').val(date);
+        });
+
         if(state == '' || state == 'transaksi_on') {
           $('#filter_transaksi').prop('checked', true);
           $('#tgl_transaksi').prop('disabled', false);
