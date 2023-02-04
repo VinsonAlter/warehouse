@@ -1009,6 +1009,13 @@
               $('#nama_ekspedisi').val(res.data.ekspedisi);
               $('#nama_driver').val(res.data.namaDriver);
               $('#no_plat').val(res.data.platDriver);
+              const wilayah = res.data.wilayah;
+              if(wilayah != '') {
+                $('<option>',
+                {
+                  value: wilayah,
+                }).appendTo('#wilayah_pengiriman');
+              }
               // $('#status_delivery').val(res.data.status);
               // $('#tgl_transaksi').val(res.data.tgltransaksi);
               // $('#nama_owner').val(res.data.nama);

@@ -25,6 +25,12 @@
         $stmt->execute();
         if($stmt->rowCount() > 0) {
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                if(($row['Wilayah']) != '') {
+                    $row['Wilayah'] = $row['Wilayah'];
+                } else {
+                    $row['Wilayah'] = '';
+                }
+
                 if(($row['NamaDriver']) != '') {
                     $row['NamaDriver'] = $row['NamaDriver'];
                 } else {
@@ -52,13 +58,14 @@
                 $data = array(
                     'transaksi' => $row['NoTransaksi'],
                     // 'status' => $row['Status'],
-                    // 'picker' => $row['PickerID'],
+                    // 'picker' => $row['NamaPicker'],
                     // 'nama' => $row['Nama'],
                     // 'namaPicker' => $row['NamaPicker'],
                     // 'tgltransaksi' => date('d-m-Y', strtotime($row['TglTransaksi'])),
                     // 'tglterima' => date('d-m-Y', strtotime($row['TglTerima'])),
                     // 'tglkirim' => $row['TglKirim'],
                     // 'tglselesai' => $row['TglSelesai'],
+                    'wilayah' => $row['Wilayah'],
                     'ekspedisi' => $row['NamaEkspedisi'],
                     'namaDriver' => $row['NamaDriver'],
                     'platDriver' => $row['NoPlat'],

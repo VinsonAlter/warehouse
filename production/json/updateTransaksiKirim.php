@@ -11,7 +11,11 @@
                 $noTransaksi = $_POST['NomorTransaksi'];
                 $arr = explode(' ; ', $noTransaksi);
                 $tanggal_kirim = $_POST['tanggal_kirim'];
-                $waktu_kirim = '0' . $_POST['waktu_kirim'] . ':00';
+                if(strlen($_POST['waktu_kirim']) < 5) {
+                    $waktu_kirim = '0' . $_POST['waktu_kirim'] . ':00';
+                } else {
+                    $waktu_kirim = $_POST['waktu_kirim'] . ':00';
+                }
                 $tgl_kirim = date_to_str($tanggal_kirim);
                 $jam_kirim = hour_to_str($waktu_kirim);
                 if($jam_kirim == false) {
