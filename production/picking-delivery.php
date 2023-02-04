@@ -72,6 +72,8 @@
     <link href="css/datatables.css" rel="stylesheet"/>
     <!-- Bootstrap Datepicker CSS -->
     <link rel="stylesheet" type="text/css" href="assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"/>
+    <!-- Bootstrap Timepicker CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/libs/bootstrap-timepicker/bootstrap-timepicker.min.css"/>
     <!-- Loading CSS -->
     <link href="css/loading.css" rel="stylesheet"/>
     <!-- Google Font -->
@@ -304,6 +306,12 @@
                               </div>
                             </div>
                             <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label required">Waktu Kirim</label>
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control mytimepicker" name="waktu_kirim" id="waktu_kirim">
+                              </div>
+                            </div>
+                            <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label required">Jenis Pengiriman</label>
                               <div class="d-flex col-sm-6">
                                 <select
@@ -412,8 +420,11 @@
 
     <script src="assets/extra-libs/DataTables/datatables.min.js"></script>
 
-     <!-- Datepicker JS -->
-     <script src="assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <!-- Datepicker JS -->
+    <script src="assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    <!-- Bootstrap Timepicker JS -->
+    <script src="assets/libs/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
 
     <script>
 
@@ -550,7 +561,7 @@
         /* hide the loader first */
         $('.loader').hide();
 
-        /*datepicker*/
+        // datepicker
         $(".mydatepicker").datepicker({
           format: 'dd-mm-yyyy',
           /* disable sunday in datepicker */
@@ -558,6 +569,20 @@
           autoclose: true,
           todayHighlight: true
         });
+
+        // timepicker 
+        $(".mytimepicker").timepicker({
+          timeFormat: 'HH:mm',
+          defaultTime: 'current',
+          minuteStep: 15,
+          maxHours: 24,
+          showInputs: true,
+          showMeridian: false,
+          icons: {
+            up: 'fas fa-angle-up',
+            down: 'fas fa-angle-down'
+          }
+        })
 
         // clear modals input when modal closed
         $('#masterModalKirim').on('hide.bs.modal', function() {
