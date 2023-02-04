@@ -23,7 +23,7 @@
       $state = $_REQUEST['enable_date'];
       if($_REQUEST['enable_date'] == 'transaksi_on') {
         $status = 'transaksi_on';
-        $_SESSION['StatusFilter'] = $status;
+        $_SESSION['StatusFilterTransaksi'] = $status;
         $_SESSION['FilterStatusAwalTransaksi'] = $_POST['statusAwalTransaksi'];
         $_SESSION['FilterStatusAkhirTransaksi'] = $_POST['statusAkhirTransaksi'];
         $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
@@ -32,7 +32,7 @@
         $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
       } else if ($_REQUEST['enable_date'] == 'terima_on') {
         $status = 'terima_on';
-        $_SESSION['StatusFilter'] = $status;
+        $_SESSION['StatusFilterTransaksi'] = $status;
         $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
         $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
         $_SESSION['FilterStatusAwalTerima'] = $_POST['statusAwalTerima'];
@@ -41,7 +41,7 @@
         $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
       } else {
         $status = 'kirim_on';
-        $_SESSION['StatusFilter'] = $status;
+        $_SESSION['StatusFilterTransaksi'] = $status;
         $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
         $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
         $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
@@ -416,6 +416,8 @@
                     </tbody>
                   </table>
                 </div>
+                <!-- Bootstrap Modals for Edit Status Pengiriman -->
+
               </div>
             </div>
           </div>

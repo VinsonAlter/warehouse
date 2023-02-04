@@ -63,6 +63,7 @@
             $total_record += $stmt->rowCount();
             $order_tgl = " ORDER BY [Status], [Tgl] DESC, [NoTransaksi] ";
             $query = "SELECT * FROM ($filters) temp" . $search_query . $order_tgl;
+            // var_dump($query);
             $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
             $stmt->execute();
             if($stmt->rowCount() > 0) {

@@ -23,12 +23,40 @@
                                     OR NamaSales LIKE '%$search%'
                                     OR Cabang LIKE '%$search%'";
             }
-            $start_date = date('01-m-Y');
-            $end_date = date('d-m-Y');
-            $status_tanggal = '';
+            $tgl_condition = '';
+            $awal_transaksi = date('d-m-Y');
+            $akhir_transaksi = date('d-m-Y');
+            $awal_terima = date('d-m-Y');
+            $akhir_terima = date('d-m-Y');
+            $awal_kirim = date('d-m-Y');
+            $akhir_kirim = date('d-m-Y');
+            $end_day = ' 23:59:59';
             $order_tanggal = '';
-            if (isset($_SESSION['FilterStatusFrom'])) $start_date = $_SESSION['FilterStatusFrom'];
-  	        if (isset($_SESSION['FilterStatusTo'])) $end_date = $_SESSION['FilterStatusTo'];
+            if(isset($_SESSION['FilterStatusAwalTransaksi'])) $awal_transaksi = $_SESSION['FilterStatusAwalTransaksi'];
+            if(isset($_SESSION['FilterStatusAkhirTransaksi'])) $akhir_transaksi = $_SESSION['FilterStatusAkhirTransaksi'];
+            if(isset($_SESSION['FilterStatusAwalTerima'])) $awal_terima = $_SESSION['FilterStatusAwalTerima'];
+            if(isset($_SESSION['FilterStatusAkhirTerima'])) $akhir_terima = $_SESSION['FilterStatusAkhirTerima'];
+            if(isset($_SESSION['FilterStatusAwalKirim'])) $awal_kirim = $_SESSION['FilterStatusAwalKirim'];
+            if(isset($_SESSION['FilterStatusAkhirKirim'])) $akhir_kirim = $_SESSION['FilterStatusAkhirKirim'];
+            $status = 'transaksi_on';
+            if (isset($_SESSION['StatusFilterTransaksi'])) $status = $_SESSION['StatusFilterTransaksi'];
+            switch($status){   
+                case 'terima_on':
+                    $tgl_condition = "WHERE [TglTerima] BETWEEN '".date_to_str($awal_terima)."'
+                        AND '".date_to_str($akhir_terima) . $end_day . "'";
+                    $order_tanggal = "ORDER BY [TglTerima] DESC";
+                    break;
+                case 'kirim_on':
+                    $tgl_condition = "WHERE [TglKirim] BETWEEN '".date_to_str($awal_kirim)."'
+                        AND '".date_to_str($akhir_kirim) . $end_day . "'";
+                    $order_tanggal = "ORDER BY [TglKirim] DESC";
+                    break;
+                default:
+                    $tgl_condition = "WHERE [TglTransaksi] BETWEEN '".date_to_str($awal_transaksi)."'
+                        AND '".date_to_str($akhir_transaksi) . $end_day . "'";
+                    $order_tanggal = "ORDER BY [TglTransaksi] DESC";
+                    break;
+            }
             // $status = isset($_SESSION['FilterStatus']) ? $_SESSION['FilterStatus'] : '';
             // switch($status) {
             //     case 'Diterima':
@@ -98,9 +126,9 @@
         $total_record += $stmt->rowCount();
 
         // Fill the table with records
-            
-        // only add the search_query when you get the idea of what to search for
-        $query = "SELECT * FROM (".$table . ' ' . $status_tanggal . $search_query.") temp" . ' ' . $order_tanggal;
+        
+        // $query = "SELECT * FROM (".$table . ' ' . $status_tanggal . $search_query.") temp" . ' ' . $order_tanggal;
+        $query = "SELECT * FROM (".$table. '' .$tgl_condition.") temp" . ' ' . $order_tanggal; 
         $stmt = $conn->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
         $stmt->execute();
         if($stmt->rowCount() > 0) {
