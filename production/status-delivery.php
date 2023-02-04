@@ -17,6 +17,9 @@
     $statusAkhirTerima = date('d-m-Y');
     $statusAwalKirim = date('d-m-Y');
     $statusAkhirKirim = date('d-m-Y');
+    $tglTerima = date('d-m-Y');
+    $tglKirim = date('d-m-Y');
+    $waktuKirim = date('H:i');
     $state = '';
     // filter noTransaksi
     if(isset($_REQUEST['filter_tgl'])){
@@ -130,6 +133,10 @@
 
     <link rel="stylesheet" type="text/css" href="assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"/>
 
+    <!-- Bootstrap Timepicker CSS -->
+    
+    <link rel="stylesheet" type="text/css" href="assets/libs/bootstrap-timepicker/bootstrap-timepicker.min.css"/>
+    
     <!-- Google Font -->
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -417,7 +424,133 @@
                   </table>
                 </div>
                 <!-- Bootstrap Modals for Edit Status Pengiriman -->
-
+                <div class="modal fade" id="masterModalEdit" tabindex="-1" role="dialog" aria-labelledby="masterModallabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Edit Status Pengiriman</h4>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true" id="masterModallabel">&times;</span>
+                        </button>
+                      </div>
+                      <form class="form-horizontal" id="form_kirim" method="post" action="javascript:editTransaksi()" role="form">
+                        <div class="modal-body pt-none pb-none">
+                          <div class="card-body pb-none">
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">No Transaksi</label>
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control" id="no_transaksi" name="NomorTransaksi" readonly="readonly">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Tgl Terima</label>
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control mydatepicker" name="tanggal_terima" id="tanggal_terima"
+                                  value="<?=$tglTerima?>">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Select Picker</label>
+                              <div class="d-flex col-sm-6">
+                                <select
+                                  class="select2 shadow-none form-select"
+                                  style="width: 100%; height: 36px"
+                                  id="select_pengiriman" name="select_pengiriman"
+                                >
+                                  <option value="Kirim Customer">Kirim ke Customer</option>
+                                  <option value="Ambil Sendiri">Ambil Sendiri</option>
+                                  <option value="Via Sales">Via Sales</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group row"> 
+                              <label class="col-sm-4 control-label col-form-label">Tgl Kirim</label>
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control mydatepicker" name="tanggal_kirim" id="tanggal_kirim"
+                                  value="<?=$tglKirim?>">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Waktu Kirim</label>
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control mytimepicker" name="waktu_kirim" id="waktu_kirim"
+                                  value="<?=$waktuKirim?>">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Jenis Pengiriman</label>
+                              <div class="d-flex col-sm-6">
+                                <select
+                                  class="select2 shadow-none form-select"
+                                  style="width: 100%; height: 36px"
+                                  id="select_pengiriman" name="select_pengiriman"
+                                >
+                                  <option value="Kirim Customer">Kirim ke Customer</option>
+                                  <option value="Ambil Sendiri">Ambil Sendiri</option>
+                                  <option value="Via Sales">Via Sales</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Wilayah</label>
+                              <div class="col-sm-6">
+                                <select
+                                    class="select2 shadow-none form-select"
+                                    id="wilayah_pengiriman" name="wilayah_pengiriman"
+                                  >
+                                  <option value="Dalam Kota">Dalam Kota</option>
+                                  <option value="Luar Kota">Luar Kota</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Nama Ekspedisi</label>
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control" id="nama_ekspedisi" name="nama_ekspedisi">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Nama Driver</label>
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control" id="nama_driver" name="nama_driver">
+                              </div>
+                              <div class="col-sm-2 d-flex">
+                                <select
+                                    id="select_driver" name="select_driver"
+                                    style="width:40px; text-align:left; padding: 0 5px;"
+                                    class="self-centered cp remove-arrow-dropdown"
+                                    onclick="javascript:checkSelectedDriver()"
+                                >
+                                  <option selected disabled value="">...</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">No. Plat</label>
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control" id="no_plat" name="no_plat">
+                              </div>
+                              <div class="col-sm-2 d-flex">
+                                <select
+                                    id="select_plat" name="select_plat"
+                                    style="width:40px; text-align:left; padding: 0 5px;"
+                                    class="self-centered cp remove-arrow-dropdown"
+                                    onclick="javascript:checkSelectedPlat()"
+                                >
+                                  <option selected disabled value="">...</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="submit" name = "btn_submit" class="btn btn-primary">Kirim</button>
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -460,17 +593,34 @@
 
     <script src="assets/extra-libs/DataTables/datatables.min.js"></script>
 
-    <!-- Datepicker JS -->
+    <!-- Bootstrap Datepicker JS -->
     <script src="assets/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+    <!-- Bootstrap Timepicker JS -->
+    <script src="assets/libs/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
 
     <script>
 
       var state = '<?php echo $state ?>';
 
+      function checkSelectedDriver() {
+        if($('#select_driver option:selected').val() != '') {
+          $('#nama_driver').val($('#select_driver').val());
+          $('#select_driver').val('');
+        }
+      } 
+      
+      function checkSelectedPlat() {
+        if($('#select_plat option:selected').val() != '') {
+          $('#no_plat').val($('#select_plat').val());
+          $('#select_plat').val('');
+        }
+      }
+
       $(document).ready(() => {
         // getPicker();
-        // getDriver();
-        // getPlat();
+        getDriver();
+        getPlat();
         // getSales();
 
         $('.loader').hide();
@@ -483,6 +633,20 @@
           autoclose: true,
 					todayHighlight: true
         });
+
+        // timepicker 
+        $(".mytimepicker").timepicker({
+          timeFormat: 'HH:mm',
+          // defaultTime: 'current',
+          minuteStep: 15,
+          maxHours: 24,
+          showInputs: true,
+          showMeridian: false,
+          icons: {
+            up: 'fas fa-angle-up',
+            down: 'fas fa-angle-down'
+          }
+        })
         
         if(state == '' || state == 'transaksi_on') {
           $('#filter_transaksi').prop('checked', true);
@@ -836,73 +1000,73 @@
         })
       }
       
-      function getDelivery(transaksi) {
-        $.ajax({
-          type: "post",
-          url: "json/getDelivery.php",
-          data: {transaksi: transaksi},
-          success: result => {
-            const res = $.parseJSON(result);
-            if(res.success == 1) {
-              $('#no_transaksi').val(res.data.transaksi);
-              $('#status_delivery').val(res.data.status);
-              $('#tgl_transaksi').val(res.data.tgltransaksi);
-              $('#nama_owner').val(res.data.nama);
-              $('#tgl_terima').val(res.data.tglterima);
-              $('#tgl_kirim').val(res.data.tglkirim);
-              $('#tgl_selesai').val(res.data.tglselesai);
-              const kirim = res.data.tglkirim;
-              const selesai = res.data.tglselesai;
-              const picker = res.data.picker;
-              const namaPicker = res.data.namaPicker;
-              SelectedDriver = res.data.driver;
-              SelectedDriverName = res.data.namaDriver;
-              SelectedPlatDriver = res.data.platDriver;
-              SelectedCustPlat = res.data.platCust;
-              SelectedCustDriver = res.data.driverCust;
-              SelectedSales = res.data.sales;
-              // check if the tglkirim value is null, prop disabled tgl selesai if null
-              if(kirim == '') {
-                $('#tgl_kirim').prop('disabled', false);
-                $('#tgl_selesai').prop('disabled', true);
-                $('#jenis_pengiriman').hide();
-              } else {
-                $('#tgl_kirim').prop('disabled', true);
-                $('#tgl_selesai').prop('disabled', false);
-                $('#jenis_pengiriman').show();
-              }
-              if(picker == null || picker == '') {
-                $('#select_picker').prop('disabled', false);
-                $("#select_picker").empty();
-                getPicker();
-              } else {
-                $('#select_picker').prop('disabled', true);
-                $('#select_picker').empty();
-                $('<option>',
-                {
-                  html: namaPicker.concat(' (' + picker + ') '),
-                  value: picker,
-                }).appendTo('#select_picker');
-              }
-              if(SelectedCustPlat != '' || SelectedCustPlat != null) {
-                $('#driver_cust').val(SelectedCustPlat);
-              }
-              if(SelectedCustDriver != '' || SelectedCustDriver != null) {
-                $('#plat_cust').val(SelectedCustDriver);
-              }
-              $("#select_driver").empty();
-              getDriver();
-              $("#select_plat").empty();
-              getPlat();
-              $("#select_sales").empty();
-              getSales();
-            }
-          },
-          error: err => {
-            console.error(err.statusText);
-          }
-        })
-      }
+      // function getDelivery(transaksi) {
+      //   $.ajax({
+      //     type: "post",
+      //     url: "json/getDelivery.php",
+      //     data: {transaksi: transaksi},
+      //     success: result => {
+      //       const res = $.parseJSON(result);
+      //       if(res.success == 1) {
+      //         $('#no_transaksi').val(res.data.transaksi);
+      //         $('#status_delivery').val(res.data.status);
+      //         $('#tgl_transaksi').val(res.data.tgltransaksi);
+      //         $('#nama_owner').val(res.data.nama);
+      //         $('#tgl_terima').val(res.data.tglterima);
+      //         $('#tgl_kirim').val(res.data.tglkirim);
+      //         $('#tgl_selesai').val(res.data.tglselesai);
+      //         const kirim = res.data.tglkirim;
+      //         const selesai = res.data.tglselesai;
+      //         const picker = res.data.picker;
+      //         const namaPicker = res.data.namaPicker;
+      //         SelectedDriver = res.data.driver;
+      //         SelectedDriverName = res.data.namaDriver;
+      //         SelectedPlatDriver = res.data.platDriver;
+      //         SelectedCustPlat = res.data.platCust;
+      //         SelectedCustDriver = res.data.driverCust;
+      //         SelectedSales = res.data.sales;
+      //         // check if the tglkirim value is null, prop disabled tgl selesai if null
+      //         if(kirim == '') {
+      //           $('#tgl_kirim').prop('disabled', false);
+      //           $('#tgl_selesai').prop('disabled', true);
+      //           $('#jenis_pengiriman').hide();
+      //         } else {
+      //           $('#tgl_kirim').prop('disabled', true);
+      //           $('#tgl_selesai').prop('disabled', false);
+      //           $('#jenis_pengiriman').show();
+      //         }
+      //         if(picker == null || picker == '') {
+      //           $('#select_picker').prop('disabled', false);
+      //           $("#select_picker").empty();
+      //           getPicker();
+      //         } else {
+      //           $('#select_picker').prop('disabled', true);
+      //           $('#select_picker').empty();
+      //           $('<option>',
+      //           {
+      //             html: namaPicker.concat(' (' + picker + ') '),
+      //             value: picker,
+      //           }).appendTo('#select_picker');
+      //         }
+      //         if(SelectedCustPlat != '' || SelectedCustPlat != null) {
+      //           $('#driver_cust').val(SelectedCustPlat);
+      //         }
+      //         if(SelectedCustDriver != '' || SelectedCustDriver != null) {
+      //           $('#plat_cust').val(SelectedCustDriver);
+      //         }
+      //         $("#select_driver").empty();
+      //         getDriver();
+      //         $("#select_plat").empty();
+      //         getPlat();
+      //         $("#select_sales").empty();
+      //         getSales();
+      //       }
+      //     },
+      //     error: err => {
+      //       console.error(err.statusText);
+      //     }
+      //   })
+      // }
 
       // } else if(picker == $('#select_picker option').val()) {
               
@@ -938,25 +1102,15 @@
           success: result => {
             const res = $.parseJSON(result);
             if (res.success == 1) {
-              if($('#select_driver').children().length == 0) {
-                if(SelectedDriver != '') {
-                  $('<option>',
-                    {
-                      html: SelectedDriverName.concat(' (' + SelectedDriver + ')'),
-                      value: SelectedDriver,
-                    }).appendTo('#select_driver');
-                }
+              if($('#select_driver').children().length == 1) {
                 for (i = 0; i < res.data.length; ++i) {
-                  if(res.id_data[i] != SelectedDriver) {
                   $('<option>',
-                    {
-                      html: (res.data[i]).concat(' (' + res.id_data[i] + ')'),
-                      value: res.id_data[i],
-                    }).appendTo('#select_driver');
-                  }
+                  {
+                    html: (res.data[i]).concat(' (' + res.id_data[i] + ')'), 
+                    value: res.data[i],
+                  }).appendTo('#select_driver');
                 }
-                
-              }
+              }   
             }
           },
           error: err => {
@@ -972,25 +1126,15 @@
           success: result => {
             const res = $.parseJSON(result);
             if (res.success == 1) {
-              if($('#select_plat').children().length == 0) {
-                if(SelectedPlatDriver != '') {
-                  $('<option>',
-                    {
-                      html: SelectedPlatDriver,
-                      value: SelectedPlatDriver,
-                    }).appendTo('#select_plat');
-                }
+              if($('#select_plat').children().length == 1) {
                 for (i = 0; i < res.data.length; ++i) {
-                  if(res.data[i] != SelectedPlatDriver) {
-                    $('<option>',
-                    {
-                      html: res.data[i],
-                      value: res.data[i],
-                    }).appendTo('#select_plat');
-                  }
+                  $('<option>',
+                  {
+                    html: res.data[i], 
+                    value: res.data[i],
+                  }).appendTo('#select_plat');
                 }
-              }
-              
+              }   
             }
           },
           error: err => {
@@ -1037,19 +1181,19 @@
         })
       }
 
-      if(!$('#kirim_cust').is(':checked')) {
-          $('#select_driver').prop('disabled', true);
-          $('#select_plat').prop('disabled', true);
-      } 
+      // if(!$('#kirim_cust').is(':checked')) {
+      //     $('#select_driver').prop('disabled', true);
+      //     $('#select_plat').prop('disabled', true);
+      // } 
 
-      if(!$('#ambil_sendiri').is(':checked')) {
-          $('#driver_cust').prop('disabled', true);
-          $('#plat_cust').prop('disabled', true);
-      } 
+      // if(!$('#ambil_sendiri').is(':checked')) {
+      //     $('#driver_cust').prop('disabled', true);
+      //     $('#plat_cust').prop('disabled', true);
+      // } 
 
-      if(!$('#via_sales').is(':checked')) {
-          $('#select_sales').prop('disabled', true);
-      }
+      // if(!$('#via_sales').is(':checked')) {
+      //     $('#select_sales').prop('disabled', true);
+      // }
 
       //  
       // if($('.form-check-input:checked[type="radio"]').checked) {

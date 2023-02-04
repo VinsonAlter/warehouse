@@ -523,14 +523,6 @@
                 }
               }   
             }
-            // if($('#select_plat').val() != '') {
-            //   $('#no_plat').val($('#select_plat').val());
-            //   $('#select_plat').val('');
-            // }
-            // if($('#select_plat input[value="0"]').is(':selected')){
-	          //   $('#no_plat').val($('#select_plat').val());
-            //   $('#select_plat').val('');
-	          // }
           },
           error: err => {
             console.error(err.statusText);

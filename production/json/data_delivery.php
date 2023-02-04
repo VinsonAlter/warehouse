@@ -150,7 +150,7 @@
                 $sales = $row['NamaSales'];
                 // comment this part because it's not needed yet
                 $aksi = '<a href="#" data-bs-toggle="modal" data-bs-target="#masterModalEdit" 
-                    onclick="getDelivery(\''.$transaksi.'\')"><i class="fa fa-edit"></i></a>';
+                    ><i class="fa fa-edit"></i></a>';
                 $data[] = array(
                     $urut,
                     $transaksi, 
