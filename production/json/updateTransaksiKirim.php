@@ -11,47 +11,53 @@
                 $noTransaksi = $_POST['NomorTransaksi'];
                 $arr = explode(' ; ', $noTransaksi);
                 $tanggal_kirim = $_POST['tanggal_kirim'];
+                $waktu_kirim = '0' . $_POST['waktu_kirim'] . ':00';
                 $tgl_kirim = date_to_str($tanggal_kirim);
-                $jam_kirim = hour_to_str(date('H:i:s'));
-                // $jam_kirim = date('H:i:s');
-                $waktu_kirim = $tgl_kirim . ' ' . $jam_kirim;
-                $jenis_pengiriman = $_POST['select_pengiriman'];
-                $wilayah_pengiriman = $_POST['wilayah_pengiriman'];
-                $ekspedisi = $_POST['nama_ekspedisi'];
-                $driver = $_POST['nama_driver'];
-                $plat = $_POST['no_plat'];
-                foreach($arr as $val){
-                    $array = explode(' , ', $val);
-                    $idTransaksi = $array[0];
-                    $Transaksi = $array[1];
-                    $status = $array[4];
-                    if($status == 1) {
-                        $update_kirim = "UPDATE [WMS].[dbo].[TB_Delivery]
-                                            SET [Status] = 2,
-                                                [TglKirim] = '$waktu_kirim',
-                                                [JenisPengiriman] = '$jenis_pengiriman',
-                                                [Wilayah] = '$wilayah_pengiriman',
-                                                [NamaEkspedisi] = '$ekspedisi',
-                                                [NamaDriver] = '$driver',
-                                                [NoPlat] = '$plat'
-                                            WHERE [NoTransaksi] = '$Transaksi' AND [IDTransaksi] = '$idTransaksi'
-                                        ";
-                        $stmt = $pdo->prepare($update_kirim, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-                        $stmt->execute();
-                        if($stmt->rowCount() > 0) {
-                            $res['success'] = 1;
-                            $res['kirim'] = $update_kirim;
-                            $res['jam'] = $jam_kirim;
-                            $res['message'] = 'Status transaksi berhasil diupdate!';
+                $jam_kirim = hour_to_str($waktu_kirim);
+                if($jam_kirim == false) {
+                    $res['success'] = 0;
+                    $res['message'] = 'Pastikan anda memasukkan format jam dan menit yang benar!';
+                } else {
+                    // $jam_kirim = date('H:i:s');
+                    $tanggal_pengiriman = $tgl_kirim . ' ' . $jam_kirim;
+                    $jenis_pengiriman = $_POST['select_pengiriman'];
+                    $wilayah_pengiriman = $_POST['wilayah_pengiriman'];
+                    $ekspedisi = $_POST['nama_ekspedisi'];
+                    $driver = $_POST['nama_driver'];
+                    $plat = $_POST['no_plat'];
+                    foreach($arr as $val){
+                        $array = explode(' , ', $val);
+                        $idTransaksi = $array[0];
+                        $Transaksi = $array[1];
+                        $status = $array[4];
+                        if($status == 1) {
+                            $update_kirim = "UPDATE [WMS].[dbo].[TB_Delivery]
+                                                SET [Status] = 2,
+                                                    [TglKirim] = '$tanggal_pengiriman',
+                                                    [JenisPengiriman] = '$jenis_pengiriman',
+                                                    [Wilayah] = '$wilayah_pengiriman',
+                                                    [NamaEkspedisi] = '$ekspedisi',
+                                                    [NamaDriver] = '$driver',
+                                                    [NoPlat] = '$plat'
+                                                WHERE [NoTransaksi] = '$Transaksi' AND [IDTransaksi] = '$idTransaksi'
+                                            ";
+                            $stmt = $pdo->prepare($update_kirim, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+                            $stmt->execute();
+                            if($stmt->rowCount() > 0) {
+                                $res['success'] = 1;
+                                $res['kirim'] = $update_kirim;
+                                
+                                $res['message'] = 'Status transaksi berhasil diupdate!';
+                            } else {
+                                $res['success'] = 0;
+                                $res['message'] = 'Status transaksi gagal diupdate, mohon periksa koneksi anda!';
+                            }
                         } else {
                             $res['success'] = 0;
-                            $res['message'] = 'Status transaksi gagal diupdate, mohon periksa koneksi anda!';
+                            $res['message'] = 'No Transaksi yang dipilih masih belum diterima!';
                         }
-                    } else {
-                        $res['success'] = 0;
-                        $res['message'] = 'No Transaksi yang dipilih masih belum diterima!';
                     }
-                }        
+                }      
             } else {
                 $res['success'] = 0;
             $res['message'] = 'Mohon pastikan semua kolom sudah diisi dengan lengkap!';
@@ -63,6 +69,8 @@
     } catch (Exception $e) {
         $res['success'] = 0;
         $res['message'] = 'ada Error';
+        $res['tanggal'] = $tanggal_pengiriman;
+        $res['jam'] = $jam_kirim;
         $res['error'] = $e->getLine();
         $res['error_2'] = $e->getMessage();
     }

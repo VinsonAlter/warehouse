@@ -96,6 +96,15 @@
         return $reform;
     }
 
+    // convert date H:i into string H:i
+    function hour_minute_to_str($date)
+    {
+        if (($date == ''))
+            return false;
+        $reform = substr($date, 0, 2) . ':' . substr($date, 3, 2);
+        return $reform;
+    }
+    
     // convert date d-m-Y H:i to string Y-m-d H:i format
     // this function is not working
     // function date_hour_minute_to_str($date)

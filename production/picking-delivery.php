@@ -13,6 +13,7 @@
     $tglTerima = date('d-m-Y');
     $tglAkhirTerima = date('d-m-Y');
     $tglKirim = date('d-m-Y');
+    $waktuKirim = date('H:i');
     $state = '';
     if(isset($_REQUEST['filter_tgl'])) {
       $state = $_REQUEST['enable_date'];
@@ -308,7 +309,8 @@
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label required">Waktu Kirim</label>
                               <div class="col-sm-6">
-                                <input type="text" class="form-control mytimepicker" name="waktu_kirim" id="waktu_kirim">
+                                <input type="text" class="form-control mytimepicker" name="waktu_kirim" id="waktu_kirim"
+                                  value="<?=$waktuKirim?>">
                               </div>
                             </div>
                             <div class="form-group row">
@@ -573,7 +575,7 @@
         // timepicker 
         $(".mytimepicker").timepicker({
           timeFormat: 'HH:mm',
-          defaultTime: 'current',
+          // defaultTime: 'current',
           minuteStep: 15,
           maxHours: 24,
           showInputs: true,
