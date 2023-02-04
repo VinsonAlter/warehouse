@@ -455,11 +455,8 @@
                                 <select
                                   class="select2 shadow-none form-select"
                                   style="width: 100%; height: 36px"
-                                  id="select_pengiriman" name="select_pengiriman"
+                                  id="select_picker" name="select_picker"
                                 >
-                                  <option value="Kirim Customer">Kirim ke Customer</option>
-                                  <option value="Ambil Sendiri">Ambil Sendiri</option>
-                                  <option value="Via Sales">Via Sales</option>
                                 </select>
                               </div>
                             </div>
@@ -618,7 +615,7 @@
       }
 
       $(document).ready(() => {
-        // getPicker();
+        getPicker();
         getDriver();
         getPlat();
         // getSales();
@@ -1000,73 +997,76 @@
         })
       }
       
-      // function getDelivery(transaksi) {
-      //   $.ajax({
-      //     type: "post",
-      //     url: "json/getDelivery.php",
-      //     data: {transaksi: transaksi},
-      //     success: result => {
-      //       const res = $.parseJSON(result);
-      //       if(res.success == 1) {
-      //         $('#no_transaksi').val(res.data.transaksi);
-      //         $('#status_delivery').val(res.data.status);
-      //         $('#tgl_transaksi').val(res.data.tgltransaksi);
-      //         $('#nama_owner').val(res.data.nama);
-      //         $('#tgl_terima').val(res.data.tglterima);
-      //         $('#tgl_kirim').val(res.data.tglkirim);
-      //         $('#tgl_selesai').val(res.data.tglselesai);
-      //         const kirim = res.data.tglkirim;
-      //         const selesai = res.data.tglselesai;
-      //         const picker = res.data.picker;
-      //         const namaPicker = res.data.namaPicker;
-      //         SelectedDriver = res.data.driver;
-      //         SelectedDriverName = res.data.namaDriver;
-      //         SelectedPlatDriver = res.data.platDriver;
-      //         SelectedCustPlat = res.data.platCust;
-      //         SelectedCustDriver = res.data.driverCust;
-      //         SelectedSales = res.data.sales;
-      //         // check if the tglkirim value is null, prop disabled tgl selesai if null
-      //         if(kirim == '') {
-      //           $('#tgl_kirim').prop('disabled', false);
-      //           $('#tgl_selesai').prop('disabled', true);
-      //           $('#jenis_pengiriman').hide();
-      //         } else {
-      //           $('#tgl_kirim').prop('disabled', true);
-      //           $('#tgl_selesai').prop('disabled', false);
-      //           $('#jenis_pengiriman').show();
-      //         }
-      //         if(picker == null || picker == '') {
-      //           $('#select_picker').prop('disabled', false);
-      //           $("#select_picker").empty();
-      //           getPicker();
-      //         } else {
-      //           $('#select_picker').prop('disabled', true);
-      //           $('#select_picker').empty();
-      //           $('<option>',
-      //           {
-      //             html: namaPicker.concat(' (' + picker + ') '),
-      //             value: picker,
-      //           }).appendTo('#select_picker');
-      //         }
-      //         if(SelectedCustPlat != '' || SelectedCustPlat != null) {
-      //           $('#driver_cust').val(SelectedCustPlat);
-      //         }
-      //         if(SelectedCustDriver != '' || SelectedCustDriver != null) {
-      //           $('#plat_cust').val(SelectedCustDriver);
-      //         }
-      //         $("#select_driver").empty();
-      //         getDriver();
-      //         $("#select_plat").empty();
-      //         getPlat();
-      //         $("#select_sales").empty();
-      //         getSales();
-      //       }
-      //     },
-      //     error: err => {
-      //       console.error(err.statusText);
-      //     }
-      //   })
-      // }
+      function getDelivery(transaksi, id) {
+        $.ajax({
+          type: "post",
+          url: "json/getDelivery.php",
+          data: {transaksi: transaksi, id: id},
+          success: result => {
+            const res = $.parseJSON(result);
+            if(res.success == 1) {
+              $('#no_transaksi').val(res.data.transaksi);
+              $('#nama_ekspedisi').val(res.data.ekspedisi);
+              $('#nama_driver').val(res.data.namaDriver);
+              $('#no_plat').val(res.data.platDriver);
+              // $('#status_delivery').val(res.data.status);
+              // $('#tgl_transaksi').val(res.data.tgltransaksi);
+              // $('#nama_owner').val(res.data.nama);
+              // $('#tgl_terima').val(res.data.tglterima);
+              // $('#tgl_kirim').val(res.data.tglkirim);
+              // $('#tgl_selesai').val(res.data.tglselesai);
+              // const kirim = res.data.tglkirim;
+              // const selesai = res.data.tglselesai;
+              // const picker = res.data.picker;
+              // const namaPicker = res.data.namaPicker;
+              // SelectedDriver = res.data.driver;
+              // SelectedDriverName = res.data.namaDriver;
+              // SelectedPlatDriver = res.data.platDriver;
+              // SelectedCustPlat = res.data.platCust;
+              // SelectedCustDriver = res.data.driverCust;
+              // SelectedSales = res.data.sales;
+              // // check if the tglkirim value is null, prop disabled tgl selesai if null
+              // if(kirim == '') {
+              //   $('#tgl_kirim').prop('disabled', false);
+              //   $('#tgl_selesai').prop('disabled', true);
+              //   $('#jenis_pengiriman').hide();
+              // } else {
+              //   $('#tgl_kirim').prop('disabled', true);
+              //   $('#tgl_selesai').prop('disabled', false);
+              //   $('#jenis_pengiriman').show();
+              // }
+              // if(picker == null || picker == '') {
+              //   $('#select_picker').prop('disabled', false);
+              //   $("#select_picker").empty();
+              //   getPicker();
+              // } else {
+              //   $('#select_picker').prop('disabled', true);
+              //   $('#select_picker').empty();
+              //   $('<option>',
+              //   {
+              //     html: namaPicker.concat(' (' + picker + ') '),
+              //     value: picker,
+              //   }).appendTo('#select_picker');
+              // }
+              // if(SelectedCustPlat != '' || SelectedCustPlat != null) {
+              //   $('#driver_cust').val(SelectedCustPlat);
+              // }
+              // if(SelectedCustDriver != '' || SelectedCustDriver != null) {
+              //   $('#plat_cust').val(SelectedCustDriver);
+              // }
+              // $("#select_driver").empty();
+              // getDriver();
+              // $("#select_plat").empty();
+              // getPlat();
+              // $("#select_sales").empty();
+              // getSales();
+            }
+          },
+          error: err => {
+            console.error(err.statusText);
+          }
+        })
+      }
 
       // } else if(picker == $('#select_picker option').val()) {
               

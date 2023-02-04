@@ -103,7 +103,8 @@
             
             // get the TotalRecords
 
-            $table = "SELECT [NoTransaksi]
+            $table = "SELECT [IDTransaksi]
+                            ,[NoTransaksi]
                             ,[Status]
                             ,[Customer]
                             ,[NamaDriver]
@@ -134,6 +135,7 @@
         if($stmt->rowCount() > 0) {
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $urut++;
+                $id = $row['IDTransaksi'];
                 $transaksi = $row['NoTransaksi'];
                 $nama = $row['Customer'];
                 $status = $row['Status'];
@@ -150,7 +152,7 @@
                 $sales = $row['NamaSales'];
                 // comment this part because it's not needed yet
                 $aksi = '<a href="#" data-bs-toggle="modal" data-bs-target="#masterModalEdit" 
-                    ><i class="fa fa-edit"></i></a>';
+                    onclick="getDelivery(\''.$transaksi.'\', \''.$id.'\')"><i class="fa fa-edit"></i></a>';
                 $data[] = array(
                     $urut,
                     $transaksi, 
