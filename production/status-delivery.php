@@ -17,10 +17,10 @@
     $statusAkhirTerima = date('d-m-Y');
     $statusAwalKirim = date('d-m-Y');
     $statusAkhirKirim = date('d-m-Y');
-    $tglTerima = date('d-m-Y');
-    $tglKirim = date('d-m-Y');
-    $waktuKirim = date('H:i');
-    $waktuTerima = date('H:i');
+    // $tglTerima = date('d-m-Y');
+    // $tglKirim = date('d-m-Y');
+    // $waktuKirim = date('H:i');
+    // $waktuTerima = date('H:i');
     $state = '';
     // filter noTransaksi
     if(isset($_REQUEST['filter_tgl'])){
@@ -462,15 +462,13 @@
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Tgl Terima</label>
                               <div class="col-sm-6">
-                                <input type="text" class="form-control mydatepicker" name="tanggal_terima" id="tanggal_terima"
-                                  value="<?=$tglTerima?>">
+                                <input type="text" class="form-control mydatepicker" name="tanggal_terima" id="tanggal_terima">
                               </div>
                             </div>
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Waktu Terima</label>
                               <div class="col-sm-6">
-                                <input type="text" class="form-control mytimepicker" name="waktu_terima" id="waktu_kirim"
-                                  value="<?=$waktuTerima?>">
+                                <input type="text" class="form-control mytimepicker" name="waktu_terima" id="waktu_terima">
                               </div>
                             </div>
                             <div class="form-group row">
@@ -487,15 +485,13 @@
                             <div class="form-group row"> 
                               <label class="col-sm-4 control-label col-form-label">Tgl Kirim</label>
                               <div class="col-sm-6">
-                                <input type="text" class="form-control mydatepicker" name="tanggal_kirim" id="tanggal_kirim"
-                                  value="<?=$tglKirim?>">
+                                <input type="text" class="form-control mydatepicker" name="tanggal_kirim" id="tanggal_kirim">
                               </div>
                             </div>
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Waktu Kirim</label>
                               <div class="col-sm-6">
-                                <input type="text" class="form-control mytimepicker" name="waktu_kirim" id="waktu_kirim"
-                                  value="<?=$waktuKirim?>">
+                                <input type="text" class="form-control mytimepicker" name="waktu_kirim" id="waktu_kirim">
                               </div>
                             </div>
                             <div class="form-group row">
@@ -1035,6 +1031,10 @@
               $('#no_plat').val(res.data.platDriver);
               const status = res.data.status;
               $('#select_status option[value="' + status + '"').prop('selected', true);
+              $('#tanggal_terima').val(res.data.tglTerima);
+              $('#waktu_terima').val(res.data.waktuTerima);
+              $('#tanggal_kirim').val(res.data.tglKirim);
+              $('#waktu_kirim').val(res.data.waktuKirim);
               const picker = res.data.picker;
               $('#select_picker option:contains("'+picker+'")').prop('selected', true);
               const wilayah = res.data.wilayah;
