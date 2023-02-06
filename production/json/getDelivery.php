@@ -57,7 +57,7 @@
 
                 $data = array(
                     'transaksi' => $row['NoTransaksi'],
-                    // 'status' => $row['Status'],
+                    'status' => $row['Status'],
                     'picker' => $row['NamaPicker'],
                     // 'customer' => $row['Customer'],
                     // 'namaPicker' => $row['NamaPicker'],
@@ -65,6 +65,7 @@
                     // 'tglterima' => date('d-m-Y', strtotime($row['TglTerima'])),
                     // 'tglkirim' => $row['TglKirim'],
                     // 'tglselesai' => $row['TglSelesai'],
+                    'jenisPengiriman' => $row['JenisPengiriman'],
                     'wilayah' => $row['Wilayah'],
                     'ekspedisi' => $row['NamaEkspedisi'],
                     'namaDriver' => $row['NamaDriver'],

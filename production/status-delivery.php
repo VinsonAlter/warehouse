@@ -20,6 +20,7 @@
     $tglTerima = date('d-m-Y');
     $tglKirim = date('d-m-Y');
     $waktuKirim = date('H:i');
+    $waktuTerima = date('H:i');
     $state = '';
     // filter noTransaksi
     if(isset($_REQUEST['filter_tgl'])){
@@ -445,10 +446,31 @@
                               </div>
                             </div>
                             <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Status Transaksi</label>
+                              <div class="d-flex col-sm-6">
+                                <select
+                                  class="select2 shadow-none form-select"
+                                  style="width: 100%; height: 36px"
+                                  id="select_status" name="select_status"
+                                >
+                                  <option value="1">Diterima</option>
+                                  <option value="2">Dikirim</option>
+                                  <option value="3">Selesai</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Tgl Terima</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control mydatepicker" name="tanggal_terima" id="tanggal_terima"
                                   value="<?=$tglTerima?>">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Waktu Terima</label>
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control mytimepicker" name="waktu_terima" id="waktu_kirim"
+                                  value="<?=$waktuTerima?>">
                               </div>
                             </div>
                             <div class="form-group row">
@@ -1011,15 +1033,17 @@
               $('#nama_ekspedisi').val(res.data.ekspedisi);
               $('#nama_driver').val(res.data.namaDriver);
               $('#no_plat').val(res.data.platDriver);
+              const status = res.data.status;
+              $('#select_status option[value="' + status + '"').prop('selected', true);
               const picker = res.data.picker;
-              $('#select_picker option[value="' + picker + '"]').prop('selected', true);
+              $('#select_picker option:contains("'+picker+'")').prop('selected', true);
               const wilayah = res.data.wilayah;
               if(wilayah != '') {
                 $('#wilayah_pengiriman option[value="' + wilayah + '"]').prop('selected', true);
               }
-              const ekspedisi = res.data.ekspedisi;
-              if(ekspedisi != '') {
-                $('#select_pengiriman option[value="' + ekspedisi + '"]').prop('selected', true);
+              const pengiriman = res.data.jenisPengiriman;
+              if(pengiriman != '') {
+                $('#select_pengiriman option[value="' + pengiriman + '"]').prop('selected', true);
               }
               // $('#status_delivery').val(res.data.status);
               // $('#tgl_transaksi').val(res.data.tgltransaksi);
