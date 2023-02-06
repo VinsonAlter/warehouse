@@ -58,8 +58,8 @@
                 $data = array(
                     'transaksi' => $row['NoTransaksi'],
                     // 'status' => $row['Status'],
-                    // 'picker' => $row['NamaPicker'],
-                    // 'nama' => $row['Nama'],
+                    'picker' => $row['NamaPicker'],
+                    // 'customer' => $row['Customer'],
                     // 'namaPicker' => $row['NamaPicker'],
                     // 'tgltransaksi' => date('d-m-Y', strtotime($row['TglTransaksi'])),
                     // 'tglterima' => date('d-m-Y', strtotime($row['TglTerima'])),

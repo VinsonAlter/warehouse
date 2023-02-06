@@ -11,15 +11,17 @@
             if($search) {
                 $search_query = "AND NoTransaksi LIKE '%$search%' 
                                     OR Status LIKE '%$search%'
-                                    OR Nama LIKE '%$search%'
-                                    OR NamaDriver LIKE '%$search%'
                                     OR NamaPicker LIKE '%$search%'
+                                    OR Customer LIKE '%$search%'
                                     OR TglTransaksi LIKE '%$search%'
                                     OR TglTerima LIKE '%$search%'
                                     OR TglKirim LIKE '%$search%'
+                                    OR TglSelesai LIKE '%$search%'
+                                    OR JenisPengiriman LIKE '%$search%'
+                                    OR Wilayah LIKE '%$search%'
+                                    OR NamaEkspedisi LIKE '%$search%'
+                                    OR NamaDriver LIKE '%$search%'
                                     OR NoPlat LIKE '%$search%'
-                                    OR PlatCust LIKE '%$search%'
-                                    OR DriverCust LIKE '%$search%'
                                     OR NamaSales LIKE '%$search%'
                                     OR Cabang LIKE '%$search%'";
             }
@@ -143,6 +145,7 @@
                 $tglTerima = $row['TglTerima'];
                 $tglKirim = $row['TglKirim'];
                 $tglSelesai = $row['TglSelesai'];
+                $jenis = $row['JenisPengiriman'];
                 $wilayah = $row['Wilayah'];
                 $ekspedisi = $row['NamaEkspedisi'];
                 $namaPicker = $row['NamaPicker'];
@@ -163,6 +166,7 @@
                     $namaPicker,
                     $tglKirim, 
                     $tglSelesai,
+                    $jenis,
                     $wilayah,
                     $ekspedisi,
                     $namaDriver,

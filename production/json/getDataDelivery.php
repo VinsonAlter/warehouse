@@ -52,7 +52,7 @@
                     LEFT JOIN [WMS].[dbo].[TB_Delivery] D 
                     ON P.NoTransaksi = D.NoTransaksi AND P.ID = D.IDTransaksi " . $tgl_condition . " AND
                     P.[Segmen] IN ($user_segmen) AND
-                    P.[Status] = 1 AND
+                    P.[Status] = 1 AND P.[NoTransaksi] <> 'J' AND 
                     isnull(P.[NoTransaksiOriginal], '') = ''
                     ";
                     $filters = implode("UNION ALL", $filter);

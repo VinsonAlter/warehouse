@@ -395,6 +395,7 @@
                         <th>Nama Picker</th>
                         <th>Tgl Kirim</th>
                         <th>Tgl Selesai</th>
+                        <th>Jenis Pengiriman</th>
                         <th>Wilayah</th>
                         <th>Nama Ekspedisi</th>
                         <th>Nama Driver</th>
@@ -405,6 +406,7 @@
                     </thead>
                     <tbody>
                       <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -698,7 +700,7 @@
             // { width: '10%', targets: [3, 5]},
             // { width: '10%', targets: [4, 5, 6]},
             { width: '20%', targets: 2},
-            { className: 'dt-center', targets: [0, 1, 3, 4, 5, 6, 7, 14]},
+            { className: 'dt-center', targets: [0, 1, 3, 4, 5, 6, 7, 15]},
             { targets: 3,
               render: function(data){
                 if(data == 1)
@@ -1009,12 +1011,15 @@
               $('#nama_ekspedisi').val(res.data.ekspedisi);
               $('#nama_driver').val(res.data.namaDriver);
               $('#no_plat').val(res.data.platDriver);
+              const picker = res.data.picker;
+              $('#select_picker option[value="' + picker + '"]').prop('selected', true);
               const wilayah = res.data.wilayah;
               if(wilayah != '') {
-                $('<option>',
-                {
-                  value: wilayah,
-                }).appendTo('#wilayah_pengiriman');
+                $('#wilayah_pengiriman option[value="' + wilayah + '"]').prop('selected', true);
+              }
+              const ekspedisi = res.data.ekspedisi;
+              if(ekspedisi != '') {
+                $('#select_pengiriman option[value="' + ekspedisi + '"]').prop('selected', true);
               }
               // $('#status_delivery').val(res.data.status);
               // $('#tgl_transaksi').val(res.data.tgltransaksi);
