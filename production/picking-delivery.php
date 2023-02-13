@@ -119,6 +119,10 @@
         background-color: #7aff8c !important;
       }
 
+      .bg-selesai {
+        background-color: #989898 !important;
+      }
+
       .highlight {
         background-color: yellowgreen !important;
       }
@@ -689,7 +693,10 @@
                   return '<b>Diterima</b>';
                 } else if(data == 2) {
                   return '<b>Dikirim</b>';
-                } else {
+                } else if(data == 3) {
+                  return '<b>Selesai</b>';
+                }
+                else {
                   return '<b>Belum Diterima</b>';
                 }
               }
@@ -713,6 +720,8 @@
               $('td:eq(4)', row).addClass("bg-diterima");
             } else if(cellValue == 2) {
               $('td:eq(4)', row).addClass("bg-dikirim");
+            } else if(cellValue == 3) {
+              $('td:eq(4)', row).addClass("bg-selesai");
             } else {
               $('td:eq(4)', row).addClass("bg-belum-diterima");
             }
@@ -761,12 +770,12 @@
           })
         })
 
-        $('#confirm_selesai').click((e) => {
+        $('#confirm_kirim').click((e) => {
           e.preventDefault();
           const CheckValues = checkValues.join(" ; ");
           $.ajax({
             type: "post",
-            url: 'json/confirmSelesai.php',
+            url: 'json/confirmTransaksiSelesai.php',
             data: {batch: CheckValues},
             success: result => {
               checkValues = [];

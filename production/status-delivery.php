@@ -189,7 +189,7 @@
       }
 
       .bg-selesai {
-        background-color: #7aff8c !important;
+        background-color: #989898 !important;
       }
 
       .bg-choose {
