@@ -26,13 +26,27 @@
         $_SESSION['FilterAkhirTransaksi'] = $_POST['tglAkhirTransaksi'];
         $_SESSION['FilterTglTerima'] = date('d-m-Y');
         $_SESSION['FilterAkhirTerima'] = date('d-m-Y');
-      } else  {
+        $_SESSION['FilterTglKirim'] = date('d-m-Y');
+        $_SESSION['FilterAkhirKirim'] = date('d-m-Y');
+      } else 
+      if($_REQUEST['enable_date'] == 'terima_on') {
         $status = 'terima_on';
         $_SESSION['StatusFilter'] = $status;
         $_SESSION['FilterTglTerima'] = $_POST['tglTerima'];
         $_SESSION['FilterAkhirTerima'] = $_POST['tglAkhirTerima'];
         $_SESSION['FilterTglTransaksi'] = date('d-m-Y');
         $_SESSION['FilterAkhirTransaksi'] = date('d-m-Y');
+        $_SESSION['FilterTglKirim'] = date('d-m-Y');
+        $_SESSION['FilterAkhirKirim'] = date('d-m-Y');
+      } else {
+        $status = 'kirim_on';
+        $_SESSION['StatusFilter'] = $status;
+        $_SESSION['FilterTglKirim'] = $_POST['tglKirim'];
+        $_SESSION['FilterAkhirKirim'] = $_POST['tglAkhirKirim'];
+        $_SESSION['FilterTglTransaksi'] = date('d-m-Y');
+        $_SESSION['FilterAkhirTransaksi'] = date('d-m-Y');
+        $_SESSION['FilterTglTerima'] = date('d-m-Y');
+        $_SESSION['FilterAkhirTerima'] = date('d-m-Y');
       }
     }
 
@@ -43,6 +57,10 @@
     if(isset($_SESSION['FilterTglTerima'])) $tglTerima = $_SESSION['FilterTglTerima'];
 
     if(isset($_SESSION['FilterAkhirTerima'])) $tglAkhirTerima = $_SESSION['FilterAkhirTerima'];
+
+    if(isset($_SESSION['FilterTglKirim'])) $tglFilterKirim = $_SESSION['FilterTglKirim'];
+
+    if(isset($_SESSION['FilterAkhirKirim'])) $tglFilterAkhirKirim = $_SESSION['FilterAkhirKirim'];
 
 ?>
 
@@ -604,8 +622,10 @@
           $('#filter_transaksi').prop('checked', true);
           $('#tgl_transaksi').prop('disabled', false);
           $('#akhir_transaksi').prop('disabled', false);
-        } else {
+        } else if(state == 'terima_on') {
           $('#filter_terima').prop('checked', true);
+        } else {
+          $('#filter_kirim').prop('checked', true);
         }
 
         if(!$('#filter_transaksi').is(':checked')) {

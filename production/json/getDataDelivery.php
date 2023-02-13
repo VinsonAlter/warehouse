@@ -30,20 +30,41 @@
             $akhir_transaksi = date('d-m-Y');
             $tgl_terima = date('d-m-Y');
             $akhir_terima = date('d-m-Y');
+            $tgl_kirim = date('d-m-Y');
+            $akhir_kirim = date('d-m-Y');
             $end_day = ' 23:59:59';
             if (isset($_SESSION['FilterTglTransaksi'])) $tgl_transaksi = $_SESSION['FilterTglTransaksi'];
             if (isset($_SESSION['FilterAkhirTransaksi'])) $akhir_transaksi = $_SESSION['FilterAkhirTransaksi'];
             if (isset($_SESSION['FilterTglTerima'])) $tgl_terima = $_SESSION['FilterTglTerima'];
             if (isset($_SESSION['FilterAkhirTerima'])) $akhir_terima = $_SESSION['FilterAkhirTerima'];
+            if (isset($_SESSION['FilterTglKirim'])) $tgl_kirim = $_SESSION['FilterTglKirim'];
+            if (isset($_SESSION['FilterAkhirKirim'])) $akhir_kirim = $_SESSION['FilterAkhirKirim'];
             $status = 'transaksi_on';
             if (isset($_SESSION['StatusFilter'])) $status = $_SESSION['StatusFilter'];
-            if($status == 'transaksi_on') {
-                $tgl_condition = " WHERE P.[Tgl] BETWEEN '".date_to_str($tgl_transaksi)."' 
-                                    AND '".date_to_str($akhir_transaksi). $end_day ."'";
-            } else {
-                $tgl_condition = " WHERE D.[TglTerima] BETWEEN '".date_to_str($tgl_terima)."' AND 
+            switch($status) {
+                case 'terima_on':
+                    $tgl_condition = " WHERE D.[TglTerima] BETWEEN '".date_to_str($tgl_terima)."' AND 
                                     '".date_to_str($akhir_terima). $end_day ."'";
+                    break;
+                case 'kirim_on':
+                    $tgl_condition = " WHERE D.[TglKirim] BETWEEN '".date_to_str($tgl_kirim)."' AND 
+                                    '".date_to_str($akhir_kirim). $end_day ."'";
+                    break;
+                default:
+                    $tgl_condition = " WHERE P.[Tgl] BETWEEN '".date_to_str($tgl_transaksi)."' 
+                                        AND '".date_to_str($akhir_transaksi). $end_day ."'";
+                    break;
             }
+            // if($status == 'transaksi_on') {
+            //     $tgl_condition = " WHERE P.[Tgl] BETWEEN '".date_to_str($tgl_transaksi)."' 
+            //                         AND '".date_to_str($akhir_transaksi). $end_day ."'";
+            // } else if($status == 'terima_on') {
+            //     $tgl_condition = " WHERE D.[TglTerima] BETWEEN '".date_to_str($tgl_terima)."' AND 
+            //                         '".date_to_str($akhir_terima). $end_day ."'";
+            // } else {
+            //     $tgl_condition = " WHERE D.[TglTerima] BETWEEN '".date_to_str($tgl_kirim)."' AND 
+            //                         '".date_to_str($akhir_kirim). $end_day ."'";
+            // }
             foreach($user_data as $key => $value) {
                 // foreach($sales_data as $key_2 => $value_2) {
                     $filter[] = "
@@ -165,7 +186,7 @@
                 'recordsTotal' => $total_record,
                 'recordsFiltered' => $urut,
                 'data' => $data,
-                'query' => $query
+                'query' => $query,
             );
 
         }
