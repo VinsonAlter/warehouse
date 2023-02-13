@@ -30,6 +30,10 @@
     margin-right: 16px;
 }
 
+.mr-32 {
+    margin-right: 32px;
+}
+
 .mr-half {
     margin-right: 0.5em;
 }

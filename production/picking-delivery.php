@@ -14,6 +14,8 @@
     $tglAkhirTerima = date('d-m-Y');
     $tglKirim = date('d-m-Y');
     $waktuKirim = date('H:i');
+    $tglFilterKirim = date('d-m-Y');
+    $tglFilterAkhirKirim = date('d-m-Y');
     $state = '';
     if(isset($_REQUEST['filter_tgl'])) {
       $state = $_REQUEST['enable_date'];
@@ -234,7 +236,7 @@
                               Filter
                             </button>
                           </div>
-                          <div class="d-sm-inline-block d-md-flex">
+                          <div class="d-sm-inline-block d-md-flex mb-3">
                             <label class="mb-3 mb-md-0 mr-16em centered d-md-flex">Filter Tgl Terima</label>
                             <input type="radio" class="cp mr-8" id="filter_terima" name="enable_date" value="terima_on" onclick="enable_terima()">
                             <input type="text" class="col-md-2 col-4 mydatepicker"
@@ -246,6 +248,15 @@
                               type="submit" name="filter_tgl_terima" id="btn_terima">
                               Filter
                             </button> -->
+                          </div>
+                          <div class="d-sm-inline-block d-md-flex">
+                            <label class="mb-3 mb-md-0 mr-32 centered d-md-flex">Filter Tgl Kirim</label>
+                            <input type="radio" class="cp mr-8" id="filter_kirim" name="enable_date" value="kirim_on" onclick="enable_kirim()">
+                            <input type="text" class="col-md-2 col-4 mydatepicker"
+                              name="tglKirim"id="tgl_kirim" value="<?=$tglFilterKirim?>" autocomplete="off">
+                            <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
+                            <input type="mtext" class="col-md-2 col-4 mydatepicker"
+                              name="tglAkhirKirim" id="akhir_kirim" value="<?=$tglFilterAkhirKirim?>" autocomplete="off">
                           </div>
                         </div>
                       </div>
@@ -613,6 +624,14 @@
             $('#akhir_terima').prop('disabled', false);
         }
 
+        if(!$('#filter_kirim').is(':checked')) {
+            $('#tgl_kirim').prop('disabled', true);
+            $('#akhir_kirim').prop('disabled', true);
+          } else {
+            $('#tgl_kirim').prop('disabled', false);
+            $('#akhir_kirim').prop('disabled', false);
+        }
+
         // fill datatables 
         var tablePicking = $('#table_picking').DataTable({
           "processing": true,
@@ -787,7 +806,9 @@
         $('#tgl_transaksi').prop('disabled', false);
         $('#akhir_transaksi').prop('disabled', false);
         $('#tgl_terima').prop('disabled', true);
-        $('#akhir_terima').prop('disabled', true);     
+        $('#akhir_terima').prop('disabled', true);
+        $('#tgl_kirim').prop('disabled', true);
+        $('#akhir_kirim').prop('disabled', true);     
       }
 
       function enable_terima() {
@@ -795,8 +816,18 @@
         $('#akhir_transaksi').prop('disabled', true);
         $('#tgl_terima').prop('disabled', false);
         $('#akhir_terima').prop('disabled', false);
+        $('#tgl_kirim').prop('disabled', true);
+        $('#akhir_kirim').prop('disabled', true);
       }
 
+      function enable_kirim() {
+        $('#tgl_transaksi').prop('disabled', true);
+        $('#akhir_transaksi').prop('disabled', true);
+        $('#tgl_terima').prop('disabled', true);
+        $('#akhir_terima').prop('disabled', true);
+        $('#tgl_kirim').prop('disabled', false);
+        $('#akhir_kirim').prop('disabled', false);
+      }
 
     </script>
   </body>
