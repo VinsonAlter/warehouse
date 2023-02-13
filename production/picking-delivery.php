@@ -226,8 +226,10 @@
                 </select>
                 <button class="btn btn-cyan mr-12" type="button" id="update_pick" name="update_terima"
                   style="width:180px;height:36px;">Update Picking</button>
-                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#masterModalKirim" type="button" id="update_kirim" name="update_kirim"
+                <button class="btn btn-warning mr-12" data-bs-toggle="modal" data-bs-target="#masterModalKirim" type="button" id="update_kirim" name="update_kirim"
                   style="width:180px;height:36px;">Update Kirim</button>
+                <button class="btn btn-secondary" type="button" id="confirm_selesai" name="confirm_selesai"
+                  style="width:180px;height:36px;">Confirm Selesai</button>
               </div>
             </div>
           </div>
@@ -734,7 +736,6 @@
           // checkValues.push($(this).val());
           // $(this).prop('checked', false);
           // })
-            
           const picker = $('#select_picker').val();
           // alert(Picker);
           // alert(checkValues);
@@ -754,6 +755,27 @@
                 // $('#checkbox_val').prop('checked', false);
               } alert(res.message);
             } ,
+            error: err => {
+              console.error(err.statusText);
+            }
+          })
+        })
+
+        $('#confirm_selesai').click((e) => {
+          e.preventDefault();
+          const CheckValues = checkValues.join(" ; ");
+          $.ajax({
+            type: "post",
+            url: 'json/confirmSelesai.php',
+            data: {batch: CheckValues},
+            success: result => {
+              checkValues = [];
+              const res = $.parseJSON(result);
+              if(res.success == 1) {
+                e.preventDefault();
+                $('#table_picking').DataTable().ajax.reload();
+              } alert(res.message);
+            },
             error: err => {
               console.error(err.statusText);
             }

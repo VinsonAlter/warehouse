@@ -70,6 +70,7 @@
             $res['success'] = 0;
             $res['message'] = 'Mohon pastikan Anda sudah checklist nomor Transaksi yang hendak dikirim!';
         }
+        $pdo = null;
     } catch (Exception $e) {
         $res['success'] = 0;
         $res['message'] = 'ada Error';
