@@ -12,8 +12,8 @@
     $tglAkhirTransaksi = date('d-m-Y');
     $tglTerima = date('d-m-Y');
     $tglAkhirTerima = date('d-m-Y');
-    $tglKirim = date('d-m-Y');
-    $waktuKirim = date('H:i');
+    // $tglKirim = date('d-m-Y');
+    $waktuKirim = date('d-m-Y H:i');
     $tglFilterKirim = date('d-m-Y');
     $tglFilterAkhirKirim = date('d-m-Y');
     $state = '';
@@ -95,6 +95,8 @@
     <link rel="stylesheet" type="text/css" href="assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"/>
     <!-- Bootstrap Timepicker CSS -->
     <link rel="stylesheet" type="text/css" href="assets/libs/bootstrap-timepicker/bootstrap-timepicker.min.css"/>
+    <!-- Bootstrap 4 Datetimepicker CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/libs/bootstrap4-datetimepicker/bootstrap-datetimepicker.min.css"/>
     <!-- Loading CSS -->
     <link href="css/loading.css" rel="stylesheet"/>
     <!-- Google Font -->
@@ -334,25 +336,44 @@
                                 <input type="text" class="form-control" id="no_transaksi" name="NomorTransaksi" readonly="readonly">
                               </div>
                             </div>
-                            <div class="form-group row"> 
+                            <!-- <div class="form-group row"> 
                               <label class="col-sm-4 control-label col-form-label required">Tgl Kirim</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control mydatepicker" name="tanggal_kirim" id="tanggal_kirim"
                                   value="<?=$tglKirim?>">
                               </div>
-                            </div>
+                            </div> -->
                             <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label required">Waktu Kirim</label>
+                              <div class="col-sm-6">
+                                <div class="input-group date datetimepicker">
+                                  <input class="form-control" type="text" value="<?=$waktuKirim?>" name="waktu_kirim">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text input-group-addon" style="padding:0.6rem 0.75rem;">
+                                      <span class="fa fa-calendar"></span>
+                                    </span>
+                                  </div>
+                                </div>
+                                <!-- <div class='input-group-append date' id='datetimepicker'>
+                                  <input type='text' class="form-control" />
+                                  <span class="basic-addon2">
+                                    <span class="fa fa-calendar"></span>
+                                  </span>
+                                </div> -->
+                              </div>
+                            </div>
+                            <!-- <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label required">Waktu Kirim</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control mytimepicker" name="waktu_kirim" id="waktu_kirim"
                                   value="<?=$waktuKirim?>">
                               </div>
-                            </div>
+                            </div> -->
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label required">Jenis Pengiriman</label>
                               <div class="d-flex col-sm-6">
                                 <select
-                                  class="select2 shadow-none form-select"
+                                  class="cp select2 shadow-none form-select"
                                   style="width: 100%; height: 36px"
                                   id="select_pengiriman" name="select_pengiriman"
                                 >
@@ -366,7 +387,7 @@
                               <label class="col-sm-4 control-label col-form-label required">Wilayah</label>
                               <div class="col-sm-6">
                                 <select
-                                    class="select2 shadow-none form-select"
+                                    class="cp select2 shadow-none form-select"
                                     id="wilayah_pengiriman" name="wilayah_pengiriman"
                                   >
                                   <option value="Dalam Kota">Dalam Kota</option>
@@ -449,7 +470,10 @@
 
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
-
+    
+    <!--Moment JavaScript -->
+    <script src="js/moment.js"></script>
+    
     <!-- this page js -->
     <script src="assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
 
@@ -462,6 +486,9 @@
 
     <!-- Bootstrap Timepicker JS -->
     <script src="assets/libs/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+    
+    <!-- Bootstrap 4 Datetimepicker JS -->
+    <script src="assets/libs/bootstrap4-datetimepicker/bootstrap-datetimepicker.js"></script>  
 
     <script>
 
@@ -610,6 +637,22 @@
           icons: {
             up: 'fas fa-angle-up',
             down: 'fas fa-angle-down'
+          }
+        })
+
+        // bootstrap4 datetimepicker
+        $(".datetimepicker").datetimepicker({
+          format: 'DD-MM-YYYY HH:mm',
+          icons: {
+            time: 'fas fa-clock',
+            date: 'fas fa-calendar',
+            up: 'fas fa-chevron-up',
+            down: 'fas fa-chevron-down',
+            previous: 'fas fa-chevron-left',
+            next: 'fas fa-chevron-right',
+            today: 'fas fa-check',
+            clear: 'fas fa-trash',
+            close: 'fas fa-times'
           }
         })
 

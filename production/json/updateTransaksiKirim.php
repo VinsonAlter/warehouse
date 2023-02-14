@@ -5,25 +5,25 @@
     $res = [];
     try {
         if($_POST['NomorTransaksi'] != '') {
-            if(isset($_POST['tanggal_kirim']) && isset($_POST['select_pengiriman'])
+            if(isset($_POST['waktu_kirim']) && isset($_POST['select_pengiriman'])
                 && isset($_POST['wilayah_pengiriman']) && isset($_POST['nama_ekspedisi'])
                 && isset($_POST['nama_driver']) && isset($_POST['no_plat'])) {
                 $noTransaksi = $_POST['NomorTransaksi'];
                 $arr = explode(' ; ', $noTransaksi);
-                $tanggal_kirim = $_POST['tanggal_kirim'];
-                if(strlen($_POST['waktu_kirim']) < 5) {
-                    $waktu_kirim = '0' . $_POST['waktu_kirim'] . ':00';
-                } else {
-                    $waktu_kirim = $_POST['waktu_kirim'] . ':00';
-                }
-                $tgl_kirim = date_to_str($tanggal_kirim);
-                $jam_kirim = hour_to_str($waktu_kirim);
-                if($jam_kirim == false) {
+                $tanggal_kirim = $_POST['waktu_kirim'] . ':00';
+                // if(strlen($_POST['waktu_kirim']) < 5) {
+                //     $waktu_kirim = '0' . $_POST['waktu_kirim'] . ':00';
+                // } else {
+                //     $waktu_kirim = $_POST['waktu_kirim'] . ':00';
+                // }
+                $tanggal_pengiriman = date_hour_to_str($tanggal_kirim);
+                if($tanggal_pengiriman == false) {
                     $res['success'] = 0;
-                    $res['message'] = 'Pastikan anda memasukkan format jam dan menit yang benar!';
+                    $res['message'] = 'Pastikan anda memasukkan format tanggal yang benar';
+                    $res['tanggal'] = $tanggal_pengiriman;
                 } else {
                     // $jam_kirim = date('H:i:s');
-                    $tanggal_pengiriman = $tgl_kirim . ' ' . $jam_kirim;
+                    // $tanggal_pengiriman = $tgl_kirim . ' ' . $jam_kirim;
                     $jenis_pengiriman = $_POST['select_pengiriman'];
                     $wilayah_pengiriman = $_POST['wilayah_pengiriman'];
                     $ekspedisi = $_POST['nama_ekspedisi'];
@@ -75,7 +75,6 @@
         $res['success'] = 0;
         $res['message'] = 'ada Error';
         $res['tanggal'] = $tanggal_pengiriman;
-        $res['jam'] = $jam_kirim;
         $res['error'] = $e->getLine();
         $res['error_2'] = $e->getMessage();
     }
