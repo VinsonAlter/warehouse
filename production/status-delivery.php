@@ -543,6 +543,7 @@
                                 <input type="text" class="form-control mytimepicker" name="waktu_kirim" id="waktu_kirim">
                               </div>
                             </div> -->
+                          <div id="section-dikirim">
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Jadwal Kirim</label>
                               <div class="col-sm-6">
@@ -556,6 +557,7 @@
                                 </div>
                               </div>
                             </div>
+                          
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Jenis Pengiriman</label>
                               <div class="d-flex col-sm-6">
@@ -563,6 +565,7 @@
                                   class="select2 shadow-none form-select"
                                   style="width: 100%; height: 36px"
                                   id="select_pengiriman" name="select_pengiriman"
+                                  autocomplete="off"
                                 > 
                                   <option value="" selected="selected" disabled>Pilih Jenis Pengiriman</option>
                                   <option value="Kirim Customer">Kirim ke Customer</option>
@@ -577,6 +580,7 @@
                                 <select
                                     class="select2 shadow-none form-select"
                                     id="wilayah_pengiriman" name="wilayah_pengiriman"
+                                    autocomplete="off"
                                   >
                                   <option value="" selected="selected" disabled>Pilih Wilayah Pengiriman</option>
                                   <option value="Dalam Kota">Dalam Kota</option>
@@ -622,6 +626,8 @@
                                 </select>
                               </div>
                             </div>
+                          </div>
+                          <div id="section-selesai">
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Jadwal Selesai</label>
                               <div class="col-sm-6">
@@ -635,6 +641,7 @@
                                 </div>
                               </div>
                             </div>
+                          </div>
                           </div>
                         </div>
                         <div class="modal-footer">
@@ -1335,9 +1342,16 @@
           $('<option value="Dalam Kota">Dalam Kota</option>').appendTo('#wilayah_pengiriman');
           $('<option value="Luar Kota">Luar Kota</option>').appendTo('#wilayah_pengiriman');
           $('#tanggal_selesai').val('');
+          $('#section-dikirim').css('display', 'none');
+          $('#section-selesai').css('display', 'none');
+        } else if($('#select_status').val() == '2'){
+          $('#tanggal_kirim').val(today);
+          $('#tanggal_selesai').val(today);
+          $('#section-dikirim').css('display', 'block');
         } else {
           $('#tanggal_kirim').val(today);
           $('#tanggal_selesai').val(today);
+          $('#section-selesai').css('display', 'block');
         }
       }
       
