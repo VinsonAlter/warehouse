@@ -472,13 +472,13 @@
                           <span aria-hidden="true" id="masterModallabel">&times;</span>
                         </button>
                       </div>
-                      <form class="form-horizontal" id="form_kirim" method="post" action="javascript:editTransaksi()" role="form">
+                      <form class="form-horizontal" id="form-edit" method="post" action="javascript:editTransaksi()" role="form">
                         <div class="modal-body pt-none pb-none">
                           <div class="card-body pb-none">
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">No Transaksi</label>
                               <div class="col-sm-6">
-                                <input type="text" class="form-control" id="no_transaksi" name="NomorTransaksi" readonly="readonly">
+                                <input type="text" class="form-control" id="no_transaksi" name="no_transaksi" readonly="readonly">
                               </div>
                             </div>
                             <div class="form-group row">
@@ -487,7 +487,7 @@
                                 <select
                                   class="select2 shadow-none form-select"
                                   style="width: 100%; height: 36px"
-                                  id="select_status" name="select_status"
+                                  id="select_status" name="select_status" onchange="javascript:checkStatus()"
                                 >
                                   <option value="1">Diterima</option>
                                   <option value="2">Dikirim</option>
@@ -563,7 +563,8 @@
                                   class="select2 shadow-none form-select"
                                   style="width: 100%; height: 36px"
                                   id="select_pengiriman" name="select_pengiriman"
-                                >
+                                > 
+                                  <option value="" selected="selected" disabled>Pilih Jenis Pengiriman</option>
                                   <option value="Kirim Customer">Kirim ke Customer</option>
                                   <option value="Ambil Sendiri">Ambil Sendiri</option>
                                   <option value="Via Sales">Via Sales</option>
@@ -577,6 +578,7 @@
                                     class="select2 shadow-none form-select"
                                     id="wilayah_pengiriman" name="wilayah_pengiriman"
                                   >
+                                  <option value="" selected="selected" disabled>Pilih Wilayah Pengiriman</option>
                                   <option value="Dalam Kota">Dalam Kota</option>
                                   <option value="Luar Kota">Luar Kota</option>
                                 </select>
@@ -698,6 +700,8 @@
     <script src="assets/libs/bootstrap4-datetimepicker/bootstrap-datetimepicker.js"></script>
 
     <script>
+
+      var today = '<?php echo date('d-m-Y H:i') ?>';
 
       var state = '<?php echo $state ?>';
 
@@ -860,103 +864,114 @@
 			    })
         }) 
 
-        $('#masterModal').on('shown.bs.modal', function(){
-          // $('.loader').show();
-          $.ajax({
-            url: 'json/filterTanggalTransaksi.php',
-            data: $('#form-filter').serialize(),
-            type: 'post',
-            beforeSend: () => {
-              $('.loader').show();
-            },
-            // add loading icon
-            success: result => {
-              const res = $.parseJSON(result);
-              // empty div container when ajax success
-              $('#transaksi_container').empty();
-              $('<div>').attr({
-                    class: 'card-padding d-flex cp',
-                    id: 'card_container'
-                  }).append(
-                    $('<div>').attr({
-                      class: 'cp d-flex col-md-4 col-6 d-flex centered border-right border-bottom-grey'
-                    }).append(
-                      $('<label>').attr({
-                        class: 'cp form-check-label col-9 m-0',
-                      }).append('No Transaksi')
-                    ),
-                    (
-                      $('<label>').attr({
-                        class: 'cp form-check-label col-md-3 col-4 d-flex centered border-right border-bottom-grey word-break',
-                      }).append('Tgl Transaksi')
-                    ),
-                    (
-                      $('<label>').attr({
-                        class: 'cp form-check-label px-2 col-md-6 col-12 border-bottom-grey ',
-                      }).append('Customer')
-                    )
-                ).appendTo('#transaksi_container');
-              if(res.data.length > 0) {
-                $.each(res.data, function (key, value) {
-                  $('<div>').attr({
-                    class: 'cp card-padding d-flex',
-                    id: 'card_container'
-                  }).append(
-                    $('<div>').attr({
-                      class: 'cp d-flex col-md-4 col-6 d-flex centered border-right border-bottom-grey'
-                    }).append(
-                      $('<input>').attr({
-                        type: 'checkbox',
-                        name: 'transaksi[]',
-                        id: value[0],
-                        class: 'cp form-check-input col-3 mr-3 mt-0',
-                        value: ((value[3] != '') ? [value[0], value[1], value[2] + '(' + value[3] + ')'] : [value[0], value[1], value[2]])
-                      }),
-                      $('<label>').attr({
-                        class: 'cp form-check-label col-9 m-0',
-                        for: value[0],
-                      }).append(value[0])
-                    ),
-                    (
-                      $('<label>').attr({
-                        class: 'cp form-check-label col-md-3 col-4 d-flex centered border-right border-bottom-grey word-break',
-                        for: value[0],
-                      }).append(value[1])
-                    ),
-                    (
-                      $('<label>').attr({
-                        class: 'cp form-check-label px-2 col-md-6 col-12 border-bottom-grey ',
-                        for: value[0],
-                      }).append((value[3] != '') ? value[2] + " (" + value[3] + ")" : value[2])
-                    )
-                  ).appendTo('#transaksi_container');
-                });
-              } else {
-                alert('Data yang dicari tidak ditemukan!');
-                $('#transaksi_container').empty();
-              }
-            },
-            complete: () => {
-              $('.loader').hide();
-            },
-            error: err => {
-              console.error(err.statusText);
-              $('.loader').hide();
-            }
-          })
+        $('#masterModalEdit').on('shown.bs.modal', function() {
+          if($('#select_status').val() == '1') {
+              $('#tanggal_kirim').val('');
+              $('#nama_ekspedisi').val('');
+              $('#nama_driver').val('');
+              $('#no_plat').val('');
+            } else {
+              $('#tanggal_kirim').val(today);
+          }
         })
 
+        // $('#masterModal').on('shown.bs.modal', function(){
+        //   // $('.loader').show();
+        //   $.ajax({
+        //     url: 'json/filterTanggalTransaksi.php',
+        //     data: $('#form-filter').serialize(),
+        //     type: 'post',
+        //     beforeSend: () => {
+        //       $('.loader').show();
+        //     },
+        //     // add loading icon
+        //     success: result => {
+        //       const res = $.parseJSON(result);
+        //       // empty div container when ajax success
+        //       $('#transaksi_container').empty();
+        //       $('<div>').attr({
+        //             class: 'card-padding d-flex cp',
+        //             id: 'card_container'
+        //           }).append(
+        //             $('<div>').attr({
+        //               class: 'cp d-flex col-md-4 col-6 d-flex centered border-right border-bottom-grey'
+        //             }).append(
+        //               $('<label>').attr({
+        //                 class: 'cp form-check-label col-9 m-0',
+        //               }).append('No Transaksi')
+        //             ),
+        //             (
+        //               $('<label>').attr({
+        //                 class: 'cp form-check-label col-md-3 col-4 d-flex centered border-right border-bottom-grey word-break',
+        //               }).append('Tgl Transaksi')
+        //             ),
+        //             (
+        //               $('<label>').attr({
+        //                 class: 'cp form-check-label px-2 col-md-6 col-12 border-bottom-grey ',
+        //               }).append('Customer')
+        //             )
+        //         ).appendTo('#transaksi_container');
+        //       if(res.data.length > 0) {
+        //         $.each(res.data, function (key, value) {
+        //           $('<div>').attr({
+        //             class: 'cp card-padding d-flex',
+        //             id: 'card_container'
+        //           }).append(
+        //             $('<div>').attr({
+        //               class: 'cp d-flex col-md-4 col-6 d-flex centered border-right border-bottom-grey'
+        //             }).append(
+        //               $('<input>').attr({
+        //                 type: 'checkbox',
+        //                 name: 'transaksi[]',
+        //                 id: value[0],
+        //                 class: 'cp form-check-input col-3 mr-3 mt-0',
+        //                 value: ((value[3] != '') ? [value[0], value[1], value[2] + '(' + value[3] + ')'] : [value[0], value[1], value[2]])
+        //               }),
+        //               $('<label>').attr({
+        //                 class: 'cp form-check-label col-9 m-0',
+        //                 for: value[0],
+        //               }).append(value[0])
+        //             ),
+        //             (
+        //               $('<label>').attr({
+        //                 class: 'cp form-check-label col-md-3 col-4 d-flex centered border-right border-bottom-grey word-break',
+        //                 for: value[0],
+        //               }).append(value[1])
+        //             ),
+        //             (
+        //               $('<label>').attr({
+        //                 class: 'cp form-check-label px-2 col-md-6 col-12 border-bottom-grey ',
+        //                 for: value[0],
+        //               }).append((value[3] != '') ? value[2] + " (" + value[3] + ")" : value[2])
+        //             )
+        //           ).appendTo('#transaksi_container');
+        //         });
+        //       } else {
+        //         alert('Data yang dicari tidak ditemukan!');
+        //         $('#transaksi_container').empty();
+        //       }
+        //     },
+        //     complete: () => {
+        //       $('.loader').hide();
+        //     },
+        //     error: err => {
+        //       console.error(err.statusText);
+        //       $('.loader').hide();
+        //     }
+        //   })
+        // })
+
       });
 
-      $('input[name="jenis_pengiriman"]').change(function () {
-        if ($('#ambil_sendiri').is(':checked')) {
-          $('#driver_cust').attr('required', true);
-          $('#plat_cust').attr('required', true);
-        } else {
-          $('#driver_cust').removeAttr('required');
-          $('#plat_cust').removeAttr('required');
-        }
-      });
+      // $('input[name="jenis_pengiriman"]').change(function () {
+      //   if ($('#ambil_sendiri').is(':checked')) {
+      //     $('#driver_cust').attr('required', true);
+      //     $('#plat_cust').attr('required', true);
+      //   } else {
+      //     $('#driver_cust').removeAttr('required');
+      //     $('#plat_cust').removeAttr('required');
+      //   }
+      // });
 
       // remove required attributes when checkbox is checked
       // var requiredEditCheckboxes = $('#masterModalEdit .modal-body :checkbox[required]');
@@ -967,98 +982,99 @@
       //         requiredEditCheckboxes.attr('required', 'required');
       //     }
       // });
-
-      function initFilter() {
-        $.ajax({
-          url: 'json/filterTanggalTransaksi.php',
-          data: $('#form-filter').serialize(),
-          type: 'post',
-          beforeSend: () => {
-            $('.loader').show();
-          },
-          success: result => {
-            // $('.loader').hide();
-            const res = $.parseJSON(result);
-            // empty div container when ajax success
-            $('#transaksi_container').empty();
-            $('<div>').attr({
-                  class: 'card-padding d-flex',
-                  id: 'card_container'
-                }).append(
-                  $('<div>').attr({
-                    class: 'cp d-flex col-md-4 col-6 d-flex centered border-right border-bottom-grey'
-                  }).append(
-                    $('<label>').attr({
-                      class: 'cp form-check-label col-9 m-0',
-                    }).append('No Transaksi')
-                  ),
-                  (
-                    $('<label>').attr({
-                      class: 'cp form-check-label col-md-3 col-4 d-flex centered border-right border-bottom-grey word-break',
-                    }).append('Tgl Transaksi')
-                  ),
-                  (
-                    $('<label>').attr({
-                      class: 'cp form-check-label px-2 col-md-6 col-12 border-bottom-grey ',
-                    }).append('Nama (Owner)')
-                  )
-              ).appendTo('#transaksi_container');
-            // append html attribute
-            if(res.data.length > 0) {
-              $.each(res.data, function (key, value) {
-                $('<div>').attr({
-                  class: 'card-padding d-flex',
-                  id: 'card_container'
-                }).append(
-                  $('<div>').attr({
-                    class: 'cp d-flex col-md-4 col-6 d-flex centered border-right border-bottom-grey'
-                  }).append(
-                    $('<input>').attr({
-                      type: 'checkbox',
-                      name: 'transaksi[]',
-                      id: value[0],
-                      class: 'cp form-check-input col-3 mr-3 mt-0',
-                      value: ((value[3] != '') ? [value[0], value[1], value[2] + '(' + value[3] + ')'] : [value[0], value[1], value[2]])
-                    }),
-                    $('<label>').attr({
-                      class: 'cp form-check-label col-9 m-0',
-                      for: value[0],
-                    }).append(value[0])
-                  ),
-                  (
-                    $('<label>').attr({
-                      class: 'cp form-check-label col-md-3 col-4 d-flex centered border-right border-bottom-grey word-break',
-                      for: value[0],
-                    }).append(value[1])
-                  ),
-                  (
-                    $('<label>').attr({
-                      class: 'cp form-check-label px-2 col-md-6 col-12 border-bottom-grey ',
-                      for: value[0],
-                    }).append((value[3] != '') ? value[2] + " (" + value[3] + ")" : value[2])
-                  )
-                ).appendTo('#transaksi_container');
+    
+      // unused part
+      // function initFilter() {
+      //   $.ajax({
+      //     url: 'json/filterTanggalTransaksi.php',
+      //     data: $('#form-filter').serialize(),
+      //     type: 'post',
+      //     beforeSend: () => {
+      //       $('.loader').show();
+      //     },
+      //     success: result => {
+      //       // $('.loader').hide();
+      //       const res = $.parseJSON(result);
+      //       // empty div container when ajax success
+      //       $('#transaksi_container').empty();
+      //       $('<div>').attr({
+      //             class: 'card-padding d-flex',
+      //             id: 'card_container'
+      //           }).append(
+      //             $('<div>').attr({
+      //               class: 'cp d-flex col-md-4 col-6 d-flex centered border-right border-bottom-grey'
+      //             }).append(
+      //               $('<label>').attr({
+      //                 class: 'cp form-check-label col-9 m-0',
+      //               }).append('No Transaksi')
+      //             ),
+      //             (
+      //               $('<label>').attr({
+      //                 class: 'cp form-check-label col-md-3 col-4 d-flex centered border-right border-bottom-grey word-break',
+      //               }).append('Tgl Transaksi')
+      //             ),
+      //             (
+      //               $('<label>').attr({
+      //                 class: 'cp form-check-label px-2 col-md-6 col-12 border-bottom-grey ',
+      //               }).append('Nama (Owner)')
+      //             )
+      //         ).appendTo('#transaksi_container');
+      //       // append html attribute
+      //       if(res.data.length > 0) {
+      //         $.each(res.data, function (key, value) {
+      //           $('<div>').attr({
+      //             class: 'card-padding d-flex',
+      //             id: 'card_container'
+      //           }).append(
+      //             $('<div>').attr({
+      //               class: 'cp d-flex col-md-4 col-6 d-flex centered border-right border-bottom-grey'
+      //             }).append(
+      //               $('<input>').attr({
+      //                 type: 'checkbox',
+      //                 name: 'transaksi[]',
+      //                 id: value[0],
+      //                 class: 'cp form-check-input col-3 mr-3 mt-0',
+      //                 value: ((value[3] != '') ? [value[0], value[1], value[2] + '(' + value[3] + ')'] : [value[0], value[1], value[2]])
+      //               }),
+      //               $('<label>').attr({
+      //                 class: 'cp form-check-label col-9 m-0',
+      //                 for: value[0],
+      //               }).append(value[0])
+      //             ),
+      //             (
+      //               $('<label>').attr({
+      //                 class: 'cp form-check-label col-md-3 col-4 d-flex centered border-right border-bottom-grey word-break',
+      //                 for: value[0],
+      //               }).append(value[1])
+      //             ),
+      //             (
+      //               $('<label>').attr({
+      //                 class: 'cp form-check-label px-2 col-md-6 col-12 border-bottom-grey ',
+      //                 for: value[0],
+      //               }).append((value[3] != '') ? value[2] + " (" + value[3] + ")" : value[2])
+      //             )
+      //           ).appendTo('#transaksi_container');
                 
                 
-              });
-            } else {
-              alert('Data yang dicari tidak ditemukan!');
-              $('#transaksi_container').empty()
-            }
-            // if(res.data.length < 0) {
-            //   alert('Data tidak Ditemukan!');
-            //   $('.loader').hide();
-            // }
-          },
-          complete: () => {
-            $('.loader').hide();
-          },
-          error: err => {
-            console.error(err.statusText);
-            $('.loader').hide();
-          }
-        })
-      }
+      //         });
+      //       } else {
+      //         alert('Data yang dicari tidak ditemukan!');
+      //         $('#transaksi_container').empty()
+      //       }
+      //       // if(res.data.length < 0) {
+      //       //   alert('Data tidak Ditemukan!');
+      //       //   $('.loader').hide();
+      //       // }
+      //     },
+      //     complete: () => {
+      //       $('.loader').hide();
+      //     },
+      //     error: err => {
+      //       console.error(err.statusText);
+      //       $('.loader').hide();
+      //     }
+      //   })
+      // }
       
       // for ui/ux purposes only, enable datetime when radio button is clicked
       function enable_transaksi() {
@@ -1124,26 +1140,37 @@
           }
         })
       }
-   
-      function initEdit() {
+
+      function editTransaksi() {
         $.ajax({
           type: "post",
-          url: "json/editDelivery.php",
+          url: "json/editTransaksi.php",
           data: $('#form-edit').serialize(),
           success: result => {
             const res = $.parseJSON(result);
-            if(res.success == 1) {
-            // hide modal after data submission
-            $('#masterModalEdit').modal('hide');
-            // reload datatable when ajax success returns success
-            $('#table_delivery').DataTable().ajax.reload();
-            } alert(res.message); 
-          },
-          error: err => {
-            console.error(err.statusText);
           }
         })
       }
+   
+      // function initEdit() {
+      //   $.ajax({
+      //     type: "post",
+      //     url: "json/editDelivery.php",
+      //     data: $('#form-edit').serialize(),
+      //     success: result => {
+      //       const res = $.parseJSON(result);
+      //       if(res.success == 1) {
+      //       // hide modal after data submission
+      //       $('#masterModalEdit').modal('hide');
+      //       // reload datatable when ajax success returns success
+      //       $('#table_delivery').DataTable().ajax.reload();
+      //       } alert(res.message); 
+      //     },
+      //     error: err => {
+      //       console.error(err.statusText);
+      //     }
+      //   })
+      // }
       
       function getDelivery(transaksi, id) {
         $.ajax({
@@ -1292,6 +1319,28 @@
         })
       }
 
+      function checkStatus() {
+        if($('#select_status').val() == '1') {
+          $('#tanggal_kirim').val('');
+          $('#nama_ekspedisi').val('');
+          $('#nama_driver').val('');
+          $('#no_plat').val('');
+          $('#select_pengiriman').empty();
+          $('<option selected="selected" disabled value="">Pilih Jenis Pengiriman</option>').appendTo('#select_pengiriman');
+          $('<option value="Kirim Customer">Kirim ke Customer</option>').appendTo('#select_pengiriman');
+          $('<option value="Ambil Sendiri">Ambil Sendiri</option>').appendTo('#select_pengiriman');
+          $('<option value="Via Sales">Via Sales</option>').appendTo('#select_pengiriman');
+          $('#wilayah_pengiriman').empty();
+          $('<option selected="selected" disabled value="">Pilih Wilayah Pengiriman</option>').appendTo('#wilayah_pengiriman');
+          $('<option value="Dalam Kota">Dalam Kota</option>').appendTo('#wilayah_pengiriman');
+          $('<option value="Luar Kota">Luar Kota</option>').appendTo('#wilayah_pengiriman');
+          $('#tanggal_selesai').val('');
+        } else {
+          $('#tanggal_kirim').val(today);
+          $('#tanggal_selesai').val(today);
+        }
+      }
+      
       // if(!$('#kirim_cust').is(':checked')) {
       //     $('#select_driver').prop('disabled', true);
       //     $('#select_plat').prop('disabled', true);
