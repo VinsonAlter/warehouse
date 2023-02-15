@@ -19,35 +19,66 @@
     $state = '';
     if(isset($_REQUEST['filter_tgl'])) {
       $state = $_REQUEST['enable_date'];
-      if($_REQUEST['enable_date'] == 'transaksi_on') {
-        $status = 'transaksi_on';
-        $_SESSION['StatusFilter'] = $status;
-        $_SESSION['FilterTglTransaksi'] = $_POST['tglTransaksi'];
-        $_SESSION['FilterAkhirTransaksi'] = $_POST['tglAkhirTransaksi'];
-        $_SESSION['FilterTglTerima'] = date('d-m-Y');
-        $_SESSION['FilterAkhirTerima'] = date('d-m-Y');
-        $_SESSION['FilterTglKirim'] = date('d-m-Y');
-        $_SESSION['FilterAkhirKirim'] = date('d-m-Y');
-      } else 
-      if($_REQUEST['enable_date'] == 'terima_on') {
-        $status = 'terima_on';
-        $_SESSION['StatusFilter'] = $status;
-        $_SESSION['FilterTglTerima'] = $_POST['tglTerima'];
-        $_SESSION['FilterAkhirTerima'] = $_POST['tglAkhirTerima'];
-        $_SESSION['FilterTglTransaksi'] = date('d-m-Y');
-        $_SESSION['FilterAkhirTransaksi'] = date('d-m-Y');
-        $_SESSION['FilterTglKirim'] = date('d-m-Y');
-        $_SESSION['FilterAkhirKirim'] = date('d-m-Y');
-      } else {
-        $status = 'kirim_on';
-        $_SESSION['StatusFilter'] = $status;
-        $_SESSION['FilterTglKirim'] = $_POST['tglKirim'];
-        $_SESSION['FilterAkhirKirim'] = $_POST['tglAkhirKirim'];
-        $_SESSION['FilterTglTransaksi'] = date('d-m-Y');
-        $_SESSION['FilterAkhirTransaksi'] = date('d-m-Y');
-        $_SESSION['FilterTglTerima'] = date('d-m-Y');
-        $_SESSION['FilterAkhirTerima'] = date('d-m-Y');
+      switch($state) {
+        case 'terima_on':
+          $status = 'terima_on';
+          $_SESSION['StatusFilter'] = $status;
+          $_SESSION['FilterTglTerima'] = $_POST['tglTerima'];
+          $_SESSION['FilterAkhirTerima'] = $_POST['tglAkhirTerima'];
+          $_SESSION['FilterTglTransaksi'] = date('d-m-Y');
+          $_SESSION['FilterAkhirTransaksi'] = date('d-m-Y');
+          $_SESSION['FilterTglKirim'] = date('d-m-Y');
+          $_SESSION['FilterAkhirKirim'] = date('d-m-Y');
+          break;
+        case 'kirim_on':
+          $status = 'kirim_on';
+          $_SESSION['StatusFilter'] = $status;
+          $_SESSION['FilterTglKirim'] = $_POST['tglKirim'];
+          $_SESSION['FilterAkhirKirim'] = $_POST['tglAkhirKirim'];
+          $_SESSION['FilterTglTransaksi'] = date('d-m-Y');
+          $_SESSION['FilterAkhirTransaksi'] = date('d-m-Y');
+          $_SESSION['FilterTglTerima'] = date('d-m-Y');
+          $_SESSION['FilterAkhirTerima'] = date('d-m-Y');
+        default:
+          $status = 'transaksi_on';
+          $_SESSION['StatusFilter'] = $status;
+          $_SESSION['FilterTglTransaksi'] = $_POST['tglTransaksi'];
+          $_SESSION['FilterAkhirTransaksi'] = $_POST['tglAkhirTransaksi'];
+          $_SESSION['FilterTglTerima'] = date('d-m-Y');
+          $_SESSION['FilterAkhirTerima'] = date('d-m-Y');
+          $_SESSION['FilterTglKirim'] = date('d-m-Y');
+          $_SESSION['FilterAkhirKirim'] = date('d-m-Y');
+          break;
       }
+      // if($_REQUEST['enable_date'] == 'transaksi_on') {
+      //   $status = 'transaksi_on';
+      //   $_SESSION['StatusFilter'] = $status;
+      //   $_SESSION['FilterTglTransaksi'] = $_POST['tglTransaksi'];
+      //   $_SESSION['FilterAkhirTransaksi'] = $_POST['tglAkhirTransaksi'];
+      //   $_SESSION['FilterTglTerima'] = date('d-m-Y');
+      //   $_SESSION['FilterAkhirTerima'] = date('d-m-Y');
+      //   $_SESSION['FilterTglKirim'] = date('d-m-Y');
+      //   $_SESSION['FilterAkhirKirim'] = date('d-m-Y');
+      // } else 
+      // if($_REQUEST['enable_date'] == 'terima_on') {
+      //   $status = 'terima_on';
+      //   $_SESSION['StatusFilter'] = $status;
+      //   $_SESSION['FilterTglTerima'] = $_POST['tglTerima'];
+      //   $_SESSION['FilterAkhirTerima'] = $_POST['tglAkhirTerima'];
+      //   $_SESSION['FilterTglTransaksi'] = date('d-m-Y');
+      //   $_SESSION['FilterAkhirTransaksi'] = date('d-m-Y');
+      //   $_SESSION['FilterTglKirim'] = date('d-m-Y');
+      //   $_SESSION['FilterAkhirKirim'] = date('d-m-Y');
+      // } else {
+      //   $status = 'kirim_on';
+      //   $_SESSION['StatusFilter'] = $status;
+      //   $_SESSION['FilterTglKirim'] = $_POST['tglKirim'];
+      //   $_SESSION['FilterAkhirKirim'] = $_POST['tglAkhirKirim'];
+      //   $_SESSION['FilterTglTransaksi'] = date('d-m-Y');
+      //   $_SESSION['FilterAkhirTransaksi'] = date('d-m-Y');
+      //   $_SESSION['FilterTglTerima'] = date('d-m-Y');
+      //   $_SESSION['FilterAkhirTerima'] = date('d-m-Y');
+      // }
     }
 
     if(isset($_SESSION['FilterTglTransaksi'])) $tglTransaksi = $_SESSION['FilterTglTransaksi'];
