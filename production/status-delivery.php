@@ -397,7 +397,7 @@
                         <th name='status-pengiriman'>Status</th>
                         <th>Tgl Transaksi</th>
                         <th>Tgl Terima</th>
-                        <th>Nama Picker</th>
+                        <th>Picker</th>
                         <th>Tgl Kirim</th>
                         <th>Tgl Selesai</th>
                         <th>Jenis Pengiriman</th>
@@ -772,7 +772,7 @@
           "stateDuration": -1,
           "pageLength": 25,
           "scrollY": '200px',
-          "scrollX": '600px',
+          "scrollX": '1200px',
           "ajax": {
             url: 'json/data_delivery.php',
           },
@@ -781,11 +781,14 @@
           },
           "order": [],
           "columnDefs": [
-            { orderable: false, targets: [0, 1, 14] },
+            { orderable: false, targets: [0, 15] },
             // { width: '10%', targets: [3, 5]},
             // { width: '10%', targets: [4, 5, 6]},
-            { width: '50%', targets: 2},
-            { className: 'dt-center', targets: [0, 1, 3, 4, 5, 6, 7, 15]},
+            { width: '125px', targets: [4, 5, 7, 8]},
+            { width: '120px', targets: 1},
+            { width: '100px', targets: 6},
+            { width: '110px', targets: [9, 10, 11, 12, 13, 14]},
+            { className: 'dt-center', targets: [0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 15]},
             { targets: 3,
               render: function(data){
                 if(data == 1)

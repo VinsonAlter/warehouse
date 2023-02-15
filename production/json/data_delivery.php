@@ -264,25 +264,25 @@
 		{	
             $data[$i][4] = date('d-m-Y', strtotime($data[$i][4]));
 			if (strtotime($data[$i][4]) != '') {
-                $data[$i][4] = date('d-m-Y', strtotime($data[$i][4]));
+                $data[$i][4] = date('d-m-Y H:i', strtotime($data[$i][4]));
             } else {
                 $data[$i][4] = '';
             } 
 
             if (strtotime($data[$i][5]) != '') {
-                $data[$i][5] = date('d-m-Y', strtotime($data[$i][5]));
+                $data[$i][5] = date('d-m-Y H:i', strtotime($data[$i][5]));
             } else {
                 $data[$i][5] = '';
             } 
 
             if (strtotime($data[$i][7]) != '') {
-                $data[$i][7] = date('d-m-Y', strtotime($data[$i][7]));
+                $data[$i][7] = date('d-m-Y H:i', strtotime($data[$i][7]));
             } else {
                 $data[$i][7] = '';
             } 
 
             if (strtotime($data[$i][8]) != '') {
-                $data[$i][8] = date('d-m-Y', strtotime($data[$i][8]));
+                $data[$i][8] = date('d-m-Y H:i', strtotime($data[$i][8]));
             } else {
                 $data[$i][8] = '';
             } 
