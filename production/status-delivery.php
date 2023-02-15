@@ -17,6 +17,8 @@
     $statusAkhirTerima = date('d-m-Y');
     $statusAwalKirim = date('d-m-Y');
     $statusAkhirKirim = date('d-m-Y');
+    $statusAwalSelesai = date('d-m-Y');
+    $statusAkhirSelesai = date('d-m-Y');
     // $tglTerima = date('d-m-Y');
     // $tglKirim = date('d-m-Y');
     // $waktuKirim = date('H:i');
@@ -25,34 +27,81 @@
     // filter noTransaksi
     if(isset($_REQUEST['filter_tgl'])){
       $state = $_REQUEST['enable_date'];
-      if($_REQUEST['enable_date'] == 'transaksi_on') {
-        $status = 'transaksi_on';
-        $_SESSION['StatusFilterTransaksi'] = $status;
-        $_SESSION['FilterStatusAwalTransaksi'] = $_POST['statusAwalTransaksi'];
-        $_SESSION['FilterStatusAkhirTransaksi'] = $_POST['statusAkhirTransaksi'];
-        $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
-        $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
-        $_SESSION['FilterStatusAwalKirim'] = date('d-m-Y');
-        $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
-      } else if ($_REQUEST['enable_date'] == 'terima_on') {
-        $status = 'terima_on';
-        $_SESSION['StatusFilterTransaksi'] = $status;
-        $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
-        $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
-        $_SESSION['FilterStatusAwalTerima'] = $_POST['statusAwalTerima'];
-        $_SESSION['FilterStatusAkhirTerima'] = $_POST['statusAkhirTerima'];
-        $_SESSION['FilterStatusAwalKirim'] = date('d-m-Y');
-        $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
-      } else {
-        $status = 'kirim_on';
-        $_SESSION['StatusFilterTransaksi'] = $status;
-        $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
-        $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
-        $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
-        $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
-        $_SESSION['FilterStatusAwalKirim'] = $_POST['statusAwalKirim'];
-        $_SESSION['FilterStatusAkhirKirim'] = $_POST['statusAkhirKirim'];
+      switch($state) {
+        case 'terima_on':
+          $status = 'transaksi_on';
+          $_SESSION['StatusFilterTransaksi'] = $status;
+          $_SESSION['FilterStatusAwalTransaksi'] = $_POST['statusAwalTransaksi'];
+          $_SESSION['FilterStatusAkhirTransaksi'] = $_POST['statusAkhirTransaksi'];
+          $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
+          $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
+          $_SESSION['FilterStatusAwalKirim'] = date('d-m-Y');
+          $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
+          break;
+        case 'kirim_on':
+          $status = 'kirim_on';
+          $_SESSION['StatusFilterTransaksi'] = $status;
+          $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
+          $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
+          $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
+          $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
+          $_SESSION['FilterStatusAwalKirim'] = $_POST['statusAwalKirim'];
+          $_SESSION['FilterStatusAkhirKirim'] = $_POST['statusAkhirKirim'];
+          $_SESSION['FilterStatusAwalSelesai'] = date('d-m-Y');
+          $_SESSION['FilterStatusAkhirSelesai'] = date('d-m-Y');
+          break;
+        case 'selesai_on':
+          $status = 'selesai_on';
+          $_SESSION['StatusFilterTransaksi'] = $status;
+          $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
+          $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
+          $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
+          $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
+          $_SESSION['FilterStatusAwalKirim'] = date('d-m-Y');
+          $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
+          $_SESSION['FilterStatusAwalSelesai'] = $_POST['statusAwalSelesai'];
+          $_SESSION['FilterStatusAkhirSelesai'] = $_POST['statusAkhirSelesai'];
+        default:
+          $status = 'transaksi_on';
+          $_SESSION['StatusFilterTransaksi'] = $status;
+          $_SESSION['FilterStatusAwalTransaksi'] = $_POST['statusAwalTransaksi'];
+          $_SESSION['FilterStatusAkhirTransaksi'] = $_POST['statusAkhirTransaksi'];
+          $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
+          $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
+          $_SESSION['FilterStatusAwalKirim'] = date('d-m-Y');
+          $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
+          $_SESSION['FilterStatusAwalSelesai'] = date('d-m-Y');
+          $_SESSION['FilterStatusAkhirSelesai'] = date('d-m-Y');
+          break;
       }
+      // if($_REQUEST['enable_date'] == 'transaksi_on') {
+      //   $status = 'transaksi_on';
+      //   $_SESSION['StatusFilterTransaksi'] = $status;
+      //   $_SESSION['FilterStatusAwalTransaksi'] = $_POST['statusAwalTransaksi'];
+      //   $_SESSION['FilterStatusAkhirTransaksi'] = $_POST['statusAkhirTransaksi'];
+      //   $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
+      //   $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
+      //   $_SESSION['FilterStatusAwalKirim'] = date('d-m-Y');
+      //   $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
+      // } else if ($_REQUEST['enable_date'] == 'terima_on') {
+      //   $status = 'terima_on';
+      //   $_SESSION['StatusFilterTransaksi'] = $status;
+      //   $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
+      //   $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
+      //   $_SESSION['FilterStatusAwalTerima'] = $_POST['statusAwalTerima'];
+      //   $_SESSION['FilterStatusAkhirTerima'] = $_POST['statusAkhirTerima'];
+      //   $_SESSION['FilterStatusAwalKirim'] = date('d-m-Y');
+      //   $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
+      // } else {
+      //   $status = 'kirim_on';
+      //   $_SESSION['StatusFilterTransaksi'] = $status;
+      //   $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
+      //   $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
+      //   $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
+      //   $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
+      //   $_SESSION['FilterStatusAwalKirim'] = $_POST['statusAwalKirim'];
+      //   $_SESSION['FilterStatusAkhirKirim'] = $_POST['statusAkhirKirim'];
+      // }
     }
 
     if(isset($_SESSION['FilterStatusAwalTransaksi'])) $statusAwalTransaksi = $_SESSION['FilterStatusAwalTransaksi'];
@@ -60,8 +109,9 @@
     if(isset($_SESSION['FilterStatusAwalTerima'])) $statusAwalTerima = $_SESSION['FilterStatusAwalTerima'];
     if(isset($_SESSION['FilterStatusAkhirTerima'])) $statusAkhirTerima = $_SESSION['FilterStatusAkhirTerima'];
     if(isset($_SESSION['FilterStatusAwalKirim'])) $statusAwalKirim = $_SESSION['FilterStatusAwalKirim'];
-    if(isset($_SESSION['FilterStatusAkhirKirim'])) $tglAkhirTerima = $_SESSION['FilterStatusAkhirKirim'];
-
+    if(isset($_SESSION['FilterStatusAkhirKirim'])) $tglAkhirKirim = $_SESSION['FilterStatusAkhirKirim'];
+    if(isset($_SESSION['FilterStatusAwalSelesai'])) $statusAwalSelesai = $_SESSION['FilterStatusAwalSelesai'];
+    if(isset($_SESSION['FilterStatusAkhirSelesai'])) $tglAkhirSelesai = $_SESSION['FilterStatusAkhirSelesai'];
     
 ?>
 
@@ -349,7 +399,7 @@
                           <input type="text" class="col-md-2 col-4 mydatepicker"
                             name="statusAwalTransaksi" id="awal_transaksi" value="<?=$statusAwalTransaksi?>" autocomplete="off">
                           <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
-                          <input type="mtext" class="col-md-2 col-4 mydatepicker"
+                          <input type="text" class="col-md-2 col-4 mydatepicker"
                             name="statusAkhirTransaksi" id="akhir_transaksi" value="<?=$statusAkhirTransaksi?>" autocomplete="off">
                           <button class="px-2 btn btn-success btn-sm text-white ml-half"
                             type="submit" name="filter_tgl" id="btn_filter">
@@ -362,7 +412,7 @@
                           <input type="text" class="col-md-2 col-4 mydatepicker"
                             name="statusAwalTerima" id="awal_terima"  value="<?=$statusAwalTerima?>" autocomplete="off">
                           <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
-                          <input type="mtext" class="col-md-2 col-4 mydatepicker"
+                          <input type="text" class="col-md-2 col-4 mydatepicker"
                             name="statusAkhirTerima" id="akhir_terima" value="<?=$statusAkhirTerima?>" autocomplete="off">
                         </div>
                         <div class="d-sm-inline-block d-md-flex mb-3">
@@ -371,8 +421,17 @@
                           <input type="text" class="col-md-2 col-4 mydatepicker"
                             name="statusAwalKirim" id="awal_kirim"  value="<?=$statusAwalKirim?>" autocomplete="off">
                           <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
-                          <input type="mtext" class="col-md-2 col-4 mydatepicker"
+                          <input type="text" class="col-md-2 col-4 mydatepicker"
                             name="statusAkhirKirim" id="akhir_kirim" value="<?=$statusAkhirKirim?>" autocomplete="off">
+                        </div>
+                        <div class="d-sm-inline-block d-md-flex">
+                          <label class="mb-3 mb-md-0 mr-half centered d-md-flex mr-15em">Filter Tgl Selesai</label>
+                          <input type="radio" class="cp mr-8" id="filter_selesai" name="enable_date" value="selesai_on" onclick="enable_selesai()">
+                          <input type="text" class="col-md-2 col-4 mydatepicker"
+                            name="statusAwalSelesai" id="awal_selesai"  value="<?=$statusAwalSelesai?>" autocomplete="off">
+                          <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
+                          <input type="text" class="col-md-2 col-4 mydatepicker"
+                            name="statusAkhirSelesai" id="akhir_selesai" value="<?=$statusAkhirSelesai?>" autocomplete="off">
                         </div>
                       </div>
                     </div>
@@ -388,7 +447,7 @@
                   </div> -->
                 </div>
                 <div class="table-responsive">
-                  <table id="table_delivery" class="table table-bordered table-condensed display compact">
+                  <table id="table_delivery" class="table table-bordered display compact">
                     <thead>
                       <tr>
                         <th style="width:10px">No</th>
@@ -736,8 +795,10 @@
           $('#akhir_transaksi').prop('disabled', false);
         } else if(state == 'terima_on') {
           $('#filter_terima').prop('checked', true);
-        } else {
+        } else if(state == 'kirim_on'){
           $('#filter_kirim').prop('checked', true);
+        } else {
+          $('#filter_selesai').prop('checked', true);
         }
 
         if(!$('#filter_transaksi').is(':checked')) {
@@ -762,6 +823,14 @@
           } else {
             $('#awal_kirim').prop('disabled', false);
             $('#akhir_kirim').prop('disabled', false);
+        }
+
+        if(!$('#filter_selesai').is(':checked')) {
+            $('#awal_selesai').prop('disabled', true);
+            $('#akhir_selesai').prop('disabled', true);
+          } else {
+            $('#awal_selesai').prop('disabled', false);
+            $('#akhir_selesai').prop('disabled', false);
         }
 
         var tableDelivery = $('#table_delivery').DataTable({
@@ -1025,7 +1094,9 @@
         $('#awal_terima').prop('disabled', true);
         $('#akhir_terima').prop('disabled', true);
         $('#awal_kirim').prop('disabled', true);
-        $('#akhir_kirim').prop('disabled', true);     
+        $('#akhir_kirim').prop('disabled', true); 
+        $('#awal_selesai').prop('disabled', true);
+        $('#akhir_selesai').prop('disabled', true);    
       }
 
       function enable_terima() {
@@ -1034,7 +1105,9 @@
         $('#awal_terima').prop('disabled', false);
         $('#akhir_terima').prop('disabled', false);
         $('#awal_kirim').prop('disabled', true);
-        $('#akhir_kirim').prop('disabled', true); 
+        $('#akhir_kirim').prop('disabled', true);
+        $('#awal_selesai').prop('disabled', true);
+        $('#akhir_selesai').prop('disabled', true); 
       }
       
       function enable_kirim() {
@@ -1043,7 +1116,20 @@
         $('#awal_terima').prop('disabled', true);
         $('#akhir_terima').prop('disabled', true);
         $('#awal_kirim').prop('disabled', false);
-        $('#akhir_kirim').prop('disabled', false); 
+        $('#akhir_kirim').prop('disabled', false);
+        $('#awal_selesai').prop('disabled', true);
+        $('#akhir_selesai').prop('disabled', true); 
+      }
+
+      function enable_selesai() {
+        $('#awal_transaksi').prop('disabled', true);
+        $('#akhir_transaksi').prop('disabled', true);
+        $('#awal_terima').prop('disabled', true);
+        $('#akhir_terima').prop('disabled', true);
+        $('#awal_kirim').prop('disabled', true);
+        $('#akhir_kirim').prop('disabled', true);
+        $('#awal_selesai').prop('disabled', false);
+        $('#akhir_selesai').prop('disabled', false)
       }
 
       function initSubmit() {

@@ -255,7 +255,7 @@
                             <input type="text" class="col-md-2 col-4 mydatepicker"
                               name="tglTransaksi" id="tgl_transaksi" value="<?=$tglTransaksi?>" autocomplete="off">
                             <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
-                            <input type="mtext" class="col-md-2 col-4 mydatepicker"
+                            <input type="text" class="col-md-2 col-4 mydatepicker"
                               name="tglAkhirTransaksi" id="akhir_transaksi" value="<?=$tglAkhirTransaksi?>" autocomplete="off">
                             <button class="px-2 btn btn-success btn-sm text-white ml-half"
                               type="submit" name="filter_tgl" id="btn_filter">
@@ -268,7 +268,7 @@
                             <input type="text" class="col-md-2 col-4 mydatepicker"
                               name="tglTerima"id="tgl_terima"  value="<?=$tglTerima?>" autocomplete="off">
                             <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
-                            <input type="mtext" class="col-md-2 col-4 mydatepicker"
+                            <input type="text" class="col-md-2 col-4 mydatepicker"
                               name="tglAkhirTerima" id="akhir_terima" value="<?=$tglAkhirTerima?>" autocomplete="off">
                             <!-- <button class="px-2 btn btn-success btn-sm text-white ml-half"
                               type="submit" name="filter_tgl_terima" id="btn_terima">
@@ -281,7 +281,7 @@
                             <input type="text" class="col-md-2 col-4 mydatepicker"
                               name="tglKirim"id="tgl_kirim" value="<?=$tglFilterKirim?>" autocomplete="off">
                             <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
-                            <input type="mtext" class="col-md-2 col-4 mydatepicker"
+                            <input type="text" class="col-md-2 col-4 mydatepicker"
                               name="tglAkhirKirim" id="akhir_kirim" value="<?=$tglFilterAkhirKirim?>" autocomplete="off">
                           </div>
                         </div>
