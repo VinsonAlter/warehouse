@@ -588,6 +588,19 @@
                                 </select>
                               </div>
                             </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Jadwal Selesai</label>
+                              <div class="col-sm-6">
+                                <div class="input-group date datetimepicker">
+                                  <input class="form-control" type="text" name="tanggal_selesai" id="tanggal_selesai">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text input-group-addon" style="padding:0.6rem 0.75rem;">
+                                      <span class="fa fa-calendar"></span>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div class="modal-footer">
@@ -1031,20 +1044,20 @@
       }
 
       function initSubmit() {
-          $.ajax({
-            type: "post",
-            url: "json/insertNewDelivery.php",
-            data: $('#form-submit').serialize(),
-            success: result => {
-              const res = $.parseJSON(result);
-              if(res.success == 1) {
-                // hide modals after submit data
-                $('#masterModal').modal('hide');
-                // reload datatable when ajax success returns success
-                $('#table_delivery').DataTable().ajax.reload();
-              } alert (res.message);
-            },
-            error: err => {
+        $.ajax({
+          type: "post",
+          url: "json/insertNewDelivery.php",
+          data: $('#form-submit').serialize(),
+          success: result => {
+            const res = $.parseJSON(result);
+            if(res.success == 1) {
+              // hide modals after submit data
+              $('#masterModal').modal('hide');
+              // reload datatable when ajax success returns success
+              $('#table_delivery').DataTable().ajax.reload();
+            } alert (res.message);
+          },
+          error: err => {
             console.error(err.statusText);
           }
         })
@@ -1062,8 +1075,7 @@
             $('#masterModalEdit').modal('hide');
             // reload datatable when ajax success returns success
             $('#table_delivery').DataTable().ajax.reload();
-            } alert(res.message);
-            
+            } alert(res.message); 
           },
           error: err => {
             console.error(err.statusText);
@@ -1089,6 +1101,7 @@
               // $('#waktu_terima').val(res.data.waktuTerima);
               $('#tanggal_kirim').val(res.data.tglKirim);
               // $('#waktu_kirim').val(res.data.waktuKirim);
+              $('#tanggal_selesai').val(res.data.tglSelesai);
               const picker = res.data.picker;
               $('#select_picker option:contains("'+picker+'")').prop('selected', true);
               const wilayah = res.data.wilayah;

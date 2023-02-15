@@ -50,9 +50,9 @@
                 }
 
                 if(strtotime($row['TglSelesai']) != '') {
-                    $row['TglSelesai'] = date('d-m-Y', strtotime($row['TglSelesai']));
+                    $tglSelesai = date('d-m-Y H:i', strtotime($row['TglSelesai']));
                 } else {
-                    $row['TglSelesai'] = '';
+                    $tglSelesai = '';
                 }
 
                 $data = array(
@@ -65,7 +65,7 @@
                     'tglTerima' => date('d-m-Y H:i', strtotime($row['TglTerima'])),
                     'tglKirim' => $tglKirim,
                     // 'waktuKirim' => $waktuKirim,
-                    // 'tglselesai' => $row['TglSelesai'],
+                    'tglSelesai' => $tglSelesai,
                     'jenisPengiriman' => $row['JenisPengiriman'],
                     'wilayah' => $row['Wilayah'],
                     'ekspedisi' => $row['NamaEkspedisi'],
