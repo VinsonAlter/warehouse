@@ -1329,6 +1329,7 @@
           } else if($('#select_status').val() == '2'){
             $('#tanggal_selesai').val('');
             $('#section-dikirim').css('display', 'block');
+            $('#section-selesai').css('display', 'none');
           } else {
             $('#section-selesai').css('display', 'block');
           }
@@ -1353,6 +1354,7 @@
           $('#section-dikirim').css('display', 'none');
           $('#section-selesai').css('display', 'none');
         } else if($('#select_status').val() == '2'){
+          // this today is troublesome, need to fix this
           $('#tanggal_kirim').val(today);
           $('#tanggal_selesai').val('');
           $('#section-dikirim').css('display', 'block');
