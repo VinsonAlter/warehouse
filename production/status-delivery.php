@@ -31,10 +31,10 @@
         case 'terima_on':
           $status = 'transaksi_on';
           $_SESSION['StatusFilterTransaksi'] = $status;
-          $_SESSION['FilterStatusAwalTransaksi'] = $_POST['statusAwalTransaksi'];
-          $_SESSION['FilterStatusAkhirTransaksi'] = $_POST['statusAkhirTransaksi'];
-          $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
-          $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
+          $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
+          $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
+          $_SESSION['FilterStatusAwalTerima'] = $_POST['statusAwalTerima'];
+          $_SESSION['FilterStatusAkhirTerima'] = $_POST['statusAkhirTerima'];
           $_SESSION['FilterStatusAwalKirim'] = date('d-m-Y');
           $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
           break;
@@ -61,6 +61,7 @@
           $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
           $_SESSION['FilterStatusAwalSelesai'] = $_POST['statusAwalSelesai'];
           $_SESSION['FilterStatusAkhirSelesai'] = $_POST['statusAkhirSelesai'];
+          break;
         default:
           $status = 'transaksi_on';
           $_SESSION['StatusFilterTransaksi'] = $status;

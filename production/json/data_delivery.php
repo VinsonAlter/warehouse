@@ -32,6 +32,8 @@
             $akhir_terima = date('d-m-Y');
             $awal_kirim = date('d-m-Y');
             $akhir_kirim = date('d-m-Y');
+            $awal_selesai = date('d-m-Y');
+            $akhir_selesai = date('d-m-Y');
             $end_day = ' 23:59:59';
             $order_tanggal = '';
             if(isset($_SESSION['FilterStatusAwalTransaksi'])) $awal_transaksi = $_SESSION['FilterStatusAwalTransaksi'];
@@ -40,6 +42,8 @@
             if(isset($_SESSION['FilterStatusAkhirTerima'])) $akhir_terima = $_SESSION['FilterStatusAkhirTerima'];
             if(isset($_SESSION['FilterStatusAwalKirim'])) $awal_kirim = $_SESSION['FilterStatusAwalKirim'];
             if(isset($_SESSION['FilterStatusAkhirKirim'])) $akhir_kirim = $_SESSION['FilterStatusAkhirKirim'];
+            if(isset($_SESSION['FilterStatusAwalSelesai'])) $awal_selesai = $_SESSION['FilterStatusAwalSelesai'];
+            if(isset($_SESSION['FilterStatusAkhirSelesai'])) $akhir_selesai = $_SESSION['FilterStatusAkhirSelesai'];
             $status = 'transaksi_on';
             if (isset($_SESSION['StatusFilterTransaksi'])) $status = $_SESSION['StatusFilterTransaksi'];
             switch($status){   
@@ -52,6 +56,11 @@
                     $tgl_condition = "WHERE [TglKirim] BETWEEN '".date_to_str($awal_kirim)."'
                         AND '".date_to_str($akhir_kirim) . $end_day . "'";
                     $order_tanggal = "ORDER BY [TglKirim] DESC";
+                    break;
+                case 'selesai_on':
+                    $tgl_condition = "WHERE [TglSelesai] BETWEEN '".date_to_str($awal_selesai)."'
+                        AND '".date_to_str($akhir_selesai) . $end_day . "'";
+                    $order_tanggal = "ORDER BY [TglSelesai] DESC";
                     break;
                 default:
                     $tgl_condition = "WHERE [TglTransaksi] BETWEEN '".date_to_str($awal_transaksi)."'
