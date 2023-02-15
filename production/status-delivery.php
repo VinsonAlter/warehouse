@@ -871,16 +871,7 @@
 			    })
         }) 
 
-        $('#masterModalEdit').on('shown.bs.modal', function() {
-          if($('#select_status').val() == '1') {
-              $('#tanggal_kirim').val('');
-              $('#nama_ekspedisi').val('');
-              $('#nama_driver').val('');
-              $('#no_plat').val('');
-            } else {
-              $('#tanggal_kirim').val(today);
-          }
-        })
+        
 
         // $('#masterModal').on('shown.bs.modal', function(){
         //   // $('.loader').show();
@@ -1326,6 +1317,23 @@
         })
       }
 
+      $('#masterModalEdit').on('shown.bs.modal', function() {
+          if($('#select_status').val() == '1') {
+            $('#tanggal_kirim').val('');
+            $('#nama_ekspedisi').val('');
+            $('#nama_driver').val('');
+            $('#no_plat').val('');
+            $('#tanggal_selesai').val('');
+            $('#section-dikirim').css('display', 'none');
+            $('#section-selesai').css('display', 'none');
+          } else if($('#select_status').val() == '2'){
+            $('#tanggal_selesai').val('');
+            $('#section-dikirim').css('display', 'block');
+          } else {
+            $('#section-selesai').css('display', 'block');
+          }
+        })
+
       function checkStatus() {
         if($('#select_status').val() == '1') {
           $('#tanggal_kirim').val('');
@@ -1346,7 +1354,7 @@
           $('#section-selesai').css('display', 'none');
         } else if($('#select_status').val() == '2'){
           $('#tanggal_kirim').val(today);
-          $('#tanggal_selesai').val(today);
+          $('#tanggal_selesai').val('');
           $('#section-dikirim').css('display', 'block');
         } else {
           $('#tanggal_kirim').val(today);
