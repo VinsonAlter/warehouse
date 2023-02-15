@@ -44,11 +44,9 @@
                 }
 
                 if(strtotime($row['TglKirim']) != '') {
-                    $tglKirim = date('d-m-Y', strtotime($row['TglKirim']));
-                    $waktuKirim = date('H:i', strtotime($row['TglKirim']));
+                    $tglKirim = date('d-m-Y H:i', strtotime($row['TglKirim']));
                 } else {
                     $tglKirim = "";
-                    $waktuKirim = "";
                 }
 
                 if(strtotime($row['TglSelesai']) != '') {
@@ -64,10 +62,9 @@
                     'kirim' => $row['TglKirim'],
                     // 'customer' => $row['Customer'],
                     // 'tgltransaksi' => date('d-m-Y', strtotime($row['TglTransaksi'])),
-                    'tglTerima' => date('d-m-Y', strtotime($row['TglTerima'])),
-                    'waktuTerima' => date('H:i', strtotime($row['TglTerima'])),
+                    'tglTerima' => date('d-m-Y H:i', strtotime($row['TglTerima'])),
                     'tglKirim' => $tglKirim,
-                    'waktuKirim' => $waktuKirim,
+                    // 'waktuKirim' => $waktuKirim,
                     // 'tglselesai' => $row['TglSelesai'],
                     'jenisPengiriman' => $row['JenisPengiriman'],
                     'wilayah' => $row['Wilayah'],

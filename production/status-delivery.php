@@ -138,6 +138,10 @@
     
     <link rel="stylesheet" type="text/css" href="assets/libs/bootstrap-timepicker/bootstrap-timepicker.min.css"/>
     
+    <!-- Bootstrap Datetimepicker CSS -->
+
+    <link rel="stylesheet" type="text/css" href="assets/libs/bootstrap4-datetimepicker/bootstrap-datetimepicker.min.css"/>
+    
     <!-- Google Font -->
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -384,12 +388,12 @@
                   </div> -->
                 </div>
                 <div class="table-responsive">
-                  <table id="table_delivery" class="table table-bordered table-condensed display compact" style="width:1800px;">
+                  <table id="table_delivery" class="table table-bordered table-condensed display compact">
                     <thead>
                       <tr>
                         <th style="width:10px">No</th>
                         <th>No Transaksi</th>
-                        <th>Customer</th>
+                        <th style="min-width:350px;">Customer</th>
                         <th name='status-pengiriman'>Status</th>
                         <th>Tgl Transaksi</th>
                         <th>Tgl Terima</th>
@@ -459,7 +463,7 @@
                                 </select>
                               </div>
                             </div>
-                            <div class="form-group row">
+                            <!-- <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Tgl Terima</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control mydatepicker" name="tanggal_terima" id="tanggal_terima">
@@ -469,6 +473,19 @@
                               <label class="col-sm-4 control-label col-form-label">Waktu Terima</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control mytimepicker" name="waktu_terima" id="waktu_terima">
+                              </div>
+                            </div> -->
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Jadwal Terima</label>
+                              <div class="col-sm-6">
+                                <div class="input-group date datetimepicker">
+                                  <input class="form-control" type="text" name="tanggal_terima" id="tanggal_terima">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text input-group-addon" style="padding:0.6rem 0.75rem;">
+                                      <span class="fa fa-calendar"></span>
+                                    </span>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                             <div class="form-group row">
@@ -482,7 +499,7 @@
                                 </select>
                               </div>
                             </div>
-                            <div class="form-group row"> 
+                            <!-- <div class="form-group row"> 
                               <label class="col-sm-4 control-label col-form-label">Tgl Kirim</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control mydatepicker" name="tanggal_kirim" id="tanggal_kirim">
@@ -492,6 +509,19 @@
                               <label class="col-sm-4 control-label col-form-label">Waktu Kirim</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control mytimepicker" name="waktu_kirim" id="waktu_kirim">
+                              </div>
+                            </div> -->
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Jadwal Kirim</label>
+                              <div class="col-sm-6">
+                                <div class="input-group date datetimepicker">
+                                  <input class="form-control" type="text" name="tanggal_kirim" id="tanggal_kirim">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text input-group-addon" style="padding:0.6rem 0.75rem;">
+                                      <span class="fa fa-calendar"></span>
+                                    </span>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                             <div class="form-group row">
@@ -603,6 +633,9 @@
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
 
+    <!--Moment JavaScript, needed for bootstrap datetimepicker to work well -->
+    <script src="js/moment.js"></script>
+
     <!-- this page js -->
     <script src="assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
 
@@ -615,6 +648,9 @@
 
     <!-- Bootstrap Timepicker JS -->
     <script src="assets/libs/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+    
+    <!-- Bootstrap Datetimepicker JS -->
+    <script src="assets/libs/bootstrap4-datetimepicker/bootstrap-datetimepicker.js"></script>
 
     <script>
 
@@ -664,6 +700,22 @@
             down: 'fas fa-angle-down'
           }
         })
+
+        // bootstrap4 datetimepicker
+        $(".datetimepicker").datetimepicker({
+          format: 'DD-MM-YYYY HH:mm',
+          icons: {
+            time: 'fas fa-clock',
+            date: 'fas fa-calendar',
+            up: 'fas fa-chevron-up',
+            down: 'fas fa-chevron-down',
+            previous: 'fas fa-chevron-left',
+            next: 'fas fa-chevron-right',
+            today: 'fas fa-check',
+            clear: 'fas fa-trash',
+            close: 'fas fa-times'
+          }
+        })
         
         if(state == '' || state == 'transaksi_on') {
           $('#filter_transaksi').prop('checked', true);
@@ -705,7 +757,9 @@
           "deferRender": true,
           "stateSave": true,
           "stateDuration": -1,
-          "pageLength": 10,
+          "pageLength": 25,
+          "scrollY": '200px',
+          "scrollX": '600px',
           "ajax": {
             url: 'json/data_delivery.php',
           },
@@ -717,7 +771,7 @@
             { orderable: false, targets: [0, 1, 14] },
             // { width: '10%', targets: [3, 5]},
             // { width: '10%', targets: [4, 5, 6]},
-            { width: '20%', targets: 2},
+            { width: '50%', targets: 2},
             { className: 'dt-center', targets: [0, 1, 3, 4, 5, 6, 7, 15]},
             { targets: 3,
               render: function(data){
@@ -1032,9 +1086,9 @@
               const status = res.data.status;
               $('#select_status option[value="' + status + '"').prop('selected', true);
               $('#tanggal_terima').val(res.data.tglTerima);
-              $('#waktu_terima').val(res.data.waktuTerima);
+              // $('#waktu_terima').val(res.data.waktuTerima);
               $('#tanggal_kirim').val(res.data.tglKirim);
-              $('#waktu_kirim').val(res.data.waktuKirim);
+              // $('#waktu_kirim').val(res.data.waktuKirim);
               const picker = res.data.picker;
               $('#select_picker option:contains("'+picker+'")').prop('selected', true);
               const wilayah = res.data.wilayah;
@@ -1045,57 +1099,6 @@
               if(pengiriman != '') {
                 $('#select_pengiriman option[value="' + pengiriman + '"]').prop('selected', true);
               }
-              // $('#status_delivery').val(res.data.status);
-              // $('#tgl_transaksi').val(res.data.tgltransaksi);
-              // $('#nama_owner').val(res.data.nama);
-              // $('#tgl_terima').val(res.data.tglterima);
-              // $('#tgl_kirim').val(res.data.tglkirim);
-              // $('#tgl_selesai').val(res.data.tglselesai);
-              // const kirim = res.data.tglkirim;
-              // const selesai = res.data.tglselesai;
-              // const picker = res.data.picker;
-              // const namaPicker = res.data.namaPicker;
-              // SelectedDriver = res.data.driver;
-              // SelectedDriverName = res.data.namaDriver;
-              // SelectedPlatDriver = res.data.platDriver;
-              // SelectedCustPlat = res.data.platCust;
-              // SelectedCustDriver = res.data.driverCust;
-              // SelectedSales = res.data.sales;
-              // // check if the tglkirim value is null, prop disabled tgl selesai if null
-              // if(kirim == '') {
-              //   $('#tgl_kirim').prop('disabled', false);
-              //   $('#tgl_selesai').prop('disabled', true);
-              //   $('#jenis_pengiriman').hide();
-              // } else {
-              //   $('#tgl_kirim').prop('disabled', true);
-              //   $('#tgl_selesai').prop('disabled', false);
-              //   $('#jenis_pengiriman').show();
-              // }
-              // if(picker == null || picker == '') {
-              //   $('#select_picker').prop('disabled', false);
-              //   $("#select_picker").empty();
-              //   getPicker();
-              // } else {
-              //   $('#select_picker').prop('disabled', true);
-              //   $('#select_picker').empty();
-              //   $('<option>',
-              //   {
-              //     html: namaPicker.concat(' (' + picker + ') '),
-              //     value: picker,
-              //   }).appendTo('#select_picker');
-              // }
-              // if(SelectedCustPlat != '' || SelectedCustPlat != null) {
-              //   $('#driver_cust').val(SelectedCustPlat);
-              // }
-              // if(SelectedCustDriver != '' || SelectedCustDriver != null) {
-              //   $('#plat_cust').val(SelectedCustDriver);
-              // }
-              // $("#select_driver").empty();
-              // getDriver();
-              // $("#select_plat").empty();
-              // getPlat();
-              // $("#select_sales").empty();
-              // getSales();
             }
           },
           error: err => {
@@ -1103,9 +1106,6 @@
           }
         })
       }
-
-      // } else if(picker == $('#select_picker option').val()) {
-              
 
       function getPicker() {
         $.ajax({

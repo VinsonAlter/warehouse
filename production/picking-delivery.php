@@ -344,7 +344,7 @@
                               </div>
                             </div> -->
                             <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label required">Waktu Kirim</label>
+                              <label class="col-sm-4 control-label col-form-label required">Jadwal Kirim</label>
                               <div class="col-sm-6">
                                 <div class="input-group date datetimepicker">
                                   <input class="form-control" type="text" value="<?=$waktuKirim?>" name="waktu_kirim">
@@ -354,12 +354,6 @@
                                     </span>
                                   </div>
                                 </div>
-                                <!-- <div class='input-group-append date' id='datetimepicker'>
-                                  <input type='text' class="form-control" />
-                                  <span class="basic-addon2">
-                                    <span class="fa fa-calendar"></span>
-                                  </span>
-                                </div> -->
                               </div>
                             </div>
                             <!-- <div class="form-group row">
@@ -471,7 +465,7 @@
     <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
     
-    <!--Moment JavaScript -->
+    <!--Moment JavaScript, needed for bootstrap datetimepicker to work well -->
     <script src="js/moment.js"></script>
     
     <!-- this page js -->
@@ -709,7 +703,7 @@
           "stateSave": true,
           "stateDuration": -1,
           "pageLength": 25,
-          "scrollY": '400px',
+          "scrollY": '300px',
           "scrollCollapse": true,
           "ajax": {
             url: "json/getDataDelivery.php"
@@ -722,16 +716,6 @@
             { orderable: false, targets: [0, 1]},
             { targets: 4,
               render: function(data){
-                // switch(data) {
-                //   case 1 :
-                //     return '<b>Diterima</b>';
-                //     break;
-                //   case 2:
-                //     return '<b>Dikirim</b>';
-                //     break;
-                //   default:
-                //     return '<b>Belum Diterima</b>';
-                // }
                 if(data == 1) {
                   return '<b>Diterima</b>';
                 } else if(data == 2) {
@@ -748,17 +732,6 @@
           ],
           "rowCallback": function(row, data, index) {
             const cellValue = data[4];
-            // switch(cellValue) {
-            //   case 1:
-            //     $('td:eq(4)', row).addClass("bg-diterima");
-            //     break;
-            //   case 2:
-            //     $('td:eq(4)', row).addClass("bg-dikirim");
-            //     break;
-            //   default:
-            //     $('td:eq(4)', row).addClass("bg-belum-diterima");
-            //     break;
-            // }
             if(cellValue == 1) {
               $('td:eq(4)', row).addClass("bg-diterima");
             } else if(cellValue == 2) {
