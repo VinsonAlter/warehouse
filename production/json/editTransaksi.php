@@ -25,7 +25,7 @@
                             $ekspedisi = $_POST['nama_ekspedisi'];
                             $driver = $_POST['nama_driver'];
                             $plat = $_POST['no_plat'];
-                            if(isset($_POST['tanggal_selesai']) ? $jadwalSelesai = date_hour_to_str($_POST['tanggal_selesai'] . ':00') : '');
+                            if(isset($_POST['tanggal_selesai']) ? $jadwalSelesai = date_hour_to_str($_POST['tanggal_selesai'] . ':00') : $jadwalSelesai = '');
                         } else {
                             $res['success'] = 0;
                             $res['message'] = 'Jadwal Pengiriman tidak boleh ditentukan sebelum Jadwal Penerimaan Transaksi';
@@ -45,7 +45,7 @@
                                 $ekspedisi = $_POST['nama_ekspedisi'];
                                 $driver = $_POST['nama_driver'];
                                 $plat = $_POST['no_plat'];
-                                if(isset($_POST['tanggal_selesai']) ? $jadwalSelesai = date_hour_to_str($_POST['tanggal_selesai'] . ':00') : '');
+                                if(isset($_POST['tanggal_selesai']) ? $jadwalSelesai = date_hour_to_str($_POST['tanggal_selesai'] . ':00') : $jadwalSelesai = '');
                             } else {
                                 $res['success'] = 0;
                                 $res['message'] = 'Jadwal Selesai tidak boleh ditentukan sebelum Jadwal Penerimaan dan Pengiriman Transaksi';
@@ -58,13 +58,13 @@
                     }
                 default:
                     $picker = $_POST['select_picker'];
-                    if(isset($_POST['tanggal_kirim']) ? $jadwalKirim = date_hour_to_str($_POST['tanggal_kirim'] . ':00')  : '');
-                    if(isset($_POST['select_pengiriman']) ? $jenisPengiriman = $_POST['select_pengiriman'] : '');
-                    if(isset($_POST['wilayah_pengiriman']) ? $wilayahPengiriman = $_POST['wilayah_pengiriman'] : '');
-                    if(isset($_POST['nama_ekspedisi']) ? $ekspedisi = $_POST['nama_ekspedisi'] : '');
-                    if(isset($_POST['nama_driver']) ? $driver = $_POST['nama_driver'] : '');
-                    if(isset($_POST['no_plat']) ? $plat = $_POST['no_plat'] : '');
-                    if(isset($_POST['tanggal_selesai']) ? $jadwalSelesai = date_hour_to_str($_POST['tanggal_selesai'] . ':00') : '');
+                    if(isset($_POST['tanggal_kirim']) ? $jadwalKirim = date_hour_to_str($_POST['tanggal_kirim'] . ':00')  : $jadwalKirim = '');
+                    if(isset($_POST['select_pengiriman']) ? $jenisPengiriman = $_POST['select_pengiriman'] : $jenisPengiriman = '');
+                    if(isset($_POST['wilayah_pengiriman']) ? $wilayahPengiriman = $_POST['wilayah_pengiriman'] : $wilayahPengiriman = '');
+                    if(isset($_POST['nama_ekspedisi']) ? $ekspedisi = $_POST['nama_ekspedisi'] : $ekspedisi = '');
+                    if(isset($_POST['nama_driver']) ? $driver = $_POST['nama_driver'] : $driver = '');
+                    if(isset($_POST['no_plat']) ? $plat = $_POST['no_plat'] : $plat = '');
+                    if(isset($_POST['tanggal_selesai']) ? $jadwalSelesai = date_hour_to_str($_POST['tanggal_selesai'] . ':00') : $jadwalSelesai = '');
                     break;
             }
             $update = "UPDATE [WMS].[dbo].[TB_Delivery] SET
