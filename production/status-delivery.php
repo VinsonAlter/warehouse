@@ -1146,10 +1146,18 @@
           data: $('#form-edit').serialize(),
           success: result => {
             const res = $.parseJSON(result);
+            if(res.success == 1) {
+              $('#masterModalEdit').modal('hide');
+              $('#table_delivery').DataTable().ajax.reload();
+            } alert(res.message);
+          },
+          error: err => {
+            console.error(err.statusText);
           }
         })
       }
-   
+      
+      // unused function
       // function initEdit() {
       //   $.ajax({
       //     type: "post",

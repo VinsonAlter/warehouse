@@ -68,21 +68,23 @@
                     break;
             }
             $update = "UPDATE [WMS].[dbo].[TB_Delivery] SET
-                        Status = :status, TglTerima = '$jadwalTerima', NamaPicker = :picker,
-                        TglKirim = '$jadwalKirim', TglSelesai = '$jadwalSelesai', JenisPengiriman = :pengiriman,
+                        Status = :status, TglTerima = :terima, NamaPicker = :picker,
+                        TglKirim = :kirim, TglSelesai = :selesai, JenisPengiriman = :pengiriman,
                         Wilayah = :wilayah, NamaEkspedisi = :ekspedisi,
-                        NamaDriver = :driver, NoPlat = :plat";
+                        NamaDriver = :driver, NoPlat = :plat
+                        WHERE NoTransaksi = :transaksi";
             $stmt2 = $pdo->prepare($update, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
             $stmt2->bindParam(":status", $status, PDO::PARAM_INT);
-            // $stmt2->bindParam(":terima", $jadwalTerima, PDO::PARAM_STR);
+            $stmt2->bindParam(":terima", $jadwalTerima, PDO::PARAM_STR);
             $stmt2->bindParam(":picker", $picker, PDO::PARAM_STR);
-            // $stmt2->bindParam(":kirim", $jadwalKirim, PDO::PARAM_STR);
-            // $stmt2->bindParam(":selesai", $jadwalSelesai, PDO::PARAM_STR);
+            $stmt2->bindParam(":kirim", $jadwalKirim, PDO::PARAM_STR);
+            $stmt2->bindParam(":selesai", $jadwalSelesai, PDO::PARAM_STR);
             $stmt2->bindParam(":pengiriman", $jenisPengiriman, PDO::PARAM_STR);
             $stmt2->bindParam(":wilayah", $wilayahPengiriman, PDO::PARAM_STR);
             $stmt2->bindParam(":ekspedisi", $ekspedisi, PDO::PARAM_STR);
             $stmt2->bindParam(":driver", $driver, PDO::PARAM_STR);
             $stmt2->bindParam(":plat", $plat, PDO::PARAM_STR);
+            $stmt2->bindParam(":transaksi", $noTransaksi, PDO::PARAM_STR);
             $stmt2->execute();
             if($stmt2->rowCount() > 0) {
                 $res['success'] = 1;

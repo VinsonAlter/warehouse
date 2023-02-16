@@ -789,12 +789,12 @@
           })
         })
 
-        $('#confirm_kirim').click((e) => {
+        $('#confirm_selesai').click((e) => {
           e.preventDefault();
           const CheckValues = checkValues.join(" ; ");
           $.ajax({
             type: "post",
-            url: 'json/confirmTransaksiSelesai.php',
+            url: 'json/confirmSelesai.php',
             data: {batch: CheckValues},
             success: result => {
               checkValues = [];
@@ -809,7 +809,7 @@
             }
           })
         })
-
+        
         tablePicking.on('draw.dt', () => {
           $('tr').find("input[type='checkbox']").on('click', function() {
             if ($(this).prop('checked') === true) {
