@@ -278,24 +278,22 @@
                       </div>
                     </div>
                   </form>
-                  <div id = "edit_part" style="display:none;">
-                    <hr/>
-                    <div class="ms-auto text-end d-flex mb-3">
-                      <h5 class="self-centered col-2 mr-12 page-title">Select Picker : </h5>
-                      <select
-                        class="cp select2 form-select shadow-none mr-12"
-                          style="width: 50%; height:36px;"
-                          id="select_picker" name="picker">
-                      </select>
-                      <button class="btn btn-cyan mr-12" type="button" id="update_pick" name="update_terima"
-                        style="width:180px;height:36px;">Update Picking</button>
-                      <button class="btn btn-warning mr-12" data-bs-toggle="modal" data-bs-target="#masterModalKirim" type="button" id="update_kirim" name="update_kirim"
-                        style="width:180px;height:36px;">Update Kirim</button>
-                      <button class="btn btn-secondary" type="button" id="confirm_selesai" name="confirm_selesai"
-                        style="width:180px;height:36px;">Confirm Selesai</button>
-                    </div>
-                    <hr/>
+                  <hr/>
+                  <div class="ms-auto text-end d-flex mb-3">
+                    <h5 class="self-centered col-2 mr-12 page-title">Select Picker : </h5>
+                    <select
+                      class="cp select2 form-select shadow-none mr-12"
+                      style="width: 50%; height:36px;"
+                      id="select_picker" name="picker">
+                    </select>
+                    <button class="btn btn-cyan mr-12" type="button" id="update_pick" name="update_terima"
+                      style="width:180px;height:36px;">Update Picking</button>
+                    <button class="btn btn-warning mr-12" data-bs-toggle="modal" data-bs-target="#masterModalKirim" type="button" id="update_kirim" name="update_kirim"
+                      style="width:180px;height:36px;">Update Kirim</button>
+                    <button class="btn btn-secondary" type="button" id="confirm_selesai" name="confirm_selesai"
+                      style="width:180px;height:36px;">Confirm Selesai</button>
                   </div>
+                  <hr/>
                 </div>
                 <div class="table-responsive">
                   <table id="table_picking" class="cp table table-bordered table-condensed display compact">
@@ -514,13 +512,13 @@
 
       var date = '<?php echo date('d-m-Y')?>'
 
-      function check() {
-        if(checkValues == '') {
-          $('#edit_part').css('display', 'none');
-        } else {
-          $('#edit_part').css('display', 'block');
-        }
-      }
+      // function check() {
+      //   if(checkValues == '') {
+      //     $('#edit_part').css('display', 'none');
+      //   } else {
+      //     $('#edit_part').css('display', 'block');
+      //   }
+      // }
       
       $('#update_kirim').click((e) => {
         e.preventDefault();
@@ -759,24 +757,22 @@
             }
           },
           "drawCallback": function( settings ) {
-            checkValues = [];
-            $("input[type=checkbox]").prop('checked', false);
-            $("input[type=checkbox]").closest('tr').removeClass('highlight');
-            // work around fixedColumns highlight
-            $("input[type=checkbox]").closest('tr .dtfc-fixed-left').removeClass('highlight');
-            $("input[type=checkbox]").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');
+            $('#select_all').prop('checked', false);
+            $('thead tr').removeClass('highlight');
+            $('#select_all').closest('tr').removeClass('highlight');
+            $('#select_all').closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');
+            for(i = 0; i < checkValues.length; i++) {
+              var check = checkValues[i].split(' , ');
+              $(`#${check[0]}`).prop('checked', true);
+              $(`#${check[0]}`).closest('tr').addClass('highlight');
+              $(`#${check[0]}`).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
+            }
+            console.log(checkValues);
           } 
         });
 
         $('#update_pick').click((e) => {
           e.preventDefault();
-          // let checkValues = []; 
-          // $('#checkbox_val:checked').map(function(){
-          // console.log($(this).val());
-          // return $(this).val();
-          // checkValues.push($(this).val());
-          // $(this).prop('checked', false);
-          // })
           const picker = $('#select_picker').val();
           // alert(Picker);
           // alert(checkValues);
@@ -831,16 +827,12 @@
               $(this).closest('tr .dtfc-fixed-left').addClass('highlight');
               $(this).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
               checkValues.push($(this).val());
-              check();
-              console.log(checkValues);
             } else {
               $(this).closest('tr').removeClass('highlight');
               // work around fixedColumns highlight
               $(this).closest('tr .dtfc-fixed-left').removeClass('highlight');
               $(this).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');	  
               checkValues.pop($(this).val());
-              check();
-              console.log(checkValues);
             }
           });
 
@@ -853,29 +845,21 @@
               // work around fixedColumns highlight
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').addClass('highlight');
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
-              $($('td #checkbox_val').prop('checked', true)).map(function(){
+              $($("input[name='checkboxes[]']").prop('checked', true)).map(function(){
                 checkValues.push($(this).val());
-                // checkValues.shift($(this).val());
               })
-              checkValues.shift($(this).val());
-              check();
-              console.log(checkValues);
+              var upper = $('#select_all').val();
+              checkValues.splice($.inArray('on', checkValues), 1);
             } else {
               $("input[type='checkbox']").closest('tr').removeClass('highlight');
               // work around fixedColumns highlight
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').removeClass('highlight');
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');
-              $($('td #checkbox_val').prop('checked', false)).map(function(){
-                checkValues = [];
+              $($("input[name='checkboxes[]']").prop('checked', false)).map(function(){
+                checkValues.pop($(this).val());
               })
-              check();
-              console.log(checkValues);
+              // console.log(checkValues);
             }
-            // if ($(this).is( ":checked" )) {
-            //     tablePicking.rows(  ).select();        
-            // } else {
-            //     tablePicking.rows(  ).deselect(); 
-            // }
 				  });
 
           
