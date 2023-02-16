@@ -39,6 +39,7 @@
           $_SESSION['FilterAkhirTransaksi'] = date('d-m-Y');
           $_SESSION['FilterTglTerima'] = date('d-m-Y');
           $_SESSION['FilterAkhirTerima'] = date('d-m-Y');
+          break;
         default:
           $status = 'transaksi_on';
           $_SESSION['StatusFilter'] = $status;
