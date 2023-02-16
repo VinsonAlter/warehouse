@@ -226,20 +226,7 @@
           <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
               <h4 class="page-title">Picking & Delivery</h4>
-              <div class="ms-auto text-end d-flex">
-                <h5 class="self-centered col-2 mr-12 page-title">Select Picker : </h5>
-                <select
-                  class="cp select2 form-select shadow-none mr-12"
-                    style="width: 50%; height:36px;"
-                    id="select_picker" name="picker">
-                </select>
-                <button class="btn btn-cyan mr-12" type="button" id="update_pick" name="update_terima"
-                  style="width:180px;height:36px;">Update Picking</button>
-                <button class="btn btn-warning mr-12" data-bs-toggle="modal" data-bs-target="#masterModalKirim" type="button" id="update_kirim" name="update_kirim"
-                  style="width:180px;height:36px;">Update Kirim</button>
-                <button class="btn btn-secondary" type="button" id="confirm_selesai" name="confirm_selesai"
-                  style="width:180px;height:36px;">Confirm Selesai</button>
-              </div>
+              
             </div>
           </div>
         </div>
@@ -291,6 +278,24 @@
                       </div>
                     </div>
                   </form>
+                  <div id = "edit_part" style="display:none;">
+                    <hr/>
+                    <div class="ms-auto text-end d-flex mb-3">
+                      <h5 class="self-centered col-2 mr-12 page-title">Select Picker : </h5>
+                      <select
+                        class="cp select2 form-select shadow-none mr-12"
+                          style="width: 50%; height:36px;"
+                          id="select_picker" name="picker">
+                      </select>
+                      <button class="btn btn-cyan mr-12" type="button" id="update_pick" name="update_terima"
+                        style="width:180px;height:36px;">Update Picking</button>
+                      <button class="btn btn-warning mr-12" data-bs-toggle="modal" data-bs-target="#masterModalKirim" type="button" id="update_kirim" name="update_kirim"
+                        style="width:180px;height:36px;">Update Kirim</button>
+                      <button class="btn btn-secondary" type="button" id="confirm_selesai" name="confirm_selesai"
+                        style="width:180px;height:36px;">Confirm Selesai</button>
+                    </div>
+                    <hr/>
+                  </div>
                 </div>
                 <div class="table-responsive">
                   <table id="table_picking" class="cp table table-bordered table-condensed display compact">
@@ -509,6 +514,14 @@
 
       var date = '<?php echo date('d-m-Y')?>'
 
+      function check() {
+        if(checkValues == '') {
+          $('#edit_part').css('display', 'none');
+        } else {
+          $('#edit_part').css('display', 'block');
+        }
+      }
+      
       $('#update_kirim').click((e) => {
         e.preventDefault();
         const checkKirim = checkValues.join(" ; ");
@@ -818,6 +831,7 @@
               $(this).closest('tr .dtfc-fixed-left').addClass('highlight');
               $(this).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
               checkValues.push($(this).val());
+              check();
               console.log(checkValues);
             } else {
               $(this).closest('tr').removeClass('highlight');
@@ -825,6 +839,7 @@
               $(this).closest('tr .dtfc-fixed-left').removeClass('highlight');
               $(this).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');	  
               checkValues.pop($(this).val());
+              check();
               console.log(checkValues);
             }
           });
@@ -843,6 +858,7 @@
                 // checkValues.shift($(this).val());
               })
               checkValues.shift($(this).val());
+              check();
               console.log(checkValues);
             } else {
               $("input[type='checkbox']").closest('tr').removeClass('highlight');
@@ -852,6 +868,7 @@
               $($('td #checkbox_val').prop('checked', false)).map(function(){
                 checkValues = [];
               })
+              check();
               console.log(checkValues);
             }
             // if ($(this).is( ":checked" )) {
