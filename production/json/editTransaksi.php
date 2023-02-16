@@ -108,7 +108,7 @@
                             }
                         } else {
                             $res['success'] = 0;
-                            $res['message'] = 'Jadwal Pengiriman tidak boleh ditentukan sebelum Jadwal Penerimaan Transaksi';
+                            $res['message'] = 'Jadwal Kirim tidak boleh ditentukan sebelum Jadwal Penerimaan Transaksi';
                         }
                         break;
                     }
