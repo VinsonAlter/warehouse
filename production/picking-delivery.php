@@ -389,7 +389,7 @@
                               <div class="col-sm-6">
                                 <select
                                     class="cp select2 shadow-none form-select"
-                                    id="wilayah_pengiriman" name="wilayah_pengiriman"
+                                    id="wilayah_pengiriman" name="wilayah_pengiriman" onchange="javascript:tempat_pengiriman()"
                                   >
                                   <option value="" selected="selected" disabled>Pilih Wilayah Pengiriman</option>
                                   <option value="Dalam Kota">Dalam Kota</option>
@@ -533,6 +533,21 @@
           $('#driver_section').removeClass('display-none');
           $('#plat_section').removeClass('display-none');
           $('#section_wilayah').removeClass('display-none');
+        }
+      }
+
+      function tempat_pengiriman() {
+        if($('#wilayah_pengiriman').val() == 'Dalam Kota') {
+          $('#nama_ekspedisi').val('');
+          $('#ekspedisi_section').addClass('display-none');
+          $('#driver_section').removeClass('display-none');
+          $('#plat_section').removeClass('display-none');
+        } else {
+          $('#ekspedisi_section').removeClass('display-none');
+          $('#nama_driver').val('');
+          $('#no_plat').val('');
+          $('#driver_section').addClass('display-none');
+          $('#plat_section').addClass('display-none');
         }
       }
       
