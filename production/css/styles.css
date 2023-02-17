@@ -1,3 +1,7 @@
+.display-none {
+    display: none;
+}
+
 .ml-right-16 {
     margin-left: -16px;
 }

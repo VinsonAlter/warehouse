@@ -337,7 +337,7 @@
                         <div class="modal-body pt-none pb-none">
                           <div class="card-body pb-none">
                             <div class="d-none form-group row">
-                              <label class="col-sm-4 control-label col-form-label required">No Transaksi</label>
+                              <label class="col-sm-4 control-label col-form-label">No Transaksi</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="no_transaksi" name="NomorTransaksi" readonly="readonly">
                               </div>
@@ -350,7 +350,7 @@
                               </div>
                             </div> -->
                             <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label required">Jadwal Kirim</label>
+                              <label class="col-sm-4 control-label col-form-label">Jadwal Kirim</label>
                               <div class="col-sm-6">
                                 <div class="input-group date datetimepicker">
                                   <input class="form-control" type="text" value="<?=$waktuKirim?>" name="waktu_kirim">
@@ -370,12 +370,12 @@
                               </div>
                             </div> -->
                             <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label required">Jenis Pengiriman</label>
+                              <label class="col-sm-4 control-label col-form-label">Jenis Pengiriman</label>
                               <div class="d-flex col-sm-6">
                                 <select
                                   class="cp select2 shadow-none form-select"
                                   style="width: 100%; height: 36px"
-                                  id="select_pengiriman" name="select_pengiriman"
+                                  id="select_pengiriman" name="select_pengiriman" onchange="javascript:tipe_pengiriman()"
                                 >
                                   <option value="Kirim Customer">Kirim ke Customer</option>
                                   <option value="Ambil Sendiri">Ambil Sendiri</option>
@@ -384,7 +384,7 @@
                               </div>
                             </div>
                             <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label required">Wilayah</label>
+                              <label class="col-sm-4 control-label col-form-label">Wilayah</label>
                               <div class="col-sm-6">
                                 <select
                                     class="cp select2 shadow-none form-select"
@@ -395,14 +395,14 @@
                                 </select>
                               </div>
                             </div>
-                            <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label required">Nama Ekspedisi</label>
+                            <div class="form-group row" id="ekspedisi_section">
+                              <label class="col-sm-4 control-label col-form-label">Nama Ekspedisi</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="nama_ekspedisi" name="nama_ekspedisi">
                               </div>
                             </div>
-                            <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label required">Nama Driver</label>
+                            <div class="form-group row" id="driver_section">
+                              <label class="col-sm-4 control-label col-form-label">Nama Driver</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="nama_driver" name="nama_driver">
                               </div>
@@ -417,8 +417,8 @@
                                 </select>
                               </div>
                             </div>
-                            <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label required">No. Plat</label>
+                            <div class="form-group row" id="plat_section">
+                              <label class="col-sm-4 control-label col-form-label">No. Plat</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="no_plat" name="no_plat">
                               </div>
@@ -503,6 +503,29 @@
         if($('#select_plat option:selected').val() != '') {
           $('#no_plat').val($('#select_plat').val());
           $('#select_plat').val('');
+        }
+      }
+
+      function tipe_pengiriman() {
+        if($('#select_pengiriman').val() == 'Ambil Sendiri')  {
+          $('#nama_ekspedisi').val('');
+          $('#nama_driver').val('');
+          $('#no_plat').val('');
+          $('#ekspedisi_section').addClass('display-none');
+          $('#driver_section').addClass('display-none');
+          $('#plat_section').addClass('display-none');
+        } 
+        else if($('#select_pengiriman').val() == 'Via Sales') {
+          $('#nama_ekspedisi').val('');
+          $('#nama_driver').val('');
+          $('#no_plat').val('');
+          $('#ekspedisi_section').addClass('display-none');
+          $('#driver_section').addClass('display-none');
+          $('#plat_section').addClass('display-none');
+        } else {
+          $('#ekspedisi_section').removeClass('display-none');
+          $('#driver_section').removeClass('display-none');
+          $('#plat_section').removeClass('display-none');
         }
       }
       
@@ -846,16 +869,6 @@
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').addClass('highlight');
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
               $($("input[name='checkboxes[]']").prop('checked', true)).map(function(){
-                // const chosen = $("input[name='checkboxes[]']:checked").val();
-                // if(!($.inArray(chosen, checkValues))) {
-                //   checkValues.push($(this).val());
-                // }
-                // const empty = [];
-                // for(var i = 0; i < checkValues.length; i++) {
-                //   if(empty.indexOf(checkValues[i] === -1)) {
-                //     checkValues.push($(this).val());
-                //   }
-                // }
                 checkValues.push($(this).val());
                 checkValues = checkValues.filter((value, index, array) => {
                   return array.indexOf(value) == index;
