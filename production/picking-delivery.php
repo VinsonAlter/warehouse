@@ -872,26 +872,24 @@
 			    tablePicking.column(1, { page: 'current' }).nodes().each((cell, i) => {
 				    cell.innerHTML = i + 1 + PageInfo.start
 			    })
+
+          $('tr').find("input[name='checkboxes[]']").on('click', function() {
+            if ($(this).prop('checked') === true) {
+              $(this).closest('tr').addClass('highlight');
+              // work around fixedColumns highlight
+              $(this).closest('tr .dtfc-fixed-left').addClass('highlight');
+              $(this).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
+              checkValues.push($(this).val());
+            } else {
+              $(this).closest('tr').removeClass('highlight');
+              // work around fixedColumns highlight
+              $(this).closest('tr .dtfc-fixed-left').removeClass('highlight');
+              $(this).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');	  
+              checkValues.pop($(this).val());
+            }
+          });
         }) 
       })
-
-     
-
-      $('tr').find("input[name='checkboxes[]']").on('click', function() {
-        if ($(this).prop('checked') === true) {
-          $(this).closest('tr').addClass('highlight');
-          // work around fixedColumns highlight
-          $(this).closest('tr .dtfc-fixed-left').addClass('highlight');
-          $(this).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
-          checkValues.push($(this).val());
-        } else {
-          $(this).closest('tr').removeClass('highlight');
-          // work around fixedColumns highlight
-          $(this).closest('tr .dtfc-fixed-left').removeClass('highlight');
-          $(this).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');	  
-          checkValues.pop($(this).val());
-        }
-      });
 
       /* initiate select all checkboxes highlight */ 
 			$('tr').find('#select_all').on('click', function() {
