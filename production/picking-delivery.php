@@ -377,19 +377,21 @@
                                   style="width: 100%; height: 36px"
                                   id="select_pengiriman" name="select_pengiriman" onchange="javascript:tipe_pengiriman()"
                                 >
+                                  <option value="" selected="selected" disabled>Pilih Jenis Pengiriman</option>
                                   <option value="Kirim Customer">Kirim ke Customer</option>
                                   <option value="Ambil Sendiri">Ambil Sendiri</option>
                                   <option value="Via Sales">Via Sales</option>
                                 </select>
                               </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row" id="section_wilayah">
                               <label class="col-sm-4 control-label col-form-label">Wilayah</label>
                               <div class="col-sm-6">
                                 <select
                                     class="cp select2 shadow-none form-select"
                                     id="wilayah_pengiriman" name="wilayah_pengiriman"
                                   >
+                                  <option value="" selected="selected" disabled>Pilih Wilayah Pengiriman</option>
                                   <option value="Dalam Kota">Dalam Kota</option>
                                   <option value="Luar Kota">Luar Kota</option>
                                 </select>
@@ -514,6 +516,8 @@
           $('#ekspedisi_section').addClass('display-none');
           $('#driver_section').addClass('display-none');
           $('#plat_section').addClass('display-none');
+          $('#wilayah_pengiriman option[value=""]').prop('selected', true);
+          $('#section_wilayah').addClass('display-none');
         } 
         else if($('#select_pengiriman').val() == 'Via Sales') {
           $('#nama_ekspedisi').val('');
@@ -522,10 +526,13 @@
           $('#ekspedisi_section').addClass('display-none');
           $('#driver_section').addClass('display-none');
           $('#plat_section').addClass('display-none');
+          $('#wilayah_pengiriman option[value=""]').prop('selected', true);
+          $('#section_wilayah').addClass('display-none');
         } else {
           $('#ekspedisi_section').removeClass('display-none');
           $('#driver_section').removeClass('display-none');
           $('#plat_section').removeClass('display-none');
+          $('#section_wilayah').removeClass('display-none');
         }
       }
       
