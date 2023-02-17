@@ -846,7 +846,20 @@
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').addClass('highlight');
               $("input[type='checkbox']").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
               $($("input[name='checkboxes[]']").prop('checked', true)).map(function(){
+                // const chosen = $("input[name='checkboxes[]']:checked").val();
+                // if(!($.inArray(chosen, checkValues))) {
+                //   checkValues.push($(this).val());
+                // }
+                // const empty = [];
+                // for(var i = 0; i < checkValues.length; i++) {
+                //   if(empty.indexOf(checkValues[i] === -1)) {
+                //     checkValues.push($(this).val());
+                //   }
+                // }
                 checkValues.push($(this).val());
+                checkValues = checkValues.filter((value, index, array) => {
+                  return array.indexOf(value) == index;
+                })
               })
               var upper = $('#select_all').val();
               checkValues.splice($.inArray('on', checkValues), 1);
