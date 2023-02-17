@@ -864,54 +864,9 @@
           })
         })
         
-        tablePicking.on('draw.dt', () => {
-          $('tr').find("input[type='checkbox']").on('click', function() {
-            if ($(this).prop('checked') === true) {
-              $(this).closest('tr').addClass('highlight');
-              // work around fixedColumns highlight
-              $(this).closest('tr .dtfc-fixed-left').addClass('highlight');
-              $(this).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
-              checkValues.push($(this).val());
-            } else {
-              $(this).closest('tr').removeClass('highlight');
-              // work around fixedColumns highlight
-              $(this).closest('tr .dtfc-fixed-left').removeClass('highlight');
-              $(this).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');	  
-              checkValues.pop($(this).val());
-            }
-          });
-
-          /* initiate select all checkboxes highlight */ 
-
-				  $('tr').find('#select_all').on('click', function() {
-					  $("input[type='checkbox']").prop('checked', $(this).prop('checked'));
-					  if ($(this).prop('checked') === true) {
-						  $("input[type='checkbox']").closest('tr').addClass('highlight');
-              // work around fixedColumns highlight
-              $("input[type='checkbox']").closest('tr .dtfc-fixed-left').addClass('highlight');
-              $("input[type='checkbox']").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
-              $($("input[name='checkboxes[]']").prop('checked', true)).map(function(){
-                checkValues.push($(this).val());
-                checkValues = checkValues.filter((value, index, array) => {
-                  return array.indexOf(value) == index;
-                })
-              })
-              var upper = $('#select_all').val();
-              checkValues.splice($.inArray('on', checkValues), 1);
-            } else {
-              $("input[type='checkbox']").closest('tr').removeClass('highlight');
-              // work around fixedColumns highlight
-              $("input[type='checkbox']").closest('tr .dtfc-fixed-left').removeClass('highlight');
-              $("input[type='checkbox']").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');
-              $($("input[name='checkboxes[]']").prop('checked', false)).map(function(){
-                checkValues.pop($(this).val());
-              })
-              // console.log(checkValues);
-            }
-				  });
-
-          
-        })
+        // tablePicking.on('draw.dt', () => {
+        //   checkValues.splice($.inArray('on', checkValues), 1);
+        // })
 
         // tablePicking.on('draw.dt', () => {
         //   const PageInfo = $('#table_picking').DataTable().page.info();
@@ -920,6 +875,54 @@
 			  //   })
         // }) 
       })
+
+     
+
+      $('tr').find("input[name='checkboxes[]']").on('click', function() {
+        if ($(this).prop('checked') === true) {
+          $(this).closest('tr').addClass('highlight');
+          // work around fixedColumns highlight
+          $(this).closest('tr .dtfc-fixed-left').addClass('highlight');
+          $(this).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
+          checkValues.push($(this).val());
+        } else {
+          $(this).closest('tr').removeClass('highlight');
+          // work around fixedColumns highlight
+          $(this).closest('tr .dtfc-fixed-left').removeClass('highlight');
+          $(this).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');	  
+          checkValues.pop($(this).val());
+        }
+      });
+
+      /* initiate select all checkboxes highlight */ 
+			$('tr').find('#select_all').on('click', function() {
+				$("input[type='checkbox']").prop('checked', $(this).prop('checked'));
+					if ($(this).prop('checked') === true) {
+            // checkValues.splice($.inArray('on', checkValues), 1);
+						$("input[type='checkbox']").closest('tr').addClass('highlight');
+            // work around fixedColumns highlight
+            $("input[type='checkbox']").closest('tr .dtfc-fixed-left').addClass('highlight');
+            $("input[type='checkbox']").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
+            $("input[name='checkboxes[]']").prop('checked', true).map(function(){
+              // checkValues.splice($.inArray('on', checkValues), 1);
+              checkValues.push($(this).val());        
+              checkValues = checkValues.filter((value, index, array) => {
+                return array.indexOf(value) == index;
+              }) 
+            })
+          } else {
+          // checkValues.splice($.inArray('on', checkValues), 1);
+          $("input[type='checkbox']").closest('tr').removeClass('highlight');
+          // work around fixedColumns highlight
+          $("input[type='checkbox']").closest('tr .dtfc-fixed-left').removeClass('highlight');
+          $("input[type='checkbox']").closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').removeClass('highlight');
+          $("input:checkbox[name='checkboxes[]']:not(:checked)").each(function(){
+            var pos = checkValues.indexOf($(this).val());
+            checkValues.splice(pos, 1);
+            $(this).prop('checked', false);
+          })
+        }
+			});
 
       function enable_transaksi() {
         $('#tgl_transaksi').prop('disabled', false);
