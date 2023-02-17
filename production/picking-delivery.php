@@ -775,7 +775,7 @@
           "order": [[1, "asc"]],
           "columnDefs": [
             { orderable: false, targets: 0},
-            { targets: 4,
+            { targets: 5,
               render: function(data){
                 if(data == 1) {
                   return '<b>Diterima</b>';
@@ -790,18 +790,18 @@
               }
             },
             { width: '20px', targets: 1},
-            { className: 'dt-center', targets: [4]}
+            { className: 'dt-center', targets: 5}
           ],
           "rowCallback": function(row, data, index) {
-            const cellValue = data[4];
+            const cellValue = data[5];
             if(cellValue == 1) {
-              $('td:eq(4)', row).addClass("bg-diterima");
+              $('td:eq(5)', row).addClass("bg-diterima");
             } else if(cellValue == 2) {
-              $('td:eq(4)', row).addClass("bg-dikirim");
+              $('td:eq(5)', row).addClass("bg-dikirim");
             } else if(cellValue == 3) {
-              $('td:eq(4)', row).addClass("bg-selesai");
+              $('td:eq(5)', row).addClass("bg-selesai");
             } else {
-              $('td:eq(4)', row).addClass("bg-belum-diterima");
+              $('td:eq(5)', row).addClass("bg-belum-diterima");
             }
           },
           "drawCallback": function( settings ) {
