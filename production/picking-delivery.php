@@ -300,6 +300,7 @@
                     <thead>
                       <tr>
                         <th><input type="checkbox" id="select_all" class="cp"></th>
+                        <th>No</th>
                         <th>No Transaksi</th>
                         <th>Tanggal Transaksi</th>
                         <th>Customer</th>
@@ -311,6 +312,7 @@
                     </thead>
                     <tbody>
                       <tr>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -772,7 +774,7 @@
           },
           "order": [[1, "asc"]],
           "columnDefs": [
-            { orderable: false, targets: [0, 1]},
+            { orderable: false, targets: 0},
             { targets: 4,
               render: function(data){
                 if(data == 1) {
@@ -787,6 +789,7 @@
                 }
               }
             },
+            { width: '20px', targets: 1},
             { className: 'dt-center', targets: [4]}
           ],
           "rowCallback": function(row, data, index) {
@@ -863,17 +866,13 @@
             }
           })
         })
-        
-        // tablePicking.on('draw.dt', () => {
-        //   checkValues.splice($.inArray('on', checkValues), 1);
-        // })
 
-        // tablePicking.on('draw.dt', () => {
-        //   const PageInfo = $('#table_picking').DataTable().page.info();
-			  //   tablePicking.column(0, { page: 'current' }).nodes().each((cell, i) => {
-				//     cell.innerHTML = i + 1 + PageInfo.start
-			  //   })
-        // }) 
+        tablePicking.on('draw.dt', () => {
+          const PageInfo = $('#table_picking').DataTable().page.info();
+			    tablePicking.column(1, { page: 'current' }).nodes().each((cell, i) => {
+				    cell.innerHTML = i + 1 + PageInfo.start
+			    })
+        }) 
       })
 
      

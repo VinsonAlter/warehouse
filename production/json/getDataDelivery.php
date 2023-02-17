@@ -106,6 +106,7 @@
                     $checkbox = '<input type="checkbox" value="' . $idTransaksi . " , " . $transaksi .  " , "  . $convert_tglTransaksi . " , " . $customer . " , " . $status . " , " . $sales . $accept . '" id="'.$idTransaksi.'" name="checkboxes[]" class="cp">';
                     $data[] = array(
                         $checkbox,
+                        $urut,
                         $transaksi,
                         $tglTransaksi,
                         $customer,
@@ -118,7 +119,7 @@
                 $pdo = null;
             }
             if(!empty($data)){
-                $sort1 = $sort2 = $sort3 = $sort4 = $sort5 = $sort6 = $sort7 = array();
+                $sort1 = $sort2 = $sort3 = $sort4 = $sort5 = $sort6 = $sort7 = $sort8 = array();
             }
             foreach($data as $key => $value) {
                 $sort1[$key] = $value[1];
@@ -128,6 +129,7 @@
                 $sort5[$key] = $value[5];
                 $sort6[$key] = $value[6];
                 $sort7[$key] = $value[7];
+                $sort8[$key] = $value[8];
             }
             if(isset($_REQUEST['order']) && count($_REQUEST['order'])) {
                 for($i = 0, $ien = count($_REQUEST['order']); $i < $ien; $i++) {
@@ -154,6 +156,9 @@
                             case 7:
                                 array_multisort($sort7, $dir, $data);
                                 break;
+                            case 8:
+                                array_multisort($sort8, $dir, $data);
+                                break;
                             default:
                                 array_multisort($sort1, $dir, $data);
                                 break;
@@ -168,16 +173,16 @@
 
             // Datetime Formatting
             for ($i=0;$i<count($data);$i++) {
-                $data[$i][2] = date('d-m-Y', strtotime($data[$i][2]));
-                if (strtotime($data[$i][5]) != '') {
-                    $data[$i][5] = date('d-m-Y H:i:s', strtotime($data[$i][5]));
+                $data[$i][3] = date('d-m-Y', strtotime($data[$i][3]));
+                if (strtotime($data[$i][6]) != '') {
+                    $data[$i][6] = date('d-m-Y H:i:s', strtotime($data[$i][6]));
                 } else {
-                    $data[$i][5] = '';
+                    $data[$i][6] = '';
                 } 
-                if (strtotime($data[$i][7]) != ''){
-                    $data[$i][7] = date('d-m-Y H:i:s', strtotime($data[$i][7]));
+                if (strtotime($data[$i][8]) != ''){
+                    $data[$i][8] = date('d-m-Y H:i:s', strtotime($data[$i][8]));
                 } else {
-                    $data[$i][7] = '';
+                    $data[$i][8] = '';
                 }
             }
 
