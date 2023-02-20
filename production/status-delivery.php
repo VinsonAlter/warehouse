@@ -567,7 +567,7 @@
                                   class="select2 shadow-none form-select cp"
                                   style="width: 100%; height: 36px"
                                   id="select_pengiriman" name="select_pengiriman"
-                                  autocomplete="off"
+                                  autocomplete="off" onchange="javascript:jenisPengiriman()"
                                 > 
                                   <option value="" selected="selected" disabled>Pilih Jenis Pengiriman</option>
                                   <option value="Kirim Customer">Kirim ke Customer</option>
@@ -576,13 +576,13 @@
                                 </select>
                               </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row" id="section_wilayah">
                               <label class="col-sm-4 control-label col-form-label">Wilayah</label>
                               <div class="col-sm-6">
                                 <select
                                     class="select2 shadow-none form-select cp"
                                     id="wilayah_pengiriman" name="wilayah_pengiriman"
-                                    autocomplete="off"
+                                    autocomplete="off" onchange="javascript:tempat_pengiriman()"
                                   >
                                   <option value="" selected="selected" disabled>Pilih Wilayah Pengiriman</option>
                                   <option value="Dalam Kota">Dalam Kota</option>
@@ -590,13 +590,13 @@
                                 </select>
                               </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row" id="ekspedisi_section">
                               <label class="col-sm-4 control-label col-form-label">Nama Ekspedisi</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="nama_ekspedisi" name="nama_ekspedisi">
                               </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row" id="driver_section">
                               <label class="col-sm-4 control-label col-form-label">Nama Driver</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="nama_driver" name="nama_driver">
@@ -612,7 +612,7 @@
                                 </select>
                               </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row" id="plat_section">
                               <label class="col-sm-4 control-label col-form-label">No. Plat</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="no_plat" name="no_plat">
@@ -1087,6 +1087,48 @@
           $('#tanggal_selesai').val(today);
           $('#section-dikirim').css('display', 'block');
           $('#section-selesai').css('display', 'block');
+        }
+      }
+
+      function jenisPengiriman() {
+        if($('#select_pengiriman').val() == 'Ambil Sendiri') {
+          $('#nama_ekspedisi').val('');
+          $('#nama_driver').val('');
+          $('#no_plat').val('');
+          $('#ekspedisi_section').addClass('display-none');
+          $('#driver_section').addClass('display-none');
+          $('#plat_section').addClass('display-none');
+          $('#wilayah_pengiriman option[value=""]').prop('selected', true);
+          $('#section_wilayah').addClass('display-none')
+        } else if($('#select_pengiriman').val() == 'Via Sales') {
+          $('#nama_ekspedisi').val('');
+          $('#nama_driver').val('');
+          $('#no_plat').val('');
+          $('#ekspedisi_section').addClass('display-none');
+          $('#driver_section').addClass('display-none');
+          $('#plat_section').addClass('display-none');
+          $('#wilayah_pengiriman option[value=""]').prop('selected', true);
+          $('#section_wilayah').addClass('display-none');
+        } else {
+          $('#section_wilayah').removeClass('display-none');
+          $('#ekspedisi_section').removeClass('display-none');
+          $('#driver_section').removeClass('display-none');
+          $('#plat_section').removeClass('display-none');
+        }
+      }
+
+      function tempat_pengiriman() {
+        if($('#wilayah_pengiriman').val() == 'Dalam Kota') {
+          $('#nama_ekspedisi').val('');
+          $('#ekspedisi_section').addClass('display-none');
+          $('#driver_section').removeClass('display-none');
+          $('#plat_section').removeClass('display-none');
+        } else {
+          $('#ekspedisi_section').removeClass('display-none');
+          $('#nama_driver').val('');
+          $('#no_plat').val('');
+          $('#driver_section').addClass('display-none');
+          $('#plat_section').addClass('display-none');
         }
       }
       
