@@ -485,7 +485,7 @@
                               <label class="col-sm-4 control-label col-form-label">Status Transaksi</label>
                               <div class="d-flex col-sm-6">
                                 <select
-                                  class="select2 shadow-none form-select"
+                                  class="select2 shadow-none form-select cp"
                                   style="width: 100%; height: 36px"
                                   id="select_status" name="select_status" onchange="javascript:checkStatus()"
                                 >
@@ -917,25 +917,25 @@
         $('#akhir_selesai').prop('disabled', false)
       }
 
-      function initSubmit() {
-        $.ajax({
-          type: "post",
-          url: "json/insertNewDelivery.php",
-          data: $('#form-submit').serialize(),
-          success: result => {
-            const res = $.parseJSON(result);
-            if(res.success == 1) {
-              // hide modals after submit data
-              $('#masterModal').modal('hide');
-              // reload datatable when ajax success returns success
-              $('#table_delivery').DataTable().ajax.reload();
-            } alert (res.message);
-          },
-          error: err => {
-            console.error(err.statusText);
-          }
-        })
-      }
+      // function initSubmit() {
+      //   $.ajax({
+      //     type: "post",
+      //     url: "json/insertNewDelivery.php",
+      //     data: $('#form-submit').serialize(),
+      //     success: result => {
+      //       const res = $.parseJSON(result);
+      //       if(res.success == 1) {
+      //         // hide modals after submit data
+      //         $('#masterModal').modal('hide');
+      //         // reload datatable when ajax success returns success
+      //         $('#table_delivery').DataTable().ajax.reload();
+      //       } alert (res.message);
+      //     },
+      //     error: err => {
+      //       console.error(err.statusText);
+      //     }
+      //   })
+      // }
 
       function editTransaksi() {
         $.ajax({
@@ -1025,7 +1025,7 @@
                   $('<option>',
                   {
                     html: (res.data[i]).concat(' (' + res.id_data[i] + ')'),
-                    value: res.id_data[i],
+                    value: res.data[i],
                   }).appendTo('#select_picker');
                 }
               }   
@@ -1085,43 +1085,43 @@
         })
       }
 
-      function getSales() {
-        $.ajax({
-          type: "post",
-          url: "json/search_sales.php",
-          success: result => {
-            const res = $.parseJSON(result);
-            if (res.success == 1) {
-              if($('#select_sales').children().length == 0) {
-                if(SelectedSales != '') {
-                  $('<option>',
-                    {
-                      html: SelectedSales,
-                      value: SelectedSales,
-                    }).appendTo('#select_sales');
-                }
-                // lowercase array values
-                const lower = (res.data).map(v => v.toLowerCase());
-                // remove duplicates in array
-                const test = unique(lower);
+      // function getSales() {
+      //   $.ajax({
+      //     type: "post",
+      //     url: "json/search_sales.php",
+      //     success: result => {
+      //       const res = $.parseJSON(result);
+      //       if (res.success == 1) {
+      //         if($('#select_sales').children().length == 0) {
+      //           if(SelectedSales != '') {
+      //             $('<option>',
+      //               {
+      //                 html: SelectedSales,
+      //                 value: SelectedSales,
+      //               }).appendTo('#select_sales');
+      //           }
+      //           // lowercase array values
+      //           const lower = (res.data).map(v => v.toLowerCase());
+      //           // remove duplicates in array
+      //           const test = unique(lower);
                 
-                for (i = 0; i < test.length; ++i) {
-                  if(test[i] != SelectedSales) {
-                    $('<option>',
-                    {
-                      html: test[i],
-                      value: test[i],
-                    }).appendTo('#select_sales');
-                  }
-                }
-              }
-            }
-          },
-          error: err => {
-            console.error(err.statusText);
-          }
-        })
-      }
+      //           for (i = 0; i < test.length; ++i) {
+      //             if(test[i] != SelectedSales) {
+      //               $('<option>',
+      //               {
+      //                 html: test[i],
+      //                 value: test[i],
+      //               }).appendTo('#select_sales');
+      //             }
+      //           }
+      //         }
+      //       }
+      //     },
+      //     error: err => {
+      //       console.error(err.statusText);
+      //     }
+      //   })
+      // }
 
       $('#masterModalEdit').on('shown.bs.modal', function() {
           if($('#select_status').val() == '1') {

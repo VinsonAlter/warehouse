@@ -68,50 +68,6 @@
                     $order_tanggal = "ORDER BY [Status], [TglTransaksi] DESC";
                     break;
             }
-            // $status = isset($_SESSION['FilterStatus']) ? $_SESSION['FilterStatus'] : '';
-            // switch($status) {
-            //     case 'Diterima':
-            //         $status_tanggal = "WHERE Status = 'Diterima' AND TglTerima BETWEEN '" .date_to_str($start_date)."' AND '" .date_to_str($end_date)."'";
-            //         $order_tanggal = "ORDER BY TglTerima ASC";
-            //         break;
-            //     case 'Dikirim':
-            //         $status_tanggal = "WHERE Status = 'Dikirim' AND TglKirim BETWEEN '" .date_to_str($start_date)."' AND '" .date_to_str($end_date)."'";
-            //         $order_tanggal = "ORDER BY TglKirim ASC";
-            //         break;
-            //     case 'Selesai':
-            //         $status_tanggal = "WHERE Status = 'Selesai' AND TglSelesai BETWEEN '" .date_to_str($start_date)."' AND '" .date_to_str($end_date)."'";
-            //         $order_tanggal = "ORDER BY TglSelesai ASC";
-            //         break;
-            //     default:
-            //         $status_tanggal = "WHERE TglTerima BETWEEN '" .date_to_str($start_date)."' AND '" .date_to_str($end_date)."'";
-            //         $order_tanggal = "ORDER BY TglTerima ASC";
-            // }
-
-            // if($status == 'Diterima') {
-
-            //     $status_tanggal = "WHERE Status = 'Diterima' AND TglTerima BETWEEN '" .date_to_str($start_date)."' AND '" .date_to_str($end_date)."'";
-
-            //     $order_tanggal = "ORDER BY TglTerima ASC";
-
-            // } else if($status == 'Dikirim') {
-
-            //     $status_tanggal = "WHERE Status = 'Dikirim' AND TglKirim BETWEEN '" .date_to_str($start_date)."' AND '" .date_to_str($end_date)."'";
-
-            //     $order_tanggal = "ORDER BY TglKirim ASC";
-            
-            // } else if($status == 'Selesai') {
-
-            //     $status_tanggal = "WHERE Status = 'Selesai' AND TglSelesai BETWEEN '" .date_to_str($start_date)."' AND '" .date_to_str($end_date)."'";
-
-            //     $order_tanggal = "ORDER BY TglSelesai ASC";                    
-                
-            // } else {
-
-            //     $status_tanggal = "WHERE TglTerima BETWEEN '" .date_to_str($start_date)."' AND '" .date_to_str($end_date)."'";
-
-            //     $order_tanggal = "ORDER BY TglTerima ASC";
-            // }   
-            
             // get the TotalRecords
 
             $table = "SELECT [IDTransaksi]
