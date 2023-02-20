@@ -529,6 +529,7 @@
                                   style="width: 100%; height: 36px"
                                   id="select_picker" name="select_picker"
                                 >
+                                <option value="" selected="selected" disabled>Pilih Picker</option>
                                 </select>
                               </div>
                             </div>
@@ -918,26 +919,6 @@
         $('#akhir_selesai').prop('disabled', false)
       }
 
-      // function initSubmit() {
-      //   $.ajax({
-      //     type: "post",
-      //     url: "json/insertNewDelivery.php",
-      //     data: $('#form-submit').serialize(),
-      //     success: result => {
-      //       const res = $.parseJSON(result);
-      //       if(res.success == 1) {
-      //         // hide modals after submit data
-      //         $('#masterModal').modal('hide');
-      //         // reload datatable when ajax success returns success
-      //         $('#table_delivery').DataTable().ajax.reload();
-      //       } alert (res.message);
-      //     },
-      //     error: err => {
-      //       console.error(err.statusText);
-      //     }
-      //   })
-      // }
-
       function editTransaksi() {
         $.ajax({
           type: "post",
@@ -955,27 +936,6 @@
           }
         })
       }
-      
-      // unused function
-      // function initEdit() {
-      //   $.ajax({
-      //     type: "post",
-      //     url: "json/editDelivery.php",
-      //     data: $('#form-edit').serialize(),
-      //     success: result => {
-      //       const res = $.parseJSON(result);
-      //       if(res.success == 1) {
-      //       // hide modal after data submission
-      //       $('#masterModalEdit').modal('hide');
-      //       // reload datatable when ajax success returns success
-      //       $('#table_delivery').DataTable().ajax.reload();
-      //       } alert(res.message); 
-      //     },
-      //     error: err => {
-      //       console.error(err.statusText);
-      //     }
-      //   })
-      // }
       
       function getDelivery(transaksi, id) {
         $.ajax({
@@ -1021,7 +981,7 @@
           success: result => {
             const res = $.parseJSON(result);
             if (res.success == 1) {
-              if($('#select_picker').children().length == 0) {
+              if($('#select_picker').children().length == 1) {
                 for (i = 0; i < res.data.length; ++i) {
                   $('<option>',
                   {
@@ -1086,44 +1046,6 @@
         })
       }
 
-      // function getSales() {
-      //   $.ajax({
-      //     type: "post",
-      //     url: "json/search_sales.php",
-      //     success: result => {
-      //       const res = $.parseJSON(result);
-      //       if (res.success == 1) {
-      //         if($('#select_sales').children().length == 0) {
-      //           if(SelectedSales != '') {
-      //             $('<option>',
-      //               {
-      //                 html: SelectedSales,
-      //                 value: SelectedSales,
-      //               }).appendTo('#select_sales');
-      //           }
-      //           // lowercase array values
-      //           const lower = (res.data).map(v => v.toLowerCase());
-      //           // remove duplicates in array
-      //           const test = unique(lower);
-                
-      //           for (i = 0; i < test.length; ++i) {
-      //             if(test[i] != SelectedSales) {
-      //               $('<option>',
-      //               {
-      //                 html: test[i],
-      //                 value: test[i],
-      //               }).appendTo('#select_sales');
-      //             }
-      //           }
-      //         }
-      //       }
-      //     },
-      //     error: err => {
-      //       console.error(err.statusText);
-      //     }
-      //   })
-      // }
-
       $('#masterModalEdit').on('shown.bs.modal', function() {
           if($('#select_status').val() == '1') {
             $('#tanggal_kirim').val('');
@@ -1149,15 +1071,8 @@
           $('#nama_ekspedisi').val('');
           $('#nama_driver').val('');
           $('#no_plat').val('');
-          $('#select_pengiriman').empty();
-          $('<option selected="selected" disabled value="">Pilih Jenis Pengiriman</option>').appendTo('#select_pengiriman');
-          $('<option value="Kirim Customer">Kirim ke Customer</option>').appendTo('#select_pengiriman');
-          $('<option value="Ambil Sendiri">Ambil Sendiri</option>').appendTo('#select_pengiriman');
-          $('<option value="Via Sales">Via Sales</option>').appendTo('#select_pengiriman');
-          $('#wilayah_pengiriman').empty();
-          $('<option selected="selected" disabled value="">Pilih Wilayah Pengiriman</option>').appendTo('#wilayah_pengiriman');
-          $('<option value="Dalam Kota">Dalam Kota</option>').appendTo('#wilayah_pengiriman');
-          $('<option value="Luar Kota">Luar Kota</option>').appendTo('#wilayah_pengiriman');
+          $('#select_pengiriman option[value=""]').prop('selected', true);
+          $('#wilayah_pengiriman option[value=""]').prop('selected', true);
           $('#tanggal_selesai').val('');
           $('#section-dikirim').css('display', 'none');
           $('#section-selesai').css('display', 'none');
@@ -1166,9 +1081,11 @@
           $('#tanggal_kirim').val(today);
           $('#tanggal_selesai').val('');
           $('#section-dikirim').css('display', 'block');
+          $('#section-selesai').css('display', 'none');
         } else {
           $('#tanggal_kirim').val(today);
           $('#tanggal_selesai').val(today);
+          $('#section-dikirim').css('display', 'block');
           $('#section-selesai').css('display', 'block');
         }
       }

@@ -285,7 +285,7 @@
                       class="cp select2 form-select shadow-none mr-12"
                       style="width: 50%; height:36px;"
                       id="select_picker" name="picker">
-                      <option value="" selected="selected" disabled>Silahkan pilih Picker</option>
+                      <option value="" selected="selected" disabled>Pilih Picker</option>
                     </select>
                     <button class="btn btn-cyan mr-12" type="button" id="update_pick" name="update_terima"
                       style="width:180px;height:36px;">Update Picking</button>
@@ -560,8 +560,6 @@
 
       var date = '<?php echo date('d-m-Y')?>';
 
-      console.log(checkValues);
-
       // function check() {
       //   if(checkValues == '') {
       //     $('#edit_part').css('display', 'none');
@@ -807,7 +805,6 @@
             }
           },
           "drawCallback": function( settings ) {
-            console.log('Test');
             $('#select_all').prop('checked', false);
             $('thead tr').removeClass('highlight');
             $('#select_all').closest('tr').removeClass('highlight');
