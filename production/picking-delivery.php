@@ -285,6 +285,7 @@
                       class="cp select2 form-select shadow-none mr-12"
                       style="width: 50%; height:36px;"
                       id="select_picker" name="picker">
+                      <option value="" selected="selected" disabled>Silahkan pilih Picker</option>
                     </select>
                     <button class="btn btn-cyan mr-12" type="button" id="update_pick" name="update_terima"
                       style="width:180px;height:36px;">Update Picking</button>
@@ -581,7 +582,7 @@
           success: result => {
             const res = $.parseJSON(result);
             if (res.success == 1) {
-              if($('#select_picker').children().length == 0) {
+              if($('#select_picker').children().length == 1) {
                 for (i = 0; i < res.data.length; ++i) {
                   $('<option>',
                   {
