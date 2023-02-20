@@ -881,7 +881,12 @@
               checkValues.pop($(this).val());
             }
           });
-        }) 
+        })
+        
+        // automatically jumps to the first page after datatables filtering
+        tablePicking.on('init.dt', () => {
+          tablePicking.page(1).draw(true);
+        })
       })
 
       /* initiate select all checkboxes highlight */ 
