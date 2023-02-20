@@ -571,7 +571,7 @@
       $('#update_kirim').click(() => {
         const checkKirim = checkValues.join(" ; ");
         $('#no_transaksi').val(checkKirim);
-        console.log(checkKirim);
+        // console.log(checkKirim);
       })
 
       function selectPicker() {
@@ -664,6 +664,47 @@
           }
         })
       }
+
+      $('#update_pick').click(() => {
+        const picker = $('#select_picker').val();
+        // alert(Picker);
+        // alert(checkValues);
+        const CheckValues = checkValues.join(" ; ");
+        $.ajax({
+          type: "post",
+          url: 'json/insertTransaksiTerima.php',
+          data: {batch : CheckValues, picker: picker},
+          success: result => {
+          const res = $.parseJSON(result);
+            if(res.success == 1) {
+              checkValues = [];
+              $('#table_picking').DataTable().ajax.reload();
+            } alert(res.message);
+          },
+          error: err => {
+            console.error(err.statusText);
+          }
+        })
+      })
+
+      $('#confirm_selesai').click(() => {
+        const CheckValues = checkValues.join(" ; ");
+        $.ajax({
+          type: "post",
+          url: 'json/confirmSelesai.php',
+          data: {batch: CheckValues},
+          success: result => {    
+            const res = $.parseJSON(result);
+            if(res.success == 1) {
+              checkValues = [];
+              $('#table_picking').DataTable().ajax.reload();
+            } alert(res.message);
+          },
+          error: err => {
+            console.error(err.statusText);
+          }
+        })
+      })
 
       $(document).ready(() => {
         selectPicker();
@@ -816,50 +857,13 @@
               $(`#${check[0]}`).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
             }
             console.log(checkValues);
-          } 
+          }
+          
         });
 
-        $('#update_pick').click(() => {
-          const picker = $('#select_picker').val();
-          // alert(Picker);
-          // alert(checkValues);
-          const CheckValues = checkValues.join(" ; ");
-          $.ajax({
-            type: "post",
-            url: 'json/insertTransaksiTerima.php',
-            data: {batch : CheckValues, picker: picker},
-              success: result => {
-              const res = $.parseJSON(result);
-              if(res.success == 1) {
-                checkValues = [];
-                $('#table_picking').DataTable().ajax.reload();
-              } alert(res.message);
-            } ,
-            error: err => {
-              console.error(err.statusText);
-            }
-          })
-        })
-
-        $('#confirm_selesai').click(() => {
-          const CheckValues = checkValues.join(" ; ");
-          $.ajax({
-            type: "post",
-            url: 'json/confirmSelesai.php',
-            data: {batch: CheckValues},
-            success: result => {    
-              const res = $.parseJSON(result);
-              if(res.success == 1) {
-                checkValues = [];
-                $('#table_picking').DataTable().ajax.reload();
-              } alert(res.message);
-            },
-            error: err => {
-              console.error(err.statusText);
-            }
-          })
-        })
-
+        // jump to the first page of the datatables
+        tablePicking.page('first').draw('page');
+       
         tablePicking.on('draw.dt', () => {
           const PageInfo = $('#table_picking').DataTable().page.info();
 			    tablePicking.column(1, { page: 'current' }).nodes().each((cell, i) => {
@@ -881,11 +885,6 @@
               checkValues.pop($(this).val());
             }
           });
-        })
-        
-        // automatically jumps to the first page after datatables filtering
-        tablePicking.on('init.dt', () => {
-          tablePicking.page(1).draw(true);
         })
       })
 

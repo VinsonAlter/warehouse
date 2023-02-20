@@ -866,15 +866,13 @@
           },
         });
 
+        tableDelivery.page('first').draw('page');
+
         tableDelivery.on('draw.dt', () => {
           const PageInfo = $('#table_delivery').DataTable().page.info();
 			    tableDelivery.column(0, { page: 'current' }).nodes().each((cell, i) => {
 				    cell.innerHTML = i + 1 + PageInfo.start
 			    })
-        })
-        
-        tableDelivery.on('init.dt', () => {
-          tableDelivery.page(1).draw(true);
         })
       });
       
