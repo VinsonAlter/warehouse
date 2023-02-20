@@ -558,7 +558,9 @@
 
       var state = '<?php echo $state ?>';
 
-      var date = '<?php echo date('d-m-Y')?>'
+      var date = '<?php echo date('d-m-Y')?>';
+
+      console.log(checkValues);
 
       // function check() {
       //   if(checkValues == '') {
@@ -568,8 +570,7 @@
       //   }
       // }
       
-      $('#update_kirim').click((e) => {
-        e.preventDefault();
+      $('#update_kirim').click(() => {
         const checkKirim = checkValues.join(" ; ");
         $('#no_transaksi').val(checkKirim);
         console.log(checkKirim);
@@ -806,6 +807,7 @@
             }
           },
           "drawCallback": function( settings ) {
+            console.log('Test');
             $('#select_all').prop('checked', false);
             $('thead tr').removeClass('highlight');
             $('#select_all').closest('tr').removeClass('highlight');
@@ -820,8 +822,7 @@
           } 
         });
 
-        $('#update_pick').click((e) => {
-          e.preventDefault();
+        $('#update_pick').click(() => {
           const picker = $('#select_picker').val();
           // alert(Picker);
           // alert(checkValues);
@@ -831,14 +832,10 @@
             url: 'json/insertTransaksiTerima.php',
             data: {batch : CheckValues, picker: picker},
               success: result => {
-              checkValues = [];
               const res = $.parseJSON(result);
               if(res.success == 1) {
-                e.preventDefault();
+                checkValues = [];
                 $('#table_picking').DataTable().ajax.reload();
-                // window.location.reload();
-                // alert(res.message);
-                // $('#checkbox_val').prop('checked', false);
               } alert(res.message);
             } ,
             error: err => {
@@ -847,18 +844,16 @@
           })
         })
 
-        $('#confirm_selesai').click((e) => {
-          e.preventDefault();
+        $('#confirm_selesai').click(() => {
           const CheckValues = checkValues.join(" ; ");
           $.ajax({
             type: "post",
             url: 'json/confirmSelesai.php',
             data: {batch: CheckValues},
-            success: result => {
-              checkValues = [];
+            success: result => {    
               const res = $.parseJSON(result);
               if(res.success == 1) {
-                e.preventDefault();
+                checkValues = [];
                 $('#table_picking').DataTable().ajax.reload();
               } alert(res.message);
             },

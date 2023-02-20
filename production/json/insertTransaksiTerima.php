@@ -43,6 +43,7 @@
         } else {
             $res['success'] = 0;
             $res['message'] = 'Mohon pastikan Anda sudah checklist nomor Transaksi yang diterima!';
+            $res['batch'] = $_POST['batch'];
         }
         $pdo = null;
     } catch (Exception $e) {

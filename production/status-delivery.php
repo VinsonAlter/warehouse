@@ -489,6 +489,7 @@
                                   style="width: 100%; height: 36px"
                                   id="select_status" name="select_status" onchange="javascript:checkStatus()"
                                 >
+                                  <option value="" selected="selected" disabled>Pilih Status Pengiriman</option>
                                   <option value="1">Diterima</option>
                                   <option value="2">Dikirim</option>
                                   <option value="3">Selesai</option>
@@ -524,7 +525,7 @@
                               <label class="col-sm-4 control-label col-form-label">Select Picker</label>
                               <div class="d-flex col-sm-6">
                                 <select
-                                  class="select2 shadow-none form-select"
+                                  class="select2 shadow-none form-select cp"
                                   style="width: 100%; height: 36px"
                                   id="select_picker" name="select_picker"
                                 >
@@ -562,7 +563,7 @@
                               <label class="col-sm-4 control-label col-form-label">Jenis Pengiriman</label>
                               <div class="d-flex col-sm-6">
                                 <select
-                                  class="select2 shadow-none form-select"
+                                  class="select2 shadow-none form-select cp"
                                   style="width: 100%; height: 36px"
                                   id="select_pengiriman" name="select_pengiriman"
                                   autocomplete="off"
@@ -578,7 +579,7 @@
                               <label class="col-sm-4 control-label col-form-label">Wilayah</label>
                               <div class="col-sm-6">
                                 <select
-                                    class="select2 shadow-none form-select"
+                                    class="select2 shadow-none form-select cp"
                                     id="wilayah_pengiriman" name="wilayah_pengiriman"
                                     autocomplete="off"
                                   >
