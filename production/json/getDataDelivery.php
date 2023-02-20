@@ -160,7 +160,9 @@
                                 array_multisort($sort8, $dir, $data);
                                 break;
                             default:
-                                array_multisort($sort1, $dir, $data);
+                                if(is_array($dir)) {
+                                    array_multisort($sort1, $dir, $data);
+                                }
                                 break;
                         }
                     }
