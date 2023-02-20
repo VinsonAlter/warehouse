@@ -50,22 +50,22 @@
                 case 'terima_on':
                     $tgl_condition = "WHERE [TglTerima] BETWEEN '".date_to_str($awal_terima)."'
                         AND '".date_to_str($akhir_terima) . $end_day . "'";
-                    $order_tanggal = "ORDER BY [TglTerima] DESC";
+                    $order_tanggal = "ORDER BY [Status], [TglTerima] DESC";
                     break;
                 case 'kirim_on':
                     $tgl_condition = "WHERE [TglKirim] BETWEEN '".date_to_str($awal_kirim)."'
                         AND '".date_to_str($akhir_kirim) . $end_day . "'";
-                    $order_tanggal = "ORDER BY [TglKirim] DESC";
+                    $order_tanggal = "ORDER BY [Status], [TglKirim] DESC";
                     break;
                 case 'selesai_on':
                     $tgl_condition = "WHERE [TglSelesai] BETWEEN '".date_to_str($awal_selesai)."'
                         AND '".date_to_str($akhir_selesai) . $end_day . "'";
-                    $order_tanggal = "ORDER BY [TglSelesai] DESC";
+                    $order_tanggal = "ORDER BY [Status], [TglSelesai] DESC";
                     break;
                 default:
                     $tgl_condition = "WHERE [TglTransaksi] BETWEEN '".date_to_str($awal_transaksi)."'
                         AND '".date_to_str($akhir_transaksi) . $end_day . "'";
-                    $order_tanggal = "ORDER BY [TglTransaksi] DESC";
+                    $order_tanggal = "ORDER BY [Status], [TglTransaksi] DESC";
                     break;
             }
             // $status = isset($_SESSION['FilterStatus']) ? $_SESSION['FilterStatus'] : '';
