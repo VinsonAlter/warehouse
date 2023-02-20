@@ -25,67 +25,108 @@
                     // $tanggal_pengiriman = $tgl_kirim . ' ' . $jam_kirim;
                     if(isset($_POST['select_pengiriman'])) {
                         $jenis_pengiriman = $_POST['select_pengiriman'];
-                        switch($jenis_pengiriman) {
-                            case 'Kirim Customer':
-                                if(isset($_POST['wilayah_pengiriman'])) {
+                        if(isset($_POST['wilayah_pengiriman'])) {
+                            switch($jenis_pengiriman) {
+                                case 'Kirim Customer':
                                     $wilayah_pengiriman = $_POST['wilayah_pengiriman'];
                                     if($wilayah_pengiriman == 'Dalam Kota') {
-                                        if(isset($_POST['nama_driver']) && isset($_POST['no_plat'])) {
+                                        if($_POST['nama_driver'] != '' && $_POST['no_plat'] != '') {
                                             $driver = $_POST['nama_driver'];
                                             $plat = $_POST['no_plat'];
+                                            $ekspedisi = '';
+                                            foreach($arr as $val){
+                                                $array = explode(' , ', $val);
+                                                $idTransaksi = $array[0];
+                                                $Transaksi = $array[1];
+                                                $status = $array[4];
+                                                if($status == 1) {
+                                                    $update_kirim = "UPDATE [WMS].[dbo].[TB_Delivery]
+                                                                        SET [Status] = 2,
+                                                                            [TglKirim] = '$tanggal_pengiriman',
+                                                                            [JenisPengiriman] = '$jenis_pengiriman',
+                                                                            [Wilayah] = '$wilayah_pengiriman',
+                                                                            [NamaEkspedisi] = '$ekspedisi',
+                                                                            [NamaDriver] = '$driver',
+                                                                            [NoPlat] = '$plat'
+                                                                        WHERE [NoTransaksi] = '$Transaksi' AND [IDTransaksi] = '$idTransaksi'
+                                                                    ";
+                                                    $stmt = $pdo->prepare($update_kirim, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+                                                    $stmt->execute();
+                                                    if($stmt->rowCount() > 0) {
+                                                        $res['success'] = 1;
+                                                        $res['kirim'] = $update_kirim;
+                                                        
+                                                        $res['message'] = 'Status transaksi berhasil diupdate!';
+                                                    } else {
+                                                        $res['success'] = 0;
+                                                        $res['message'] = 'Status transaksi gagal diupdate, mohon periksa koneksi anda!';
+                                                    }
+                                                } else {
+                                                    $res['success'] = 0;
+                                                    $res['message'] = 'No Transaksi yang dipilih masih belum diterima!';
+                                                }
+                                            }
                                         } else {
                                             $res['success'] = 0;
                                             $res['message'] = 'Mohon ditentukan nama driver dan plat no mobil untuk pengiriman ini';
                                         }
-                                    } else {
-                                        if(isset($_POST['nama_ekspedisi'])) {
+                                    } else if($wilayah_pengiriman == 'Luar Kota') {
+                                        if($_POST['nama_ekspedisi'] != '') {
                                             $ekspedisi = $_POST['nama_ekspedisi'];
+                                            $driver = '';
+                                            $plat = '';
+                                            foreach($arr as $val){
+                                                $array = explode(' , ', $val);
+                                                $idTransaksi = $array[0];
+                                                $Transaksi = $array[1];
+                                                $status = $array[4];
+                                                if($status == 1) {
+                                                    $update_kirim = "UPDATE [WMS].[dbo].[TB_Delivery]
+                                                                        SET [Status] = 2,
+                                                                            [TglKirim] = '$tanggal_pengiriman',
+                                                                            [JenisPengiriman] = '$jenis_pengiriman',
+                                                                            [Wilayah] = '$wilayah_pengiriman',
+                                                                            [NamaEkspedisi] = '$ekspedisi',
+                                                                            [NamaDriver] = '$driver',
+                                                                            [NoPlat] = '$plat'
+                                                                        WHERE [NoTransaksi] = '$Transaksi' AND [IDTransaksi] = '$idTransaksi'
+                                                                    ";
+                                                    $stmt = $pdo->prepare($update_kirim, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+                                                    $stmt->execute();
+                                                    if($stmt->rowCount() > 0) {
+                                                        $res['success'] = 1;
+                                                        $res['kirim'] = $update_kirim;
+                                                        
+                                                        $res['message'] = 'Status transaksi berhasil diupdate!';
+                                                    } else {
+                                                        $res['success'] = 0;
+                                                        $res['message'] = 'Status transaksi gagal diupdate, mohon periksa koneksi anda!';
+                                                    }
+                                                } else {
+                                                    $res['success'] = 0;
+                                                    $res['message'] = 'No Transaksi yang dipilih masih belum diterima!';
+                                                }
+                                            }
                                         } else {
                                             $res['success'] = 0;
                                             $res['message'] = 'Mohon tentukan nama ekspedisi untuk pengiriman ini';
                                         }
-                                    }
-                                }
+                                        
+                                    }    
                                 break;
-                            case 'Ambil Sendiri':
-                                break;
+                                case 'Ambil Sendiri':
+
+                                    break;
+                            } 
+                        } else {
+                            $res['success'] = 0;
+                            $res['message'] = 'Mohon pilih jenis destinasi untuk pengiriman ini';
                         }
-                        $wilayah_pengiriman = $_POST['wilayah_pengiriman'];
-                        $ekspedisi = $_POST['nama_ekspedisi'];
-                        $driver = $_POST['nama_driver'];
-                        $plat = $_POST['no_plat'];
-                        foreach($arr as $val){
-                            $array = explode(' , ', $val);
-                            $idTransaksi = $array[0];
-                            $Transaksi = $array[1];
-                            $status = $array[4];
-                            if($status == 1) {
-                                $update_kirim = "UPDATE [WMS].[dbo].[TB_Delivery]
-                                                    SET [Status] = 2,
-                                                        [TglKirim] = '$tanggal_pengiriman',
-                                                        [JenisPengiriman] = '$jenis_pengiriman',
-                                                        [Wilayah] = '$wilayah_pengiriman',
-                                                        [NamaEkspedisi] = '$ekspedisi',
-                                                        [NamaDriver] = '$driver',
-                                                        [NoPlat] = '$plat'
-                                                    WHERE [NoTransaksi] = '$Transaksi' AND [IDTransaksi] = '$idTransaksi'
-                                                ";
-                                $stmt = $pdo->prepare($update_kirim, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-                                $stmt->execute();
-                                if($stmt->rowCount() > 0) {
-                                    $res['success'] = 1;
-                                    $res['kirim'] = $update_kirim;
-                                    
-                                    $res['message'] = 'Status transaksi berhasil diupdate!';
-                                } else {
-                                    $res['success'] = 0;
-                                    $res['message'] = 'Status transaksi gagal diupdate, mohon periksa koneksi anda!';
-                                }
-                            } else {
-                                $res['success'] = 0;
-                                $res['message'] = 'No Transaksi yang dipilih masih belum diterima!';
-                            }
-                        }
+                        // $wilayah_pengiriman = $_POST['wilayah_pengiriman'];
+                        // $ekspedisi = $_POST['nama_ekspedisi'];
+                        // $driver = $_POST['nama_driver'];
+                        // $plat = $_POST['no_plat'];
+                        
                     } else {
                         $res['success'] = 0;
                         $res['message'] = 'Mohon dipilih jenis pengiriman untuk no transaksi yang dikirim';
