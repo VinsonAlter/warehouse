@@ -1051,23 +1051,61 @@
       }
 
       $('#masterModalEdit').on('shown.bs.modal', function() {
-          if($('#select_status').val() == '1') {
-            $('#tanggal_kirim').val('');
-            $('#nama_ekspedisi').val('');
-            $('#nama_driver').val('');
-            $('#no_plat').val('');
-            $('#tanggal_selesai').val('');
-            $('#section-dikirim').css('display', 'none');
-            $('#section-selesai').css('display', 'none');
-          } else if($('#select_status').val() == '2'){
-            $('#tanggal_selesai').val('');
-            $('#section-dikirim').css('display', 'block');
-            $('#section-selesai').css('display', 'none');
-          } else {
-            $('#section-dikirim').css('display', 'block');
-            $('#section-selesai').css('display', 'block');
-          }
-        })
+        if($('#select_status').val() == '1') {
+          $('#tanggal_kirim').val('');
+          $('#nama_ekspedisi').val('');
+          $('#nama_driver').val('');
+          $('#no_plat').val('');
+          $('#tanggal_selesai').val('');
+          $('#section-dikirim').css('display', 'none');
+          $('#section-selesai').css('display', 'none');
+        } else if($('#select_status').val() == '2'){
+          $('#tanggal_selesai').val('');
+          $('#section-dikirim').css('display', 'block');
+          $('#section-selesai').css('display', 'none');
+        } else {
+          $('#section-dikirim').css('display', 'block');
+          $('#section-selesai').css('display', 'block');
+        }
+
+        if($('#select_pengiriman').val() == 'Ambil Sendiri') {
+          $('#nama_ekspedisi').val('');
+          $('#nama_driver').val('');
+          $('#no_plat').val('');
+          $('#ekspedisi_section').addClass('display-none');
+          $('#driver_section').addClass('display-none');
+          $('#plat_section').addClass('display-none');
+          $('#wilayah_pengiriman option[value=""]').prop('selected', true);
+          $('#section_wilayah').addClass('display-none')
+        } else if($('#select_pengiriman').val() == 'Via Sales') {
+          $('#nama_ekspedisi').val('');
+          $('#nama_driver').val('');
+          $('#no_plat').val('');
+          $('#ekspedisi_section').addClass('display-none');
+          $('#driver_section').addClass('display-none');
+          $('#plat_section').addClass('display-none');
+          $('#wilayah_pengiriman option[value=""]').prop('selected', true);
+          $('#section_wilayah').addClass('display-none');
+        } else {
+          $('#section_wilayah').removeClass('display-none');
+          $('#ekspedisi_section').removeClass('display-none');
+          $('#driver_section').removeClass('display-none');
+          $('#plat_section').removeClass('display-none');
+        }
+
+        if($('#wilayah_pengiriman').val() == 'Dalam Kota') {
+          $('#nama_ekspedisi').val('');
+          $('#ekspedisi_section').addClass('display-none');
+          $('#driver_section').removeClass('display-none');
+          $('#plat_section').removeClass('display-none');
+        } else {
+          $('#ekspedisi_section').removeClass('display-none');
+          $('#nama_driver').val('');
+          $('#no_plat').val('');
+          $('#driver_section').addClass('display-none');
+          $('#plat_section').addClass('display-none');
+        }
+      })
 
       function checkStatus() {
         if($('#select_status').val() == '1') {
