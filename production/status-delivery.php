@@ -590,7 +590,7 @@
                                 </select>
                               </div>
                             </div>
-                            <div class="form-group row" id="ekspedisi_section">
+                            <div class="form-group row" id="ekspedisi">
                               <label class="col-sm-4 control-label col-form-label">Nama Ekspedisi</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="nama_ekspedisi" name="nama_ekspedisi">
@@ -826,7 +826,7 @@
           "stateSave": true,
           "stateDuration": -1,
           "pageLength": 25,
-          "scrollY": '200px',
+          "scrollY": '400px',
           "scrollX": '1200px',
           "ajax": {
             url: 'json/data_delivery.php',
@@ -1070,34 +1070,34 @@
           $('#nama_ekspedisi').val('');
           $('#nama_driver').val('');
           $('#no_plat').val('');
-          $('#ekspedisi_section').addClass('display-none');
-          $('#driver_section').addClass('display-none');
-          $('#plat_section').addClass('display-none');
-          $('#wilayah_pengiriman option[value=""]').prop('selected', true);
-          $('#section_wilayah').addClass('display-none')
-        } else if($('#select_pengiriman').val() == 'Via Sales') {
-          $('#nama_ekspedisi').val('');
-          $('#nama_driver').val('');
-          $('#no_plat').val('');
-          $('#ekspedisi_section').addClass('display-none');
           $('#driver_section').addClass('display-none');
           $('#plat_section').addClass('display-none');
           $('#wilayah_pengiriman option[value=""]').prop('selected', true);
           $('#section_wilayah').addClass('display-none');
+          $('#ekspedisi').addClass('display-none');
+        } else if($('#select_pengiriman').val() == 'Via Sales') {
+          $('#nama_ekspedisi').val('');
+          $('#nama_driver').val('');
+          $('#no_plat').val('');
+          $('#driver_section').addClass('display-none');
+          $('#plat_section').addClass('display-none');
+          $('#wilayah_pengiriman option[value=""]').prop('selected', true);
+          $('#section_wilayah').addClass('display-none');
+          $('#ekspedisi').addClass('display-none');
         } else {
           $('#section_wilayah').removeClass('display-none');
-          $('#ekspedisi_section').removeClass('display-none');
+          $('#ekspedisi').removeClass('display-none');
           $('#driver_section').removeClass('display-none');
           $('#plat_section').removeClass('display-none');
         }
 
         if($('#wilayah_pengiriman').val() == 'Dalam Kota') {
           $('#nama_ekspedisi').val('');
-          $('#ekspedisi_section').addClass('display-none');
+          $('#ekspedisi').addClass('display-none');
           $('#driver_section').removeClass('display-none');
           $('#plat_section').removeClass('display-none');
-        } else {
-          $('#ekspedisi_section').removeClass('display-none');
+        } else if($('#wilayah_pengiriman').val() == 'Luar Kota') {
+          $('#ekspedisi').removeClass('display-none');
           $('#nama_driver').val('');
           $('#no_plat').val('');
           $('#driver_section').addClass('display-none');
@@ -1135,23 +1135,23 @@
           $('#nama_ekspedisi').val('');
           $('#nama_driver').val('');
           $('#no_plat').val('');
-          $('#ekspedisi_section').addClass('display-none');
+          $('#ekspedisi').addClass('display-none');
           $('#driver_section').addClass('display-none');
           $('#plat_section').addClass('display-none');
           $('#wilayah_pengiriman option[value=""]').prop('selected', true);
-          $('#section_wilayah').addClass('display-none')
+          $('#section_wilayah').addClass('display-none');
         } else if($('#select_pengiriman').val() == 'Via Sales') {
           $('#nama_ekspedisi').val('');
           $('#nama_driver').val('');
           $('#no_plat').val('');
-          $('#ekspedisi_section').addClass('display-none');
+          $('#ekspedisi').addClass('display-none');
           $('#driver_section').addClass('display-none');
           $('#plat_section').addClass('display-none');
           $('#wilayah_pengiriman option[value=""]').prop('selected', true);
           $('#section_wilayah').addClass('display-none');
         } else {
           $('#section_wilayah').removeClass('display-none');
-          $('#ekspedisi_section').removeClass('display-none');
+          $('#ekspedisi').removeClass('display-none');
           $('#driver_section').removeClass('display-none');
           $('#plat_section').removeClass('display-none');
         }
@@ -1160,11 +1160,11 @@
       function tempat_pengiriman() {
         if($('#wilayah_pengiriman').val() == 'Dalam Kota') {
           $('#nama_ekspedisi').val('');
-          $('#ekspedisi_section').addClass('display-none');
+          $('#ekspedisi').addClass('display-none');
           $('#driver_section').removeClass('display-none');
           $('#plat_section').removeClass('display-none');
         } else {
-          $('#ekspedisi_section').removeClass('display-none');
+          $('#ekspedisi').removeClass('display-none');
           $('#nama_driver').val('');
           $('#no_plat').val('');
           $('#driver_section').addClass('display-none');

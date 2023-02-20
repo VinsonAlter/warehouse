@@ -1,5 +1,5 @@
 .display-none {
-    display: none;
+    display: none !important;
 }
 
 .ml-right-16 {
