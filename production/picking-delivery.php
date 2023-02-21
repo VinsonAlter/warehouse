@@ -113,6 +113,25 @@
         overflow:auto;
       }
 
+      @media (min-width: 768px) {
+        .mr-md-64 {
+          margin-right: 64px;
+        }
+
+        .fs16-scaled {
+          font-size: 16px;
+        }
+
+        .btn-scaled {
+          padding: 12px 16px;
+        }
+      }
+      
+      .self-centered {
+        text-align: center;
+        align-self: center !important;
+      }
+
       .mt-4-half {
         margin-top: 2.25rem;
       }
@@ -196,6 +215,13 @@
 				left: 50%;
 			}
 
+      .fs16-scaled {
+        font-size: 12px;
+      }
+
+      .btn-scaled {
+        padding: 9px 12px;
+      }
 
     </style>
 
@@ -242,7 +268,7 @@
                 <div class="row" style="padding-left:1.8rem;">
                   <form method="post" action="" role="form">
                   <div class="d-flex ">
-                    <div class="col-md-4 col-10">
+                    <div class="col-md-4 col-6">
                       <div class="form-group">
                         <div class="ml-right-16 mb-2">
                           <div class="d-sm-inline-block d-md-flex mb-3">
@@ -275,20 +301,38 @@
                         </div>
                       </div>
                     </div>
-                    <div class = "col-1 col-md-2 mt-md-0 mt-4-half">
+                    <div class = "col-1 mt-md-0 mt-4-half text-center">
                       <button class="px-2 btn btn-success btn-sm text-white"
                         type="submit" name="filter_tgl" id="btn_filter">
                         Filter
                       </button>
                     </div>
+                    <div class="col-md-6 d-block pl-md-2">
+                      <div class="ms-auto text-end d-flex mb-3 mr-md-64">
+                        <b class="d-flex centered col-3 mr-12">Select Picker : </b>
+                        <select
+                          class="cp select2 shadow-none mr-12"
+                          id="select_picker" name="picker">
+                          <option value="" selected="selected" disabled>Pilih Picker</option>
+                        </select>
+                        <button class="btn btn-cyan mr-12 fs16-scaled btn-scaled" type="button" id="update_pick" name="update_terima">
+                          Update Picking
+                        </button>
+                        <!-- <button class="btn btn-cyan mr-12" type="button" id="update_pick" name="update_terima"
+                          style="width:180px;height:36px;">Update Picking</button>
+                        <button class="btn btn-warning mr-12" data-bs-toggle="modal" data-bs-target="#masterModalKirim" type="button" id="update_kirim" name="update_kirim"
+                          style="width:180px;height:36px;">Update Kirim</button>
+                        <button class="btn btn-secondary" type="button" id="confirm_selesai" name="confirm_selesai"
+                          style="width:180px;height:36px;">Confirm Selesai</button> -->
+                      </div>
+                    </div>
                   </form>
                   </div>
-                  <hr/>
                   <div class="ms-auto text-end d-flex mb-3">
                     <h5 class="self-centered col-2 mr-12 page-title">Select Picker : </h5>
                     <select
                       class="cp select2 form-select shadow-none mr-12"
-                      style="width: 50%; height:2px;"
+                      style="width: 50%; height:36px;"
                       id="select_picker" name="picker">
                       <option value="" selected="selected" disabled>Pilih Picker</option>
                     </select>
@@ -299,7 +343,6 @@
                     <button class="btn btn-secondary" type="button" id="confirm_selesai" name="confirm_selesai"
                       style="width:180px;height:36px;">Confirm Selesai</button>
                   </div>
-                  <hr/>
                 </div>
                 <div class="table-responsive">
                   <table id="table_delivery" class="cp table table-bordered display compact">
