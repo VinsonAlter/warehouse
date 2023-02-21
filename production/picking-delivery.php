@@ -920,6 +920,7 @@
           "scrollX": '300px',
           "scrollCollapse": true,
           "autoWidth": false,
+          "pagingType": 'full_numbers',
           "ajax": {
             url: "json/getDataDelivery.php"
           },
