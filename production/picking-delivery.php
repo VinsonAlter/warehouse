@@ -119,14 +119,16 @@
         }
 
         .fs12-scaled {
-          font-size: 12px;
+          font-size: 13px !important;
         }
 
         .btn-scaled {
           padding: 8px 16px;
         }
 
-        
+        .fs16-scaled {
+          font-size: 16px;
+        }
 
       }
       
@@ -234,12 +236,16 @@
         margin-right: -1.5rem;
       }
 
+      .ml-1em {
+        margin-left: 1em;
+      }
+
       @media (max-width: 768px) {
         .mr-sm-3half-left {
           margin-right: -2.75rem;
         }
 
-        .ml-15em {
+        .ml-1em {
           margin-left: 0;
         }
       }
@@ -346,7 +352,7 @@
                         <button class="btn btn-secondary" type="button" id="confirm_selesai" name="confirm_selesai"
                           style="width:180px;height:36px;">Confirm Selesai</button> -->
                       </div>
-                      <div class="d-flex ml-15em">
+                      <div class="d-flex ml-1em">
                         <button class="btn btn-warning mr-12 fs16-scaled btn-scaled" data-bs-toggle="modal" 
                           data-bs-target="#masterModalKirim" type="button" id="update_kirim" name="update_kirim">
                           Kirim
