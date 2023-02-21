@@ -245,6 +245,8 @@
       .ml-1em {
         margin-left: 1em;
       }
+      
+      
 
       .border-bottom-mobile {
         border-bottom: 0;
@@ -268,8 +270,13 @@
         }
 
         .border-bottom-mobile {
+          padding-bottom: 1rem;
           border-bottom: 1px solid #e9ecef;
         }
+
+        /* .border-bottom-mobile::before {
+          margin-top: 2rem;
+        } */
 
       }
 
@@ -352,14 +359,14 @@
                         </div>
                       </div>
                     </div>
-                    <div class = "ml-custom-right-10 col-12 col-md-1 mt-md-0 mb-3">
+                    <div class = "ml-custom-right-10 col-12 col-md-1 mt-md-0 mb-3 border-bottom-mobile">
                       <button class="px-2 btn btn-success btn-sm text-white"
                         type="submit" name="filter_tgl" id="btn_filter">
                         Filter
                       </button>
                     </div>
-                    <span class="border-bottom-mobile"></span>
-                    <div class="mt-3 col-md-6 col-sm-12 p-0 mb-3">
+                    <!-- <span class="border-bottom-mobile"></span> -->
+                    <div class="mt-1 mt-md-0 col-md-6 col-12 p-0 mb-3">
                       <div class="d-flex mb-3">
                         <b class="d-flex centered col-3 fs12-scaled">Select Picker : </b>
                         <select
@@ -522,7 +529,7 @@
                               <div class="col-md-6 col-10">
                                 <input type="text" class="form-control" id="nama_driver" name="nama_driver">
                               </div>
-                              <div class="col-2 d-flex">
+                              <div class="col-md-2 col-2 d-flex">
                                 <select
                                     id="select_driver" name="select_driver"
                                     style="width:40px; text-align:left; padding: 0 5px;"
@@ -538,7 +545,7 @@
                               <div class="col-sm-6 col-10">
                                 <input type="text" class="form-control" id="no_plat" name="no_plat">
                               </div>
-                              <div class="col-2 d-flex">
+                              <div class="col-sm-2 d-flex">
                                 <select
                                     id="select_plat" name="select_plat"
                                     style="width:40px; text-align:left; padding: 0 5px;"
