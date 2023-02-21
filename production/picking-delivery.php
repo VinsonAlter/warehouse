@@ -130,7 +130,13 @@
           font-size: 16px;
         }
 
+        
       }
+
+      .ml-custom-right-10 {
+        margin-left: 0;
+      }
+
       
       .self-centered {
         text-align: center;
@@ -240,16 +246,34 @@
         margin-left: 1em;
       }
 
+      .border-bottom-mobile {
+        border-bottom: 0;
+      }
+
+      .b-bottom {
+        border-bottom: 1px solid #e9ecef;
+      }
+
       @media (max-width: 768px) {
         .mr-sm-3half-left {
-          margin-right: -2.75rem;
+          margin-right: 0rem;
         }
 
         .ml-1em {
           margin-left: 0;
         }
+
+        .ml-custom-right-10 {
+          margin-left: -10px;
+        }
+
+        .border-bottom-mobile {
+          border-bottom: 1px solid #e9ecef;
+        }
+
       }
 
+     
     </style>
 
   </head>
@@ -295,7 +319,7 @@
                 <div class="d-flex" style="padding-left:1.8rem;">
                   <form method="post" action="" role="form">
                   <div class="row">
-                    <div class="col-md-5 col-11 mr-sm-3half-left">
+                    <div class="col-md-5 col-12 mr-sm-3half-left">
                       <div class="form-group">
                         <div class="ml-right-8 mb-2">
                           <div class="d-sm-inline-block d-md-flex mb-3">
@@ -328,13 +352,14 @@
                         </div>
                       </div>
                     </div>
-                    <div class = "col-1 mt-md-0 mt-4-half text-center">
+                    <div class = "ml-custom-right-10 col-12 col-md-1 mt-md-0 mb-3">
                       <button class="px-2 btn btn-success btn-sm text-white"
                         type="submit" name="filter_tgl" id="btn_filter">
                         Filter
                       </button>
                     </div>
-                    <div class="col-md-6 col-sm-12 p-0 mb-3">
+                    <span class="border-bottom-mobile"></span>
+                    <div class="mt-3 col-md-6 col-sm-12 p-0 mb-3">
                       <div class="d-flex mb-3">
                         <b class="d-flex centered col-3 fs12-scaled">Select Picker : </b>
                         <select
@@ -363,6 +388,7 @@
                         </button>
                       </div>
                     </div>
+                    <span class="b-bottom"></span>
                   </form>
                   </div>
                   <!-- <div class="ms-auto text-end d-flex mb-3">
@@ -381,7 +407,7 @@
                       style="width:180px;height:36px;">Confirm Selesai</button>
                   </div> -->
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive mt-3">
                   <table id="table_delivery" class="cp table table-bordered display compact">
                     <thead>
                       <tr>
