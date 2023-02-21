@@ -125,6 +125,11 @@
         .btn-scaled {
           padding: 12px 16px;
         }
+
+        .mr-sm-3half-left {
+          margin-right: -3.5rem;
+        }
+
       }
       
       .self-centered {
@@ -223,6 +228,10 @@
         padding: 9px 12px;
       }
 
+      .mr-sm-3half-left {
+        margin-right: -2.75rem;
+      }
+
     </style>
 
   </head>
@@ -267,8 +276,8 @@
               <div class="card-body">
                 <div class="row" style="padding-left:1.8rem;">
                   <form method="post" action="" role="form">
-                  <div class="d-flex ">
-                    <div class="col-md-4 col-6" style="margin-right:-1rem;">
+                  <div class="row">
+                    <div class="col-md-5 col-11 mr-sm-3half-left">
                       <div class="form-group">
                         <div class="ml-right-8 mb-2">
                           <div class="d-sm-inline-block d-md-flex mb-3">
@@ -307,7 +316,7 @@
                         Filter
                       </button>
                     </div>
-                    <div class="col-md-6 d-block pl-md-2">
+                    <div class="col-md-6 col-sm-12 pl-md-2">
                       <div class="d-flex mb-3">
                         <b class="d-flex centered col-3">Select Picker : </b>
                         <select
@@ -325,7 +334,7 @@
                         <button class="btn btn-secondary" type="button" id="confirm_selesai" name="confirm_selesai"
                           style="width:180px;height:36px;">Confirm Selesai</button> -->
                       </div>
-                      <div class="d-flex" style="margin-left:1.5rem;">
+                      <div class="d-flex">
                         <button class="btn btn-warning mr-12 fs16-scaled btn-scaled" data-bs-toggle="modal" 
                           data-bs-target="#masterModalKirim" type="button" id="update_kirim" name="update_kirim">
                           Update Kirim
@@ -863,8 +872,8 @@
           "stateSave": true,
           "stateDuration": -1,
           "pageLength": 25,
-          "scrollY": true,
-          "scrollX": true,
+          "scrollY": '300px',
+          "scrollX": '300px',
           "scrollCollapse": true,
           "autoWidth": false,
           "ajax": {
