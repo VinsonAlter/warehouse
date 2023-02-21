@@ -5,6 +5,7 @@
     try {
         if($_POST['batch'] != '') {
             $noTransaksi = $_POST['batch'];
+            $total = substr_count($noTransaksi, ' ; ') + 1;
             $arr = explode(' ; ', $noTransaksi);
             $tglSelesai = date_hour_to_str(date('d-m-Y H:i:00'));
             foreach($arr as $val) {
@@ -22,10 +23,10 @@
                     if($stmt->rowCount() > 0) {
                         $res['success'] = 1;
                         $res['selesai'] = $selesai;
-                        $res['message'] = 'Status transaksi berhasil diupdate!';
+                        $res['message'] = $total . ' transaksi diconfirm selesai';
                     } else {
                         $res['success'] = 0;
-                        $res['message'] = 'Status transaksi gagal diupdate, mohon periksa koneksi anda!';
+                        $res['message'] = 'transaksi gagal diconfirm, mohon periksa koneksi anda!';
                     }
                 } else {
                     $res['success'] = 0;

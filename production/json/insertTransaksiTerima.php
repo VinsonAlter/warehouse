@@ -8,6 +8,8 @@
                 $batch = $_POST['batch'];
                 $picker = $_POST['picker'];
                 $arr = explode(' ; ', $batch);
+                // count sepparated value inside array
+                $total = substr_count($batch, ' ; ') + 1;
                 $tglTerima = date_hour_to_str(date('d-m-Y H:i:00'));
                 foreach($arr as $val){
                     $array = explode(' , ', $val);
@@ -26,7 +28,7 @@
                         if($stmt->rowCount() > 0){
                             $res['success'] = 1;
                             $res['insert'] = $insert;
-                            $res['message'] = 'Status transaksi berhasil diupdate!';
+                            $res['message'] = $total . ' transaksi berhasil diupdate!';
                         } else {
                             $res['success'] = 0;
                             $res['message'] = 'Status transaksi gagal diupdate, mohon periksa koneksi anda!';

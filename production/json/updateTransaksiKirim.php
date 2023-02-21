@@ -7,13 +7,9 @@
         if($_POST['NomorTransaksi'] != '') {
             if(isset($_POST['waktu_kirim'])) {
                 $noTransaksi = $_POST['NomorTransaksi'];
+                $total = substr_count($noTransaksi, ' ; ') + 1;
                 $arr = explode(' ; ', $noTransaksi);
                 $tanggal_kirim = $_POST['waktu_kirim'] . ':00';
-                // if(strlen($_POST['waktu_kirim']) < 5) {
-                //     $waktu_kirim = '0' . $_POST['waktu_kirim'] . ':00';
-                // } else {
-                //     $waktu_kirim = $_POST['waktu_kirim'] . ':00';
-                // }
                 $tanggal_pengiriman = date_hour_to_str($tanggal_kirim);
                 if($tanggal_pengiriman == false) {
                     $res['success'] = 0;
@@ -56,7 +52,7 @@
                                                     if($stmt->rowCount() > 0) {
                                                         $res['success'] = 1;
                                                         $res['kirim'] = $update_kirim;   
-                                                        $res['message'] = 'Status transaksi berhasil diupdate!';
+                                                        $res['message'] = $total . ' transaksi berhasil diupdate!';
                                                     } else {
                                                         $res['success'] = 0;
                                                         $res['message'] = 'Status transaksi gagal diupdate, mohon periksa koneksi anda!';
@@ -96,7 +92,7 @@
                                                     if($stmt->rowCount() > 0) {
                                                         $res['success'] = 1;
                                                         $res['kirim'] = $update_kirim;
-                                                        $res['message'] = 'Status transaksi berhasil diupdate!';
+                                                        $res['message'] = $total . ' transaksi berhasil diupdate!';
                                                     } else {
                                                         $res['success'] = 0;
                                                         $res['message'] = 'Status transaksi gagal diupdate, mohon periksa koneksi anda!';
@@ -142,7 +138,7 @@
                                         if($stmt->rowCount() > 0) {
                                             $res['success'] = 1;
                                             $res['kirim'] = $update_kirim;       
-                                            $res['message'] = 'Status transaksi berhasil diupdate!';
+                                            $res['message'] = $update . ' transaksi berhasil diupdate!';
                                         } else {
                                             $res['success'] = 0;
                                             $res['message'] = 'Status transaksi gagal diupdate, mohon periksa koneksi anda!';
@@ -179,7 +175,7 @@
                                         if($stmt->rowCount() > 0) {
                                             $res['success'] = 1;
                                             $res['kirim'] = $update_kirim;       
-                                            $res['message'] = 'Status transaksi berhasil diupdate!';
+                                            $res['message'] = $update . ' transaksi berhasil diupdate!';
                                         } else {
                                             $res['success'] = 0;
                                             $res['message'] = 'Status transaksi gagal diupdate, mohon periksa koneksi anda!';
