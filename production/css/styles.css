@@ -2,6 +2,10 @@
     display: none !important;
 }
 
+.mt-4-half {
+    margin-top: 2.25rem;
+}
+
 .ml-right-16 {
     margin-left: -16px;
 }

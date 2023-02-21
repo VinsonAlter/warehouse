@@ -236,48 +236,89 @@
               <div class="card-body">
                 <div class="row">
                   <form method="post" action="" role="form">
-                    <div class="col-md-8">
-                      <div class="ml-15em form-group">
-                        <div class="mb-2">
+                  <div class="d-flex px-3">
+                    <div class="col-md-4 col-10">
+                      <div class="form-group">
+                        <div class="ml-right-16 mb-2">
                           <div class="d-sm-inline-block d-md-flex mb-3">
-                            <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Filter Tgl Transaksi</label>
+                            <label class="mb-3 mb-md-0 mr-half centered d-md-flex d-block">Filter Tgl Transaksi</label>
                             <input type="radio" class="cp mr-8" id="filter_transaksi" name="enable_date" value="transaksi_on" onclick="enable_transaksi()">
-                            <input type="text" class="col-md-2 col-4 mydatepicker"
+                            <input type="text" class="col-md-3 col-4 mydatepicker"
                               name="tglTransaksi" id="tgl_transaksi" value="<?=$tglTransaksi?>" autocomplete="off">
                             <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
-                            <input type="text" class="col-md-2 col-4 mydatepicker"
+                            <input type="text" class="col-md-3 col-4 mydatepicker"
                               name="tglAkhirTransaksi" id="akhir_transaksi" value="<?=$tglAkhirTransaksi?>" autocomplete="off">
-                            <button class="px-2 btn btn-success btn-sm text-white ml-half"
-                              type="submit" name="filter_tgl" id="btn_filter">
-                              Filter
-                            </button>
                           </div>
                           <div class="d-sm-inline-block d-md-flex mb-3">
-                            <label class="mb-3 mb-md-0 mr-16em centered d-md-flex">Filter Tgl Terima</label>
+                            <label class="mb-3 mb-md-0 mr-16em-half centered d-md-flex d-block">Filter Tgl Terima</label>
                             <input type="radio" class="cp mr-8" id="filter_terima" name="enable_date" value="terima_on" onclick="enable_terima()">
-                            <input type="text" class="col-md-2 col-4 mydatepicker"
-                              name="tglTerima"id="tgl_terima"  value="<?=$tglTerima?>" autocomplete="off">
+                            <input type="text" class="col-md-3 col-4 mydatepicker"
+                              name="tglTerima" id="tgl_terima"  value="<?=$tglTerima?>" autocomplete="off">
                             <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
-                            <input type="text" class="col-md-2 col-4 mydatepicker"
+                            <input type="text" class="col-md-3 col-4 mydatepicker"
                               name="tglAkhirTerima" id="akhir_terima" value="<?=$tglAkhirTerima?>" autocomplete="off">
-                            <!-- <button class="px-2 btn btn-success btn-sm text-white ml-half"
-                              type="submit" name="filter_tgl_terima" id="btn_terima">
-                              Filter
-                            </button> -->
                           </div>
-                          <div class="d-sm-inline-block d-md-flex">
-                            <label class="mb-3 mb-md-0 mr-32 centered d-md-flex">Filter Tgl Kirim</label>
+                          <div class="d-sm-inline-block d-md-flex mb-3">
+                            <label class="mb-3 mb-md-0 mr-25em-half centered d-md-flex d-block">Filter Tgl Kirim</label>
                             <input type="radio" class="cp mr-8" id="filter_kirim" name="enable_date" value="kirim_on" onclick="enable_kirim()">
-                            <input type="text" class="col-md-2 col-4 mydatepicker"
-                              name="tglKirim"id="tgl_kirim" value="<?=$tglFilterKirim?>" autocomplete="off">
+                            <input type="text" class="col-md-3 col-4 mydatepicker"
+                              name="tglKirim" id="tgl_kirim"  value="<?=$tglFilterKirim?>" autocomplete="off">
                             <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
-                            <input type="text" class="col-md-2 col-4 mydatepicker"
+                            <input type="text" class="col-md-3 col-4 mydatepicker"
                               name="tglAkhirKirim" id="akhir_kirim" value="<?=$tglFilterAkhirKirim?>" autocomplete="off">
                           </div>
                         </div>
                       </div>
                     </div>
+                    <div class = "col-2 mt-md-0 mt-4-half mr-32">
+                      <button class="px-2 btn btn-success btn-sm text-white"
+                        type="submit" name="filter_tgl" id="btn_filter">
+                        Filter
+                      </button>
+                    </div>
                   </form>
+                  </div>
+                    <!-- <div class="col-md-4 col-10">
+                      <div class="ml-15em form-group">
+                        <div class="mb-2">
+                          <div class="d-sm-inline-block d-md-flex mb-3">
+                            <label class="mb-3 mb-md-0 mr-half centered d-md-flex">Filter Tgl Transaksi</label>
+                            <input type="radio" class="cp mr-8" id="filter_transaksi" name="enable_date" value="transaksi_on" onclick="enable_transaksi()">
+                            <input type="text" class="col-md-3 col-4 mydatepicker"
+                              name="tglTransaksi" id="tgl_transaksi" value="<?=$tglTransaksi?>" autocomplete="off">
+                            <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
+                            <input type="text" class="col-md-3 col-4 mydatepicker"
+                              name="tglAkhirTransaksi" id="akhir_transaksi" value="<?=$tglAkhirTransaksi?>" autocomplete="off">
+                          </div>
+                          <div class="d-sm-inline-block d-md-flex mb-3">
+                            <label class="mb-3 mb-md-0 mr-16em centered d-md-flex">Filter Tgl Terima</label>
+                            <input type="radio" class="cp mr-8" id="filter_terima" name="enable_date" value="terima_on" onclick="enable_terima()">
+                            <input type="text" class="col-md-3 col-4 mydatepicker"
+                              name="tglTerima"id="tgl_terima"  value="<?=$tglTerima?>" autocomplete="off">
+                            <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
+                            <input type="text" class="col-md-3 col-4 mydatepicker"
+                              name="tglAkhirTerima" id="akhir_terima" value="<?=$tglAkhirTerima?>" autocomplete="off">
+                          </div>
+                          <div class="d-sm-inline-block d-md-flex">
+                            <label class="mb-3 mb-md-0 mr-32 centered d-md-flex">Filter Tgl Kirim</label>
+                            <input type="radio" class="cp mr-8" id="filter_kirim" name="enable_date" value="kirim_on" onclick="enable_kirim()">
+                            <input type="text" class="col-md-3 col-4 mydatepicker"
+                              name="tglKirim"id="tgl_kirim" value="<?=$tglFilterKirim?>" autocomplete="off">
+                            <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
+                            <input type="text" class="col-md-3 col-4 mydatepicker"
+                              name="tglAkhirKirim" id="akhir_kirim" value="<?=$tglFilterAkhirKirim?>" autocomplete="off">
+                          </div>
+                        </div>
+                      </div>
+                    </div> -->
+
+                    <!-- <div class="col-2 mt-md-0 mt-4-half mr-32">
+                      <button class="px-2 btn btn-success btn-sm text-white ml-half"
+                          type="submit" name="filter_tgl" id="btn_filter">
+                            Filter
+                      </button>
+                    </div>
+                  </form> -->
                   <hr/>
                   <div class="ms-auto text-end d-flex mb-3">
                     <h5 class="self-centered col-2 mr-12 page-title">Select Picker : </h5>
