@@ -325,10 +325,20 @@
                         <button class="btn btn-secondary" type="button" id="confirm_selesai" name="confirm_selesai"
                           style="width:180px;height:36px;">Confirm Selesai</button> -->
                       </div>
+                      <div>
+                        <button class="btn btn-warning mr-12 fs16-scaled btn-scaled" data-bs-toggle="modal" 
+                          data-bs-target="#masterModalKirim" type="button" id="update_kirim" name="update_kirim">
+                          Update Kirim
+                        </button>
+                        <button class="btn btn-secondary fs16-scaled btn-scaled" type="button" id="confirm_selesai" 
+                          name="confirm_selesai">
+                          Confirm Selesai
+                        </button>
+                      </div>
                     </div>
                   </form>
                   </div>
-                  <div class="ms-auto text-end d-flex mb-3">
+                  <!-- <div class="ms-auto text-end d-flex mb-3">
                     <h5 class="self-centered col-2 mr-12 page-title">Select Picker : </h5>
                     <select
                       class="cp select2 form-select shadow-none mr-12"
@@ -342,7 +352,7 @@
                       style="width:180px;height:36px;">Update Kirim</button>
                     <button class="btn btn-secondary" type="button" id="confirm_selesai" name="confirm_selesai"
                       style="width:180px;height:36px;">Confirm Selesai</button>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="table-responsive">
                   <table id="table_delivery" class="cp table table-bordered display compact">
@@ -853,9 +863,10 @@
           "stateSave": true,
           "stateDuration": -1,
           "pageLength": 25,
-          "scrollY": '300px',
-          "scrollX": '300px',
+          "scrollY": true,
+          "scrollX": true,
           "scrollCollapse": true,
+          "autoWidth": false,
           "ajax": {
             url: "json/getDataDelivery.php"
           },
