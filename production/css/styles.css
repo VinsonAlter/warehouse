@@ -10,6 +10,10 @@
     margin-top: 2.25rem;
 }
 
+.ml-right-8 {
+    margin-left: -8px;
+}
+
 .ml-right-16 {
     margin-left: -16px;
 }

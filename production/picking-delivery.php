@@ -268,9 +268,9 @@
                 <div class="row" style="padding-left:1.8rem;">
                   <form method="post" action="" role="form">
                   <div class="d-flex ">
-                    <div class="col-md-4 col-6">
+                    <div class="col-md-4 col-6" style="margin-right:-1rem;">
                       <div class="form-group">
-                        <div class="ml-right-16 mb-2">
+                        <div class="ml-right-8 mb-2">
                           <div class="d-sm-inline-block d-md-flex mb-3">
                             <label class="mb-3 mb-md-0 mr-half centered d-md-flex d-block">Filter Tgl Transaksi</label>
                             <input type="radio" class="cp mr-8" id="filter_transaksi" name="enable_date" value="transaksi_on" onclick="enable_transaksi()">
@@ -308,8 +308,8 @@
                       </button>
                     </div>
                     <div class="col-md-6 d-block pl-md-2">
-                      <div class="ms-auto text-end d-flex mb-3 mr-md-64">
-                        <b class="d-flex centered col-3 mr-12">Select Picker : </b>
+                      <div class="d-flex mb-3">
+                        <b class="d-flex centered col-3">Select Picker : </b>
                         <select
                           class="cp select2 shadow-none mr-12"
                           id="select_picker" name="picker">
@@ -325,7 +325,7 @@
                         <button class="btn btn-secondary" type="button" id="confirm_selesai" name="confirm_selesai"
                           style="width:180px;height:36px;">Confirm Selesai</button> -->
                       </div>
-                      <div>
+                      <div class="d-flex" style="margin-left:1.5rem;">
                         <button class="btn btn-warning mr-12 fs16-scaled btn-scaled" data-bs-toggle="modal" 
                           data-bs-target="#masterModalKirim" type="button" id="update_kirim" name="update_kirim">
                           Update Kirim
