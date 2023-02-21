@@ -118,17 +118,15 @@
           margin-right: 64px;
         }
 
-        .fs16-scaled {
-          font-size: 16px;
+        .fs12-scaled {
+          font-size: 12px;
         }
 
         .btn-scaled {
-          padding: 12px 16px;
+          padding: 8px 16px;
         }
 
-        .mr-sm-3half-left {
-          margin-right: -3.5rem;
-        }
+        
 
       }
       
@@ -220,16 +218,30 @@
 				left: 50%;
 			}
 
+      .fs12-scaled {
+        font-size: 11px;
+      }
+
       .fs16-scaled {
         font-size: 12px;
       }
 
       .btn-scaled {
-        padding: 9px 12px;
+        padding: 6px 12px;
       }
 
       .mr-sm-3half-left {
-        margin-right: -2.75rem;
+        margin-right: -1.5rem;
+      }
+
+      @media (max-width: 768px) {
+        .mr-sm-3half-left {
+          margin-right: -2.75rem;
+        }
+
+        .ml-15em {
+          margin-left: 0;
+        }
       }
 
     </style>
@@ -274,7 +286,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <div class="row" style="padding-left:1.8rem;">
+                <div class="d-flex" style="padding-left:1.8rem;">
                   <form method="post" action="" role="form">
                   <div class="row">
                     <div class="col-md-5 col-11 mr-sm-3half-left">
@@ -316,16 +328,16 @@
                         Filter
                       </button>
                     </div>
-                    <div class="col-md-6 col-sm-12 pl-md-2">
+                    <div class="col-md-6 col-sm-12 p-0 mb-3">
                       <div class="d-flex mb-3">
-                        <b class="d-flex centered col-3">Select Picker : </b>
+                        <b class="d-flex centered col-3 fs12-scaled">Select Picker : </b>
                         <select
-                          class="cp select2 shadow-none mr-12"
+                          class="cp select2 shadow-none mr-12 fs16-scaled"
                           id="select_picker" name="picker">
                           <option value="" selected="selected" disabled>Pilih Picker</option>
                         </select>
                         <button class="btn btn-cyan mr-12 fs16-scaled btn-scaled" type="button" id="update_pick" name="update_terima">
-                          Update Picking
+                          Picking
                         </button>
                         <!-- <button class="btn btn-cyan mr-12" type="button" id="update_pick" name="update_terima"
                           style="width:180px;height:36px;">Update Picking</button>
@@ -334,14 +346,14 @@
                         <button class="btn btn-secondary" type="button" id="confirm_selesai" name="confirm_selesai"
                           style="width:180px;height:36px;">Confirm Selesai</button> -->
                       </div>
-                      <div class="d-flex">
+                      <div class="d-flex ml-15em">
                         <button class="btn btn-warning mr-12 fs16-scaled btn-scaled" data-bs-toggle="modal" 
                           data-bs-target="#masterModalKirim" type="button" id="update_kirim" name="update_kirim">
-                          Update Kirim
+                          Kirim
                         </button>
                         <button class="btn btn-secondary fs16-scaled btn-scaled" type="button" id="confirm_selesai" 
                           name="confirm_selesai">
-                          Confirm Selesai
+                          Selesai
                         </button>
                       </div>
                     </div>
