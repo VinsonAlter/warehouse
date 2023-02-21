@@ -308,7 +308,15 @@
         left: 50%;
 	    }
 
+      .ml-custom-right-16 {
+        margin-left: -16px;
+      }
 
+      @media (min-width: 768px) {
+        .ml-custom-right-16 {
+          margin-left: -48px;
+        }
+      }
 
     </style>
 
@@ -364,12 +372,12 @@
         <div class="row mt-3">
           <div class="col-12">
             <div class="card">
-              <div class="card-body d-flex px-3">
+              <div class="card-body d-flex px-4 border-bottom">
                 <!-- erase this px-3, causing trouble at styling -->
                 <div class="container px-3">
                   <form method="post" action="" role="form">
-                  <div class="d-flex">
-                    <div class="col-md-4 col-10">
+                  <div class="row">
+                    <div class="col-md-5 col-12">
                       <div class="form-group">
                         <div class="ml-right-16 mb-2">
                           <div class="d-sm-inline-block d-md-flex mb-3">
@@ -411,7 +419,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class = "col-2 mt-md-0 mt-4-half mr-32">
+                    <div class = "ml-custom-right-16 col-md-2 col-sm-12">
                       <button class="px-2 btn btn-success btn-sm text-white"
                         type="submit" name="filter_tgl" id="btn_filter">
                         Filter
@@ -429,7 +437,7 @@
                     </div>
                   </div> -->
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive mt-3">
                   <table id="table_delivery" class="table table-bordered display compact">
                     <thead>
                       <tr>
