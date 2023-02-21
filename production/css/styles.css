@@ -2,6 +2,10 @@
     display: none !important;
 }
 
+.pl-2 {
+    padding-left: 2rem;
+}
+
 .mt-4-half {
     margin-top: 2.25rem;
 }

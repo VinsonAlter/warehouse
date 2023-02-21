@@ -108,9 +108,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <style>
 
-      /* body {
-        overflow:hidden;
-      } */
+      body {
+        overflow:auto;
+      }
+
+      .mt-4-half {
+        margin-top: 2.25rem !important;
+      }
       
       .bg-belum-diterima { 
         background-color: #fcb1ac !important;
@@ -234,9 +238,9 @@
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <div class="row">
+                <div class="row" style="padding-left:1.8rem;">
                   <form method="post" action="" role="form">
-                  <div class="d-flex px-3">
+                  <div class="d-flex ">
                     <div class="col-md-4 col-10">
                       <div class="form-group">
                         <div class="ml-right-16 mb-2">
@@ -270,7 +274,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class = "col-2 mt-md-0 mt-4-half mr-32">
+                    <div class = "col-1 col-md-2 mt-md-0 mt-4-half">
                       <button class="px-2 btn btn-success btn-sm text-white"
                         type="submit" name="filter_tgl" id="btn_filter">
                         Filter
@@ -338,7 +342,7 @@
                   <hr/>
                 </div>
                 <div class="table-responsive">
-                  <table id="table_picking" class="cp table table-bordered table-condensed display compact">
+                  <table id="table_delivery" class="cp table table-bordered display compact">
                     <thead>
                       <tr>
                         <th><input type="checkbox" id="select_all" class="cp"></th>
@@ -696,7 +700,7 @@
           success: result => {
             const res = $.parseJSON(result);
             if(res.success == 1){
-              $('#table_picking').DataTable().ajax.reload();
+              $('#table_delivery').DataTable().ajax.reload();
               $('#masterModalKirim').modal('hide');
             } alert(res.message);
           },
@@ -719,7 +723,7 @@
           const res = $.parseJSON(result);
             if(res.success == 1) {
               checkValues = [];
-              $('#table_picking').DataTable().ajax.reload();
+              $('#table_delivery').DataTable().ajax.reload();
             } alert(res.message);
           },
           error: err => {
@@ -738,7 +742,7 @@
             const res = $.parseJSON(result);
             if(res.success == 1) {
               checkValues = [];
-              $('#table_picking').DataTable().ajax.reload();
+              $('#table_delivery').DataTable().ajax.reload();
             } alert(res.message);
           },
           error: err => {
@@ -839,7 +843,7 @@
         }
 
         // fill datatables 
-        var tablePicking = $('#table_picking').DataTable({
+        var tablePicking = $('#table_delivery').DataTable({
           "processing": true,
           "serverSide": true,
           "deferRender": true,
@@ -847,6 +851,7 @@
           "stateDuration": -1,
           "pageLength": 25,
           "scrollY": '300px',
+          "scrollX": '300px',
           "scrollCollapse": true,
           "ajax": {
             url: "json/getDataDelivery.php"
@@ -906,7 +911,7 @@
         tablePicking.page('first').draw('page');
        
         tablePicking.on('draw.dt', () => {
-          const PageInfo = $('#table_picking').DataTable().page.info();
+          const PageInfo = $('#table_delivery').DataTable().page.info();
 			    tablePicking.column(1, { page: 'current' }).nodes().each((cell, i) => {
 				    cell.innerHTML = i + 1 + PageInfo.start
 			    })

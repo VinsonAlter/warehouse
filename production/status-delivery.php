@@ -175,6 +175,10 @@
 
     <style>
 
+      .mt-4-half {
+          margin-top: 2.25rem;
+      }
+
       /* Disable box shadows for this table */
 
       /* table.dataTable.stripe > tbody > tr.odd > *, 
