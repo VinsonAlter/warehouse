@@ -47,13 +47,14 @@ div.dataTables_wrapper div.dataTables_info {
 }
 div.dataTables_wrapper div.dataTables_paginate {
   margin: 0;
-  white-space: nowrap;
+  white-space: wrap;
   text-align: right;
 }
 div.dataTables_wrapper div.dataTables_paginate ul.pagination {
   /* margin: 2px 0; */
-  white-space: nowrap;
-  justify-content: flex-end;
+  /* white-space: wrap; */
+  /* justify-content: flex-end; */
+  flex-wrap: wrap;
 }
 div.dataTables_wrapper div.dataTables_processing {
   position: absolute;
