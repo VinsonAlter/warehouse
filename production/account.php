@@ -245,7 +245,7 @@
             <div class="card">
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="table_user" class="table table-striped table-bordered table-condensed display compact " style="width:1400px">
+                  <table id="table_user" class="table table-striped table-bordered table-condensed display compact " width="1200px">
                     <thead>
                       <tr>
                         <th style="width:10px">No</th>
@@ -283,85 +283,84 @@
 
       <!-- Bootstrap Modals for Adding New User -->
       <div class="modal fade" id="masterModal" tabindex="-1" role="dialog" aria-labelledby="masterModallabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">Tambah User</h4>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" id="masterModallabel">&times;</span>
-                  </button>
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Tambah User</h4>
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" id="masterModallabel">&times;</span>
+              </button>
+            </div>
+            <form class="form-horizontal" id="form-submit" method="post" action="javascript:initSubmit()" role="form">
+              <div class="modal-body">
+                <div class="input-group mb-2">
+                  <label class="input-group-text col-md-4 col-6 required" for="name">Name</label>
+                  <input type="text" class="form-control" id="name" name="name" autocomplete="off" required> 
                 </div>
-                <form class="form-horizontal" id="form-submit" method="post" action="javascript:initSubmit()" role="form">
-                <div class="modal-body">
-                  <div class="input-group mb-2">
-                    <label class="input-group-text col-md-4 col-6 required" for="name">Name</label>
-                    <input type="text" class="form-control" id="name" name="name" autocomplete="off" required> 
+                <div class="input-group mb-2">
+                  <label class="input-group-text col-md-4 col-6 required" for="userName">Username</label>
+                  <input type="text" class="form-control" id="userName" name="userName" autocomplete="off" required>  
+                </div>
+                <div class="input-group mb-2">
+                  <label class="input-group-text col-md-4 col-6 required" for="password">Password</label>
+                  <input type="password" class="form-control" id="password" name="password" autocomplete="off" required>
+                </div>
+                <div class="input-group mb-2">
+                  <label class="input-group-text col-md-4 col-6 required" for="conf_pass">Confirm Password</label>
+                  <input type="password" class="form-control" id="conf_pass" name="conf_pass" autocomplete="off" required>
+                </div>
+                <div class="form-check input-group mb-2">
+                  <div class = "px-2 col-1">
+                    <input class="cp form-check-input" type="checkbox" id="userAktif" name="check" value="1">
+                    <label class="cp" for="userAktif">Aktif</label>
                   </div>
-                  <div class="input-group mb-2">
-                    <label class="input-group-text col-md-4 col-6 required" for="userName">Username</label>
-                    <input type="text" class="form-control" id="userName" name="userName" autocomplete="off" required>  
-                  </div>
-                  <div class="input-group mb-2">
-                    <label class="input-group-text col-md-4 col-6 required" for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" autocomplete="off" required>
-                  </div>
-                  <div class="input-group mb-2">
-                    <label class="input-group-text col-md-4 col-6 required" for="conf_pass">Confirm Password</label>
-                    <input type="password" class="form-control" id="conf_pass" name="conf_pass" autocomplete="off" required>
-                  </div>
-                  <div class="form-check input-group mb-2">
-                    <div class = "px-2 col-1">
-                      <input class="cp form-check-input" type="checkbox" id="userAktif" name="check" value="1">
-                      <label class="cp" for="userAktif">Aktif</label>
-                    </div>
-                  </div>
-                  <p style="margin-left:2px;color:red;"> <b> (*) Database, Segmen dan Otoritas harus dicentang setidaknya satu</b></p>
-                  <div class="d-flex">
-                    <p class="col-6 ml-half"> <b>Select Database : </b></p>
-                    <p class="col-6" style="margin-left:2px"> <b>Select Segmen : </b></p>
-                  </div>
-                  <div class = "input-group mb-3">   
-                    <!-- read the check-label and check-input from database -->
-                    <div class = "col col-md-6">
-                      <div class="form-check ml-half">
-                        <div class="d-flex flex-column">
-                          <?php foreach ($database as $row): ?>
-                            <label class="cp form-check-label">
-                              <input class="cp form-check-input" id="<?=$row['warehouse']?>" type="checkbox"  name="server[]" value="<?=$row['warehouse']?>">
-                              <?=$row['warehouse']?>
-                            </label>
-                          <?php endforeach;?>
-                        </div>
+                </div>
+                <p style="margin-left:2px;color:red;"> <b> (*) Database, Segmen dan Otoritas harus dicentang setidaknya satu</b></p>
+                <div class="d-flex">
+                  <p class="col-6 ml-half"> <b>Select Database : </b></p>
+                  <p class="col-6" style="margin-left:2px"> <b>Select Segmen : </b></p>
+                </div>
+                <div class = "input-group mb-3">   
+                  <!-- read the check-label and check-input from database -->
+                  <div class = "col col-md-6">
+                    <div class="form-check ml-half">
+                      <div class="d-flex flex-column">
+                        <?php foreach ($database as $row): ?>
+                          <label class="cp form-check-label">
+                            <input class="cp form-check-input" id="<?=$row['warehouse']?>" type="checkbox"  name="server[]" value="<?=$row['warehouse']?>">
+                            <?=$row['warehouse']?>
+                          </label>
+                        <?php endforeach;?>
                       </div>
                     </div>
-                    <div class = "col col-md-6">
-                      <div class="ml-half">
-                        <div class="d-flex flex-column">
-                          <div class="d-flex">
-                            <input id="AS" name="segmen[]" class="cp form-check-input" type="checkbox"  
+                  </div>
+                  <div class = "col col-md-6">
+                    <div class="ml-half">
+                      <div class="d-flex flex-column">
+                        <div class="d-flex">
+                          <input id="AS" name="segmen[]" class="cp form-check-input" type="checkbox"  
                               value="AS">
-                            <label for="AS" class="cp form-check-label ml-half">AS</label>
-                          </div>
-                          <div class="d-flex">
-                            <input id="CO" name="segmen[]" class="cp form-check-input" type="checkbox"  
-                              value="CO">
-                            <label for="CO" class="cp form-check-label ml-half">CO</label>
-                          </div>
-                          <div class="d-flex">
-                            <input id="SS" name="segmen[]" class="cp form-check-input" type="checkbox"  
-                              value="SS">
-                            <label for="SS" class="cp form-check-label ml-half">SS</label>
-                          </div>
-                          <div class="d-flex">
-                            <input id="CS" name="segmen[]" class="cp form-check-input" type="checkbox"  
-                              value="CS">
-                            <label for="CS" class="cp form-check-label ml-half">CS</label>
-                          </div>
-                          <div class="d-flex">
-                            <input id="BP" name="segmen[]" class="cp form-check-input" type="checkbox"  
-                              value="BP">
-                            <label for="BP" class="cp form-check-label ml-half">BP</label>
-                          </div>
+                          <label for="AS" class="cp form-check-label ml-half">AS</label>
+                        </div>
+                        <div class="d-flex">
+                          <input id="CO" name="segmen[]" class="cp form-check-input" type="checkbox"  
+                            value="CO">
+                          <label for="CO" class="cp form-check-label ml-half">CO</label>
+                        </div>
+                        <div class="d-flex">
+                          <input id="SS" name="segmen[]" class="cp form-check-input" type="checkbox"  
+                            value="SS">
+                          <label for="SS" class="cp form-check-label ml-half">SS</label>
+                        </div>
+                        <div class="d-flex">
+                          <input id="CS" name="segmen[]" class="cp form-check-input" type="checkbox"  
+                            value="CS">
+                          <label for="CS" class="cp form-check-label ml-half">CS</label>
+                        </div>
+                        <div class="d-flex">
+                          <input id="BP" name="segmen[]" class="cp form-check-input" type="checkbox"  
+                            value="BP">
+                          <label for="BP" class="cp form-check-label ml-half">BP</label>
                         </div>
                       </div>
                     </div>
@@ -412,12 +411,12 @@
                   </div>
                   <!-- <p style="margin-left:2px"><span style="color:red;">(*)</span> <b>Wajib Diisi</b></p> -->
                 </div>
-                <div class="modal-footer">
-                  <button type="submit" name = "btn_submit" class="btn btn-primary">Simpan</button>
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                </div>
-                </form>
               </div>
+              <div class="modal-footer">
+                <button type="submit" name = "btn_submit" class="btn btn-primary">Simpan</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -645,6 +644,7 @@
           "stateSave": true,
           "stateDuration": -1,
           "pageLength": 10,
+          "scrollX": '300px',
           "ajax": {
             url: 'json/data_user.php',
           },
@@ -653,10 +653,9 @@
           },
           "order": [[2, "asc"]],
           "columnDefs": [
-            { orderable: false, targets: [0, 3, 4, 5, 6, 7] },
-            { width: '50%', targets: 3},
-            { width: '15%', targets: 4},
-            { width: '35%', targets: 5},
+            { orderable: false, targets: [3, 4, 5, 6, 7] },
+            { width: '500px', targets: [3, 5]},
+            { width: '200px', targets: 4},
             { className: 'dt-center', targets: [0, 6, 7]},
             // this part renders font awesome checklist or cross according to active value
             {

@@ -233,7 +233,7 @@
             <div class="card">
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="table_mobil" class="table table-striped table-bordered table-condensed display compact " style="width:95%">
+                  <table id="table_mobil" class="table table-striped table-bordered table-condensed display compact ">
                     <thead>
                       <tr>
                         <th style="width:10px">No</th>
@@ -279,38 +279,37 @@
       <!-- Bootstrap Modals for Adding New Mobil -->
 
       <div class="modal fade" id="masterModal" tabindex="-1" role="dialog" aria-labelledby="masterModallabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">Tambah Mobil</h4>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" id="masterModallabel">&times;</span>
-                  </button>
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Tambah Mobil</h4>
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" id="masterModallabel">&times;</span>
+              </button>
+            </div>
+            <form class="form-horizontal" id="form-submit" method="post" action="javascript:initSubmit()" role="form">
+              <div class="modal-body">
+                <div class="input-group mb-3">
+                  <label class="input-group-text col-md-3 col-5 required" for="platMobil">No. Plat</label>
+                  <input type="text" class="form-control" id="platMobil" name="plat" autocomplete="off" required>
+                </div>   
+                <div class="input-group mb-1">
+                  <label class="input-group-text col-md-3 col-5 required" for="jenisMobil">Jenis Mobil</label>
+                  <input type="text" class="form-control" id="jenisMobil" name="jenis" autocomplete="off" required>
                 </div>
-                <form class="form-horizontal" id="form-submit" method="post" action="javascript:initSubmit()" role="form">
-                <div class="modal-body">
-                  <div class="input-group mb-3">
-                    <label class="input-group-text col-md-3 col-5 required" for="platMobil">No. Plat</label>
-                    <input type="text" class="form-control" id="platMobil" name="plat" autocomplete="off" required>
-                  </div>   
-                  <div class="input-group mb-1">
-                    <label class="input-group-text col-md-3 col-5 required" for="jenisMobil">Jenis Mobil</label>
-                    <input type="text" class="form-control" id="jenisMobil" name="jenis" autocomplete="off" required>
+                <div class="form-check input-group">
+                  <div class = "offset-11 col-1">
+                    <input class="cp form-check-input" type="checkbox" id="mobilAktif" name="check" value="1">
+                    <label class="cp" for="mobilAktif">Aktif</label>
                   </div>
-                  <div class="form-check input-group">
-                    <div class = "offset-11 col-1">
-                      <input class="cp form-check-input" type="checkbox" id="mobilAktif" name="check" value="1">
-                      <label class="cp" for="mobilAktif">Aktif</label>
-                    </div>
-                  </div>
-                  <p style="margin-left:8px"><span style="color:red;">(*)</span> <b>Wajib Diisi</b></p>
                 </div>
-                <div class="modal-footer">
-                  <button type="submit" name = "btn_submit" class="btn btn-primary">Simpan</button>
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                </div>
-                </form>
+                <p style="margin-left:8px"><span style="color:red;">(*)</span> <b>Wajib Diisi</b></p>
               </div>
+              <div class="modal-footer">
+                <button type="submit" name = "btn_submit" class="btn btn-primary">Simpan</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -318,37 +317,36 @@
       <!-- Bootstrap Modals Edit Mobil -->
 
       <div class="modal fade" id="masterModalEdit" tabindex="-1" role="dialog" aria-labelledby="masterModalEditlabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title">Edit Mobil</h4>
-                  <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" id="masterModalEditlabel">&times;</span>
-                  </button>
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Edit Mobil</h4>
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" id="masterModalEditlabel">&times;</span>
+              </button>
+            </div>
+            <form class="form-horizontal" id="form-edit" method="post" action="javascript:initEdit()" role="form">
+              <div class="modal-body">
+                <div class="input-group mb-3">
+                  <label class="input-group-text col-md-3 col-5" for="editPlat">No Plat</label>
+                  <input type="text" class="form-control" id="editPlat" name="edit_plat" readonly="readonly">
+                </div>   
+                <div class="input-group mb-1">
+                  <label class="input-group-text col-md-3 col-5" for="editJenis">Jenis Mobil</label>
+                  <input type="text" class="form-control" id="editJenis" name="edit_jenis" autocomplete="off">
                 </div>
-                <form class="form-horizontal" id="form-edit" method="post" action="javascript:initEdit()" role="form">
-                <div class="modal-body">
-                  <div class="input-group mb-3">
-                    <label class="input-group-text col-md-3 col-5" for="editPlat">No Plat</label>
-                    <input type="text" class="form-control" id="editPlat" name="edit_plat" readonly="readonly">
-                  </div>   
-                  <div class="input-group mb-1">
-                    <label class="input-group-text col-md-3 col-5" for="editJenis">Jenis Mobil</label>
-                    <input type="text" class="form-control" id="editJenis" name="edit_jenis" autocomplete="off">
+                <div class="form-check input-group">
+                  <div class = "offset-11 col-1">
+                    <input class="cp form-check-input" type="checkbox" id="aktifMobil" name="edit_aktif">
+                    <label class="cp" for="aktifMobil">Aktif</label>
                   </div>
-                  <div class="form-check input-group">
-                    <div class = "offset-11 col-1">
-                      <input class="cp form-check-input" type="checkbox" id="aktifMobil" name="edit_aktif">
-                      <label class="cp" for="aktifMobil">Aktif</label>
-                    </div>
-                  </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="submit" name = "btn_submit" class="btn btn-primary">Simpan</button>
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                </div>
-                </form>
               </div>
+              <div class="modal-footer">
+                <button type="submit" name = "btn_submit" class="btn btn-primary">Simpan</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -409,6 +407,7 @@
           "stateSave": true,
           "stateDuration": -1,
           "pageLength": 10,
+          "autoWidth": false,
           "ajax": {
             url: 'json/data_mobil.php'
           },
