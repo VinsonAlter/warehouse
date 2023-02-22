@@ -639,10 +639,10 @@
                             </div>
                             <div class="form-group row" id="plat_section">
                               <label class="col-md-4 col-12 control-label col-form-label">No. Plat</label>
-                              <div class="col-sm-6 col-10">
+                              <div class="col-md-6 col-10">
                                 <input type="text" class="form-control" id="no_plat" name="no_plat">
                               </div>
-                              <div class="col-2 d-flex">
+                              <div class="col-md-2 col-2 d-flex">
                                 <select
                                     id="select_plat" name="select_plat"
                                     style="width:40px; text-align:left; padding: 0 5px;"
