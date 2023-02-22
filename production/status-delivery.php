@@ -318,6 +318,13 @@
         }
       }
 
+      div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+        /* margin: 2px 0;
+        white-space: wrap;
+        justify-content: flex-end; */
+        flex-wrap: wrap;
+      }
+
     </style>
 
   </head>
