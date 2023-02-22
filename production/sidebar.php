@@ -140,7 +140,17 @@
                     </ul>
                 </li>
             ';
-    ?>   
+    ?>
+        <li class="sidebar-item">
+            <a
+                class="sidebar-link"
+                href="../logout.php"
+                aria-expanded="false"
+            >
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="hide-menu"> Logout </span>
+            </a>
+        </li>
     </ul>
 </nav>
 <!-- End Sidebar navigation -->
