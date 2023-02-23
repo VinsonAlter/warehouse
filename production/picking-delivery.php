@@ -141,7 +141,7 @@
       }
 
       .ml-custom-right-10 {
-        margin-left: 0;
+        margin-left: 10px;
       }
 
       
@@ -940,9 +940,9 @@
           "language": {
             "processing": '<div class="loader"></div>',
           },
-          "order": [[1, "asc"]],
+          "order": [[2, 3, 4], "asc"],
           "columnDefs": [
-            { orderable: false, targets: 0},
+            { orderable: false, targets: [0]},
             { targets: 5,
               render: function(data){
                 if(data == 1) {
@@ -983,7 +983,7 @@
               $(`#${check[0]}`).closest('tr').addClass('highlight');
               $(`#${check[0]}`).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
             }
-            console.log(checkValues);
+            // console.log(checkValues);
           }
           
         });

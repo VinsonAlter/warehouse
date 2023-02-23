@@ -82,8 +82,8 @@
             $stmt = $conn->prepare($filters, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
             $stmt->execute();
             $total_record += $stmt->rowCount();
-            $order_tgl = " ORDER BY [Status], [Tgl] DESC, [NoTransaksi] ";
-            $query = "SELECT * FROM ($filters) temp" . $search_query . $order_tgl;
+            // $order_tgl = " ORDER BY [Status], [Tgl] DESC, [NoTransaksi] ";
+            $query = "SELECT * FROM ($filters) temp" . $search_query;
             // var_dump($query);
             $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
             $stmt->execute();
