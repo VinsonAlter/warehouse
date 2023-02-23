@@ -73,7 +73,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.5" />
     <meta name="author" content="Vinson">
     <title>PT. Sardana IndahBerlian Motor</title>
     <link href="css/styles.css" rel="stylesheet" />
@@ -940,9 +940,16 @@
           "language": {
             "processing": '<div class="loader"></div>',
           },
-          "order": [[2, 3, 4], "asc"],
+          "order": [],
+          // "order": [
+          //     [4, "asc"],
+          //     // [2, "asc"],
+          //   //  [3, "desc"],
+          //   //  [5, "desc"],       
+          // ],
+          // "order": [[2, 4], "asc"],
           "columnDefs": [
-            { orderable: false, targets: [0]},
+            { orderable: false, targets: [0, 1]},
             { targets: 5,
               render: function(data){
                 if(data == 1) {
@@ -957,7 +964,8 @@
                 }
               }
             },
-            { width: '20px', targets: 1},
+            { width: '50px', targets: 1},
+            { width: '120px', targets: 2},
             { className: 'dt-center', targets: 5}
           ],
           "rowCallback": function(row, data, index) {
@@ -984,8 +992,10 @@
               $(`#${check[0]}`).closest('tr .dtfc-fixed-left').nextUntil('tr .dtfc-fixed-left:nth-child(5)').addClass('highlight');
             }
             // console.log(checkValues);
+          },
+          "initComplete": function( settings, json ) {
+            $("th").removeClass('sorting_desc'); //remove sorting_desc class
           }
-          
         });
 
         // jump to the first page of the datatables
