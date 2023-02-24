@@ -73,7 +73,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=0.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Vinson">
     <title>PT. Sardana IndahBerlian Motor</title>
     <link href="css/styles.css" rel="stylesheet" />
@@ -129,11 +129,15 @@
         .fs14-scaled {
           font-size: 14px !important;
         }
+
+        .custom-scaled {
+          font-size: 14px !important;
+        }
       }
 
       @-moz-document url-prefix() {
         .mb-moz {
-          margin-bottom: 0.785rem;
+          margin-bottom: 0.765rem !important;
         }
       }
 
@@ -241,12 +245,16 @@
 				left: 50%;
 			}
 
+      .custom-scaled {
+        font-size: 14px;
+      }
+
       .fs12-scaled {
-        font-size: 11px;
+        font-size: 13px;
       }
 
       .fs14-scaled {
-        font-size: 12px;
+        font-size: 13px;
       }
 
       .btn-scaled {
@@ -258,7 +266,7 @@
       }
 
       .ml-1em {
-        margin-left: 1em;
+        margin-left: 0.675em;
       }
       
     
@@ -287,6 +295,7 @@
           padding-bottom: 1rem;
           border-bottom: 1px solid #e9ecef;
         }
+
 
         /* .border-bottom-mobile::before {
           margin-top: 2rem;
@@ -343,10 +352,10 @@
                     <div class="col-md-6 col-12 mr-sm-3half-left">
                       <div class="form-group">
                         <div class="ml-right-8 mb-2">
-                          <div class="d-sm-inline-block d-md-flex mb-3">
-                            <label class="mb-3 mb-md-0 mr-half fs14-scaled centered d-flex">Pilih Transaksi : </label>
+                          <div class="d-flex mb-3" style="align-items:center">
+                            <label class="mb-0 mr-half fs14-scaled align-self-center d-flex">Pilih Transaksi : </label>
                             <select
-                              class="cp select2 shadow-none mr-12 fs14-scaled"
+                              class="cp select2 shadow-none mr-12 custom-scaled"
                               id="select_status" name="status_transaksi">
                               <option value="" selected="selected" disabled>Pilih Status</option>
                               <option value="semua">Semua</option>
@@ -355,14 +364,14 @@
                               <option value="selesai">Selesai</option>
                             </select>
                           </div>
-                          <div class="d-sm-inline-block d-md-flex mb-3">
-                            <label class="mb-3 mb-md-0 mr-half centered d-md-flex">
-                              Tanggal :
+                          <div class="d-block d-md-flex mb-3" style="align-items:center;">
+                            <label class="fs12-scaled mb-2 mb-md-0 mr-half centered d-block d-md-flex">
+                              Tanggal : 
                             </label>
-                            <input type="text" class="col-md-3 col-4 mydatepicker" name="filter_awal" 
+                            <input type="text" class="col-4 col-md-3 mydatepicker" name="filter_awal" 
                               id="filter_awal" autocomplete="off">
-                            <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
-                            <input type="text" class="col-md-3 col-4 mydatepicker"
+                            <label class="ml-3 centered d-md-flex mb-0" style="margin-right:5px;">s/d</label>
+                            <input type="text" class="col-4 col-md-3 mydatepicker"
                               name="filter_akhir" id="filter_akhir" autocomplete="off">
                             <button class="px-2 btn btn-success btn-sm text-white ml-half"
                               type="submit" name="filter_tgl_status">
@@ -407,8 +416,8 @@
                     </div> -->
                     <!-- <span class="border-bottom-mobile"></span> -->
                     <div class="mt-1 mt-md-0 col-md-6 col-12 p-0 mb-3">
-                      <div class="px-2 d-flex mb-moz">
-                        <p class="d-flex centered col-3 fs14-scaled">Select Picker : </p>
+                      <div class="px-md-2 px-0 d-flex mb-moz">
+                        <p class="d-flex col-3 fs14-scaled mr-3 align-self-center mb-0">Select Picker : </p>
                         <select
                           class="cp select2 shadow-none mr-12 fs12-scaled"
                           id="select_picker" name="picker">

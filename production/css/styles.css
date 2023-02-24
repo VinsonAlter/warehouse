@@ -3,12 +3,6 @@ body {
     /* transform-origin: 0 0; */
 }
 
-@media (max-width: 768px) {
-    body {
-        zoom: 1;
-    }
-}
-
 .display-none {
     display: none !important;
 }
