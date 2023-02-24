@@ -994,6 +994,13 @@
               const picker = res.data.picker;
               $('#select_picker option:contains("'+picker+'")').prop('selected', true);
               const wilayah = res.data.wilayah;
+              const terima = res.data.tglTerima;
+              if(picker == '') {
+                $('#select_picker option[value=""]').prop('selected', true);
+              } 
+              if(status == '') {
+                $('#select_status option[value=""]').prop('selected', true);
+              } 
               if(wilayah != '') {
                 $('#wilayah_pengiriman option[value="' + wilayah + '"]').prop('selected', true);
               }
@@ -1094,11 +1101,13 @@
           $('#tanggal_selesai').val('');
           $('#section-dikirim').css('display', 'block');
           $('#section-selesai').css('display', 'none');
-        } else {
+        } else if($('#select_status').val() == '3'){
           $('#section-dikirim').css('display', 'block');
           $('#section-selesai').css('display', 'block');
+        } else {
+          $('#section-dikirim').css('display', 'none');
+          $('#section-selesai').css('display', 'none');
         }
-
         if($('#select_pengiriman').val() == 'Ambil Sendiri') {
           $('#nama_ekspedisi').val('');
           $('#nama_driver').val('');
