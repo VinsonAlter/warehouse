@@ -275,7 +275,7 @@
       }
 
       .b-bottom {
-        border-bottom: 1px solid #e9ecef;
+        border-bottom: 3px solid #e9ecef;
       }
 
       @media (max-width: 768px) {
@@ -296,7 +296,14 @@
           border-bottom: 1px solid #e9ecef;
         }
 
+        .b-bottom {
+          border-bottom: none;
+        }
 
+        .b-sm-bottom {
+          border-bottom: 3px solid #e9ecef;
+          margin-bottom: 6px !important;
+        }
         /* .border-bottom-mobile::before {
           margin-top: 2rem;
         } */
@@ -346,10 +353,10 @@
           <div class="col-12">
             <div class="card">
               <div class="card-body">
-                <div class="d-flex" style="padding-left:1.8rem;">
+                <div class="d-flex b-bottom" style="padding-left:1.8rem;">
                   <form method="post" action="" role="form">
                   <div class="row">
-                    <div class="col-md-6 col-12 mr-sm-3half-left">
+                    <div class="col-md-6 col-12 mr-sm-3half-left b-sm-bottom">
                       <div class="form-group">
                         <div class="ml-right-8 mb-2">
                           <div class="d-flex mb-3" style="align-items:center">
@@ -365,7 +372,7 @@
                             </select>
                           </div>
                           <div class="d-block d-md-flex mb-3" style="align-items:center;">
-                            <label class="fs12-scaled mb-2 mb-md-0 mr-half centered d-block d-md-flex">
+                            <label class="fs14-scaled mb-2 mb-md-0 mr-half centered d-block d-md-flex">
                               Tanggal : 
                             </label>
                             <input type="text" class="col-4 col-md-3 mydatepicker" name="filter_awal" 
@@ -415,7 +422,7 @@
                       </button>
                     </div> -->
                     <!-- <span class="border-bottom-mobile"></span> -->
-                    <div class="mt-1 mt-md-0 col-md-6 col-12 p-0 mb-3">
+                    <div class="mt-1 mt-md-0 col-md-6 col-12 b-sm-bottom p-0 mb-3">
                       <div class="px-md-2 px-0 d-flex mb-moz">
                         <p class="d-flex col-3 fs14-scaled mr-3 align-self-center mb-0">Select Picker : </p>
                         <select
@@ -433,7 +440,7 @@
                         <button class="btn btn-secondary" type="button" id="confirm_selesai" name="confirm_selesai"
                           style="width:180px;height:36px;">Confirm Selesai</button> -->
                       </div>
-                      <div class="d-flex ml-1em">
+                      <div class="d-flex ml-1em mb-2 mb-md-0">
                         <button class="btn btn-warning btn-sm mr-12" data-bs-toggle="modal" 
                           data-bs-target="#masterModalKirim" type="button" id="update_kirim" name="update_kirim">
                           Kirim
@@ -444,7 +451,7 @@
                         </button>
                       </div>
                     </div>
-                    <span class="b-bottom"></span>
+                    <!-- <span class="b-bottom"></span> -->
                   </form>
                   </div>
                   <!-- <div class="ms-auto text-end d-flex mb-3">
