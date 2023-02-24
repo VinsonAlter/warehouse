@@ -45,14 +45,17 @@
                 case 'terima_on':
                     $tgl_condition = " WHERE D.[TglTerima] BETWEEN '".date_to_str($tgl_terima)."' AND 
                                     '".date_to_str($akhir_terima). $end_day ."'";
+                    $order_tgl = " ORDER BY [Status], [Tgl], [TglTerima] DESC, Customer, [NoTransaksi]";
                     break;
                 case 'kirim_on':
                     $tgl_condition = " WHERE D.[TglKirim] BETWEEN '".date_to_str($tgl_kirim)."' AND 
                                     '".date_to_str($akhir_kirim). $end_day ."'";
+                    $order_tgl = " ORDER BY [Status], [Tgl], [TglKirim] DESC, Customer, [NoTransaksi]";                
                     break;
                 default:
                     $tgl_condition = " WHERE P.[Tgl] BETWEEN '".date_to_str($tgl_transaksi)."' 
                                         AND '".date_to_str($akhir_transaksi). $end_day ."'";
+                    $order_tgl = " ORDER BY [Status], [Tgl] DESC, Customer, [NoTransaksi]";
                     break;
             }
             // if($status == 'transaksi_on') {
@@ -68,7 +71,7 @@
             foreach($user_data as $key => $value) {
                 $filter[] = "
                     SELECT P.[ID], P.[NoTransaksi], P.[Tgl], P.[Nama], P.[Owner],
-                            CASE WHEN ISNULL (P.[Nama], '') <> '' THEN
+                            CASE WHEN ISNULL (P.[Owner], '') <> '' THEN
                                P.[Nama] + ' ' + P.[Owner]
                             ELSE 
                                 P.[Nama] 
@@ -87,7 +90,7 @@
             $stmt = $conn->prepare($filters, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
             $stmt->execute();
             $total_record += $stmt->rowCount();
-            $order_tgl = " ORDER BY [Status], [Tgl] DESC, Customer, [NoTransaksi]";
+            // $order_tgl = " ORDER BY [Status], [Tgl] DESC, Customer, [NoTransaksi]";
             $query = "SELECT * FROM ($filters) temp" . $search_query . $order_tgl;
             // var_dump($query);
             $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);

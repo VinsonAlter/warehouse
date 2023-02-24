@@ -210,6 +210,10 @@
       table.dataTable.order-column.stripe > tbody > tr.odd > .sorting_1 {
         box-shadow: none;
       } */
+
+      .bg-belum-diterima { 
+        background-color: #fcb1ac !important;
+      }
     
       .bg-diterima {
         background-color: #ff9933 !important;
@@ -875,8 +879,10 @@
                   return '<b>Diterima</b>'
                 else if (data == 2)
                   return '<b>Dikirim</b>'
-                else 
+                else if(data == 3)
                   return '<b>Selesai</b>'
+                else 
+                  return ''
               }}
           ],
           "rowCallback": function(row, data, index) {
@@ -885,8 +891,10 @@
               $('td:eq(3)', row).addClass("bg-diterima");
             } else if (cellValue == 2) {
               $('td:eq(3)', row).addClass("bg-dikirim");
-            } else {
+            } else if (cellValue == 3) {
               $('td:eq(3)', row).addClass("bg-selesai");
+            } else {
+              $('td:eq(3)', row).addClass("bg-belum-diterima");
             }
           },
         });

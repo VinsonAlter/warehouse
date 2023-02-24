@@ -50,64 +50,61 @@
             if (isset($_SESSION['StatusFilterTransaksi'])) $status = $_SESSION['StatusFilterTransaksi'];
             switch($status){   
                 case 'terima_on':
-                    $tgl_condition = "WHERE [TglTerima] BETWEEN '".date_to_str($awal_terima)."'
+                    $tgl_condition = "WHERE W.[TglTerima] BETWEEN '".date_to_str($awal_terima)."'
                         AND '".date_to_str($akhir_terima) . $end_day . "'";
-                    $order_tanggal = "ORDER BY [Status], [TglTerima] DESC";
+                    $order_tanggal = " ORDER BY [Status], [Tgl], [TglTerima] DESC, Customer, [NoTransaksi]";
                     break;
                 case 'kirim_on':
-                    $tgl_condition = "WHERE [TglKirim] BETWEEN '".date_to_str($awal_kirim)."'
+                    $tgl_condition = "WHERE W.[TglKirim] BETWEEN '".date_to_str($awal_kirim)."'
                         AND '".date_to_str($akhir_kirim) . $end_day . "'";
-                    $order_tanggal = "ORDER BY [Status], [TglKirim] DESC";
+                    $order_tanggal = " ORDER BY [Status], [Tgl], [TglKirim] DESC, Customer, [NoTransaksi]";
                     break;
                 case 'selesai_on':
-                    $tgl_condition = "WHERE [TglSelesai] BETWEEN '".date_to_str($awal_selesai)."'
+                    $tgl_condition = "WHERE W.[TglSelesai] BETWEEN '".date_to_str($awal_selesai)."'
                         AND '".date_to_str($akhir_selesai) . $end_day . "'";
-                    $order_tanggal = "ORDER BY [Status], [TglSelesai] DESC";
+                    $order_tanggal = " ORDER BY [Status], [Tgl], [TglSelesai] DESC, Customer, [NoTransaksi]";
                     break;
                 default:
-                    $tgl_condition = "WHERE [TglTransaksi] BETWEEN '".date_to_str($awal_transaksi)."'
+                    $tgl_condition = "WHERE P.[Tgl] BETWEEN '".date_to_str($awal_transaksi)."'
                         AND '".date_to_str($akhir_transaksi) . $end_day . "'";
-                    $order_tanggal = "ORDER BY [Status], [TglTransaksi] DESC";
+                    $order_tanggal = " ORDER BY [Status], [Tgl] DESC, Customer, [NoTransaksi]";
                     break;
             }
             // get the TotalRecords
-            // foreach($user_data as $key => $value) {
-            //     $filter[] = "
-            //         SELECT P.[ID], 
-            //                 P.[NoTransaksi], 
-            //                 P.[Tgl], 
-            //                 P.[Nama], 
-            //                 P.[Owner], 
-            //                 S.[Nama] AS NamaSales,
-            //                 D.[Status], 
-            //                 D.[TglTerima], 
-            //                 D.[TglKirim], 
-            //                 D.[NamaPicker]
-            //         FROM $value LEFT JOIN [WMS].[dbo].[TB_Delivery] D 
-            //         ON P.NoTransaksi = D.NoTransaksi AND P.ID = D.IDTransaksi " . $tgl_condition . " AND
-            //         P.[Segmen] IN ($user_segmen) AND
-            //         P.[Status] = 1 AND P.[NoTransaksi] <> 'J' AND 
-            //         isnull(P.[NoTransaksiOriginal], '') = ''
-            //     ";
-            //     $filters = implode("UNION ALL", $filter);
-            // }
-            $table = "SELECT [IDTransaksi]
-                            ,[NoTransaksi]
-                            ,[Status]
-                            ,[Customer]
-                            ,[NamaDriver]
-                            ,[NamaPicker]
-                            ,[TglTransaksi]
-                            ,[TglTerima]
-                            ,[TglKirim]
-                            ,[TglSelesai]
-                            ,[Wilayah]
-                            ,[JenisPengiriman]
-                            ,[NamaEkspedisi]
-                            ,[NoPlat]
-                            ,[NamaSales]
-                            ,[Cabang]
-                        FROM [WMS].[dbo].[TB_Delivery]";
+            foreach($user_data as $key => $value) {
+                $filter[] = "
+                    SELECT P.[ID], P.[NoTransaksi], P.[Tgl], W.[Status],
+                           CASE WHEN ISNULL(P.[Owner], '') <> '' THEN P.[Nama] + ' ( ' + P.[Owner] + ' ) '
+                                ELSE P.[Nama]
+                           END AS Customer, 
+                           W.[NamaDriver], W.[NamaPicker], W.[TglTerima], W.[TglKirim], 
+                           W.[TglSelesai], W.[Wilayah], W.[JenisPengiriman], W.[NamaEkspedisi],
+                           W.[NoPlat], W.[NamaSales]
+                    FROM [WMS].[dbo].[TB_Delivery] W RIGHT JOIN $value P
+                    ON W.NoTransaksi = P.NoTransaksi" . ' ' . $tgl_condition . " AND
+                    P.[Segmen] IN ($user_segmen) AND
+                    P.[Status] = 1 AND P.[NoTransaksi] <> 'J' AND 
+                    isnull(P.[NoTransaksiOriginal], '') = ''
+                ";
+                $table = implode("UNION ALL", $filter);
+            }
+            // $table = "SELECT [IDTransaksi]
+            //                 ,[NoTransaksi]
+            //                 ,[Status]
+            //                 ,[Customer]
+            //                 ,[NamaDriver]
+            //                 ,[NamaPicker]
+            //                 ,[TglTransaksi]
+            //                 ,[TglTerima]
+            //                 ,[TglKirim]
+            //                 ,[TglSelesai]
+            //                 ,[Wilayah]
+            //                 ,[JenisPengiriman]
+            //                 ,[NamaEkspedisi]
+            //                 ,[NoPlat]
+            //                 ,[NamaSales]
+            //                 ,[Cabang]
+            //             FROM [WMS].[dbo].[TB_Delivery]";
         }
 
         $stmt = $conn->prepare($table, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
@@ -117,17 +114,17 @@
         // Fill the table with records
         
         // $query = "SELECT * FROM (".$table . ' ' . $status_tanggal . $search_query.") temp" . ' ' . $order_tanggal;
-        $query = "SELECT * FROM (".$table. '' .$tgl_condition.") temp" . ' ' . $order_tanggal; 
+        $query = "SELECT * FROM ($table) temp" . $search_query .  $order_tanggal; 
         $stmt = $conn->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
         $stmt->execute();
         if($stmt->rowCount() > 0) {
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $urut++;
-                $id = $row['IDTransaksi'];
+                $id = $row['ID'];
                 $transaksi = $row['NoTransaksi'];
                 $nama = $row['Customer'];
                 $status = $row['Status'];
-                $tglTransaksi = $row['TglTransaksi'];
+                $tglTransaksi = $row['Tgl'];
                 $tglTerima = $row['TglTerima'];
                 $tglKirim = $row['TglKirim'];
                 $tglSelesai = $row['TglSelesai'];
