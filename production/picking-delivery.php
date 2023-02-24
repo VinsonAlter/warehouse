@@ -119,18 +119,26 @@
         }
 
         .fs12-scaled {
-          font-size: 13px !important;
+          font-size: 12px !important;
         }
 
         .btn-scaled {
           padding: 8px 16px;
         }
 
-        .fs16-scaled {
-          font-size: 16px;
+        .fs14-scaled {
+          font-size: 14px !important;
         }
+      }
 
-        
+      @-moz-document url-prefix() {
+        .mb-moz {
+          margin-bottom: 0.785rem;
+        }
+      }
+
+      .mb-moz {
+        margin-bottom: 0.525rem;
       }
 
       div.dataTables_wrapper div.dataTables_paginate ul.pagination {
@@ -237,7 +245,7 @@
         font-size: 11px;
       }
 
-      .fs16-scaled {
+      .fs14-scaled {
         font-size: 12px;
       }
 
@@ -253,8 +261,7 @@
         margin-left: 1em;
       }
       
-      
-
+    
       .border-bottom-mobile {
         border-bottom: 0;
       }
@@ -333,10 +340,36 @@
                 <div class="d-flex" style="padding-left:1.8rem;">
                   <form method="post" action="" role="form">
                   <div class="row">
-                    <div class="col-md-5 col-12 mr-sm-3half-left">
+                    <div class="col-md-6 col-12 mr-sm-3half-left">
                       <div class="form-group">
                         <div class="ml-right-8 mb-2">
                           <div class="d-sm-inline-block d-md-flex mb-3">
+                            <label class="mb-3 mb-md-0 mr-half fs14-scaled centered d-flex">Pilih Transaksi : </label>
+                            <select
+                              class="cp select2 shadow-none mr-12 fs14-scaled"
+                              id="select_status" name="status_transaksi">
+                              <option value="" selected="selected" disabled>Pilih Status</option>
+                              <option value="semua">Semua</option>
+                              <option value="terima">Terima</option>
+                              <option value="kirim">Kirim</option>
+                              <option value="selesai">Selesai</option>
+                            </select>
+                          </div>
+                          <div class="d-sm-inline-block d-md-flex mb-3">
+                            <label class="mb-3 mb-md-0 mr-half centered d-md-flex">
+                              Tanggal :
+                            </label>
+                            <input type="text" class="col-md-3 col-4 mydatepicker" name="filter_awal" 
+                              id="filter_awal" autocomplete="off">
+                            <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
+                            <input type="text" class="col-md-3 col-4 mydatepicker"
+                              name="filter_akhir" id="filter_akhir" autocomplete="off">
+                            <button class="px-2 btn btn-success btn-sm text-white ml-half"
+                              type="submit" name="filter_tgl_status">
+                              Filter
+                            </button>
+                          </div>
+                          <!-- <div class="d-sm-inline-block d-md-flex mb-3">
                             <label class="mb-3 mb-md-0 mr-half centered d-md-flex d-block">Filter Tgl Transaksi</label>
                             <input type="radio" class="cp mr-8" id="filter_transaksi" name="enable_date" value="transaksi_on" onclick="enable_transaksi()">
                             <input type="text" class="col-md-3 col-4 mydatepicker"
@@ -362,26 +395,26 @@
                             <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
                             <input type="text" class="col-md-3 col-4 mydatepicker"
                               name="tglAkhirKirim" id="akhir_kirim" value="<?=$tglFilterAkhirKirim?>" autocomplete="off">
-                          </div>
+                          </div> -->
                         </div>
                       </div>
                     </div>
-                    <div class = "ml-custom-right-10 col-12 col-md-1 mt-md-0 mb-3 border-bottom-mobile">
+                    <!-- <div class = "ml-custom-right-10 col-12 col-md-1 mt-md-0 mb-3 border-bottom-mobile">
                       <button class="px-2 btn btn-success btn-sm text-white"
                         type="submit" name="filter_tgl" id="btn_filter">
                         Filter
                       </button>
-                    </div>
+                    </div> -->
                     <!-- <span class="border-bottom-mobile"></span> -->
                     <div class="mt-1 mt-md-0 col-md-6 col-12 p-0 mb-3">
-                      <div class="d-flex mb-3">
-                        <b class="d-flex centered col-3 fs12-scaled">Select Picker : </b>
+                      <div class="px-2 d-flex mb-moz">
+                        <p class="d-flex centered col-3 fs14-scaled">Select Picker : </p>
                         <select
-                          class="cp select2 shadow-none mr-12 fs16-scaled"
+                          class="cp select2 shadow-none mr-12 fs12-scaled"
                           id="select_picker" name="picker">
                           <option value="" selected="selected" disabled>Pilih Picker</option>
                         </select>
-                        <button class="btn btn-cyan mr-12 fs16-scaled btn-scaled" type="button" id="update_pick" name="update_terima">
+                        <button class="btn btn-cyan btn-sm mr-12" type="button" id="update_pick" name="update_terima">
                           Picking
                         </button>
                         <!-- <button class="btn btn-cyan mr-12" type="button" id="update_pick" name="update_terima"
@@ -392,11 +425,11 @@
                           style="width:180px;height:36px;">Confirm Selesai</button> -->
                       </div>
                       <div class="d-flex ml-1em">
-                        <button class="btn btn-warning mr-12 fs16-scaled btn-scaled" data-bs-toggle="modal" 
+                        <button class="btn btn-warning btn-sm mr-12" data-bs-toggle="modal" 
                           data-bs-target="#masterModalKirim" type="button" id="update_kirim" name="update_kirim">
                           Kirim
                         </button>
-                        <button class="btn btn-secondary fs16-scaled btn-scaled" type="button" id="confirm_selesai" 
+                        <button class="btn btn-secondary btn-sm" type="button" id="confirm_selesai" 
                           name="confirm_selesai">
                           Selesai
                         </button>
