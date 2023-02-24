@@ -66,23 +66,28 @@
             //                         '".date_to_str($akhir_kirim). $end_day ."'";
             // }
             foreach($user_data as $key => $value) {
-                // foreach($sales_data as $key_2 => $value_2) {
-                    $filter[] = "
-                    SELECT P.[ID], P.[NoTransaksi], P.[Tgl], P.[Nama], P.[Owner], S.[Nama] AS NamaSales,D.[Status], D.[TglTerima], D.[TglKirim], D.[NamaPicker]
+                $filter[] = "
+                    SELECT P.[ID], P.[NoTransaksi], P.[Tgl], P.[Nama], P.[Owner],
+                            CASE WHEN ISNULL (P.[Nama], '') <> '' THEN
+                               P.[Nama] + ' ' + P.[Owner]
+                            ELSE 
+                                P.[Nama] 
+                            END AS Customer, 
+                            S.[Nama] AS NamaSales,D.[Status], D.[TglTerima], 
+                            D.[TglKirim], D.[NamaPicker]
                     FROM $value P LEFT JOIN $sales_data[$key] S ON P.SalesID = S.SalesID
                     LEFT JOIN [WMS].[dbo].[TB_Delivery] D 
                     ON P.NoTransaksi = D.NoTransaksi AND P.ID = D.IDTransaksi " . $tgl_condition . " AND
                     P.[Segmen] IN ($user_segmen) AND
                     P.[Status] = 1 AND P.[NoTransaksi] <> 'J' AND 
                     isnull(P.[NoTransaksiOriginal], '') = ''
-                    ";
-                    $filters = implode("UNION ALL", $filter);
-                // }
+                ";
+                $filters = implode("UNION ALL", $filter);
             }
             $stmt = $conn->prepare($filters, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
             $stmt->execute();
             $total_record += $stmt->rowCount();
-            $order_tgl = " ORDER BY [Status], [Tgl] DESC, [Owner], [NoTransaksi]";
+            $order_tgl = " ORDER BY [Status], [Tgl] DESC, Customer, [NoTransaksi]";
             $query = "SELECT * FROM ($filters) temp" . $search_query . $order_tgl;
             // var_dump($query);
             $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);

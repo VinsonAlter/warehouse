@@ -2,6 +2,8 @@
     session_start();
     require_once '../../function.php';
     $data = $result = array();
+    $user_data = $_SESSION['user_server'];
+    $user_segmen = $_SESSION['segmen_user'];
     try {
         if ($conn) {
             $urut = $total_record = 0;
@@ -69,7 +71,26 @@
                     break;
             }
             // get the TotalRecords
-
+            // foreach($user_data as $key => $value) {
+            //     $filter[] = "
+            //         SELECT P.[ID], 
+            //                 P.[NoTransaksi], 
+            //                 P.[Tgl], 
+            //                 P.[Nama], 
+            //                 P.[Owner], 
+            //                 S.[Nama] AS NamaSales,
+            //                 D.[Status], 
+            //                 D.[TglTerima], 
+            //                 D.[TglKirim], 
+            //                 D.[NamaPicker]
+            //         FROM $value LEFT JOIN [WMS].[dbo].[TB_Delivery] D 
+            //         ON P.NoTransaksi = D.NoTransaksi AND P.ID = D.IDTransaksi " . $tgl_condition . " AND
+            //         P.[Segmen] IN ($user_segmen) AND
+            //         P.[Status] = 1 AND P.[NoTransaksi] <> 'J' AND 
+            //         isnull(P.[NoTransaksiOriginal], '') = ''
+            //     ";
+            //     $filters = implode("UNION ALL", $filter);
+            // }
             $table = "SELECT [IDTransaksi]
                             ,[NoTransaksi]
                             ,[Status]
