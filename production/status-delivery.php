@@ -634,6 +634,12 @@
                               </div>
                             </div>
                             <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Nama Sales</label>
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control" id="nama_sales" name="nama_sales" readonly="readonly">
+                              </div>
+                            </div>
+                            <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Status Transaksi</label>
                               <div class="d-flex col-sm-6">
                                 <select
@@ -1126,6 +1132,7 @@
               $('#tanggal_kirim').val(res.data.tglKirim);
               // $('#waktu_kirim').val(res.data.waktuKirim);
               $('#tanggal_selesai').val(res.data.tglSelesai);
+              $('#nama_sales').val(res.data.sales);
               const picker = res.data.picker;
               $('#select_picker option:contains("'+picker+'")').prop('selected', true);
               const wilayah = res.data.wilayah;

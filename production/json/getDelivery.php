@@ -3,6 +3,7 @@
     require_once '../../function.php';
     $user_data = $_SESSION['user_server'];
     $user_segmen = $_SESSION['segmen_user'];
+    $sales_data = $_SESSION['sales_force'];
     if($_POST['transaksi']) {
         $res = [];
         $id = $_POST['id'];
@@ -10,7 +11,7 @@
         foreach($user_data as $key => $value) {
             $filter[] = "
                         SELECT 
-                        P.[NoTransaksi]
+                         P.[NoTransaksi]
                         ,D.[NamaPicker]
                         ,D.[Status]
                         ,D.[Customer]
@@ -22,9 +23,11 @@
                         ,D.[Wilayah]
                         ,D.[NamaEkspedisi]
                         ,D.[NamaDriver]
-                        ,D.[NoPlat] 
+                        ,D.[NoPlat]
+                        ,S.[Nama]
                         FROM [WMS].[dbo].[TB_Delivery] D RIGHT JOIN $value P
-                        ON D.NoTransaksi = P.NoTransaksi
+                        ON D.NoTransaksi = P.NoTransaksi 
+                        LEFT JOIN $sales_data[$key] S ON P.SalesID = S.SalesID
                         WHERE
                         P.NoTransaksi = '$transaksi'
             ";
@@ -53,6 +56,12 @@
         $stmt->execute();
         if($stmt->rowCount() > 0) {
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                if(($row['Nama']) != '') {
+                    $row['Nama'] = $row['Nama'];
+                } else {
+                    $row['Nama'] = '';
+                }
+
                 if(($row['Status']) != '') {
                     $row['Status'] = $row['Status'];
                 } else {
@@ -103,6 +112,7 @@
 
                 $data = array(
                     'transaksi' => $row['NoTransaksi'],
+                    'sales' => $row['Nama'],
                     'status' => $row['Status'],
                     'picker' => $row['NamaPicker'],
                     'kirim' => $row['TglKirim'],
