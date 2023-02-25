@@ -628,7 +628,7 @@
                           </div>
                         </div>
                         <div class="modal-footer">
-                          <button type="submit" name = "btn_submit" class="btn btn-primary">Kirim</button>
+                          <button type="submit" name = "btn_submit" class="btn btn-primary">Simpan</button>
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                         </div>
                       </form>
@@ -683,7 +683,7 @@
     <script src="assets/libs/bootstrap4-datetimepicker/bootstrap-datetimepicker.js"></script>  
 
     <script>
-      
+
       function checkSelectedDriver() {
         if($('#select_driver option:selected').val() != '') {
           $('#nama_driver').val($('#select_driver').val());
@@ -850,8 +850,9 @@
           success: result => {
             const res = $.parseJSON(result);
             if(res.success == 1){
-              $('#table_delivery').DataTable().ajax.reload();
               $('#masterModalKirim').modal('hide');
+              $('#table_delivery').DataTable().ajax.reload();
+              $('input[name="checkboxes[]"]').prop('checked', false);
             } alert(res.message);
           },
           error: err => {
@@ -958,8 +959,6 @@
           $('#masterModalKirim .modal-body input[name="tanggal_kirim"]').val(date);
         });
 
-        
-
         // tidak jadi gunakan event ini
         /* 
         if(state == '' || state == 'transaksi_on') {
@@ -1035,7 +1034,7 @@
                   return '<b>Selesai</b>';
                 }
                 else {
-                  return '<b>Belum Diterima</b>';
+                  return '';
                 }
               }
             },
