@@ -337,6 +337,7 @@
                         break;
                     }
                 default:
+                    $sales = $_POST['nama_sales'];
                     $jadwalKirim = NULL;
                     $jenisPengiriman = NULL;
                     $wilayahPengiriman = NULL;
@@ -348,10 +349,12 @@
                                         Status = :status, TglTerima = :terima, NamaPicker = :picker,
                                         TglKirim = :kirim, TglSelesai = :selesai, JenisPengiriman = :pengiriman,
                                         Wilayah = :wilayah, NamaEkspedisi = :ekspedisi,
-                                        NamaDriver = :driver, NoPlat = :plat
+                                        NamaDriver = :driver, NoPlat = :plat,
+                                        NamaSales = :sales,
                                         WHERE NoTransaksi = :transaksi";
                     $stmt2 = $pdo->prepare($update, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
                     $stmt2->bindParam(":status", $status, PDO::PARAM_INT);
+                    $stmt2->bindParam(":sales", $sales, PDO::PARAM_STR);
                     $stmt2->bindParam(":terima", $jadwalTerima, PDO::PARAM_STR);
                     $stmt2->bindParam(":picker", $picker, PDO::PARAM_STR);
                     $stmt2->bindParam(":kirim", $jadwalKirim, PDO::PARAM_STR);

@@ -645,7 +645,7 @@
                                 <select
                                   class="select2 shadow-none form-select cp"
                                   style="width: 100%; height: 36px"
-                                  id="select_status" name="select_status" onchange="javascript:checkStatus()"
+                                  id="ganti_status" name="select_status" onchange="javascript:checkStatus()"
                                 >
                                   <option value="" selected="selected" disabled>Pilih Status Pengiriman</option>
                                   <option value="1">Diterima</option>
@@ -1142,23 +1142,23 @@
               } 
               if(status == '') {
                 $('#select_status option[value=""]').prop('selected', true);
-                $('#section-dikirim').css('display', 'none');
-                $('#section-selesai').css('display', 'none');
+                $('#section-dikirim').addClass('display-none');
+                $('#section-selesai').addClass('display-none');
               } else if(status == '1') {
                 $('#tanggal_kirim').val('');
                 $('#nama_ekspedisi').val('');
                 $('#nama_driver').val('');
                 $('#no_plat').val('');
                 $('#tanggal_selesai').val('');
-                $('#section-dikirim').css('display', 'none');
-                $('#section-selesai').css('display', 'none');
+                $('#section-dikirim').addClass('display-none');
+                $('#section-selesai').addClass('display-none');
               } else if (status == '2') {
                 $('#tanggal_selesai').val('');
-                $('#section-dikirim').css('display', 'block');
-                $('#section-selesai').css('display', 'none');
+                $('#section-dikirim').removeClass('display-none');
+                $('#section-selesai').addClass('display-none');
               } else {
-                $('#section-dikirim').css('display', 'block');
-                $('#section-selesai').css('display', 'block');
+                $('#section-dikirim').removeClass('display-none');
+                $('#section-selesai').removeClass('display-none');
               }
               if(wilayah != '') {
                 $('#wilayah_pengiriman option[value="' + wilayah + '"]').prop('selected', true);
@@ -1307,7 +1307,8 @@
       })
 
       function checkStatus() {
-        if($('#select_status').val() == '1') {
+        console.log($('#ganti_status').val());
+        if($('#ganti_status').val() == '1') {
           $('#tanggal_kirim').val('');
           $('#nama_ekspedisi').val('');
           $('#nama_driver').val('');
@@ -1315,19 +1316,19 @@
           $('#select_pengiriman option[value=""]').prop('selected', true);
           $('#wilayah_pengiriman option[value=""]').prop('selected', true);
           $('#tanggal_selesai').val('');
-          $('#section-dikirim').css('display', 'none');
-          $('#section-selesai').css('display', 'none');
-        } else if($('#select_status').val() == '2'){
+          $('#section-dikirim').addClass('display-none');
+          $('#section-selesai').addClass('display-none');
+        } else if($('#ganti_status').val() == '2'){
           // this today is troublesome, need to fix this
           $('#tanggal_kirim').val(today);
           $('#tanggal_selesai').val('');
-          $('#section-dikirim').css('display', 'block');
-          $('#section-selesai').css('display', 'none');
-        } else {
+          $('#section-dikirim').removeClass('display-none');
+          $('#section-selesai').addClass('display-none');
+        } else if($('#ganti_status').val() == '3') {
           $('#tanggal_kirim').val(today);
           $('#tanggal_selesai').val(today);
-          $('#section-dikirim').css('display', 'block');
-          $('#section-selesai').css('display', 'block');
+          $('#section-dikirim').removeClass('display-none');
+          $('#section-selesai').removeClass('display-none');
         }
       }
 
