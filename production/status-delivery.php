@@ -1135,7 +1135,24 @@
               } 
               if(status == '') {
                 $('#select_status option[value=""]').prop('selected', true);
-              } 
+                $('#section-dikirim').css('display', 'none');
+                $('#section-selesai').css('display', 'none');
+              } else if(status == '1') {
+                $('#tanggal_kirim').val('');
+                $('#nama_ekspedisi').val('');
+                $('#nama_driver').val('');
+                $('#no_plat').val('');
+                $('#tanggal_selesai').val('');
+                $('#section-dikirim').css('display', 'none');
+                $('#section-selesai').css('display', 'none');
+              } else if (status == '2') {
+                $('#tanggal_selesai').val('');
+                $('#section-dikirim').css('display', 'block');
+                $('#section-selesai').css('display', 'none');
+              } else {
+                $('#section-dikirim').css('display', 'block');
+                $('#section-selesai').css('display', 'block');
+              }
               if(wilayah != '') {
                 $('#wilayah_pengiriman option[value="' + wilayah + '"]').prop('selected', true);
               }
@@ -1224,25 +1241,25 @@
       }
 
       $('#masterModalEdit').on('shown.bs.modal', function() {
-        if($('#select_status').val() == '1') {
-          $('#tanggal_kirim').val('');
-          $('#nama_ekspedisi').val('');
-          $('#nama_driver').val('');
-          $('#no_plat').val('');
-          $('#tanggal_selesai').val('');
-          $('#section-dikirim').css('display', 'none');
-          $('#section-selesai').css('display', 'none');
-        } else if($('#select_status').val() == '2'){
-          $('#tanggal_selesai').val('');
-          $('#section-dikirim').css('display', 'block');
-          $('#section-selesai').css('display', 'none');
-        } else if($('#select_status').val() == '3'){
-          $('#section-dikirim').css('display', 'block');
-          $('#section-selesai').css('display', 'block');
-        } else {
-          $('#section-dikirim').css('display', 'none');
-          $('#section-selesai').css('display', 'none');
-        }
+        // if($('#select_status').val() == '1') {
+        //   $('#tanggal_kirim').val('');
+        //   $('#nama_ekspedisi').val('');
+        //   $('#nama_driver').val('');
+        //   $('#no_plat').val('');
+        //   $('#tanggal_selesai').val('');
+        //   $('#section-dikirim').css('display', 'none');
+        //   $('#section-selesai').css('display', 'none');
+        // } else if($('#select_status').val() == '2'){
+        //   $('#tanggal_selesai').val('');
+        //   $('#section-dikirim').css('display', 'block');
+        //   $('#section-selesai').css('display', 'none');
+        // } else if($('#select_status').val() == '3'){
+        //   $('#section-dikirim').css('display', 'block');
+        //   $('#section-selesai').css('display', 'block');
+        // } else {
+        //   $('#section-dikirim').css('display', 'none');
+        //   $('#section-selesai').css('display', 'none');
+        // }
         if($('#select_pengiriman').val() == 'Ambil Sendiri') {
           $('#nama_ekspedisi').val('');
           $('#nama_driver').val('');
