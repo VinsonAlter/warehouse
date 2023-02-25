@@ -381,13 +381,23 @@
                                 $res['message'] = 'Status Transaksi gagal diganti, mohon periksa koneksi anda!';
                             }
                         } else {
+                            $idTransaksi = $_POST['id_transaksi'];
+                            $customer = $_POST['nama_customer'];
                             $sales = $_POST['nama_sales'];
-
+                            $tglTransaksi = date_hour_to_str($_POST['tgl_transaksi']);
                             $insert = "INSERT INTO [WMS].[dbo].[TB_Delivery] 
                                         ([IDTransaksi], [NoTransaksi], [Customer], [TglTransaksi], [Status], [NamaPicker], [TglTerima], [NamaSales])
                                         VALUES ('$idTransaksi', '$noTransaksi', '$customer', '$tglTransaksi', 1, '$picker', '$jadwalTerima', '$sales')";
-
-                        }
+                            $stmt3 = $pdo->prepare($insert, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+                            $stmt3->execute();
+                            if($stmt3->rowCount() > 0){
+                                $res['success'] = 1;
+                                $res['message'] = 'Status Transaksi Berhasil Dimasukkan!';
+                            } else {
+                                $res['success'] = 0;
+                                $res['message'] = 'Status Transaksi gagal dimasukkan, mohon periksa koneksi anda!';
+                            }
+                        }   
                     break;
             }
             

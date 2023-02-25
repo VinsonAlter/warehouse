@@ -652,6 +652,12 @@
                               </div>
                             </div>
                             <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Tgl Transaksi</label>
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control" id="tgl_transaksi" name="tgl_transaksi" readonly="readonly">
+                              </div>
+                            </div>
+                            <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Status Transaksi</label>
                               <div class="d-flex col-sm-6">
                                 <select
@@ -1139,6 +1145,7 @@
               $('#no_plat').val(res.data.platDriver);
               const status = res.data.status;
               $('#select_status option[value="' + status + '"').prop('selected', true);
+              $('#tgl_transaksi').val(res.data.tglTransaksi);
               $('#tanggal_terima').val(res.data.tglTerima);
               // $('#waktu_terima').val(res.data.waktuTerima);
               $('#tanggal_kirim').val(res.data.tglKirim);
