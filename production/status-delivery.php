@@ -10,81 +10,94 @@
     // var_dump($user_segmen);
     $nama = $_SESSION['user_login'];
     $user_data = $_SESSION['user_server'];
-    $sales = $_SESSION['sales_force'];
-    $statusAwalTransaksi = date('d-m-Y');
-    $statusAkhirTransaksi = date('d-m-Y');
-    $statusAwalTerima = date('d-m-Y');
-    $statusAkhirTerima = date('d-m-Y');
-    $statusAwalKirim = date('d-m-Y');
-    $statusAkhirKirim = date('d-m-Y');
-    $statusAwalSelesai = date('d-m-Y');
-    $statusAkhirSelesai = date('d-m-Y');
+    $tanggalAwal = date('d-m-Y');
+    $tanggalAkhir = date('d-m-Y');
+    // $sales = $_SESSION['sales_force'];
+    // $statusAwalTransaksi = date('d-m-Y');
+    // $statusAkhirTransaksi = date('d-m-Y');
+    // $statusAwalTerima = date('d-m-Y');
+    // $statusAkhirTerima = date('d-m-Y');
+    // $statusAwalKirim = date('d-m-Y');
+    // $statusAkhirKirim = date('d-m-Y');
+    // $statusAwalSelesai = date('d-m-Y');
+    // $statusAkhirSelesai = date('d-m-Y');
     // $tglTerima = date('d-m-Y');
     // $tglKirim = date('d-m-Y');
     // $waktuKirim = date('H:i');
     // $waktuTerima = date('H:i');
     $state = '';
     // filter noTransaksi
-    if(isset($_REQUEST['filter_tgl'])){
-      $state = $_REQUEST['enable_date'];
-      switch($state) {
-        case 'terima_on':
-          $status = 'transaksi_on';
-          $_SESSION['StatusFilterTransaksi'] = $status;
-          $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
-          $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
-          $_SESSION['FilterStatusAwalTerima'] = $_POST['statusAwalTerima'];
-          $_SESSION['FilterStatusAkhirTerima'] = $_POST['statusAkhirTerima'];
-          $_SESSION['FilterStatusAwalKirim'] = date('d-m-Y');
-          $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
-          break;
-        case 'kirim_on':
-          $status = 'kirim_on';
-          $_SESSION['StatusFilterTransaksi'] = $status;
-          $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
-          $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
-          $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
-          $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
-          $_SESSION['FilterStatusAwalKirim'] = $_POST['statusAwalKirim'];
-          $_SESSION['FilterStatusAkhirKirim'] = $_POST['statusAkhirKirim'];
-          $_SESSION['FilterStatusAwalSelesai'] = date('d-m-Y');
-          $_SESSION['FilterStatusAkhirSelesai'] = date('d-m-Y');
-          break;
-        case 'selesai_on':
-          $status = 'selesai_on';
-          $_SESSION['StatusFilterTransaksi'] = $status;
-          $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
-          $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
-          $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
-          $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
-          $_SESSION['FilterStatusAwalKirim'] = date('d-m-Y');
-          $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
-          $_SESSION['FilterStatusAwalSelesai'] = $_POST['statusAwalSelesai'];
-          $_SESSION['FilterStatusAkhirSelesai'] = $_POST['statusAkhirSelesai'];
-          break;
-        default:
-          $status = 'transaksi_on';
-          $_SESSION['StatusFilterTransaksi'] = $status;
-          $_SESSION['FilterStatusAwalTransaksi'] = $_POST['statusAwalTransaksi'];
-          $_SESSION['FilterStatusAkhirTransaksi'] = $_POST['statusAkhirTransaksi'];
-          $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
-          $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
-          $_SESSION['FilterStatusAwalKirim'] = date('d-m-Y');
-          $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
-          $_SESSION['FilterStatusAwalSelesai'] = date('d-m-Y');
-          $_SESSION['FilterStatusAkhirSelesai'] = date('d-m-Y');
-          break;
-      }
+    if(isset($_REQUEST['filter_tgl_status'])){
+      $state = $_POST['status_transaksi'];
+      $_SESSION['FilterTglAwal'] = $_POST['filter_awal'];
+      $_SESSION['FilterTglAkhir'] = $_POST['filter_akhir'];
     }
 
-    if(isset($_SESSION['FilterStatusAwalTransaksi'])) $statusAwalTransaksi = $_SESSION['FilterStatusAwalTransaksi'];
-    if(isset($_SESSION['FilterStatusAkhirTransaksi'])) $statusAkhirTransaksi = $_SESSION['FilterStatusAkhirTransaksi'];
-    if(isset($_SESSION['FilterStatusAwalTerima'])) $statusAwalTerima = $_SESSION['FilterStatusAwalTerima'];
-    if(isset($_SESSION['FilterStatusAkhirTerima'])) $statusAkhirTerima = $_SESSION['FilterStatusAkhirTerima'];
-    if(isset($_SESSION['FilterStatusAwalKirim'])) $statusAwalKirim = $_SESSION['FilterStatusAwalKirim'];
-    if(isset($_SESSION['FilterStatusAkhirKirim'])) $tglAkhirKirim = $_SESSION['FilterStatusAkhirKirim'];
-    if(isset($_SESSION['FilterStatusAwalSelesai'])) $statusAwalSelesai = $_SESSION['FilterStatusAwalSelesai'];
-    if(isset($_SESSION['FilterStatusAkhirSelesai'])) $tglAkhirSelesai = $_SESSION['FilterStatusAkhirSelesai'];
+    $_SESSION['status'] = $state;
+
+    if(isset($_SESSION['FilterTglAwal'])) $tanggalAwal = $_SESSION['FilterTglAwal'];
+    if(isset($_SESSION['FilterTglAkhir'])) $tanggalAkhir = $_SESSION['FilterTglAkhir'];
+
+    // if(isset($_REQUEST['filter_tgl'])){
+    //   $state = $_REQUEST['enable_date'];
+    //   switch($state) {
+    //     case 'terima_on':
+    //       $status = 'transaksi_on';
+    //       $_SESSION['StatusFilterTransaksi'] = $status;
+    //       $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAwalTerima'] = $_POST['statusAwalTerima'];
+    //       $_SESSION['FilterStatusAkhirTerima'] = $_POST['statusAkhirTerima'];
+    //       $_SESSION['FilterStatusAwalKirim'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
+    //       break;
+    //     case 'kirim_on':
+    //       $status = 'kirim_on';
+    //       $_SESSION['StatusFilterTransaksi'] = $status;
+    //       $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAwalKirim'] = $_POST['statusAwalKirim'];
+    //       $_SESSION['FilterStatusAkhirKirim'] = $_POST['statusAkhirKirim'];
+    //       $_SESSION['FilterStatusAwalSelesai'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAkhirSelesai'] = date('d-m-Y');
+    //       break;
+    //     case 'selesai_on':
+    //       $status = 'selesai_on';
+    //       $_SESSION['StatusFilterTransaksi'] = $status;
+    //       $_SESSION['FilterStatusAwalTransaksi'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAkhirTransaksi'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAwalKirim'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAwalSelesai'] = $_POST['statusAwalSelesai'];
+    //       $_SESSION['FilterStatusAkhirSelesai'] = $_POST['statusAkhirSelesai'];
+    //       break;
+    //     default:
+    //       $status = 'transaksi_on';
+    //       $_SESSION['StatusFilterTransaksi'] = $status;
+    //       $_SESSION['FilterStatusAwalTransaksi'] = $_POST['statusAwalTransaksi'];
+    //       $_SESSION['FilterStatusAkhirTransaksi'] = $_POST['statusAkhirTransaksi'];
+    //       $_SESSION['FilterStatusAwalTerima'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAkhirTerima'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAwalKirim'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAkhirKirim'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAwalSelesai'] = date('d-m-Y');
+    //       $_SESSION['FilterStatusAkhirSelesai'] = date('d-m-Y');
+    //       break;
+    //   }
+    // }
+
+    // if(isset($_SESSION['FilterStatusAwalTransaksi'])) $statusAwalTransaksi = $_SESSION['FilterStatusAwalTransaksi'];
+    // if(isset($_SESSION['FilterStatusAkhirTransaksi'])) $statusAkhirTransaksi = $_SESSION['FilterStatusAkhirTransaksi'];
+    // if(isset($_SESSION['FilterStatusAwalTerima'])) $statusAwalTerima = $_SESSION['FilterStatusAwalTerima'];
+    // if(isset($_SESSION['FilterStatusAkhirTerima'])) $statusAkhirTerima = $_SESSION['FilterStatusAkhirTerima'];
+    // if(isset($_SESSION['FilterStatusAwalKirim'])) $statusAwalKirim = $_SESSION['FilterStatusAwalKirim'];
+    // if(isset($_SESSION['FilterStatusAkhirKirim'])) $tglAkhirKirim = $_SESSION['FilterStatusAkhirKirim'];
+    // if(isset($_SESSION['FilterStatusAwalSelesai'])) $statusAwalSelesai = $_SESSION['FilterStatusAwalSelesai'];
+    // if(isset($_SESSION['FilterStatusAkhirSelesai'])) $tglAkhirSelesai = $_SESSION['FilterStatusAkhirSelesai'];
     
 ?>
 
@@ -211,10 +224,71 @@
         box-shadow: none;
       } */
 
+      body {
+        overflow:auto;
+      }
+
+      @media (min-width: 768px) {
+        .mr-md-64 {
+          margin-right: 64px;
+        }
+
+        .fs12-scaled {
+          font-size: 12px !important;
+        }
+
+        .btn-scaled {
+          padding: 8px 16px;
+        }
+
+        .fs14-scaled {
+          font-size: 14px !important;
+        }
+
+        .fs16-scaled {
+          font-size: 16px !important;
+        }
+
+        .custom-scaled {
+          font-size: 14px !important;
+        }
+      }
+
+      @-moz-document url-prefix() {
+        .mb-moz {
+          margin-bottom: 0.765rem !important;
+        }
+      }
+
+      .mb-moz {
+        margin-bottom: 0.525rem;
+      }
+
+      div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+        /* margin: 2px 0;
+        white-space: wrap;
+        justify-content: flex-end; */
+        flex-wrap: wrap;
+      }
+
+      .ml-custom-right-10 {
+        margin-left: 10px;
+      }
+
+      
+      .self-centered {
+        text-align: center;
+        align-self: center !important;
+      }
+
+      .mt-4-half {
+        margin-top: 2.25rem;
+      }
+      
       .bg-belum-diterima { 
         background-color: #fcb1ac !important;
       }
-    
+
       .bg-diterima {
         background-color: #ff9933 !important;
       }
@@ -227,17 +301,8 @@
         background-color: #989898 !important;
       }
 
-      .bg-choose {
-        background-color: #D3D3D3 !important;
-      }
-
-      body {
-        overflow-x:auto;
-      }
-    
-      table.dataTable.compact thead th,
-      table.dataTable.compact thead td {
-        padding: 4px 13px !important;
+      .highlight {
+        background-color: yellowgreen !important;
       }
 
       .nav-img {
@@ -274,43 +339,73 @@
       /* adding required labels */
       
       .required::before {
-        content: ' * ';
+        content: '*';
         color: red;
         margin-right: 3px;
       }
 
-      div.loader {
-        position: fixed;
-        top: 0;
-        left: 0;
-        margin-top:1px;
-        margin-left:1px;
-        z-index: 99999;
-        -moz-opacity: 0.50;
-        opacity: 0.50;
-        top: 50%;
-        left: 50%;
+      div.dataTables_wrapper div.dataTables_processing {
+				height: 100%;
+				width: 100%;
+				position: fixed;
+				top: 0;
+				left: 0;
+				margin-top:1px;
+				margin-left:1px;
+				z-index: 99999;
+				background-color: gray;
+				-moz-opacity: 0.50;
+				opacity: 0.50;
+			}
+
+			div.dataTables_wrapper div.dataTables_processing .loader{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+			}
+
+      .custom-scaled {
+        font-size: 14px;
       }
 
-      div.dataTables_wrapper div.dataTables_processing {
-        height: 100%;
-        width: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        margin-top:1px;
-        margin-left:1px;
-        z-index: 99999;
-        background-color: gray;
-        -moz-opacity: 0.50;
-        opacity: 0.50;
-	    }
+      .fs12-scaled {
+        font-size: 13px;
+      }
 
-      div.dataTables_wrapper div.dataTables_processing .loader{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-	    }
+      .fs14-scaled {
+        font-size: 13px;
+      }
+
+      .btn-scaled {
+        padding: 6px 12px;
+      }
+
+      .mr-sm-3half-left {
+        margin-right: -1.5rem;
+      }
+
+      .ml-1em {
+        margin-left: 0.675em;
+      }
+      
+      .b-bottom {
+        border-bottom: 3px solid #e9ecef;
+      }
+
+      @media (max-width: 768px) {
+        .mr-sm-3half-left {
+          margin-right: 0rem;
+        }
+
+        .ml-1em {
+          margin-left: 0;
+        }
+
+        .ml-custom-right-10 {
+          margin-left: -10px;
+        }
+
+      }
 
       .ml-custom-right-16 {
         margin-left: -16px;
@@ -383,7 +478,7 @@
         <div class="row mt-3">
           <div class="col-12">
             <div class="card">
-              <div class="card-body d-flex px-4 border-bottom">
+              <div class="card-body d-flex px-4 pb-2 b-bottom">
                 <!-- erase this px-3, causing trouble at styling -->
                 <div class="container px-3">
                   <form method="post" action="" role="form">
@@ -391,7 +486,8 @@
                     <div class="col-md-5 col-12">
                       <div class="form-group">
                         <div class="ml-right-16 mb-2">
-                          <div class="d-sm-inline-block d-md-flex mb-3">
+                          <!-- Change the date filtering into the newer version -->
+                          <!-- <div class="d-sm-inline-block d-md-flex mb-3">
                             <label class="mb-3 mb-md-0 mr-half centered d-md-flex d-block">Filter Tgl Transaksi</label>
                             <input type="radio" class="cp mr-8" id="filter_transaksi" name="enable_date" value="transaksi_on" onclick="enable_transaksi()">
                             <input type="text" class="col-md-3 col-4 mydatepicker"
@@ -426,16 +522,42 @@
                             <label class="ml-3 centered d-md-flex" style="margin-right:5px;">s/d</label>
                             <input type="text" class="col-md-3 col-4 mydatepicker"
                               name="statusAkhirSelesai" id="akhir_selesai" value="<?=$statusAkhirSelesai?>" autocomplete="off">
+                          </div> -->
+                          <div class="d-flex mb-3" style="align-items:center">
+                            <label class="mb-0 mr-half fs14-scaled align-self-center d-flex">Pilih Transaksi : </label>
+                            <select
+                              class="cp select2 shadow-none mr-12 custom-scaled"
+                              id="select_status" name="status_transaksi">
+                              <!-- <option value="" selected="selected" disabled>Pilih Status</option> -->
+                              <option value="semua">Semua</option>
+                              <option value="terima">Terima</option>
+                              <option value="kirim">Kirim</option>
+                              <!-- <option value="selesai">Selesai</option> -->
+                            </select>
+                          </div>
+                          <div class="d-block d-md-flex mb-3" style="align-items:center;">
+                            <label class="fs14-scaled mb-2 mb-md-0 mr-half centered d-block d-md-flex">
+                              Tanggal : 
+                            </label>
+                            <input type="text" class="col-4 col-md-3 mydatepicker" name="filter_awal" 
+                              id="filter_awal" value="<?=$tanggalAwal?>" autocomplete="off">
+                            <label class="ml-3 centered d-md-flex mb-0" style="margin-right:5px;">s/d</label>
+                            <input type="text" class="col-4 col-md-3 mydatepicker"
+                              name="filter_akhir" value="<?=$tanggalAkhir?>" id="filter_akhir" autocomplete="off">
+                            <button class="px-2 btn btn-success btn-sm text-white ml-half"
+                              type="submit" name="filter_tgl_status">
+                              Filter
+                            </button>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class = "ml-custom-right-16 col-md-2 col-sm-12">
+                    <!-- <div class = "ml-custom-right-16 col-md-2 col-sm-12">
                       <button class="px-2 btn btn-success btn-sm text-white"
                         type="submit" name="filter_tgl" id="btn_filter">
                         Filter
                       </button>
-                    </div>
+                    </div> -->
                   </form>
                   </div>
 

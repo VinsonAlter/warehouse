@@ -4,8 +4,9 @@
     $data = $result = array();
     $user_data = $_SESSION['user_server'];
     $user_segmen = $_SESSION['segmen_user'];
+    $sales_data = $_SESSION['sales_force'];
     try {
-        if ($conn) {
+        if ($pdo) {
             $urut = $total_record = 0;
             $search_query = '';
             $search = isset($_REQUEST['search']['value']) ? $_REQUEST['search']['value'] : '';
@@ -79,9 +80,10 @@
                            END AS Customer, 
                            W.[NamaDriver], W.[NamaPicker], W.[TglTerima], W.[TglKirim], 
                            W.[TglSelesai], W.[Wilayah], W.[JenisPengiriman], W.[NamaEkspedisi],
-                           W.[NoPlat], W.[NamaSales]
+                           W.[NoPlat], S.[Nama]
                     FROM [WMS].[dbo].[TB_Delivery] W RIGHT JOIN $value P
-                    ON W.NoTransaksi = P.NoTransaksi" . ' ' . $tgl_condition . " AND
+                    ON W.NoTransaksi = P.NoTransaksi RIGHT JOIN $sales_data[$key] S ON W.NamaSales = S.Nama
+                    " . ' ' . $tgl_condition . " AND
                     P.[Segmen] IN ($user_segmen) AND
                     P.[Status] = 1 AND P.[NoTransaksi] <> 'J' AND 
                     isnull(P.[NoTransaksiOriginal], '') = ''
@@ -107,7 +109,7 @@
             //             FROM [WMS].[dbo].[TB_Delivery]";
         }
 
-        $stmt = $conn->prepare($table, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        $stmt = $pdo->prepare($table, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
         $stmt->execute();
         $total_record += $stmt->rowCount();
 
@@ -115,7 +117,7 @@
         
         // $query = "SELECT * FROM (".$table . ' ' . $status_tanggal . $search_query.") temp" . ' ' . $order_tanggal;
         $query = "SELECT * FROM ($table) temp" . $search_query .  $order_tanggal; 
-        $stmt = $conn->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        $stmt = $pdo->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
         $stmt->execute();
         if($stmt->rowCount() > 0) {
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -135,7 +137,7 @@
                 $namaDriver = $row['NamaDriver'];
                 $platDriver = $row['NoPlat'];
                 $wilayah = $row['Wilayah'];
-                $sales = $row['NamaSales'];
+                $sales = $row['Nama'];
                 // comment this part because it's not needed yet
                 $aksi = '<a href="#" data-bs-toggle="modal" data-bs-target="#masterModalEdit" 
                     onclick="getDelivery(\''.$transaksi.'\', \''.$id.'\')"><i class="fa fa-edit"></i></a>';
@@ -158,7 +160,7 @@
                     $aksi
                 );
             }
-            $conn = null;
+            $pdo = null;
         }
         // Sorting Data 
         if(!empty($data)) {
