@@ -64,6 +64,11 @@
                                     '".date_to_str($tglAkhir). $end_day ."'";
                     $order_tgl = " ORDER BY [Status], [Tgl], [TglKirim] DESC, Customer, [NoTransaksi]";                
                     break;
+                case 'selesai':
+                    $tgl_condition = " WHERE W.[TglSelesai] BETWEEN '".date_to_str($tglAwal)."' AND 
+                                    '".date_to_str($tglAkhir). $end_day ."'";
+                    $order_tgl = " ORDER BY [Status], [Tgl], [TglSelesai] DESC, Customer, [NoTransaksi]";
+                    break;
                 default:
                     $tgl_condition = " WHERE P.[Tgl] BETWEEN '".date_to_str($tglAwal)."' 
                                         AND '".date_to_str($tglAkhir). $end_day ."'";

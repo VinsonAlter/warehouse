@@ -532,6 +532,7 @@
                               <option value="semua">Semua</option>
                               <option value="terima">Terima</option>
                               <option value="kirim">Kirim</option>
+                              <option value="selesai">Selesai</option>
                               <!-- <option value="selesai">Selesai</option> -->
                             </select>
                           </div>
@@ -866,11 +867,13 @@
       var state = '<?php echo $state ?>';
 
       if(state == '' || state == 'semua') {
-          $('#select_status option[value="semua"]').prop('selected', true);
+        $('#select_status option[value="semua"]').prop('selected', true);
       } else if(state == 'terima') {
-          $('#select_status option[value="terima"]').prop('selected', true);
+        $('#select_status option[value="terima"]').prop('selected', true);
       } else if(state == 'kirim'){
-          $('#select_status option[value="kirim"]').prop('selected', true);
+        $('#select_status option[value="kirim"]').prop('selected', true);
+      } else {
+        $('#select_status option[value="selesai"]').prop('selected', true);
       }
 
       function checkSelectedDriver() {
@@ -946,37 +949,38 @@
           $('#filter_selesai').prop('checked', true);
         }
 
-        if(!$('#filter_transaksi').is(':checked')) {
-            $('#awal_transaksi').prop('disabled', true);
-            $('#akhir_transaksi').prop('disabled', true);
-          } else {
-            $('#awal_transaksi').prop('disabled', false);
-            $('#akhir_transaksi').prop('disabled', false);
-        }
+        // this filtering event is unused yet
+        // if(!$('#filter_transaksi').is(':checked')) {
+        //     $('#awal_transaksi').prop('disabled', true);
+        //     $('#akhir_transaksi').prop('disabled', true);
+        //   } else {
+        //     $('#awal_transaksi').prop('disabled', false);
+        //     $('#akhir_transaksi').prop('disabled', false);
+        // }
 
-        if(!$('#filter_terima').is(':checked')) {
-            $('#awal_terima').prop('disabled', true);
-            $('#akhir_terima').prop('disabled', true);
-          } else {
-            $('#awal_terima').prop('disabled', false);
-            $('#akhir_terima').prop('disabled', false);
-        }
+        // if(!$('#filter_terima').is(':checked')) {
+        //     $('#awal_terima').prop('disabled', true);
+        //     $('#akhir_terima').prop('disabled', true);
+        //   } else {
+        //     $('#awal_terima').prop('disabled', false);
+        //     $('#akhir_terima').prop('disabled', false);
+        // }
 
-        if(!$('#filter_kirim').is(':checked')) {
-            $('#awal_kirim').prop('disabled', true);
-            $('#akhir_kirim').prop('disabled', true);
-          } else {
-            $('#awal_kirim').prop('disabled', false);
-            $('#akhir_kirim').prop('disabled', false);
-        }
+        // if(!$('#filter_kirim').is(':checked')) {
+        //     $('#awal_kirim').prop('disabled', true);
+        //     $('#akhir_kirim').prop('disabled', true);
+        //   } else {
+        //     $('#awal_kirim').prop('disabled', false);
+        //     $('#akhir_kirim').prop('disabled', false);
+        // }
 
-        if(!$('#filter_selesai').is(':checked')) {
-            $('#awal_selesai').prop('disabled', true);
-            $('#akhir_selesai').prop('disabled', true);
-          } else {
-            $('#awal_selesai').prop('disabled', false);
-            $('#akhir_selesai').prop('disabled', false);
-        }
+        // if(!$('#filter_selesai').is(':checked')) {
+        //     $('#awal_selesai').prop('disabled', true);
+        //     $('#akhir_selesai').prop('disabled', true);
+        //   } else {
+        //     $('#awal_selesai').prop('disabled', false);
+        //     $('#akhir_selesai').prop('disabled', false);
+        // }
 
         var tableDelivery = $('#table_delivery').DataTable({
           "processing": true,
@@ -985,7 +989,7 @@
           "stateSave": true,
           "stateDuration": -1,
           "pageLength": 25,
-          "scrollY": '400px',
+          "scrollY": '300px',
           "scrollX": '1200px',
           "ajax": {
             url: 'json/data_delivery.php',
