@@ -26,37 +26,43 @@
             $urut = $total_record = 0;
             // $tgl_transaksi = $_SESSION['FilterTglTransaksi'] != date('d-m-Y') ? $_SESSION['FilterTglTransaksi'] : date('d-m-Y');
             // $tgl_terima = $_SESSION['FilterTglTerima'] != date('d-m-Y') ? $_SESSION['FilterTglTerima'] : date('d-m-Y');
-            $tgl_transaksi = date('d-m-Y');
-            $akhir_transaksi = date('d-m-Y');
-            $tgl_terima = date('d-m-Y');
-            $akhir_terima = date('d-m-Y');
-            $tgl_kirim = date('d-m-Y');
-            $akhir_kirim = date('d-m-Y');
+            $tglAwal = date('d-m-Y');
+            $tglAkhir = date('d-m-Y');
+            // $tgl_terima = date('d-m-Y');
+            // $akhir_terima = date('d-m-Y');
+            // $tgl_kirim = date('d-m-Y');
+            // $akhir_kirim = date('d-m-Y');
             $end_day = ' 23:59:59';
-            if (isset($_SESSION['FilterTglTransaksi'])) $tgl_transaksi = $_SESSION['FilterTglTransaksi'];
-            if (isset($_SESSION['FilterAkhirTransaksi'])) $akhir_transaksi = $_SESSION['FilterAkhirTransaksi'];
-            if (isset($_SESSION['FilterTglTerima'])) $tgl_terima = $_SESSION['FilterTglTerima'];
-            if (isset($_SESSION['FilterAkhirTerima'])) $akhir_terima = $_SESSION['FilterAkhirTerima'];
-            if (isset($_SESSION['FilterTglKirim'])) $tgl_kirim = $_SESSION['FilterTglKirim'];
-            if (isset($_SESSION['FilterAkhirKirim'])) $akhir_kirim = $_SESSION['FilterAkhirKirim'];
-            $status = 'transaksi_on';
-            if (isset($_SESSION['StatusFilter'])) $status = $_SESSION['StatusFilter'];
+            if(isset($_SESSION['FilterTglAwal'])) $tglAwal = $_SESSION['FilterTglAwal'];
+            if(isset($_SESSION['FilterTglAkhir'])) $tglAkhir = $_SESSION['FilterTglAkhir'];
+            // if (isset($_SESSION['FilterTglTransaksi'])) $tgl_transaksi = $_SESSION['FilterTglTransaksi'];
+            // if (isset($_SESSION['FilterAkhirTransaksi'])) $akhir_transaksi = $_SESSION['FilterAkhirTransaksi'];
+            // if (isset($_SESSION['FilterTglTerima'])) $tgl_terima = $_SESSION['FilterTglTerima'];
+            // if (isset($_SESSION['FilterAkhirTerima'])) $akhir_terima = $_SESSION['FilterAkhirTerima'];
+            // if (isset($_SESSION['FilterTglKirim'])) $tgl_kirim = $_SESSION['FilterTglKirim'];
+            // if (isset($_SESSION['FilterAkhirKirim'])) $akhir_kirim = $_SESSION['FilterAkhirKirim'];
+            // $status = 'semua';
+            if (isset($_SESSION['status'])) $status = $_SESSION['status'];
             switch($status) {
-                case 'terima_on':
-                    $tgl_condition = " WHERE D.[TglTerima] BETWEEN '".date_to_str($tgl_terima)."' AND 
-                                    '".date_to_str($akhir_terima). $end_day ."'";
+                case 'terima':
+                    $tgl_condition = " WHERE D.[TglTerima] BETWEEN '".date_to_str($tglAwal)."' AND 
+                                    '".date_to_str($tglAkhir). $end_day ."'";
                     $order_tgl = " ORDER BY [Status], [Tgl], [TglTerima] DESC, Customer, [NoTransaksi]";
                     break;
-                case 'kirim_on':
-                    $tgl_condition = " WHERE D.[TglKirim] BETWEEN '".date_to_str($tgl_kirim)."' AND 
-                                    '".date_to_str($akhir_kirim). $end_day ."'";
+                case 'kirim':
+                    $tgl_condition = " WHERE D.[TglKirim] BETWEEN '".date_to_str($tglAwal)."' AND 
+                                    '".date_to_str($tglAkhir). $end_day ."'";
                     $order_tgl = " ORDER BY [Status], [Tgl], [TglKirim] DESC, Customer, [NoTransaksi]";                
                     break;
                 default:
-                    $tgl_condition = " WHERE P.[Tgl] BETWEEN '".date_to_str($tgl_transaksi)."' 
-                                        AND '".date_to_str($akhir_transaksi). $end_day ."'";
+                    $tgl_condition = " WHERE P.[Tgl] BETWEEN '".date_to_str($tglAwal)."' 
+                                        AND '".date_to_str($tglAkhir). $end_day ."'";
                     $order_tgl = " ORDER BY [Status], [Tgl] DESC, Customer, [NoTransaksi]";
                     break;
+                // default:
+                //     $tgl_condition = "";
+                //     $order_tgl = "";
+                //     break;
             }
             // if($status == 'transaksi_on') {
             //     $tgl_condition = " WHERE P.[Tgl] BETWEEN '".date_to_str($tgl_transaksi)."' 

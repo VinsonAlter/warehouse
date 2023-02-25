@@ -8,62 +8,75 @@
       header("location:../login.php");  
     }
     $nama = $_SESSION['user_login'];
-    $tglTransaksi = date('d-m-Y');
-    $tglAkhirTransaksi = date('d-m-Y');
-    $tglTerima = date('d-m-Y');
-    $tglAkhirTerima = date('d-m-Y');
-    // $tglKirim = date('d-m-Y');
-    $waktuKirim = date('d-m-Y H:i');
-    $tglFilterKirim = date('d-m-Y');
-    $tglFilterAkhirKirim = date('d-m-Y');
+    $tanggalAwal = date('d-m-Y');
+    $tanggalAkhir = date('d-m-Y');
+    // $tglTransaksi = date('d-m-Y');
+    // $tglAkhirTransaksi = date('d-m-Y');
+    // $tglTerima = date('d-m-Y');
+    // $tglAkhirTerima = date('d-m-Y');
+    // // $tglKirim = date('d-m-Y');
+    // $waktuKirim = date('d-m-Y H:i');
+    // $tglFilterKirim = date('d-m-Y');
+    // $tglFilterAkhirKirim = date('d-m-Y');
     $state = '';
-    if(isset($_REQUEST['filter_tgl'])) {
-      $state = $_REQUEST['enable_date'];
-      switch($state) {
-        case 'terima_on':
-          $status = 'terima_on';
-          $_SESSION['StatusFilter'] = $status;
-          $_SESSION['FilterTglTerima'] = $_POST['tglTerima'];
-          $_SESSION['FilterAkhirTerima'] = $_POST['tglAkhirTerima'];
-          $_SESSION['FilterTglTransaksi'] = date('d-m-Y');
-          $_SESSION['FilterAkhirTransaksi'] = date('d-m-Y');
-          $_SESSION['FilterTglKirim'] = date('d-m-Y');
-          $_SESSION['FilterAkhirKirim'] = date('d-m-Y');
-          break;
-        case 'kirim_on':
-          $status = 'kirim_on';
-          $_SESSION['StatusFilter'] = $status;
-          $_SESSION['FilterTglKirim'] = $_POST['tglKirim'];
-          $_SESSION['FilterAkhirKirim'] = $_POST['tglAkhirKirim'];
-          $_SESSION['FilterTglTransaksi'] = date('d-m-Y');
-          $_SESSION['FilterAkhirTransaksi'] = date('d-m-Y');
-          $_SESSION['FilterTglTerima'] = date('d-m-Y');
-          $_SESSION['FilterAkhirTerima'] = date('d-m-Y');
-          break;
-        default:
-          $status = 'transaksi_on';
-          $_SESSION['StatusFilter'] = $status;
-          $_SESSION['FilterTglTransaksi'] = $_POST['tglTransaksi'];
-          $_SESSION['FilterAkhirTransaksi'] = $_POST['tglAkhirTransaksi'];
-          $_SESSION['FilterTglTerima'] = date('d-m-Y');
-          $_SESSION['FilterAkhirTerima'] = date('d-m-Y');
-          $_SESSION['FilterTglKirim'] = date('d-m-Y');
-          $_SESSION['FilterAkhirKirim'] = date('d-m-Y');
-          break;
-      }
+    if(isset($_REQUEST['filter_tgl_status'])){
+      $state = $_POST['status_transaksi'];
+      $_SESSION['FilterTglAwal'] = $_POST['filter_awal'];
+      $_SESSION['FilterTglAkhir'] = $_POST['filter_akhir'];
     }
 
-    if(isset($_SESSION['FilterTglTransaksi'])) $tglTransaksi = $_SESSION['FilterTglTransaksi'];
+    $_SESSION['status'] = $state;
 
-    if(isset($_SESSION['FilterAkhirTransaksi'])) $tglAkhirTransaksi = $_SESSION['FilterAkhirTransaksi'];
+    if(isset($_SESSION['FilterTglAwal'])) $tanggalAwal = $_SESSION['FilterTglAwal'];
+    if(isset($_SESSION['FilterTglAkhir'])) $tanggalAkhir = $_SESSION['FilterTglAkhir'];
 
-    if(isset($_SESSION['FilterTglTerima'])) $tglTerima = $_SESSION['FilterTglTerima'];
+    // if(isset($_REQUEST['filter_tgl'])) {
+    //   $state = $_REQUEST['enable_date'];
+    //   switch($state) {
+    //     case 'terima_on':
+    //       $status = 'terima_on';
+    //       $_SESSION['StatusFilter'] = $status;
+    //       $_SESSION['FilterTglTerima'] = $_POST['tglTerima'];
+    //       $_SESSION['FilterAkhirTerima'] = $_POST['tglAkhirTerima'];
+    //       $_SESSION['FilterTglTransaksi'] = date('d-m-Y');
+    //       $_SESSION['FilterAkhirTransaksi'] = date('d-m-Y');
+    //       $_SESSION['FilterTglKirim'] = date('d-m-Y');
+    //       $_SESSION['FilterAkhirKirim'] = date('d-m-Y');
+    //       break;
+    //     case 'kirim_on':
+    //       $status = 'kirim_on';
+    //       $_SESSION['StatusFilter'] = $status;
+    //       $_SESSION['FilterTglKirim'] = $_POST['tglKirim'];
+    //       $_SESSION['FilterAkhirKirim'] = $_POST['tglAkhirKirim'];
+    //       $_SESSION['FilterTglTransaksi'] = date('d-m-Y');
+    //       $_SESSION['FilterAkhirTransaksi'] = date('d-m-Y');
+    //       $_SESSION['FilterTglTerima'] = date('d-m-Y');
+    //       $_SESSION['FilterAkhirTerima'] = date('d-m-Y');
+    //       break;
+    //     default:
+    //       $status = 'transaksi_on';
+    //       $_SESSION['StatusFilter'] = $status;
+    //       $_SESSION['FilterTglTransaksi'] = $_POST['tglTransaksi'];
+    //       $_SESSION['FilterAkhirTransaksi'] = $_POST['tglAkhirTransaksi'];
+    //       $_SESSION['FilterTglTerima'] = date('d-m-Y');
+    //       $_SESSION['FilterAkhirTerima'] = date('d-m-Y');
+    //       $_SESSION['FilterTglKirim'] = date('d-m-Y');
+    //       $_SESSION['FilterAkhirKirim'] = date('d-m-Y');
+    //       break;
+    //   }
+    // }
 
-    if(isset($_SESSION['FilterAkhirTerima'])) $tglAkhirTerima = $_SESSION['FilterAkhirTerima'];
+    // if(isset($_SESSION['FilterTglTransaksi'])) $tglTransaksi = $_SESSION['FilterTglTransaksi'];
 
-    if(isset($_SESSION['FilterTglKirim'])) $tglFilterKirim = $_SESSION['FilterTglKirim'];
+    // if(isset($_SESSION['FilterAkhirTransaksi'])) $tglAkhirTransaksi = $_SESSION['FilterAkhirTransaksi'];
 
-    if(isset($_SESSION['FilterAkhirKirim'])) $tglFilterAkhirKirim = $_SESSION['FilterAkhirKirim'];
+    // if(isset($_SESSION['FilterTglTerima'])) $tglTerima = $_SESSION['FilterTglTerima'];
+
+    // if(isset($_SESSION['FilterAkhirTerima'])) $tglAkhirTerima = $_SESSION['FilterAkhirTerima'];
+
+    // if(isset($_SESSION['FilterTglKirim'])) $tglFilterKirim = $_SESSION['FilterTglKirim'];
+
+    // if(isset($_SESSION['FilterAkhirKirim'])) $tglFilterAkhirKirim = $_SESSION['FilterAkhirKirim'];
 
 ?>
 
@@ -364,11 +377,11 @@
                             <select
                               class="cp select2 shadow-none mr-12 custom-scaled"
                               id="select_status" name="status_transaksi">
-                              <option value="" selected="selected" disabled>Pilih Status</option>
+                              <!-- <option value="" selected="selected" disabled>Pilih Status</option> -->
                               <option value="semua">Semua</option>
                               <option value="terima">Terima</option>
                               <option value="kirim">Kirim</option>
-                              <option value="selesai">Selesai</option>
+                              <!-- <option value="selesai">Selesai</option> -->
                             </select>
                           </div>
                           <div class="d-block d-md-flex mb-3" style="align-items:center;">
@@ -376,10 +389,10 @@
                               Tanggal : 
                             </label>
                             <input type="text" class="col-4 col-md-3 mydatepicker" name="filter_awal" 
-                              id="filter_awal" autocomplete="off">
+                              id="filter_awal" value="<?=$tanggalAwal?>" autocomplete="off">
                             <label class="ml-3 centered d-md-flex mb-0" style="margin-right:5px;">s/d</label>
                             <input type="text" class="col-4 col-md-3 mydatepicker"
-                              name="filter_akhir" id="filter_akhir" autocomplete="off">
+                              name="filter_akhir" value="<?=$tanggalAkhir?>" id="filter_akhir" autocomplete="off">
                             <button class="px-2 btn btn-success btn-sm text-white ml-half"
                               type="submit" name="filter_tgl_status">
                               Filter
@@ -670,7 +683,7 @@
     <script src="assets/libs/bootstrap4-datetimepicker/bootstrap-datetimepicker.js"></script>  
 
     <script>
-
+      
       function checkSelectedDriver() {
         if($('#select_driver option:selected').val() != '') {
           $('#nama_driver').val($('#select_driver').val());
@@ -731,6 +744,14 @@
       let checkValues = [];
 
       var state = '<?php echo $state ?>';
+
+      if(state == '' || state == 'semua') {
+          $('#select_status option[value="semua"]').prop('selected', true);
+      } else if(state == 'terima') {
+          $('#select_status option[value="terima"]').prop('selected', true);
+      } else if(state == 'kirim'){
+          $('#select_status option[value="kirim"]').prop('selected', true);
+      }
 
       var date = '<?php echo date('d-m-Y')?>';
 
@@ -937,6 +958,10 @@
           $('#masterModalKirim .modal-body input[name="tanggal_kirim"]').val(date);
         });
 
+        
+
+        // tidak jadi gunakan event ini
+        /* 
         if(state == '' || state == 'transaksi_on') {
           $('#filter_transaksi').prop('checked', true);
           $('#tgl_transaksi').prop('disabled', false);
@@ -970,6 +995,7 @@
             $('#tgl_kirim').prop('disabled', false);
             $('#akhir_kirim').prop('disabled', false);
         }
+        */
 
         // fill datatables 
         var tablePicking = $('#table_delivery').DataTable({
@@ -1104,6 +1130,8 @@
         }
 			});
 
+      // function ini tidak digunakan
+      /* 
       function enable_transaksi() {
         $('#tgl_transaksi').prop('disabled', false);
         $('#akhir_transaksi').prop('disabled', false);
@@ -1130,6 +1158,7 @@
         $('#tgl_kirim').prop('disabled', false);
         $('#akhir_kirim').prop('disabled', false);
       }
+      */
 
     </script>
   </body>
