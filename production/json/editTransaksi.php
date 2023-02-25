@@ -7,12 +7,12 @@
     $status = $_POST['select_status'];
     $jadwalTerima = date_hour_to_str($_POST['tanggal_terima'] . ':00');
     if(isset($_POST['tanggal_terima'])) {
-        $check = "SELECT * FROM [WMS].[dbo].[TB_Delivery]
-                         WHERE NoTransaksi = :noTransaksi";
-        $stmt = $pdo->prepare($check, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-        $stmt->bindParam(":noTransaksi", $noTransaksi, PDO::PARAM_STR);
-        $stmt->execute();
-        if($stmt->rowCount() > 0) {
+        // $check = "SELECT * FROM [WMS].[dbo].[TB_Delivery]
+        //             WHERE NoTransaksi = :noTransaksi";
+        // $stmt = $pdo->prepare($check, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        // $stmt->bindParam(":noTransaksi", $noTransaksi, PDO::PARAM_STR);
+        // $stmt->execute();
+        // if($stmt->rowCount() > 0) {
             $picker = $_POST['select_picker'];
             switch($status) {
                 case 2:
@@ -337,44 +337,57 @@
                         break;
                     }
                 default:
-                    $sales = $_POST['nama_sales'];
-                    $jadwalKirim = NULL;
-                    $jenisPengiriman = NULL;
-                    $wilayahPengiriman = NULL;
-                    $ekspedisi = NULL;
-                    $driver = NULL;
-                    $plat = NULL;
-                    $jadwalSelesai = NULL;
-                    $update = "UPDATE [WMS].[dbo].[TB_Delivery] SET
-                                        Status = :status, TglTerima = :terima, NamaPicker = :picker,
-                                        TglKirim = :kirim, TglSelesai = :selesai, JenisPengiriman = :pengiriman,
-                                        Wilayah = :wilayah, NamaEkspedisi = :ekspedisi,
-                                        NamaDriver = :driver, NoPlat = :plat,
-                                        NamaSales = :sales,
-                                        WHERE NoTransaksi = :transaksi";
-                    $stmt2 = $pdo->prepare($update, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-                    $stmt2->bindParam(":status", $status, PDO::PARAM_INT);
-                    $stmt2->bindParam(":sales", $sales, PDO::PARAM_STR);
-                    $stmt2->bindParam(":terima", $jadwalTerima, PDO::PARAM_STR);
-                    $stmt2->bindParam(":picker", $picker, PDO::PARAM_STR);
-                    $stmt2->bindParam(":kirim", $jadwalKirim, PDO::PARAM_STR);
-                    $stmt2->bindParam(":selesai", $jadwalSelesai, PDO::PARAM_STR);
-                    $stmt2->bindParam(":pengiriman", $jenisPengiriman, PDO::PARAM_STR);
-                    $stmt2->bindParam(":wilayah", $wilayahPengiriman, PDO::PARAM_STR);
-                    $stmt2->bindParam(":ekspedisi", $ekspedisi, PDO::PARAM_STR);
-                    $stmt2->bindParam(":driver", $driver, PDO::PARAM_STR);
-                    $stmt2->bindParam(":plat", $plat, PDO::PARAM_STR);
-                    $stmt2->bindParam(":transaksi", $noTransaksi, PDO::PARAM_STR);
-                    $stmt2->execute();
-                    if($stmt2->rowCount() > 0) {
-                        $res['success'] = 1;
-                        $res['message'] = 'Status Transaksi Berhasil Diganti!';
-                        // var_dump($jadwalKirim);
-                        // var_dump($jadwalSelesai);
-                    } else {
-                        $res['success'] = 0;
-                        $res['message'] = 'Status Transaksi gagal diganti, mohon periksa koneksi anda!';
-                    }
+                $check = "SELECT * FROM [WMS].[dbo].[TB_Delivery]
+                            WHERE NoTransaksi = :noTransaksi";
+                        $stmt = $pdo->prepare($check, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+                        $stmt->bindParam(":noTransaksi", $noTransaksi, PDO::PARAM_STR);
+                        $stmt->execute();
+                        if($stmt->rowCount() > 0) {
+                            $jadwalKirim = "";
+                            $jenisPengiriman = "";
+                            $wilayahPengiriman = "";
+                            $ekspedisi = "";
+                            $driver = "";
+                            $plat = "";
+                            $jadwalSelesai = "";
+                            // var_dump($sales);
+                            $update = "UPDATE [WMS].[dbo].[TB_Delivery] SET
+                                                Status = :status, TglTerima = :terima, NamaPicker = :picker,
+                                                TglKirim = :kirim, TglSelesai = :selesai, JenisPengiriman = :pengiriman,
+                                                Wilayah = :wilayah, NamaEkspedisi = :ekspedisi,
+                                                NamaDriver = :driver, NoPlat = :plat,
+                                                WHERE NoTransaksi = :transaksi";
+                            // var_dump($update);
+                            $stmt2 = $pdo->prepare($update, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+                            $stmt2->bindParam(":status", $status, PDO::PARAM_INT);
+                            $stmt2->bindParam(":terima", $jadwalTerima, PDO::PARAM_STR);
+                            $stmt2->bindParam(":picker", $picker, PDO::PARAM_STR);
+                            $stmt2->bindParam(":kirim", $jadwalKirim, PDO::PARAM_STR);
+                            $stmt2->bindParam(":selesai", $jadwalSelesai, PDO::PARAM_STR);
+                            $stmt2->bindParam(":pengiriman", $jenisPengiriman, PDO::PARAM_STR);
+                            $stmt2->bindParam(":wilayah", $wilayahPengiriman, PDO::PARAM_STR);
+                            $stmt2->bindParam(":ekspedisi", $ekspedisi, PDO::PARAM_STR);
+                            $stmt2->bindParam(":driver", $driver, PDO::PARAM_STR);
+                            $stmt2->bindParam(":plat", $plat, PDO::PARAM_STR);
+                            $stmt2->bindParam(":transaksi", $noTransaksi, PDO::PARAM_STR);
+                            $stmt2->execute();
+                            if($stmt2->rowCount() > 0) {
+                                $res['success'] = 1;
+                                $res['message'] = 'Status Transaksi Berhasil Diganti!';
+                                // var_dump($jadwalKirim);
+                                // var_dump($jadwalSelesai);
+                            } else {
+                                $res['success'] = 0;
+                                $res['message'] = 'Status Transaksi gagal diganti, mohon periksa koneksi anda!';
+                            }
+                        } else {
+                            $sales = $_POST['nama_sales'];
+
+                            $insert = "INSERT INTO [WMS].[dbo].[TB_Delivery] 
+                                        ([IDTransaksi], [NoTransaksi], [Customer], [TglTransaksi], [Status], [NamaPicker], [TglTerima], [NamaSales])
+                                        VALUES ('$idTransaksi', '$noTransaksi', '$customer', '$tglTransaksi', 1, '$picker', '$jadwalTerima', '$sales')";
+
+                        }
                     break;
             }
             
@@ -386,10 +399,10 @@
             // if(isset($_POST['nama_driver']) ? $driver = $_POST['nama_driver'] : '');
             // if(isset($_POST['no_plat']) ? $plat = $_POST['no_plat'] : '');
             // if(isset($_POST['tanggal_selesai']) ? $jadwalSelesai = date_hour_to_str($_POST['tanggal_selesai'] . ':00') : '');
-        } else {
-            $res['success'] = 0;
-            $res['message'] = 'Maaf, no transaksi ini tidak terdaftar';
-        }
+        // } else {
+        //     $res['success'] = 0;
+        //     $res['message'] = 'Maaf, no transaksi ini tidak terdaftar';
+        // }
     } else {
         $res['success'] = 0;
         $res['message'] = 'Mohon tentukan tanggal penerimaan No Transaksi ini';

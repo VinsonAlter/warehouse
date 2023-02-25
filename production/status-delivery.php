@@ -640,6 +640,18 @@
                               </div>
                             </div>
                             <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">ID Transaksi</label>
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control" id="id_transaksi" name="id_transaksi" readonly="readonly">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label class="col-sm-4 control-label col-form-label">Customer</label>
+                              <div class="col-sm-6">
+                                <input type="text" class="form-control" id="nama_customer" name="nama_customer" readonly="readonly">
+                              </div>
+                            </div>
+                            <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Status Transaksi</label>
                               <div class="d-flex col-sm-6">
                                 <select
@@ -1133,6 +1145,8 @@
               // $('#waktu_kirim').val(res.data.waktuKirim);
               $('#tanggal_selesai').val(res.data.tglSelesai);
               $('#nama_sales').val(res.data.sales);
+              $('#id_transaksi').val(res.data.idTransaksi);
+              $('#nama_customer').val(res.data.customer);
               const picker = res.data.picker;
               $('#select_picker option:contains("'+picker+'")').prop('selected', true);
               const wilayah = res.data.wilayah;
@@ -1141,10 +1155,11 @@
                 $('#select_picker option[value=""]').prop('selected', true);
               } 
               if(status == '') {
-                $('#select_status option[value=""]').prop('selected', true);
+                $('#ganti_status option[value=""]').prop('selected', true);
                 $('#section-dikirim').addClass('display-none');
                 $('#section-selesai').addClass('display-none');
               } else if(status == '1') {
+                $('#ganti_status option[value="1"]').prop('selected', true);
                 $('#tanggal_kirim').val('');
                 $('#nama_ekspedisi').val('');
                 $('#nama_driver').val('');
@@ -1153,10 +1168,12 @@
                 $('#section-dikirim').addClass('display-none');
                 $('#section-selesai').addClass('display-none');
               } else if (status == '2') {
+                $('#ganti_status option[value="2"]').prop('selected', true);
                 $('#tanggal_selesai').val('');
                 $('#section-dikirim').removeClass('display-none');
                 $('#section-selesai').addClass('display-none');
               } else {
+                $('#ganti_status option[value="3"]').prop('selected', true);
                 $('#section-dikirim').removeClass('display-none');
                 $('#section-selesai').removeClass('display-none');
               }
@@ -1307,7 +1324,7 @@
       })
 
       function checkStatus() {
-        console.log($('#ganti_status').val());
+        // console.log($('#ganti_status').val());
         if($('#ganti_status').val() == '1') {
           $('#tanggal_kirim').val('');
           $('#nama_ekspedisi').val('');

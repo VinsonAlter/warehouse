@@ -11,10 +11,16 @@
         foreach($user_data as $key => $value) {
             $filter[] = "
                         SELECT 
-                         P.[NoTransaksi]
+                         P.[ID]
+                        ,P.[NoTransaksi]
+                        ,P.[Tgl]
+                        ,CASE WHEN ISNULL (P.[Owner], '') <> '' THEN
+                            P.[Nama] + ' ( ' + P.[Owner] + ' ) '
+                            ELSE
+                            P.[Nama]
+                            END AS Customer
                         ,D.[NamaPicker]
                         ,D.[Status]
-                        ,D.[Customer]
                         ,D.[TglTransaksi]
                         ,D.[TglTerima]
                         ,D.[TglKirim]
@@ -51,6 +57,7 @@
         //                 WHERE
         //                NoTransaksi = :transaksi AND IDTransaksi = :idTransaksi";
         $stmt = $conn->prepare($query, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+        // var_dump($query);
         // $stmt->bindParam(":transaksi", $transaksi, PDO::PARAM_STR);
         // $stmt->bindParam(":idTransaksi", $id, PDO::PARAM_STR);
         $stmt->execute();
@@ -111,12 +118,14 @@
                 }
 
                 $data = array(
+                    'idTransaksi' => $row['ID'],
+                    'tglTransaksi' => date('d-m-Y H:i', strtotime($row['Tgl'])),
+                    'customer' => $row['Customer'],
                     'transaksi' => $row['NoTransaksi'],
                     'sales' => $row['Nama'],
                     'status' => $row['Status'],
                     'picker' => $row['NamaPicker'],
                     'kirim' => $row['TglKirim'],
-                    // 'customer' => $row['Customer'],
                     // 'tgltransaksi' => date('d-m-Y', strtotime($row['TglTransaksi'])),
                     'tglTerima' => $tglTerima,
                     'tglKirim' => $tglKirim,
