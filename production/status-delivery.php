@@ -865,6 +865,14 @@
 
       var state = '<?php echo $state ?>';
 
+      if(state == '' || state == 'semua') {
+          $('#select_status option[value="semua"]').prop('selected', true);
+      } else if(state == 'terima') {
+          $('#select_status option[value="terima"]').prop('selected', true);
+      } else if(state == 'kirim'){
+          $('#select_status option[value="kirim"]').prop('selected', true);
+      }
+
       function checkSelectedDriver() {
         if($('#select_driver option:selected').val() != '') {
           $('#nama_driver').val($('#select_driver').val());
@@ -1032,49 +1040,50 @@
       });
       
       // for ui/ux purposes only, enable datetime when radio button is clicked
-      function enable_transaksi() {
-        $('#awal_transaksi').prop('disabled', false);
-        $('#akhir_transaksi').prop('disabled', false);
-        $('#awal_terima').prop('disabled', true);
-        $('#akhir_terima').prop('disabled', true);
-        $('#awal_kirim').prop('disabled', true);
-        $('#akhir_kirim').prop('disabled', true); 
-        $('#awal_selesai').prop('disabled', true);
-        $('#akhir_selesai').prop('disabled', true);    
-      }
+      // this function is not used in this template
+      // function enable_transaksi() {
+      //   $('#awal_transaksi').prop('disabled', false);
+      //   $('#akhir_transaksi').prop('disabled', false);
+      //   $('#awal_terima').prop('disabled', true);
+      //   $('#akhir_terima').prop('disabled', true);
+      //   $('#awal_kirim').prop('disabled', true);
+      //   $('#akhir_kirim').prop('disabled', true); 
+      //   $('#awal_selesai').prop('disabled', true);
+      //   $('#akhir_selesai').prop('disabled', true);    
+      // }
 
-      function enable_terima() {
-        $('#awal_transaksi').prop('disabled', true);
-        $('#akhir_transaksi').prop('disabled', true);
-        $('#awal_terima').prop('disabled', false);
-        $('#akhir_terima').prop('disabled', false);
-        $('#awal_kirim').prop('disabled', true);
-        $('#akhir_kirim').prop('disabled', true);
-        $('#awal_selesai').prop('disabled', true);
-        $('#akhir_selesai').prop('disabled', true); 
-      }
+      // function enable_terima() {
+      //   $('#awal_transaksi').prop('disabled', true);
+      //   $('#akhir_transaksi').prop('disabled', true);
+      //   $('#awal_terima').prop('disabled', false);
+      //   $('#akhir_terima').prop('disabled', false);
+      //   $('#awal_kirim').prop('disabled', true);
+      //   $('#akhir_kirim').prop('disabled', true);
+      //   $('#awal_selesai').prop('disabled', true);
+      //   $('#akhir_selesai').prop('disabled', true); 
+      // }
       
-      function enable_kirim() {
-        $('#awal_transaksi').prop('disabled', true);
-        $('#akhir_transaksi').prop('disabled', true);
-        $('#awal_terima').prop('disabled', true);
-        $('#akhir_terima').prop('disabled', true);
-        $('#awal_kirim').prop('disabled', false);
-        $('#akhir_kirim').prop('disabled', false);
-        $('#awal_selesai').prop('disabled', true);
-        $('#akhir_selesai').prop('disabled', true); 
-      }
+      // function enable_kirim() {
+      //   $('#awal_transaksi').prop('disabled', true);
+      //   $('#akhir_transaksi').prop('disabled', true);
+      //   $('#awal_terima').prop('disabled', true);
+      //   $('#akhir_terima').prop('disabled', true);
+      //   $('#awal_kirim').prop('disabled', false);
+      //   $('#akhir_kirim').prop('disabled', false);
+      //   $('#awal_selesai').prop('disabled', true);
+      //   $('#akhir_selesai').prop('disabled', true); 
+      // }
 
-      function enable_selesai() {
-        $('#awal_transaksi').prop('disabled', true);
-        $('#akhir_transaksi').prop('disabled', true);
-        $('#awal_terima').prop('disabled', true);
-        $('#akhir_terima').prop('disabled', true);
-        $('#awal_kirim').prop('disabled', true);
-        $('#akhir_kirim').prop('disabled', true);
-        $('#awal_selesai').prop('disabled', false);
-        $('#akhir_selesai').prop('disabled', false)
-      }
+      // function enable_selesai() {
+      //   $('#awal_transaksi').prop('disabled', true);
+      //   $('#akhir_transaksi').prop('disabled', true);
+      //   $('#awal_terima').prop('disabled', true);
+      //   $('#akhir_terima').prop('disabled', true);
+      //   $('#awal_kirim').prop('disabled', true);
+      //   $('#akhir_kirim').prop('disabled', true);
+      //   $('#awal_selesai').prop('disabled', false);
+      //   $('#akhir_selesai').prop('disabled', false)
+      // }
 
       function editTransaksi() {
         $.ajax({
