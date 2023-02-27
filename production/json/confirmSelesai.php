@@ -12,7 +12,8 @@
                 $array = explode(' , ', $val);
                 $noTransaksi = $array[1];
                 $status = $array[4];
-                if($status == 2) {
+                // var_dump($status);
+                if($status === 2) {
                     $selesai = "UPDATE [WMS].[dbo].[TB_Delivery]
                                     SET [Status] = 3,
                                         [TglSelesai] = '$tglSelesai'
