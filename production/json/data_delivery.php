@@ -12,11 +12,11 @@
             $search = isset($_REQUEST['search']['value']) ? $_REQUEST['search']['value'] : '';
             $table = '';
             if($search) {
-                $search_query = "AND NoTransaksi LIKE '%$search%' 
+                $search_query = " WHERE NoTransaksi LIKE '%$search%' 
                                     OR Status LIKE '%$search%'
                                     OR NamaPicker LIKE '%$search%'
                                     OR Customer LIKE '%$search%'
-                                    OR TglTransaksi LIKE '%$search%'
+                                    OR Tgl LIKE '%$search%'
                                     OR TglTerima LIKE '%$search%'
                                     OR TglKirim LIKE '%$search%'
                                     OR TglSelesai LIKE '%$search%'
@@ -25,8 +25,7 @@
                                     OR NamaEkspedisi LIKE '%$search%'
                                     OR NamaDriver LIKE '%$search%'
                                     OR NoPlat LIKE '%$search%'
-                                    OR NamaSales LIKE '%$search%'
-                                    OR Cabang LIKE '%$search%'";
+                                    OR Nama LIKE '%$search%'";
             }
             $tgl_condition = '';
             $tglAwal = date('d-m-Y');
