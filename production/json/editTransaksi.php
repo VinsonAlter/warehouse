@@ -21,6 +21,7 @@
                         if($jadwalKirim >= $jadwalTerima) {
                             if(isset($_POST['select_pengiriman'])) {
                                 $jenisPengiriman = $_POST['select_pengiriman'];
+                                $jadwalSelesai = null;
                                 switch($jenisPengiriman) {
                                     case 'Kirim Customer':
                                         if(isset($_POST['wilayah_pengiriman'])) {
@@ -338,13 +339,13 @@
                         break;
                     }
                 default:
-                    $jadwalKirim = "";
+                    $jadwalKirim = null;
                     $jenisPengiriman = "";
                     $wilayahPengiriman = "";
                     $ekspedisi = "";
                     $driver = "";
                     $plat = "";
-                    $jadwalSelesai = "";
+                    $jadwalSelesai = null;
                     $update = "UPDATE [WMS].[dbo].[TB_Delivery] SET
                                         Status = :status, TglTerima = :terima, NamaPicker = :picker,
                                         TglKirim = :kirim, TglSelesai = :selesai, JenisPengiriman = :pengiriman,
