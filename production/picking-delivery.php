@@ -543,15 +543,8 @@
                                 <input type="text" class="form-control" id="no_transaksi" name="NomorTransaksi" readonly="readonly">
                               </div>
                             </div>
-                            <!-- <div class="form-group row"> 
-                              <label class="col-sm-4 control-label col-form-label required">Tgl Kirim</label>
-                              <div class="col-sm-6">
-                                <input type="text" class="form-control mydatepicker" name="tanggal_kirim" id="tanggal_kirim"
-                                  value="<?=$tglKirim?>">
-                              </div>
-                            </div> -->
                             <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label">Jadwal Kirim</label>
+                              <label class="col-sm-4 control-label col-form-label">Jadwal Terima</label>
                               <div class="col-sm-6">
                                 <div class="input-group date datetimepicker">
                                   <input class="form-control" type="text" value="<?=$waktuKirim?>" name="waktu_kirim">
@@ -563,76 +556,14 @@
                                 </div>
                               </div>
                             </div>
-                            <!-- <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label required">Waktu Kirim</label>
-                              <div class="col-sm-6">
-                                <input type="text" class="form-control mytimepicker" name="waktu_kirim" id="waktu_kirim"
-                                  value="<?=$waktuKirim?>">
-                              </div>
-                            </div> -->
                             <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label">Jenis Pengiriman</label>
+                              <label class="col-sm-4 control-label col-form-label">Pilih Picker</label>
                               <div class="d-flex col-sm-6">
                                 <select
-                                  class="cp select2 shadow-none form-select"
-                                  style="width: 100%; height: 36px"
-                                  id="select_pengiriman" name="select_pengiriman" onchange="javascript:tipe_pengiriman()"
-                                >
-                                  <option value="" selected="selected" disabled>Pilih Jenis Pengiriman</option>
-                                  <option value="Kirim Customer">Kirim ke Customer</option>
-                                  <option value="Ambil Sendiri">Ambil Sendiri</option>
-                                  <option value="Via Sales">Via Sales</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="form-group row" id="section_wilayah">
-                              <label class="col-sm-4 control-label col-form-label">Wilayah</label>
-                              <div class="col-sm-6">
-                                <select
-                                    class="cp select2 shadow-none form-select"
-                                    id="wilayah_pengiriman" name="wilayah_pengiriman" onchange="javascript:tempat_pengiriman()"
-                                  >
-                                  <option value="" selected="selected" disabled>Pilih Wilayah Pengiriman</option>
-                                  <option value="Dalam Kota">Dalam Kota</option>
-                                  <option value="Luar Kota">Luar Kota</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="form-group row" id="ekspedisi_section">
-                              <label class="col-sm-4 control-label col-form-label">Nama Ekspedisi</label>
-                              <div class="col-sm-6">
-                                <input type="text" class="form-control" id="nama_ekspedisi" name="nama_ekspedisi">
-                              </div>
-                            </div>
-                            <div class="form-group row" id="driver_section">
-                              <label class="col-md-4 col-12 control-label col-form-label">Nama Driver</label>
-                              <div class="col-md-6 col-10">
-                                <input type="text" class="form-control" id="nama_driver" name="nama_driver">
-                              </div>
-                              <div class="col-md-2 col-2 d-flex">
-                                <select
-                                    id="select_driver" name="select_driver"
-                                    style="width:40px; text-align:left; padding: 0 5px;"
-                                    class="self-centered cp remove-arrow-dropdown"
-                                    onclick="javascript:checkSelectedDriver()"
-                                >
-                                  <option selected disabled value="">...</option>
-                                </select>
-                              </div>
-                            </div>
-                            <div class="form-group row" id="plat_section">
-                              <label class="col-md-4 col-12 control-label col-form-label">No. Plat</label>
-                              <div class="col-md-6 col-10">
-                                <input type="text" class="form-control" id="no_plat" name="no_plat">
-                              </div>
-                              <div class="col-md-2 col-2 d-flex">
-                                <select
-                                    id="select_plat" name="select_plat"
-                                    style="width:40px; text-align:left; padding: 0 5px;"
-                                    class="self-centered cp remove-arrow-dropdown"
-                                    onclick="javascript:checkSelectedPlat()"
-                                >
-                                  <option selected disabled value="">...</option>
+                                  class="cp select2 shadow-none fs14-scaled"
+                                  id="select_picker" name="picker"
+                                  style="width:100%; height:36px">
+                                  <option value="" selected="selected" disabled>Pilih Picker</option>
                                 </select>
                               </div>
                             </div>
@@ -646,12 +577,12 @@
                     </div>
                   </div>
                 </div>
-                <!-- Bootstrap Modals for Status Selesai -->
-                <div class="modal fade" id="masterModalSelesai" tabindex="-1" role="dialog" aria-labelledby="masterModallabel" aria-hidden="true">
+                <!-- Bootstrap Modals for Pengiriman -->
+                <div class="modal fade" id="masterModalKirim" tabindex="-1" role="dialog" aria-labelledby="masterModallabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h4 class="modal-title">Konfirmasi Selesai</h4>
+                        <h4 class="modal-title">Schedule Pengiriman</h4>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true" id="masterModallabel">&times;</span>
                         </button>
@@ -768,12 +699,12 @@
                     </div>
                   </div>
                 </div>
-                <!-- Bootstrap Modals for Pengiriman -->
-                <div class="modal fade" id="masterModalKirim" tabindex="-1" role="dialog" aria-labelledby="masterModallabel" aria-hidden="true">
+                <!-- Bootstrap Modals for Status Selesai -->
+                <div class="modal fade" id="masterModalSelesai" tabindex="-1" role="dialog" aria-labelledby="masterModallabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h4 class="modal-title">Schedule Pengiriman</h4>
+                        <h4 class="modal-title">Konfirmasi Selesai</h4>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true" id="masterModallabel">&times;</span>
                         </button>
