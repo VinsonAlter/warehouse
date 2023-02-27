@@ -10,12 +10,12 @@
     $nama = $_SESSION['user_login'];
     $tanggalAwal = date('d-m-Y');
     $tanggalAkhir = date('d-m-Y');
+    $waktuKirim = date('d-m-Y H:i');
     // $tglTransaksi = date('d-m-Y');
     // $tglAkhirTransaksi = date('d-m-Y');
     // $tglTerima = date('d-m-Y');
     // $tglAkhirTerima = date('d-m-Y');
     // // $tglKirim = date('d-m-Y');
-    // $waktuKirim = date('d-m-Y H:i');
     // $tglFilterKirim = date('d-m-Y');
     // $tglFilterAkhirKirim = date('d-m-Y');
     $state = '';
