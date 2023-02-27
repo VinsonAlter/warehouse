@@ -207,7 +207,6 @@
                 'recordsTotal' => $total_record,
                 'recordsFiltered' => $urut,
                 'data' => $data,
-                'query' => $query,
             );
 
         }

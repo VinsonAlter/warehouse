@@ -310,7 +310,6 @@
             'recordsTotal' => $total_record,
             'recordsFiltered' => $urut,
             "data" => $data,
-            "query" => $query
         );
 
 
@@ -321,7 +320,6 @@
             "recordsFiltered" => 0,
             "data" => $data,
             // "table" => $table,
-            "query" => $query,
             "error" => $e -> getMessage(),
             "error2" => $e -> getLine(),
         );

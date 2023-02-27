@@ -142,7 +142,6 @@
         }
             $res['success'] = 1;
             $res['data'] = $data;
-            $res['tgl'] = $data['kirim'];
         } else {
             $res['success'] = 0;
             $res['message'] = "Gagal menampilkan data, mohon dicoba lagi";
