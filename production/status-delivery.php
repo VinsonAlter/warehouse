@@ -1353,6 +1353,9 @@
           $('#section-dikirim').removeClass('display-none');
           $('#section-selesai').addClass('display-none');
         } else if($('#ganti_status').val() == '3') {
+          if($('#tanggal_terima').val() == '') {
+            $('#tanggal_terima').val(today);
+          }
           if($('#tanggal_kirim').val() == '') {
             $('#tanggal_kirim').val(today);
           }
