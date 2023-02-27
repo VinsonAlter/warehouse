@@ -369,7 +369,7 @@
                 <div class="d-flex b-bottom" style="padding-left:1.8rem;">
                   <form method="post" action="" role="form">
                   <div class="row">
-                    <div class="col-md-6 col-12 mr-sm-3half-left b-sm-bottom">
+                    <div class="col-md-6 col-12 b-sm-bottom">
                       <div class="form-group">
                         <div class="ml-right-8 mb-2">
                           <div class="d-flex mb-3" style="align-items:center">
@@ -435,7 +435,24 @@
                       </button>
                     </div> -->
                     <!-- <span class="border-bottom-mobile"></span> -->
+                    <!-- Oh boy, changing features again -->
                     <div class="mt-1 mt-md-0 col-md-6 col-12 b-sm-bottom p-0 mb-3">
+                      <div class="px-md-2 px-0 d-flex mb-moz">
+                        <p class="d-flex col-3 fs14-scaled mr-3 align-self-center mb-0">Select Status : </p>
+                        <select
+                          class="cp select2 shadow-none mr-12 custom-scaled"
+                          id="select_status" name="status">
+                          <option value="" selected="selected" disabled>Pilih Status</option>
+                          <option value="1">Diterima</option>
+                          <option value="2">Kirim</option>
+                          <option value="3">Selesai</option>
+                        </select>
+                        <!-- <button class="btn btn-cyan btn-sm mr-12" type="button" id="update_pick" name="update_terima">
+                          Picking
+                        </button> -->
+                      </div>
+                    </div>
+                    <!-- <div class="mt-1 mt-md-0 col-md-6 col-12 b-sm-bottom p-0 mb-3">
                       <div class="px-md-2 px-0 d-flex mb-moz">
                         <p class="d-flex col-3 fs14-scaled mr-3 align-self-center mb-0">Select Picker : </p>
                         <select
@@ -446,12 +463,6 @@
                         <button class="btn btn-cyan btn-sm mr-12" type="button" id="update_pick" name="update_terima">
                           Picking
                         </button>
-                        <!-- <button class="btn btn-cyan mr-12" type="button" id="update_pick" name="update_terima"
-                          style="width:180px;height:36px;">Update Picking</button>
-                        <button class="btn btn-warning mr-12" data-bs-toggle="modal" data-bs-target="#masterModalKirim" type="button" id="update_kirim" name="update_kirim"
-                          style="width:180px;height:36px;">Update Kirim</button>
-                        <button class="btn btn-secondary" type="button" id="confirm_selesai" name="confirm_selesai"
-                          style="width:180px;height:36px;">Confirm Selesai</button> -->
                       </div>
                       <div class="d-flex ml-1em mb-2 mb-md-0">
                         <button class="btn btn-warning btn-sm mr-12" data-bs-toggle="modal" 
@@ -463,7 +474,7 @@
                           Selesai
                         </button>
                       </div>
-                    </div>
+                    </div> -->
                     <!-- <span class="b-bottom"></span> -->
                   </form>
                   </div>
