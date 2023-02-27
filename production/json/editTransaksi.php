@@ -419,7 +419,7 @@
                                                     $idTransaksi = $_POST['id_transaksi'];
                                                     $customer = $_POST['nama_customer'];
                                                     $sales = $_POST['nama_sales'];
-                                                    $tglTransaksi = date_hour_to_str($_POST['tgl_transaksi']);
+                                                    $tglTransaksi = date_hour_to_str($_POST['tgl_transaksi'] . ':00');
                                                     $insert = "INSERT INTO [WMS].[dbo].[TB_Delivery] 
                                                             ([IDTransaksi], [NoTransaksi], [Customer], 
                                                              [TglTransaksi], [Status], [NamaPicker], 
@@ -427,8 +427,8 @@
                                                              [JenisPengiriman], [Wilayah], [NamaEkspedisi],
                                                              [NamaDriver], [NoPlat])
                                                             VALUES (:id, :no, :cust, :tgltransaksi, :status, :picker, 
-                                                                    :terima, :sales, :kirim, :wilayah, :ekspedisi, :driver,
-                                                                    :plat)";
+                                                                    :terima, :sales, :kirim, :pengiriman, :wilayah, :ekspedisi, 
+                                                                    :driver, :plat)";
                                                     $stmt3 = $pdo->prepare($insert, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
                                                     $stmt3->bindParam(":id", $idTransaksi, PDO::PARAM_STR);
                                                     $stmt3->bindParam(":no", $noTransaksi, PDO::PARAM_STR);
@@ -439,10 +439,19 @@
                                                     $stmt3->bindParam(":terima", $jadwalTerima, PDO::PARAM_STR);
                                                     $stmt3->bindParam(":sales", $sales, PDO::PARAM_STR);
                                                     $stmt3->bindParam(":kirim", $jadwalKirim, PDO::PARAM_STR);
+                                                    $stmt3->bindParam(":pengiriman", $jenisPengiriman, PDO::PARAM_STR);
                                                     $stmt3->bindParam(":wilayah", $wilayahPengiriman, PDO::PARAM_STR);
                                                     $stmt3->bindParam(":ekspedisi", $ekspedisi, PDO::PARAM_STR);
                                                     $stmt3->bindParam(":driver", $driver, PDO::PARAM_STR);
                                                     $stmt3->bindParam(":plat", $plat, PDO::PARAM_STR);
+                                                    $stmt3->execute();
+                                                    if($stmt3->rowCount() > 0) {
+                                                        $res['success'] = 1;
+                                                        $res['message'] = 'Status Transaksi Berhasil Dimasukkan!';
+                                                    } else {
+                                                        $res['success'] = 0;
+                                                        $res['message'] = 'Status Transaksi gagal diganti, mohon periksa koneksi anda!';
+                                                    }
                                                     // $update = "UPDATE [WMS].[dbo].[TB_Delivery] SET
                                                     //     Status = :status, TglTerima = :terima, NamaPicker = :picker,
                                                     //     TglKirim = :kirim, TglSelesai = :selesai, JenisPengiriman = :pengiriman,
@@ -480,34 +489,44 @@
                                                     $ekspedisi = $_POST['nama_ekspedisi'];
                                                     $driver = '';
                                                     $plat = '';
-                                                    $update = "UPDATE [WMS].[dbo].[TB_Delivery] SET
-                                                        Status = :status, TglTerima = :terima, NamaPicker = :picker,
-                                                        TglKirim = :kirim, TglSelesai = :selesai, JenisPengiriman = :pengiriman,
-                                                        Wilayah = :wilayah, NamaEkspedisi = :ekspedisi,
-                                                        NamaDriver = :driver, NoPlat = :plat
-                                                        WHERE NoTransaksi = :transaksi";
-                                                    $stmt2 = $pdo->prepare($update, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
-                                                    $stmt2->bindParam(":status", $status, PDO::PARAM_INT);
-                                                    $stmt2->bindParam(":terima", $jadwalTerima, PDO::PARAM_STR);
-                                                    $stmt2->bindParam(":picker", $picker, PDO::PARAM_STR);
-                                                    $stmt2->bindParam(":kirim", $jadwalKirim, PDO::PARAM_STR);
-                                                    $stmt2->bindParam(":selesai", $jadwalSelesai, PDO::PARAM_STR);
-                                                    $stmt2->bindParam(":pengiriman", $jenisPengiriman, PDO::PARAM_STR);
-                                                    $stmt2->bindParam(":wilayah", $wilayahPengiriman, PDO::PARAM_STR);
-                                                    $stmt2->bindParam(":ekspedisi", $ekspedisi, PDO::PARAM_STR);
-                                                    $stmt2->bindParam(":driver", $driver, PDO::PARAM_STR);
-                                                    $stmt2->bindParam(":plat", $plat, PDO::PARAM_STR);
-                                                    $stmt2->bindParam(":transaksi", $noTransaksi, PDO::PARAM_STR);
-                                                    $stmt2->execute();
-                                                    if($stmt2->rowCount() > 0) {
+                                                    $idTransaksi = $_POST['id_transaksi'];
+                                                    $customer = $_POST['nama_customer'];
+                                                    $sales = $_POST['nama_sales'];
+                                                    $tglTransaksi = date_hour_to_str($_POST['tgl_transaksi'] . ':00');
+                                                    $insert = "INSERT INTO [WMS].[dbo].[TB_Delivery] 
+                                                                ([IDTransaksi], [NoTransaksi], [Customer], 
+                                                                [TglTransaksi], [Status], [NamaPicker], 
+                                                                [TglTerima], [NamaSales], [TglKirim], 
+                                                                [JenisPengiriman], [Wilayah], [NamaEkspedisi],
+                                                                [NamaDriver], [NoPlat])
+                                                                VALUES (:id, :no, :cust, :tgltransaksi, :status, :picker, 
+                                                                        :terima, :sales, :kirim, :pengiriman, :wilayah, :ekspedisi, 
+                                                                        :driver, :plat)";
+                                                    $stmt3 = $pdo->prepare($insert, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+                                                    $stmt3->bindParam(":id", $idTransaksi, PDO::PARAM_STR);
+                                                    $stmt3->bindParam(":no", $noTransaksi, PDO::PARAM_STR);
+                                                    $stmt3->bindParam(":cust", $customer, PDO::PARAM_STR);
+                                                    $stmt3->bindParam(":status", $status, PDO::PARAM_INT);
+                                                    $stmt3->bindParam(":tgltransaksi", $tglTransaksi, PDO::PARAM_STR);
+                                                    $stmt3->bindParam(":picker", $picker, PDO::PARAM_STR);
+                                                    $stmt3->bindParam(":terima", $jadwalTerima, PDO::PARAM_STR);
+                                                    $stmt3->bindParam(":sales", $sales, PDO::PARAM_STR);
+                                                    $stmt3->bindParam(":kirim", $jadwalKirim, PDO::PARAM_STR);
+                                                    $stmt3->bindParam(":pengiriman", $jenisPengiriman, PDO::PARAM_STR);
+                                                    $stmt3->bindParam(":wilayah", $wilayahPengiriman, PDO::PARAM_STR);
+                                                    $stmt3->bindParam(":ekspedisi", $ekspedisi, PDO::PARAM_STR);
+                                                    $stmt3->bindParam(":driver", $driver, PDO::PARAM_STR);
+                                                    $stmt3->bindParam(":plat", $plat, PDO::PARAM_STR);
+                                                    $stmt3->execute();
+                                                    if($stmt3->rowCount() > 0) {
                                                         $res['success'] = 1;
-                                                        $res['message'] = 'Status Transaksi Berhasil Diganti!';
+                                                        $res['message'] = 'Status Transaksi Berhasil Dimasukkan!';
                                                         // var_dump($jadwalKirim);
                                                         // var_dump($jadwalSelesai);
                                                     } else {
                                                         $res['success'] = 0;
                                                         $res['message'] = 'Status Transaksi gagal diganti, mohon periksa koneksi anda!';
-                                                        }
+                                                    }
                                                 } else {
                                                     $res['success'] = 0;
                                                     $res['message'] = 'Mohon tentukan nama ekspedisi untuk transaksi ini';
