@@ -10,7 +10,9 @@
     $nama = $_SESSION['user_login'];
     $tanggalAwal = date('d-m-Y');
     $tanggalAkhir = date('d-m-Y');
+    $waktuTerima = date('d-m-Y H:i');
     $waktuKirim = date('d-m-Y H:i');
+    $waktuSelesai = date('d-m-Y H:i');
     // $tglTransaksi = date('d-m-Y');
     // $tglAkhirTransaksi = date('d-m-Y');
     // $tglTerima = date('d-m-Y');
@@ -534,7 +536,7 @@
                           <span aria-hidden="true" id="masterModallabel">&times;</span>
                         </button>
                       </div>
-                      <form class="form-horizontal" id="form_kirim" method="post" action="javascript:kirimTransaksi()" role="form">
+                      <form class="form-horizontal" id="form_kirim" method="post" action="javascript:terimaTransaksi()" role="form">
                         <div class="modal-body pt-none pb-none">
                           <div class="card-body pb-none">
                             <div class="d-none form-group row">
@@ -547,7 +549,7 @@
                               <label class="col-sm-4 control-label col-form-label">Jadwal Terima</label>
                               <div class="col-sm-6">
                                 <div class="input-group date datetimepicker">
-                                  <input class="form-control" type="text" value="<?=$waktuKirim?>" name="waktu_kirim">
+                                  <input class="form-control" type="text" value="<?=$waktuTerima?>" name="waktu_terima">
                                   <div class="input-group-append">
                                     <span class="input-group-text input-group-addon" style="padding:0.6rem 0.75rem;">
                                       <span class="fa fa-calendar"></span>
@@ -709,7 +711,7 @@
                           <span aria-hidden="true" id="masterModallabel">&times;</span>
                         </button>
                       </div>
-                      <form class="form-horizontal" id="form_kirim" method="post" action="javascript:kirimTransaksi()" role="form">
+                      <form class="form-horizontal" id="form_kirim" method="post" action="javascript:confirmTransaksiSelesai()" role="form">
                         <div class="modal-body pt-none pb-none">
                           <div class="card-body pb-none">
                             <div class="d-none form-group row">
@@ -722,7 +724,7 @@
                               <label class="col-sm-4 control-label col-form-label">Jadwal Selesai</label>
                               <div class="col-sm-6">
                                 <div class="input-group date datetimepicker">
-                                  <input class="form-control" type="text" value="<?=$waktuKirim?>" name="waktu_kirim">
+                                  <input class="form-control" type="text" value="<?=$waktuSelesai?>" name="waktu_selesai">
                                   <div class="input-group-append">
                                     <span class="input-group-text input-group-addon" style="padding:0.6rem 0.75rem;">
                                       <span class="fa fa-calendar"></span>
