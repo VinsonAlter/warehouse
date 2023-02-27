@@ -1343,13 +1343,16 @@
           $('#section-dikirim').addClass('display-none');
           $('#section-selesai').addClass('display-none');
         } else if($('#ganti_status').val() == '2'){
-          // this today is troublesome, need to fix this
-          $('#tanggal_kirim').val(today);
+          if($('#tanggal_kirim').val() == '') {
+            $('#tanggal_kirim').val(today);
+          }
           $('#tanggal_selesai').val('');
           $('#section-dikirim').removeClass('display-none');
           $('#section-selesai').addClass('display-none');
         } else if($('#ganti_status').val() == '3') {
-          $('#tanggal_kirim').val(today);
+          if($('#tanggal_kirim').val() == '') {
+            $('#tanggal_kirim').val(today);
+          }
           $('#tanggal_selesai').val(today);
           $('#section-dikirim').removeClass('display-none');
           $('#section-selesai').removeClass('display-none');
