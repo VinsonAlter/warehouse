@@ -14,7 +14,7 @@
                 if($tanggal_pengiriman == false) {
                     $res['success'] = 0;
                     $res['message'] = 'Pastikan anda memasukkan format tanggal yang benar';
-                    $res['tanggal'] = $tanggal_pengiriman;
+                    // $res['tanggal'] = $tanggal_pengiriman;
                 } 
                     else {
                     // $jam_kirim = date('H:i:s');
@@ -51,7 +51,7 @@
                                                     $stmt->execute();
                                                     if($stmt->rowCount() > 0) {
                                                         $res['success'] = 1;
-                                                        $res['kirim'] = $update_kirim;   
+                                                        // $res['kirim'] = $update_kirim;   
                                                         $res['message'] = $total . ' transaksi berhasil diupdate!';
                                                     } else {
                                                         $res['success'] = 0;
@@ -91,7 +91,7 @@
                                                     $stmt->execute();
                                                     if($stmt->rowCount() > 0) {
                                                         $res['success'] = 1;
-                                                        $res['kirim'] = $update_kirim;
+                                                        // $res['kirim'] = $update_kirim;
                                                         $res['message'] = $total . ' transaksi berhasil diupdate!';
                                                     } else {
                                                         $res['success'] = 0;
@@ -137,7 +137,7 @@
                                         $stmt->execute();
                                         if($stmt->rowCount() > 0) {
                                             $res['success'] = 1;
-                                            $res['kirim'] = $update_kirim;       
+                                            // $res['kirim'] = $update_kirim;       
                                             $res['message'] = $update . ' transaksi berhasil diupdate!';
                                         } else {
                                             $res['success'] = 0;
@@ -174,7 +174,7 @@
                                         $stmt->execute();
                                         if($stmt->rowCount() > 0) {
                                             $res['success'] = 1;
-                                            $res['kirim'] = $update_kirim;       
+                                            // $res['kirim'] = $update_kirim;       
                                             $res['message'] = $update . ' transaksi berhasil diupdate!';
                                         } else {
                                             $res['success'] = 0;
@@ -213,7 +213,7 @@
     } catch (Exception $e) {
         $res['success'] = 0;
         $res['message'] = 'ada Error';
-        $res['tanggal'] = $tanggal_pengiriman;
+        // $res['tanggal'] = $tanggal_pengiriman;
         $res['error'] = $e->getLine();
         $res['error_2'] = $e->getMessage();
     }
