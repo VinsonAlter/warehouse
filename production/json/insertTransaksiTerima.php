@@ -11,8 +11,8 @@
         //         $arr = explode(' ; ', $batch);
         //         // count sepparated value inside array
         //         $total = substr_count($batch, ' ; ') + 1;
-        if($_POST['NomorTransaksi'] != '') {
-            if($_POST['picker'] != '') {
+        if(isset($_POST['NomorTransaksi']) != '') {
+            if(isset($_POST['picker']) != '') {
                 $noTransaksi = $_POST['NomorTransaksi'];
                 $picker = $_POST['picker'];
                 $tglTerima = date_hour_to_str($_POST['waktu_terima'] . ':00');
