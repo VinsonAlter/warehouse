@@ -997,7 +997,8 @@
             const res = $.parseJSON(result);
             if(res.success == 1) {
               $('#masterModalTerima').modal('hide');
-              $('input[name="checkboxes[]"]').prop('checked', false);
+              // $('input[name="checkboxes[]"]').prop('checked', false);
+              checkValues = [];
               $('#table_delivery').DataTable().ajax.reload();
               $('#change_status option[value=""]').prop('selected', true);
             } alert(res.message);
