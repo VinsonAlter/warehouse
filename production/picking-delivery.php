@@ -536,7 +536,7 @@
                           <span aria-hidden="true" id="masterModallabel">&times;</span>
                         </button>
                       </div>
-                      <form class="form-horizontal" id="form_kirim" method="post" action="javascript:terimaTransaksi()" role="form">
+                      <form class="form-horizontal" id="form_terima" method="post" action="javascript:terimaTransaksi()" role="form">
                         <div class="modal-body pt-none pb-none">
                           <div class="card-body pb-none">
                             <div class="d-none form-group row">
@@ -813,8 +813,11 @@
       }
 
       function changeModals() {
+        const batch = checkValues.join(" ; ");
+        $('#no_transaksi').val(batch);
         if($('#change_status').val() == '2') {
           $('#masterModalKirim').modal('show');
+
         } else if($('#change_status').val() == '3') {
           $('#masterModalSelesai').modal('show');
         } else {
@@ -977,6 +980,26 @@
               $('#masterModalKirim').modal('hide');
               $('#table_delivery').DataTable().ajax.reload();
               $('input[name="checkboxes[]"]').prop('checked', false);
+            } alert(res.message);
+          },
+          error: err => {
+            console.error(err.statusText);
+          }
+        })
+      }
+
+      function terimaTransaksi() {
+        $.ajax({
+          type: 'post',
+          url: 'json/insertTransaksiTerima.php',
+          data: $('#form_terima').serialize(),
+          success: result => {
+            const res = $.parseJSON(result);
+            if(res.success == 1) {
+              $('#masterModalTerima').modal('hide');
+              $('input[name="checkboxes[]"]').prop('checked', false);
+              $('#table_delivery').DataTable().ajax.reload();
+              $('#change_status option[value=""]').prop('selected', true);
             } alert(res.message);
           },
           error: err => {
