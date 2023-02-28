@@ -798,6 +798,18 @@
 
     <script>
 
+      $('#masterModalTerima').on('hidden.bs.modal', function() {
+        $('#change_status option[value=""]').prop('selected', true);
+      })
+
+      $('#masterModalKirim').on('hidden.bs.modal', function() {
+        $('#change_status option[value=""]').prop('selected', true);
+      })
+
+      $('#masterModalSelesai').on('hidden.bs.modal', function() {
+        $('#change_status option[value=""]').prop('selected', true);
+      })
+
       function checkSelectedDriver() {
         if($('#select_driver option:selected').val() != '') {
           $('#nama_driver').val($('#select_driver').val());
