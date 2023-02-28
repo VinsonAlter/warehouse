@@ -539,7 +539,7 @@
                       <form class="form-horizontal" id="form_terima" method="post" action="javascript:terimaTransaksi()" role="form">
                         <div class="modal-body pt-none pb-none">
                           <div class="card-body pb-none">
-                            <div class="d-none form-group row">
+                            <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">No Transaksi</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="no_transaksi" name="NomorTransaksi" readonly="readonly">
@@ -592,10 +592,10 @@
                       <form class="form-horizontal" id="form_kirim" method="post" action="javascript:kirimTransaksi()" role="form">
                         <div class="modal-body pt-none pb-none">
                           <div class="card-body pb-none">
-                            <div class="d-none form-group row">
+                            <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">No Transaksi</label>
                               <div class="col-sm-6">
-                                <input type="text" class="form-control" id="no_transaksi" name="NomorTransaksi" readonly="readonly">
+                                <input type="text" class="form-control" id="no_transaksi_kirim" name="NomorTransaksi" readonly="readonly">
                               </div>
                             </div>
                             <!-- <div class="form-group row"> 
@@ -813,15 +813,16 @@
       }
 
       function changeModals() {
-        const batch = checkValues.join(" ; ");
-        $('#no_transaksi').val(batch);
         if($('#change_status').val() == '2') {
           $('#masterModalKirim').modal('show');
-
+          const batch = checkValues.join(" ; ");
+          $('#no_transaksi_kirim').val(batch);
         } else if($('#change_status').val() == '3') {
           $('#masterModalSelesai').modal('show');
         } else {
           $('#masterModalTerima').modal('show');
+          const batch = checkValues.join(" ; ");
+          $('#no_transaksi').val(batch);
         }
       }
 
@@ -890,11 +891,11 @@
       //   }
       // }
       
-      $('#update_kirim').click(() => {
-        const checkKirim = checkValues.join(" ; ");
-        $('#no_transaksi').val(checkKirim);
-        // console.log(checkKirim);
-      })
+      // $('#update_kirim').click(() => {
+      //   const checkKirim = checkValues.join(" ; ");
+      //   $('#no_transaksi').val(checkKirim);
+      //   // console.log(checkKirim);
+      // })
 
       function selectPicker() {
         $.ajax({
