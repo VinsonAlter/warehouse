@@ -711,13 +711,13 @@
                           <span aria-hidden="true" id="masterModallabel">&times;</span>
                         </button>
                       </div>
-                      <form class="form-horizontal" id="form_kirim" method="post" action="javascript:confirmTransaksiSelesai()" role="form">
+                      <form class="form-horizontal" id="form_selesai" method="post" action="javascript:confirmTransaksiSelesai()" role="form">
                         <div class="modal-body pt-none pb-none">
                           <div class="card-body pb-none">
-                            <div class="d-none form-group row">
+                            <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">No Transaksi</label>
                               <div class="col-sm-6">
-                                <input type="text" class="form-control" id="no_transaksi" name="NomorTransaksi" readonly="readonly">
+                                <input type="text" class="form-control" id="no_transaksi_selesai" name="NomorTransaksi" readonly="readonly">
                               </div>
                             </div>
                             <div class="form-group row">
@@ -736,7 +736,7 @@
                             <div class="form-group row">
                               <label class="col-sm-4 control-label col-form-label">Keterangan</label>
                               <div class="col-sm-6">
-                                <textarea class="form-control"></textarea>
+                                <textarea class="form-control" name="keterangan"></textarea>
                               </div>
                             </div>
                           </div>
@@ -819,6 +819,8 @@
           $('#no_transaksi_kirim').val(batch);
         } else if($('#change_status').val() == '3') {
           $('#masterModalSelesai').modal('show');
+          const batch = checkValues.join(" ; ");
+          $('#no_transaksi_selesai').val(batch);
         } else {
           $('#masterModalTerima').modal('show');
           const batch = checkValues.join(" ; ");
@@ -1001,6 +1003,26 @@
             if(res.success == 1) {
               $('#masterModalTerima').modal('hide');
               // $('input[name="checkboxes[]"]').prop('checked', false);
+              checkValues = [];
+              $('#table_delivery').DataTable().ajax.reload();
+              $('#change_status option[value=""]').prop('selected', true);
+            } alert(res.message);
+          },
+          error: err => {
+            console.error(err.statusText);
+          }
+        })
+      }
+
+      function confirmTransaksiSelesai() {
+        $.ajax({
+          type: 'post',
+          url: 'json/confirmSelesai.php',
+          data: $('#form_selesai').serialize(),
+          success: result => {
+            const res = $.parseJSON(result);
+            if(res.success == 1) {
+              $('#masterModalSelesai').modal('hide');
               checkValues = [];
               $('#table_delivery').DataTable().ajax.reload();
               $('#change_status option[value=""]').prop('selected', true);

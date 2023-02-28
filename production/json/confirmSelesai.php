@@ -3,27 +3,35 @@
     date_default_timezone_set('Asia/Jakarta');
     $res = [];
     try {
-        if($_POST['batch'] != '') {
-            $noTransaksi = $_POST['batch'];
+        // not using batch anymore, since using submit forms
+        // if($_POST['batch'] != '') {
+        //     $noTransaksi = $_POST['batch'];
+        //     $total = substr_count($noTransaksi, ' ; ') + 1;
+        //     $arr = explode(' ; ', $noTransaksi);
+        //     $tglSelesai = date_hour_to_str(date('d-m-Y H:i:00'));
+        if(isset($_POST['NomorTransaksi']) != '') {
+            $noTransaksi = $_POST['NomorTransaksi'];
             $total = substr_count($noTransaksi, ' ; ') + 1;
             $arr = explode(' ; ', $noTransaksi);
-            $tglSelesai = date_hour_to_str(date('d-m-Y H:i:00'));
+            $tglSelesai = date_hour_to_str($_POST['waktu_selesai'] . ':00');
+            $keterangan = $_POST['keterangan'];
             foreach($arr as $val) {
                 $array = explode(' , ', $val);
                 $noTransaksi = $array[1];
                 $status = $array[4];
                 // var_dump($status);
-                if($status === 2) {
+                if($status == 2) {
                     $selesai = "UPDATE [WMS].[dbo].[TB_Delivery]
                                     SET [Status] = 3,
-                                        [TglSelesai] = '$tglSelesai'
+                                        [TglSelesai] = '$tglSelesai',
+                                        [Keterangan] = '$keterangan'
                                     WHERE [NoTransaksi] = '$noTransaksi'
                                 ";
                     $stmt = $pdo->prepare($selesai, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
                     $stmt->execute();
                     if($stmt->rowCount() > 0) {
                         $res['success'] = 1;
-                        $res['selesai'] = $selesai;
+                        // $res['selesai'] = $selesai;
                         $res['message'] = $total . ' transaksi diconfirm selesai';
                     } else {
                         $res['success'] = 0;
