@@ -979,8 +979,10 @@
             const res = $.parseJSON(result);
             if(res.success == 1){
               $('#masterModalKirim').modal('hide');
+              checkValues = [];
               $('#table_delivery').DataTable().ajax.reload();
-              $('input[name="checkboxes[]"]').prop('checked', false);
+              // $('input[name="checkboxes[]"]').prop('checked', false);
+              $('#change_status option[value=""]').prop('selected', true);
             } alert(res.message);
           },
           error: err => {
