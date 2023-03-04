@@ -148,9 +148,9 @@
 
       rel="stylesheet"/>
 
-    <link href="css/style.min.css" rel="stylesheet" />
-
     <link href="css/styles.css" rel="stylesheet" />
+
+    <link href="css/style.min.css" rel="stylesheet" />
 
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"> -->
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -192,6 +192,11 @@
           margin-top: 2.25rem;
       }
 
+      .modal-backdrop {
+        width: 100% !important;
+        height: 100% !important;
+      }
+
       /* Disable box shadows for this table */
 
       /* table.dataTable.stripe > tbody > tr.odd > *, 
@@ -223,6 +228,7 @@
       table.dataTable.order-column.stripe > tbody > tr.odd > .sorting_1 {
         box-shadow: none;
       } */
+      
 
       body {
         overflow:auto;
@@ -480,10 +486,10 @@
             <div class="card">
               <div class="card-body d-flex px-4 pb-2 b-bottom">
                 <!-- erase this px-3, causing trouble at styling -->
-                <div class="container px-3">
+                <div class="px-3">
                   <form method="post" action="" role="form">
                   <div class="row">
-                    <div class="col-md-5 col-12">
+                    <div class="col-md-10 col-12">
                       <div class="form-group">
                         <div class="ml-right-16 mb-2">
                           <!-- Change the date filtering into the newer version -->

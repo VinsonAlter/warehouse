@@ -153,6 +153,10 @@
 				left: 50%;
 			}
 
+      .modal-backdrop {
+        width: 100% !important;
+        height: 100% !important;
+      }
 
     </style>
 

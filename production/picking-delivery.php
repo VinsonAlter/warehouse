@@ -124,8 +124,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <style>
 
+      .modal-backdrop {
+        width: 100% !important;
+        height: 100% !important;
+      }
+
       body {
         overflow:auto;
+      }
+
+      .fs13 {
+        font-size: 13px;
       }
 
       @media (min-width: 768px) {
@@ -440,7 +449,7 @@
                     <!-- Oh boy, changing features again -->
                     <div class="mt-1 mt-md-0 col-md-6 col-12 b-sm-bottom p-0 mb-3">
                       <div class="px-md-2 px-0 d-flex mb-moz">
-                        <p class="d-flex col-3 fs14-scaled mr-3 align-self-center mb-0">Select Status : </p>
+                        <p class="d-flex col-3 fs13 mr-3 align-self-center mb-0">Select Status : </p>
                         <select
                           class="cp select2 shadow-none mr-12 custom-scaled"
                           id="change_status" name="status" onchange="javascript:changeModals()">

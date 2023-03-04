@@ -64,6 +64,11 @@
         color: #ed0000;
       }
 
+      .modal-backdrop {
+        width: 100% !important;
+        height: 100% !important;
+      }
+
     </style>
   </head>
 

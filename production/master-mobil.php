@@ -89,6 +89,11 @@
       body {
         overflow:hidden;
       }
+
+      .modal-backdrop {
+        width: 100% !important;
+        height: 100% !important;
+      }
       
       .nav-img {
         margin-right: 10px;
