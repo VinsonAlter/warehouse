@@ -37,17 +37,27 @@
                                                 $Transaksi = $array[1];
                                                 $status = $array[4];
                                                 if($status == 1) {
+                                                    $status_kirim = 2;
                                                     $update_kirim = "UPDATE [WMS].[dbo].[TB_Delivery]
-                                                                        SET [Status] = 2,
-                                                                            [TglKirim] = '$tanggal_pengiriman',
-                                                                            [JenisPengiriman] = '$jenis_pengiriman',
-                                                                            [Wilayah] = '$wilayah_pengiriman',
-                                                                            [NamaEkspedisi] = '$ekspedisi',
-                                                                            [NamaDriver] = '$driver',
-                                                                            [NoPlat] = '$plat'
-                                                                        WHERE [NoTransaksi] = '$Transaksi' AND [IDTransaksi] = '$idTransaksi'
+                                                                        SET [Status] = :status,
+                                                                            [TglKirim] = :tanggal,
+                                                                            [JenisPengiriman] = :jenis,
+                                                                            [Wilayah] = :wilayah,
+                                                                            [NamaEkspedisi] = :ekspedisi,
+                                                                            [NamaDriver] = :driver,
+                                                                            [NoPlat] = :plat
+                                                                        WHERE [NoTransaksi] = :no AND [IDTransaksi] = :id
                                                                     ";
                                                     $stmt = $pdo->prepare($update_kirim, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+                                                    $stmt->bindParam(":id", $idTransaksi, PDO::PARAM_STR);
+                                                    $stmt->bindParam(":no", $Transaksi, PDO::PARAM_STR);
+                                                    $stmt->bindParam(":status", $status_kirim, PDO::PARAM_INT);
+                                                    $stmt->bindParam(":tanggal", $tanggal_pengiriman, PDO::PARAM_STR);
+                                                    $stmt->bindParam(":jenis", $jenis_pengiriman, PDO::PARAM_STR);
+                                                    $stmt->bindParam(":wilayah", $wilayah_pengiriman, PDO::PARAM_STR);
+                                                    $stmt->bindParam(":ekspedisi", $ekspedisi, PDO::PARAM_STR);
+                                                    $stmt->bindParam(":driver", $driver, PDO::PARAM_STR);
+                                                    $stmt->bindParam(":plat", $plat, PDO::PARAM_STR);
                                                     $stmt->execute();
                                                     if($stmt->rowCount() > 0) {
                                                         $res['success'] = 1;
@@ -77,17 +87,27 @@
                                                 $Transaksi = $array[1];
                                                 $status = $array[4];
                                                 if($status == 1) {
+                                                    $status_kirim = 2;
                                                     $update_kirim = "UPDATE [WMS].[dbo].[TB_Delivery]
-                                                                        SET [Status] = 2,
-                                                                            [TglKirim] = '$tanggal_pengiriman',
-                                                                            [JenisPengiriman] = '$jenis_pengiriman',
-                                                                            [Wilayah] = '$wilayah_pengiriman',
-                                                                            [NamaEkspedisi] = '$ekspedisi',
-                                                                            [NamaDriver] = '$driver',
-                                                                            [NoPlat] = '$plat'
-                                                                        WHERE [NoTransaksi] = '$Transaksi' AND [IDTransaksi] = '$idTransaksi'
+                                                                        SET [Status] = :status,
+                                                                            [TglKirim] = :tanggal,
+                                                                            [JenisPengiriman] = :jenis,
+                                                                            [Wilayah] = :wilayah,
+                                                                            [NamaEkspedisi] = :ekspedisi,
+                                                                            [NamaDriver] = :driver,
+                                                                            [NoPlat] = :plat,
+                                                                        WHERE [NoTransaksi] = :no AND [IDTransaksi] = :id
                                                                     ";
                                                     $stmt = $pdo->prepare($update_kirim, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+                                                    $stmt->bindParam(":id", $idTransaksi, PDO::PARAM_STR);
+                                                    $stmt->bindParam(":no", $Transaksi, PDO::PARAM_STR);
+                                                    $stmt->bindParam(":status", $status_kirim, PDO::PARAM_INT);
+                                                    $stmt->bindParam(":tanggal", $tanggal_pengiriman, PDO::PARAM_STR);
+                                                    $stmt->bindParam(":jenis", $jenis_pengiriman, PDO::PARAM_STR);
+                                                    $stmt->bindParam(":wilayah", $wilayah_pengiriman, PDO::PARAM_STR);
+                                                    $stmt->bindParam(":ekspedisi", $ekspedisi, PDO::PARAM_STR);
+                                                    $stmt->bindParam(":driver", $driver, PDO::PARAM_STR);
+                                                    $stmt->bindParam(":plat", $plat, PDO::PARAM_STR);
                                                     $stmt->execute();
                                                     if($stmt->rowCount() > 0) {
                                                         $res['success'] = 1;
@@ -122,23 +142,33 @@
                                     $idTransaksi = $array[0];
                                     $Transaksi = $array[1];
                                     $status = $array[4];
+                                    $status_kirim = 2;
                                     if($status == 1) {
                                         $update_kirim = "UPDATE [WMS].[dbo].[TB_Delivery]
-                                                            SET [Status] = 2,
-                                                                [TglKirim] = '$tanggal_pengiriman',
-                                                                [JenisPengiriman] = '$jenis_pengiriman',
-                                                                [Wilayah] = '$wilayah_pengiriman',
-                                                                [NamaEkspedisi] = '$ekspedisi',
-                                                                [NamaDriver] = '$driver',
-                                                                [NoPlat] = '$plat'
-                                                            WHERE [NoTransaksi] = '$Transaksi' AND [IDTransaksi] = '$idTransaksi'
+                                                            SET [Status] = :status,
+                                                                [TglKirim] = :tanggal,
+                                                                [JenisPengiriman] = :jenis,
+                                                                [Wilayah] = :wilayah,
+                                                                [NamaEkspedisi] = :ekspedisi,
+                                                                [NamaDriver] = :driver,
+                                                                [NoPlat] = :plat
+                                                            WHERE [NoTransaksi] = :no AND [IDTransaksi] = :id
                                                         ";
                                         $stmt = $pdo->prepare($update_kirim, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+                                        $stmt->bindParam(":id", $idTransaksi, PDO::PARAM_STR);
+                                        $stmt->bindParam(":no", $Transaksi, PDO::PARAM_STR);
+                                        $stmt->bindParam(":status", $status_kirim, PDO::PARAM_INT);
+                                        $stmt->bindParam(":tanggal", $tanggal_pengiriman, PDO::PARAM_STR);
+                                        $stmt->bindParam(":jenis", $jenis_pengiriman, PDO::PARAM_STR);
+                                        $stmt->bindParam(":wilayah", $wilayah_pengiriman, PDO::PARAM_STR);
+                                        $stmt->bindParam(":ekspedisi", $ekspedisi, PDO::PARAM_STR);
+                                        $stmt->bindParam(":driver", $driver, PDO::PARAM_STR);
+                                        $stmt->bindParam(":plat", $plat, PDO::PARAM_STR);
                                         $stmt->execute();
                                         if($stmt->rowCount() > 0) {
                                             $res['success'] = 1;
                                             // $res['kirim'] = $update_kirim;       
-                                            $res['message'] = $update . ' transaksi berhasil diupdate!';
+                                            $res['message'] = $total . ' transaksi berhasil diupdate!';
                                         } else {
                                             $res['success'] = 0;
                                             $res['message'] = 'Status transaksi gagal diupdate, mohon periksa koneksi anda!';
@@ -160,22 +190,32 @@
                                     $Transaksi = $array[1];
                                     $status = $array[4];
                                     if($status == 1) {
+                                        $status_kirim = 2;
                                         $update_kirim = "UPDATE [WMS].[dbo].[TB_Delivery]
-                                                            SET [Status] = 2,
-                                                                [TglKirim] = '$tanggal_pengiriman',
-                                                                [JenisPengiriman] = '$jenis_pengiriman',
-                                                                [Wilayah] = '$wilayah_pengiriman',
-                                                                [NamaEkspedisi] = '$ekspedisi',
-                                                                [NamaDriver] = '$driver',
-                                                                [NoPlat] = '$plat'
-                                                            WHERE [NoTransaksi] = '$Transaksi' AND [IDTransaksi] = '$idTransaksi'
+                                                            SET [Status] = :status,
+                                                                [TglKirim] = :tanggal,
+                                                                [JenisPengiriman] = :jenis,
+                                                                [Wilayah] = :wilayah,
+                                                                [NamaEkspedisi] = :ekspedisi,
+                                                                [NamaDriver] = :driver,
+                                                                [NoPlat] = :plat
+                                                            WHERE [NoTransaksi] = :no AND [IDTransaksi] = :id
                                                         ";
                                         $stmt = $pdo->prepare($update_kirim, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+                                        $stmt->bindParam(":id", $idTransaksi, PDO::PARAM_STR);
+                                        $stmt->bindParam(":no", $Transaksi, PDO::PARAM_STR);
+                                        $stmt->bindParam(":status", $status_kirim, PDO::PARAM_INT);
+                                        $stmt->bindParam(":tanggal", $tanggal_pengiriman, PDO::PARAM_STR);
+                                        $stmt->bindParam(":jenis", $jenis_pengiriman, PDO::PARAM_STR);
+                                        $stmt->bindParam(":wilayah", $wilayah_pengiriman, PDO::PARAM_STR);
+                                        $stmt->bindParam(":ekspedisi", $ekspedisi, PDO::PARAM_STR);
+                                        $stmt->bindParam(":driver", $driver, PDO::PARAM_STR);
+                                        $stmt->bindParam(":plat", $plat, PDO::PARAM_STR);
                                         $stmt->execute();
                                         if($stmt->rowCount() > 0) {
                                             $res['success'] = 1;
                                             // $res['kirim'] = $update_kirim;       
-                                            $res['message'] = $update . ' transaksi berhasil diupdate!';
+                                            $res['message'] = $total . ' transaksi berhasil diupdate!';
                                         } else {
                                             $res['success'] = 0;
                                             $res['message'] = 'Status transaksi gagal diupdate, mohon periksa koneksi anda!';
