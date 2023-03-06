@@ -639,22 +639,24 @@
                                 <input type="text" class="form-control" id="no_transaksi" name="no_transaksi" readonly="readonly">
                               </div>
                             </div>
-                            <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label">Nama Sales</label>
-                              <div class="col-sm-6">
-                                <input type="text" class="form-control" id="nama_sales" name="nama_sales" readonly="readonly">
+                            <div class="d-none">
+                              <div class="form-group row">
+                                <label class="col-sm-4 control-label col-form-label">Nama Sales</label>
+                                <div class="col-sm-6">
+                                  <input type="text" class="form-control" id="nama_sales" name="nama_sales" readonly="readonly">
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label">ID Transaksi</label>
-                              <div class="col-sm-6">
-                                <input type="text" class="form-control" id="id_transaksi" name="id_transaksi" readonly="readonly">
+                              <div class="form-group row">
+                                <label class="col-sm-4 control-label col-form-label">ID Transaksi</label>
+                                <div class="col-sm-6">
+                                  <input type="text" class="form-control" id="id_transaksi" name="id_transaksi" readonly="readonly">
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group row">
-                              <label class="col-sm-4 control-label col-form-label">Customer</label>
-                              <div class="col-sm-6">
-                                <input type="text" class="form-control" id="nama_customer" name="nama_customer" readonly="readonly">
+                              <div class="form-group row">
+                                <label class="col-sm-4 control-label col-form-label">Customer</label>
+                                <div class="col-sm-6">
+                                  <input type="text" class="form-control" id="nama_customer" name="nama_customer" readonly="readonly">
+                                </div>
                               </div>
                             </div>
                             <div class="form-group row">

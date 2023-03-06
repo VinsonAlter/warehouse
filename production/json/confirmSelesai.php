@@ -17,17 +17,24 @@
             $keterangan = $_POST['keterangan'];
             foreach($arr as $val) {
                 $array = explode(' , ', $val);
+                $idTransaksi = $array[0];
                 $noTransaksi = $array[1];
                 $status = $array[4];
                 // var_dump($status);
                 if($status == 2) {
+                    $status_selesai = 3;
                     $selesai = "UPDATE [WMS].[dbo].[TB_Delivery]
-                                    SET [Status] = 3,
-                                        [TglSelesai] = '$tglSelesai',
-                                        [Keterangan] = '$keterangan'
-                                    WHERE [NoTransaksi] = '$noTransaksi'
+                                    SET [Status] = :status,
+                                        [TglSelesai] = :selesai,
+                                        [Keterangan] = :keterangan
+                                    WHERE [NoTransaksi] = :no AND [IDTransaksi] = :id
                                 ";
                     $stmt = $pdo->prepare($selesai, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+                    $stmt->bindParam(":status", $status_selesai, PDO::PARAM_STR);
+                    $stmt->bindParam(":selesai", $tglSelesai, PDO::PARAM_STR);
+                    $stmt->bindParam(":keterangan", $keterangan, PDO::PARAM_STR);
+                    $stmt->bindParam(":no", $noTransaksi, PDO::PARAM_STR);
+                    $stmt->bindParam(":id", $idTransaksi, PDO::PARAM_STR);
                     $stmt->execute();
                     if($stmt->rowCount() > 0) {
                         $res['success'] = 1;

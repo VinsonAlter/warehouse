@@ -548,7 +548,7 @@
                       <form class="form-horizontal" id="form_terima" method="post" action="javascript:terimaTransaksi()" role="form">
                         <div class="modal-body pt-none pb-none">
                           <div class="card-body pb-none">
-                            <div class="form-group row">
+                            <div class="d-none form-group row">
                               <label class="col-sm-4 control-label col-form-label">No Transaksi</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="no_transaksi" name="NomorTransaksi" readonly="readonly">
@@ -601,7 +601,7 @@
                       <form class="form-horizontal" id="form_kirim" method="post" action="javascript:kirimTransaksi()" role="form">
                         <div class="modal-body pt-none pb-none">
                           <div class="card-body pb-none">
-                            <div class="form-group row">
+                            <div class="d-none form-group row">
                               <label class="col-sm-4 control-label col-form-label">No Transaksi</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="no_transaksi_kirim" name="NomorTransaksi" readonly="readonly">
@@ -723,7 +723,7 @@
                       <form class="form-horizontal" id="form_selesai" method="post" action="javascript:confirmTransaksiSelesai()" role="form">
                         <div class="modal-body pt-none pb-none">
                           <div class="card-body pb-none">
-                            <div class="form-group row">
+                            <div class="d-none form-group row">
                               <label class="col-sm-4 control-label col-form-label">No Transaksi</label>
                               <div class="col-sm-6">
                                 <input type="text" class="form-control" id="no_transaksi_selesai" name="NomorTransaksi" readonly="readonly">
@@ -807,17 +807,17 @@
 
     <script>
 
-      $('#masterModalTerima').on('hidden.bs.modal', function() {
-        $('#change_status option[value=""]').prop('selected', true);
-      })
+      // $('#masterModalTerima').on('hidden.bs.modal', function() {
+      //   $('#change_status option[value=""]').prop('selected', true);
+      // })
 
-      $('#masterModalKirim').on('hidden.bs.modal', function() {
-        $('#change_status option[value=""]').prop('selected', true);
-      })
+      // $('#masterModalKirim').on('hidden.bs.modal', function() {
+      //   $('#change_status option[value=""]').prop('selected', true);
+      // })
 
-      $('#masterModalSelesai').on('hidden.bs.modal', function() {
-        $('#change_status option[value=""]').prop('selected', true);
-      })
+      // $('#masterModalSelesai').on('hidden.bs.modal', function() {
+      //   $('#change_status option[value=""]').prop('selected', true);
+      // })
 
       function checkSelectedDriver() {
         if($('#select_driver option:selected').val() != '') {
@@ -1005,7 +1005,8 @@
               checkValues = [];
               $('#table_delivery').DataTable().ajax.reload();
               // $('input[name="checkboxes[]"]').prop('checked', false);
-              $('#change_status option[value=""]').prop('selected', true);
+              // $('#change_status option[value=""]').prop('selected', true);
+              $('#form_kirim').trigger('reset');
             } alert(res.message);
           },
           error: err => {
@@ -1026,7 +1027,8 @@
               // $('input[name="checkboxes[]"]').prop('checked', false);
               checkValues = [];
               $('#table_delivery').DataTable().ajax.reload();
-              $('#change_status option[value=""]').prop('selected', true);
+              // $('#change_status option[value=""]').prop('selected', true);
+              $('#form_terima').trigger('reset');
             } alert(res.message);
           },
           error: err => {
@@ -1046,7 +1048,8 @@
               $('#masterModalSelesai').modal('hide');
               checkValues = [];
               $('#table_delivery').DataTable().ajax.reload();
-              $('#change_status option[value=""]').prop('selected', true);
+              // $('#change_status option[value=""]').prop('selected', true);
+              $('#form_terima').trigger('reset');
             } alert(res.message);
           },
           error: err => {
