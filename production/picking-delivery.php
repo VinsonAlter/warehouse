@@ -807,17 +807,17 @@
 
     <script>
 
-      // $('#masterModalTerima').on('hidden.bs.modal', function() {
-      //   $('#change_status option[value=""]').prop('selected', true);
-      // })
+      $('#masterModalTerima').on('hidden.bs.modal', function() {
+        $('#change_status option[value=""]').prop('selected', true);
+      })
 
-      // $('#masterModalKirim').on('hidden.bs.modal', function() {
-      //   $('#change_status option[value=""]').prop('selected', true);
-      // })
+      $('#masterModalKirim').on('hidden.bs.modal', function() {
+        $('#change_status option[value=""]').prop('selected', true);
+      })
 
-      // $('#masterModalSelesai').on('hidden.bs.modal', function() {
-      //   $('#change_status option[value=""]').prop('selected', true);
-      // })
+      $('#masterModalSelesai').on('hidden.bs.modal', function() {
+        $('#change_status option[value=""]').prop('selected', true);
+      })
 
       function checkSelectedDriver() {
         if($('#select_driver option:selected').val() != '') {
@@ -1004,8 +1004,8 @@
               $('#masterModalKirim').modal('hide');
               checkValues = [];
               $('#table_delivery').DataTable().ajax.reload();
-              // $('input[name="checkboxes[]"]').prop('checked', false);
-              // $('#change_status option[value=""]').prop('selected', true);
+              $('input[name="checkboxes[]"]').prop('checked', false);
+              $('#change_status option[value=""]').prop('selected', true);
               $('#form_kirim').trigger('reset');
             } alert(res.message);
           },
@@ -1027,7 +1027,7 @@
               // $('input[name="checkboxes[]"]').prop('checked', false);
               checkValues = [];
               $('#table_delivery').DataTable().ajax.reload();
-              // $('#change_status option[value=""]').prop('selected', true);
+              $('#change_status option[value=""]').prop('selected', true);
               $('#form_terima').trigger('reset');
             } alert(res.message);
           },
@@ -1048,7 +1048,7 @@
               $('#masterModalSelesai').modal('hide');
               checkValues = [];
               $('#table_delivery').DataTable().ajax.reload();
-              // $('#change_status option[value=""]').prop('selected', true);
+              $('#change_status option[value=""]').prop('selected', true);
               $('#form_terima').trigger('reset');
             } alert(res.message);
           },
