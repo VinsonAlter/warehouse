@@ -31,10 +31,19 @@
                         $status = $array[4];
                         $sales = $array[5];
                         if($status == "") {
+                            $status_terima = 1;
                             $insert = "INSERT INTO [WMS].[dbo].[TB_Delivery] 
                                 ([IDTransaksi], [NoTransaksi], [Customer], [TglTransaksi], [Status], [NamaPicker], [TglTerima], [NamaSales])
-                                VALUES ('$idTransaksi', '$noTransaksi', '$customer', '$tglTransaksi', 1, '$picker', '$tglTerima', '$sales')";
+                                VALUES (:id, :no, :cust, :tgltransaksi, :status, :picker, :terima, :sales)";
                             $stmt = $pdo->prepare($insert, [PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL]);
+                            $stmt->bindParam(":id", $idTransaksi, PDO::PARAM_STR);
+                            $stmt->bindParam(":no", $noTransaksi, PDO::PARAM_STR);
+                            $stmt->bindParam(":cust", $customer, PDO::PARAM_STR);
+                            $stmt->bindParam(":status", $status_terima, PDO::PARAM_INT);
+                            $stmt->bindParam(":tgltransaksi", $tglTransaksi, PDO::PARAM_STR);
+                            $stmt->bindParam(":picker", $picker, PDO::PARAM_STR);
+                            $stmt->bindParam(":terima", $tglTerima, PDO::PARAM_STR);
+                            $stmt->bindParam(":sales", $sales, PDO::PARAM_STR);
                             $stmt->execute();
                             if($stmt->rowCount() > 0){
                                 $res['success'] = 1;
