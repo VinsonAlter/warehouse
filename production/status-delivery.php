@@ -1038,7 +1038,7 @@
             { width: '120px', targets: 1},
             { width: '100px', targets: 6},
             { width: '110px', targets: [9, 10, 11, 12, 13, 14]},
-            { className: 'dt-center', targets: [0, 1, 3, 4, 5, 6, 7, 8, 9, 10, 15]},
+            { className: 'dt-center', targets: [0, 3, 4, 5, 6, 7, 8, 9, 10, 15]},
             { targets: 3,
               render: function(data){
                 if(data == 1)

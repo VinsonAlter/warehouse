@@ -650,6 +650,7 @@
           "stateDuration": -1,
           "pageLength": 10,
           "scrollX": '300px',
+          "autoWidth": false,
           "ajax": {
             url: 'json/data_user.php',
           },
@@ -661,7 +662,7 @@
             { orderable: false, targets: [3, 4, 5, 6, 7] },
             { width: '500px', targets: [3, 5]},
             { width: '200px', targets: 4},
-            { className: 'dt-center', targets: [0, 6, 7]},
+            { className: 'dt-center', targets: [6, 7]},
             // this part renders font awesome checklist or cross according to active value
             {
               targets: 6,
